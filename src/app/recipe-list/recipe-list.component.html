@@ -1,0 +1,15 @@
+<div>
+
+
+<h2>Search recipe</h2>
+
+<input type="text" id="myInput" (keyup)="myFunction()" ng-model="test" placeholder="Search for recipe.." title="Type in a name">
+
+<app-recipe-button id="myUL" *ngFor="let recipe of recipeList" [hidden]="!recipe.dsply"  [name]="recipe.name"  ></app-recipe-button>
+
+</div>
+<script>
+
+ 
+
+</script>

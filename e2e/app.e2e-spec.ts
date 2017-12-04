@@ -9,6 +9,6 @@ describe('say-cook-book App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('Welcome to say cook book!');
   });
 });
