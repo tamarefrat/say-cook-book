@@ -35,7 +35,8 @@ constructor() {
     new recipeName("Carrot Salad", "carrot_salad",true),
     new recipeName("Chocolate Cake", "Chocolate_Cake",true),
     new recipeName("Blintzes Cheese", "Blintzes_cheese",true),
-    new recipeName("Man", "Man",true)
+    new recipeName("Man", "man",true),
+    new recipeName("Tomato Salad", "tomato_salad",true)
   ]; 
 }
 
