@@ -32,9 +32,10 @@ myFunction() {
 
 constructor() { 
   this.recipeList = [
-    new recipeName("carrot salad", "carrot_salad",true),
+    new recipeName("Carrot Salad", "carrot_salad",true),
     new recipeName("Chocolate Cake", "Chocolate_Cake",true),
-    new recipeName("Blintzes cheese", "Blintzes_cheese",true),
+    new recipeName("Blintzes Cheese", "Blintzes_cheese",true),
+    new recipeName("Man", "Man",true)
   ]; 
 }
 
