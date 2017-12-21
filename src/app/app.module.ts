@@ -16,6 +16,10 @@ import { AppComponent } from './app.component';
 import { RecipeButtonComponent } from './recipe-button/recipe-button.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { ItemLineComponent } from './recipe/item-line/item-line.component';
+import { InstructionLineComponent } from './recipe/instruction-line/instruction-line.component';
+import { MainDetailsComponent } from './recipe/main-details/main-details.component';
+import { RecipeService } from './services/recipe.service';
 
 
 @NgModule({
@@ -23,7 +27,10 @@ import { RecipeComponent } from './recipe/recipe.component';
     AppComponent,
     RecipeButtonComponent,
     RecipeListComponent,
-    RecipeComponent
+    RecipeComponent,
+    ItemLineComponent,
+    InstructionLineComponent,
+    MainDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,7 @@ import { RecipeComponent } from './recipe/recipe.component';
     MatIconModule,
     MatCheckboxModule
   ],
-  providers: [],
+  providers: [RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
