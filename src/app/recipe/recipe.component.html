@@ -1,0 +1,157 @@
+<form *ngIf="statusDetails!=4" role="form">
+    <div id="recipeDetails" [ngSwitch]="statusDetails">
+        <div id="recipeCreated" *ngSwitchCase="0">
+            <p>{{code}}</p>
+            <input type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+            <br>
+            <input type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
+            <br>
+
+            <h3>Categories:</h3>
+            <mat-select *ngFor="let cat of category; let i=index" name="category[i]" [(ngModel)]="category[i]">
+                <mat-option *ngFor="let option of optionCategories">{{option}}</mat-option>
+            </mat-select>
+            <br>
+            <input type="file" name="urlImg">
+            <br>
+            <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
+            <br>
+            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveDetails()">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+        </div>
+
+        <div id="recipeOnSave" *ngSwitchCase="1">
+            <p>{{code}}/get recipe from {{getFrom}}</p>
+            <h1>{{nameRecipe}}</h1>
+            <h3>Categories:</h3>
+            <ul>
+                <li *ngFor="let cat of category">{{cat}}</li>
+            </ul>
+            <img width="300" [src]="urlImg">
+            <h5>Comment:</h5>
+            <p>{{comment}}</p>
+            <br>
+            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditDetails()">
+          <img src="assets\aditBtn.png" width="100%">
+        </button>
+            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteRecipe()">
+          <img src="assets\deleteBtn.png" width="100%">
+        </button>
+        </div>
+
+        <div id="recipeInAdit" *ngSwitchCase="2">
+            <p>{{code}}</p>
+            <input type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+            <br>
+            <input type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
+            <br>
+
+            <h3>Categories:</h3>
+            <mat-select *ngFor="let cat of category; let i=index" name="category[i]" [(ngModel)]="category[i]">
+                <mat-option *ngFor="let option of optionCategories">{{option}}</mat-option>
+            </mat-select><br>
+            <input type="file" name="urlImg">
+            <br>
+            <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
+            <br>
+            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveRepice()">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+        </div>
+
+    </div>
+
+    <h2>food stoff(how i write it??)</h2>
+    <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createItemLine(-1)" *ngIf="zeroItems">
+    <img src="assets\addBtn.png" width="100%">
+  </button>
+
+    <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
+        <div id="itemLineDetails" [ngSwitch]="item.statusLine">
+            <div id="itemLineDetailsCreated" *ngSwitchCase="0">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveItemLine(item.amount, item.measurement, item.item, i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+                <input type="number" name="item.amount" placeholder="Amount">
+                <input type="text" name="item.measurement" placeholder="Measurement">
+                <input type="text" name="item.item" placeholder="Food stuff">
+
+            </div>
+
+            <div id="itemLineDetailsInSaved" *ngSwitchCase="1">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditItemLine(i)">
+          <img src="assets\aditBtn.png" width="100%">
+        </button>
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteItemLine(i)">
+          <img src="assets\deleteBtn.png" width="100%">
+        </button>
+
+                <label>{{item.amount}}</label>
+                <label>{{item.measurement}}</label>
+                <label>{{item.item}}</label>
+
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createItemLine(i)" *ngIf="item.lastLine">
+          <img src="assets\addBtn.png" width="100%">
+        </button>
+            </div>
+
+            <div id="itemLineDetailsInAdit" *ngSwitchCase="2">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveItemLine(i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+                <input type="number" name="item.amount" [(ngModel)]="item.amount" placeholder="Amount">
+                <input type="text" name="item.measurement" [(ngModel)]="item.measurement" placeholder="Measurement">
+                <input type="text" name="item.item" [(ngModel)]="item.item" placeholder="Food stuff">
+
+            </div>
+        </div>
+    </div>
+
+    <h2>instruction</h2>
+    <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createInstructionLine(-1)" *ngIf="zeroInstructions">
+    <img src="assets\addBtn.png" width="100%">
+  </button>
+
+    <div id='instructionLine' *ngFor="let instruction of instructions; let i = index">
+        <div id="instructionLineDetails" [ngSwitch]="instruction.statusLine">
+            <div id="instructionLineDetailsCreate" *ngSwitchCase="0">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveInstructionLine(instruction.instruction, i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+                <input type="text" name="instruction.instruction" placeholder="Enter instruction">
+            </div>
+
+            <div id="instructionLineDetailsInSaved" *ngSwitchCase="1">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditInstructionLine(i)">
+          <img src="assets\aditBtn.png" width="100%">
+        </button>
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteInstructionLine(i)">
+          <img src="assets\deleteBtn.png" width="100%">
+        </button>
+
+                <label>{{instruction.instruction}}</label>
+
+
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createInstructionLine(i)" *ngIf="instruction.lastLine">
+          <img src="assets\addBtn.png" width="100%">
+        </button>
+            </div>
+
+            <div id="instructionLineDetailsInAdit" *ngSwitchCase="2">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveInstructionLine(i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+
+                <input type="text" name="instruction.instruction" [(ngModel)]="instruction.instruction" placeholder="Enter instruction">
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
