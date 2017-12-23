@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { RecipeService } from '../services/recipe.service';
+import {Foodstuff} from '../item-line/item-line.component';
 
 @Component({
   selector: 'app-recipe',
@@ -25,7 +26,7 @@ export class RecipeComponent implements OnInit {
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
 
 
-  constructor() {
+  constructor(private _recipeService: RecipeService) {
     this.code = 1111;
     /*this.nameRecipe = 'choclate cake';
     this.getFrom = 'tami';*/
@@ -34,19 +35,16 @@ export class RecipeComponent implements OnInit {
     this.zeroInstructions = true;
     this.zeroItems = true;
     this.urlImg = 'assets/saveBtn.png';
-    this.foodstuffs = [
+    this.foodstuffs = [];
       /*new Foodstuff(1, 30, 'kg', 'sugar', false),
       new Foodstuff(1, 30, 'gr', 'water', false),
       new Foodstuff(1, 30, 'kg', 'oil', false),
       new Foodstuff(1, 30, 'gr', 'cofee', false),
       new Foodstuff(1, 30, 'kg', 'sugar', false),
       new Foodstuff(1, 20, 'gr', 'chocolate', true),*/
-    ];
+   /* ];*/
 
-    this.instructions = [
-      /*new Instruction(1, 'mix all', false),
-      new Instruction(1, 'bake till ready', true)*/
-    ];
+    this.instructions = [];
 
     this.keyWords = ['chocalate'];
     /* this.comment = 'delitios';*/
@@ -55,49 +53,6 @@ export class RecipeComponent implements OnInit {
   }
   /*functions*/
   /******************************************************************************************* */
-  /*item line functions*/
-  firstSaveItemLine(amount, measurement, item, i) {
-    /*pops without save the last empty item in the list, create a new item and pushss to list, change status of lastLine*/
-    this.foodstuffs[i].statusLine = 1;
-    this.foodstuffs[i].amount = amount;
-    this.foodstuffs[i].measurement = measurement;
-    this.foodstuffs[i].item = item;
-    this.foodstuffs[i].lastLine = true;
-  }
-  /*can adit only 1 line in any time- have to change this*/
-  aditItemLine(i) {
-    this.foodstuffs[i].statusLine = 2;
-  }
-
-  deleteItemLine(i) {
-    let ans = confirm('Are You Sure?\nAre you want delete this line from your recipe?');
-    if (!ans) {
-      return;
-    }
-
-    if (this.foodstuffs[i].lastLine) {/* this is the last line*/
-      if (i > 0) {/*there is more then 1 line*/
-        this.foodstuffs[i - 1].lastLine = true;
-      }
-      else {/* there is 1 line*/
-        this.zeroItems = true;
-      }
-    }
-    this.foodstuffs.splice(i, 1);
-
-  }
-
-  saveItemLine(i) {
-    this.foodstuffs[i].statusLine = 1;
-  }
-
-  createItemLine(i) {
-    if (i >= 0) {
-      this.foodstuffs[i].lastLine = false;
-    }
-    this.foodstuffs.push(new Foodstuff(0, 0, '', '', true));
-    this.zeroItems = false;
-  }
 
   /************************************************************************************************* */
   /*instruction line functions*/
@@ -121,8 +76,7 @@ export class RecipeComponent implements OnInit {
     if (this.instructions[i].lastLine) {/* this is the last line*/
       if (i > 0) {/*there is more then 1 line*/
         this.instructions[i - 1].lastLine = true;
-      }
-      else {/* there is 1 line*/
+      }else {/* there is 1 line*/
         this.zeroInstructions = true;
       }
     }
@@ -149,6 +103,8 @@ export class RecipeComponent implements OnInit {
       this.comment = comment;
       this.urlImg = urlImg;*/
     this.statusDetails = 1;
+    this._recipeService.allMyRecipes.push(this);
+    console.log(this._recipeService);
   }
 
   aditDetails() {
@@ -175,9 +131,26 @@ export class RecipeComponent implements OnInit {
 
 
   ngOnInit() {
-  }
+    if (this._recipeService.getRecipe(this.code) != null) {
+      const index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
+      this.nameRecipe = this._recipeService.allMyRecipes[index].nameRecipe;
+      this.getFrom = this._recipeService.allMyRecipes[index].getFrom;
+      this.foodstuffs = this._recipeService.allMyRecipes[index].foodstuffs;
+      this.instructions = this._recipeService.allMyRecipes[index].instructions;
+      this.category = this._recipeService.allMyRecipes[index].category;
+      this.urlImg = this._recipeService.allMyRecipes[index].urlImg;
+      this.keyWords = this._recipeService.allMyRecipes[index].keyWords;
+      this.comment = this._recipeService.allMyRecipes[index].comment;
+      this.zeroItems = this._recipeService.allMyRecipes[index].zeroItems;
+      this.zeroInstructions = this._recipeService.allMyRecipes[index].zeroInstructions;
+      this.statusDetails = this._recipeService.allMyRecipes[index].statusDetails;
+      this.optionCategories = this._recipeService.allMyRecipes[index].optionCategories;
+      this.partToShow = this._recipeService.allMyRecipes[index].partToShow;
+    }
 }
+
+}/*end of class*/
 
 /********************************************************* */
 export class Instruction {
@@ -190,16 +163,4 @@ export class Instruction {
   }
 
 }
-export class Foodstuff {
 
-  constructor(public statusLine: number,
-    public amount: number,
-    public measurement: string,
-    public item: string,
-    public lastLine: boolean) {
-    /*statusLine:
-    0=>created (before first save)
-    1=> on save
-    2=>in adit*/
-  }
-}
