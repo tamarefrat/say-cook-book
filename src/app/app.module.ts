@@ -7,16 +7,12 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeButtonComponent,
-    RecipeListComponent,
-    LoginComponent,
-    SignupComponent
+    RecipeListComponent
   ],
   imports: [
     BrowserModule,
