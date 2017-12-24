@@ -34,8 +34,9 @@ export class RecipeListComponent implements OnInit {
 
   rec: Observable<any[]>;
   constructor(db:AngularFireDatabase) { 
-    this.recipeList = [];   
+    
     db.list('/recipes').valueChanges().subscribe(recipes => {
+      this.recipeList = [];   
       recipes.forEach(recipe =>{
        this.recipeList.push(new recipeName(JSON.stringify(recipe),JSON.stringify(recipe), true));
       })
