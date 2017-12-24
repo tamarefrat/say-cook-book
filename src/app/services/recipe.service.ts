@@ -7,10 +7,14 @@ import { RecipeComponent } from '../recipe/recipe.component';
 
 export class RecipeService {
   allMyRecipes: RecipeComponent[];
+  optionCategories: string[];
   /* instructions = [];*/
 
 
-  constructor() { this.allMyRecipes = []; }
+  constructor() {
+     this.allMyRecipes = [];
+    this.optionCategories = ['cakes', 'parve', 'easy', 'milk', 'coockies', 'similiar'];
+    }
 
   getRecipe(code): RecipeComponent {
     return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];

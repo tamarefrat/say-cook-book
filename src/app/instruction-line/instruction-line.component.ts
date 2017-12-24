@@ -33,20 +33,18 @@ export class InstructionLineComponent implements OnInit {
   /*functions*/
   /******************************************************************************************* */
   /*instruction line functions*/
-  firstSaveInstructionLine(instruction, i) {
+  firstSaveInstructionLine( i) {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     /*pops without save the last empty item in the list, create a new item and pushss to list, change status of lastLine*/
 
-    this._recipeService.allMyRecipes[this.index].instructionLines.instructions[i] = new Instruction(1, instruction, true);
+    this.instructions[i].lastLine = true;
+    this.instructions[i].statusLine = 1;
 
   }
   /*can adit only 1 line in any time- have to change this*/
   aditInstructionLine(i) {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.instructions[i].statusLine = 2;
-
-    this._recipeService.allMyRecipes[this.index].instructionLines.instructions[i].statusLine = 2;
-
   }
 
   deleteInstructionLine(i) {
@@ -59,38 +57,25 @@ export class InstructionLineComponent implements OnInit {
     if (this.instructions[i].lastLine) {/* this is the last line*/
       if (i > 0) {/*there is more then 1 line*/
         this.instructions[i - 1].lastLine = true;
-        this._recipeService.allMyRecipes[this.index].instructionLines.instructions[i - 1].lastLine = true;
       } else {/* there is 1 line*/
         this.zeroInstructions = true;
-        this._recipeService.allMyRecipes[this.index].instructionLines.zeroInstructions = true;
       }
     }
     this.instructions.splice(i, 1);
-    this._recipeService.allMyRecipes[this.index].instructionLines.instructions.splice(i, 1);
-
   }
 
   saveInstructionLine(i) {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.instructions[i].statusLine = 1;
-    this._recipeService.allMyRecipes[this.index].instructionLines.instructions[i] = new Instruction(1,
-      this.instructions[i].instruction,
-      this.instructions[i].lastLine);
   }
 
   createInstructionLine(i) {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     if (i >= 0) {
       this.instructions[i].lastLine = false;
-      this._recipeService.allMyRecipes[this.index].instructionLines.instructions[i].lastLine = false;
     }
     this.instructions.push(new Instruction(0, '', true));
     this.zeroInstructions = false;
-
-    this._recipeService.allMyRecipes[this.index].instructionLines.instructions.push(new Instruction(0, '', true));
-    this._recipeService.allMyRecipes[this.index].instructionLines.zeroInstructions = false;
-
-
   }
 
   /************************************************************************************************* */

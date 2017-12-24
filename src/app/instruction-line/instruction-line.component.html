@@ -7,36 +7,36 @@
     <div id='instructionLine' *ngFor="let instruction of instructions; let i = index">
         <div id="instructionLineDetails" [ngSwitch]="instruction.statusLine">
             <div id="instructionLineDetailsCreate" *ngSwitchCase="0">
-                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveInstructionLine(instruction.instruction, i)">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveInstructionLine( i)">
           <img src="assets\saveBtn.png" width="100%">
         </button>
 
-                <input type="text" name="instruction.instruction" placeholder="Enter instruction">
+                <input type="text" name="instruction.instruction" placeholder="Enter instruction" [(ngModel)]="instruction.instruction">
             </div>
 
-            <div id="instructionLineDetailsInSaved" *ngSwitchCase="1">
-                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditInstructionLine(i)">
-          <img src="assets\aditBtn.png" width="100%">
+            <div id="instructionLineDetailsInSaved " *ngSwitchCase="1 ">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe " type="button " (click)="aditInstructionLine(i) ">
+          <img src="assets\aditBtn.png " width="100% ">
         </button>
-                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteInstructionLine(i)">
-          <img src="assets\deleteBtn.png" width="100%">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe " type="button " (click)="deleteInstructionLine(i) ">
+          <img src="assets\deleteBtn.png " width="100% ">
         </button>
 
                 <label>{{instruction.instruction}}</label>
 
 
-                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createInstructionLine(i)" *ngIf="instruction.lastLine">
-          <img src="assets\addBtn.png" width="100%">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe " type="button " (click)="createInstructionLine(i) " *ngIf="instruction.lastLine ">
+          <img src="assets\addBtn.png " width="100% ">
         </button>
             </div>
 
-            <div id="instructionLineDetailsInAdit" *ngSwitchCase="2">
-                <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveInstructionLine(i)">
-          <img src="assets\saveBtn.png" width="100%">
+            <div id="instructionLineDetailsInAdit " *ngSwitchCase="2 ">
+                <button class="md-fab md-mini md-button md-ink-ripple md-recipe " type="button " (click)="saveInstructionLine(i) ">
+          <img src="assets\saveBtn.png " width="100% ">
         </button>
 
 
-                <input type="text" name="instruction.instruction" [(ngModel)]="instruction.instruction" placeholder="Enter instruction">
+                <input type="text " name="instruction.instruction " [(ngModel)]="instruction.instruction " placeholder="Enter instruction ">
 
             </div>
         </div>
