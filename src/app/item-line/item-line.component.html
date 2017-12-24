@@ -6,13 +6,13 @@
 <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
     <div id="itemLineDetails" [ngSwitch]="item.statusLine">
         <div id="itemLineDetailsCreated" *ngSwitchCase="0">
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveItemLine(item.amount, item.measurement, item.item, i)">
+            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveItemLine(i)">
           <img src="assets\saveBtn.png" width="100%">
         </button>
 
-            <input type="number" name="item.amount" placeholder="Amount">
-            <input type="text" name="item.measurement" placeholder="Measurement">
-            <input type="text" name="item.item" placeholder="Food stuff">
+            <input type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
+            <input type="text" name="item.measurement" placeholder="Measurement" [(ngModel)]="item.measurement">
+            <input type="text" name="item.item" placeholder="Food stuff" [(ngModel)]="item.item">
 
         </div>
 

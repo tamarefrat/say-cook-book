@@ -1,8 +1,5 @@
 <form *ngIf="statusDetails!=4" role="form">
-    <app-main-details></app-main-details>
-    <app-item-line></app-item-line>
-    <app-instruction-line></app-instruction-line>
-
-
-
+    <app-main-details [code]="this.code"></app-main-details>
+    <app-item-line [code]="this.code"></app-item-line>
+    <app-instruction-line [code]="this.code"></app-instruction-line>
 </form>

@@ -7,47 +7,48 @@ import { RecipeService } from '../services/recipe.service';
   styleUrls: ['./item-line.component.css']
 })
 export class ItemLineComponent implements OnInit {
-  @Input() code: number;
+ @Input() code: number;
   @Input() foodstuffs: Foodstuff[]; /*change class and prop*/
-  @Input() keyWords: string[];
+  /* @Input() keyWords: string[];*/
   @Input() zeroItems: boolean;
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
     this.foodstuffs = [];
-    this.keyWords = [];
+    /* this.keyWords = [];*/
     this.zeroItems = true;
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }
 
   ngOnInit() {
     if (this._recipeService.getRecipe(this.code) != null) {
-      this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
-      this.foodstuffs = this._recipeService.allMyRecipes[this.index].foodstuffs;
-      this.keyWords = this._recipeService.allMyRecipes[this.index].keyWords;
-      this.zeroItems = this._recipeService.allMyRecipes[this.index].zeroItems;
-
+    this.foodstuffs = this._recipeService.allMyRecipes[this.index].itemLines.foodstuffs;
+    /*this.keyWords = this._recipeService.allMyRecipes[this.index].itemLines.keyWords;*/
+    this.zeroItems = this._recipeService.allMyRecipes[this.index].itemLines.zeroItems;
     }
+
   }
   /*functions*/
   /******************************************************************************************* */
   /*item line functions*/
-  firstSaveItemLine(amount, measurement, item, i) {
+  firstSaveItemLine(i) {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     /*pops without save the last empty item in the list, create a new item and pushss to list, change status of lastLine*/
-    if (this._recipeService.allMyRecipes[this.index].foodstuffs != null) {
-    this._recipeService.allMyRecipes[this.index].foodstuffs[i] = new Foodstuff(1, amount, measurement, item, true);
-    }
+
+    this.foodstuffs[i].lastLine = true;
+    this.foodstuffs[i].statusLine = 1;
+
   }
   /*can adit only 1 line in any time- have to change this*/
   aditItemLine(i) {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.foodstuffs[i].statusLine = 2;
-    if (this._recipeService.allMyRecipes[this.index].foodstuffs != null) {
-    this._recipeService.allMyRecipes[this.index].foodstuffs[i].statusLine = 2;
   }
-}
 
   deleteItemLine(i) {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     let ans = confirm('Are You Sure?\nAre you want delete this line from your recipe?');
     if (!ans) {
       return;
@@ -56,40 +57,30 @@ export class ItemLineComponent implements OnInit {
     if (this.foodstuffs[i].lastLine) {/* this is the last line*/
       if (i > 0) {/*there is more then 1 line*/
         this.foodstuffs[i - 1].lastLine = true;
-        this._recipeService.allMyRecipes[this.index].foodstuffs[i - 1].lastLine = true;
-      }
-      else {/* there is 1 line*/
+      } else {/* there is 1 line*/
         this.zeroItems = true;
-        this._recipeService.allMyRecipes[this.index].zeroItems = true;
       }
     }
     this.foodstuffs.splice(i, 1);
-    this._recipeService.allMyRecipes[this.index].foodstuffs.splice(i, 1);
-
-  }
+}
 
   saveItemLine(i) {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.foodstuffs[i].statusLine = 1;
-    this._recipeService.allMyRecipes[this.index].foodstuffs[i] = new Foodstuff(1,
-                                                                                this.foodstuffs[i].amount,
-                                                                                this.foodstuffs[i].measurement,
-                                                                                this.foodstuffs[i].item,
-                                                                                this.foodstuffs[i].lastLine);
   }
 
   createItemLine(i) {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     if (i >= 0) {
       this.foodstuffs[i].lastLine = false;
-      this._recipeService.allMyRecipes[this.index].foodstuffs[i].lastLine = false;
     }
     this.foodstuffs.push(new Foodstuff(0, 0, '', '', true));
     this.zeroItems = false;
-    if (this._recipeService.allMyRecipes[this.index].foodstuffs != null) {
-this._recipeService.allMyRecipes[this.index].foodstuffs.push(new Foodstuff(0, 0, '', '', true));
-this._recipeService.allMyRecipes[this.index].zeroItems = false;
-}
-
+    console.log(this.index);
+ console.log(this._recipeService);
   }
+
+
 
   /************************************************************************************************* */
 }

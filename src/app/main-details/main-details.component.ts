@@ -14,22 +14,23 @@ export class MainDetailsComponent implements OnInit {
   @Input() getFrom: string;
   @Input() category: string[]; /* change to final number///?*/
   @Input() urlImg: string;
-  @Input() keyWords: string[];
+ /* @Input() keyWords: string[];*/
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
-
+@Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
-    this._recipeService.allMyRecipes.push(new RecipeComponent(this._recipeService)); //have to delete
+
     this.code = 1111;
     /*this.nameRecipe = 'choclate cake';
     this.getFrom = 'tami';*/
     this.statusDetails = 0;
     this.category = ['', '', ''];
     this.urlImg = 'assets/saveBtn.png';
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
-    this.keyWords = ['chocalate'];
+   /* this.keyWords = ['chocalate'];*/
     /* this.comment = 'delitios';*/
 
 
@@ -41,17 +42,20 @@ export class MainDetailsComponent implements OnInit {
 
   /*details functions*/
   firstSaveDetails() {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 1;
     this.saveRepice();
   }
 
   aditDetails() {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     const index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 2;
-    this._recipeService.allMyRecipes[index].statusDetails = 2;
+    this._recipeService.allMyRecipes[index].mainDetails.statusDetails = 2;
   }
 
   deleteRecipe() {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     let ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
     /*.title('Are You Sure?')
               .textContent('Are you want delete this recipe from your application?')
@@ -67,34 +71,30 @@ export class MainDetailsComponent implements OnInit {
   }
 
   saveRepice() {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 1;
     const index = this._recipeService.getIndexOfRecipeByCode(this.code);
-    this._recipeService.allMyRecipes[index].statusDetails = 1;
-    this._recipeService.allMyRecipes[index].category = this.category;
-    this._recipeService.allMyRecipes[index].comment = this.comment;
-    this._recipeService.allMyRecipes[index].getFrom = this.getFrom;
-    this._recipeService.allMyRecipes[index].nameRecipe = this.nameRecipe;
-    this._recipeService.allMyRecipes[index].keyWords = this.keyWords;
-    this._recipeService.allMyRecipes[index].urlImg = this.urlImg;
+    this._recipeService.allMyRecipes[index].mainDetails = this;
+
 
   }
 
 
 
   ngOnInit() {
-    if (this._recipeService.getRecipe(this.code) != null) {
-      const index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
-      this.nameRecipe = this._recipeService.allMyRecipes[index].nameRecipe;
-      this.getFrom = this._recipeService.allMyRecipes[index].getFrom;
-      this.category = this._recipeService.allMyRecipes[index].category;
-      this.urlImg = this._recipeService.allMyRecipes[index].urlImg;
-      this.keyWords = this._recipeService.allMyRecipes[index].keyWords;
-      this.comment = this._recipeService.allMyRecipes[index].comment;
-      this.statusDetails = this._recipeService.allMyRecipes[index].statusDetails;
+      this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
+const index = this.index;
+      this.nameRecipe = this._recipeService.allMyRecipes[index].mainDetails.nameRecipe;
+      this.getFrom = this._recipeService.allMyRecipes[index].mainDetails.getFrom;
+      this.category = this._recipeService.allMyRecipes[index].mainDetails.category;
+      this.urlImg = this._recipeService.allMyRecipes[index].mainDetails.urlImg;
+    /*  this.keyWords = this._recipeService.allMyRecipes[index].keyWords;*/
+      this.comment = this._recipeService.allMyRecipes[index].mainDetails.comment;
+      this.statusDetails = this._recipeService.allMyRecipes[index].mainDetails.statusDetails;
       this.partToShow = this._recipeService.allMyRecipes[index].partToShow;
     }
-  }
+
 
 }/*end of class*/
 
