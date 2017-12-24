@@ -22,9 +22,9 @@ export class RecipeComponent implements OnInit {
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
-    this._recipeService.allMyRecipes.push(this); // have to delete
+   this._recipeService.allMyRecipes.push(this); // have to delete
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-    this.code = 1111;
+    this.code = this._recipeService.counter++;
     this.instructionLines = new InstructionLineComponent(this._recipeService);
     this.itemLines = new ItemLineComponent(this._recipeService);
     this.mainDetails = new MainDetailsComponent(this._recipeService);

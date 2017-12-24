@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { RecipeComponent } from '../recipe/recipe.component';
 
@@ -14,11 +14,11 @@ export class MainDetailsComponent implements OnInit {
   @Input() getFrom: string;
   @Input() category: string[]; /* change to final number///?*/
   @Input() urlImg: string;
- /* @Input() keyWords: string[];*/
+  /* @Input() keyWords: string[];*/
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
-@Input() index: number;
+  @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
 
@@ -30,7 +30,7 @@ export class MainDetailsComponent implements OnInit {
     this.urlImg = 'assets/Say CookBook logo.ico';
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
-   /* this.keyWords = ['chocalate'];*/
+    /* this.keyWords = ['chocalate'];*/
     /* this.comment = 'delitios';*/
 
 
@@ -41,17 +41,17 @@ export class MainDetailsComponent implements OnInit {
   /************************************************************************************************* */
 
 
- /* getImage() {
-    let filepath = document.getElementById('choosedImg').value;
-    let a = filepath.split('\\');
-return a[a.length - 1];
-}*/
+  /* getImage() {
+     let filepath = document.getElementById('choosedImg').value;
+     let a = filepath.split('\\');
+ return a[a.length - 1];
+ }*/
   /*details functions*/
   firstSaveDetails() {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 1;
     this.saveRepice();
-  /*  this.urlImg = 'assets/' + this.getImage(image);*/
+    /*  this.urlImg = 'assets/' + this.getImage(image);*/
   }
 
   aditDetails() {
@@ -89,18 +89,19 @@ return a[a.length - 1];
 
 
   ngOnInit() {
-
+    if (this._recipeService.getRecipe(this.code) != null) {
       this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-const index = this.index;
+      const index = this.index;
       this.nameRecipe = this._recipeService.allMyRecipes[index].mainDetails.nameRecipe;
       this.getFrom = this._recipeService.allMyRecipes[index].mainDetails.getFrom;
       this.category = this._recipeService.allMyRecipes[index].mainDetails.category;
       this.urlImg = this._recipeService.allMyRecipes[index].mainDetails.urlImg;
-    /*  this.keyWords = this._recipeService.allMyRecipes[index].keyWords;*/
+      /*  this.keyWords = this._recipeService.allMyRecipes[index].keyWords;*/
       this.comment = this._recipeService.allMyRecipes[index].mainDetails.comment;
       this.statusDetails = this._recipeService.allMyRecipes[index].mainDetails.statusDetails;
       this.partToShow = this._recipeService.allMyRecipes[index].partToShow;
     }
+  }
 
 
 }/*end of class*/

@@ -8,12 +8,14 @@ import { RecipeComponent } from '../recipe/recipe.component';
 export class RecipeService {
   allMyRecipes: RecipeComponent[];
   optionCategories: string[];
+  counter: number; // starts from 0 - and every recipe get the counter++ for his code
   /* instructions = [];*/
 
 
   constructor() {
      this.allMyRecipes = [];
     this.optionCategories = ['cakes', 'parve', 'easy', 'milk', 'coockies', 'similiar'];
+    this.counter = 0;
     }
 
   getRecipe(code): RecipeComponent {

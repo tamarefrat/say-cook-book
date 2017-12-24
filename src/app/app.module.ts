@@ -20,8 +20,11 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { ItemLineComponent } from './item-line/item-line.component';
 import { InstructionLineComponent } from './instruction-line/instruction-line.component';
 import { MainDetailsComponent } from './main-details/main-details.component';
+import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
+
 /*services*/
 import { RecipeService } from './services/recipe.service';
+
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { RecipeService } from './services/recipe.service';
     RecipeComponent,
     ItemLineComponent,
     InstructionLineComponent,
-    MainDetailsComponent
+    MainDetailsComponent,
+    OptionsForRecipeComponent
   ],
   imports: [
     BrowserModule,
