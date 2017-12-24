@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import {Foodstuff} from '../item-line/item-line.component';
+import { Instruction } from '../instruction-line/instruction-line.component';
 
 @Component({
   selector: 'app-recipe',
@@ -55,78 +56,6 @@ export class RecipeComponent implements OnInit {
   /******************************************************************************************* */
 
   /************************************************************************************************* */
-  /*instruction line functions*/
-  firstSaveInstructionLine(instruction, i) {
-    /*pops without save the last empty item in the list, create a new item and pushss to list, change status of lastLine*/
-    this.instructions[i].statusLine = 1;
-    this.instructions[i].instruction = instruction;
-    this.instructions[i].lastLine = true;
-  }
-  /*can adit only 1 line in any time- have to change this*/
-  aditInstructionLine(i) {
-    this.instructions[i].statusLine = 2;
-  }
-
-  deleteInstructionLine(i) {
-    let ans = confirm('Are You Sure?\nAre you want delete this line from your recipe?');
-    if (!ans) {
-      return;
-    }
-
-    if (this.instructions[i].lastLine) {/* this is the last line*/
-      if (i > 0) {/*there is more then 1 line*/
-        this.instructions[i - 1].lastLine = true;
-      }else {/* there is 1 line*/
-        this.zeroInstructions = true;
-      }
-    }
-    this.instructions.splice(i, 1);
-
-  }
-
-  saveInstructionLine(i) {
-    this.instructions[i].statusLine = 1;
-  }
-
-  createInstructionLine(i) {
-    if (i >= 0) {
-      this.instructions[i].lastLine = false;
-    }
-    this.instructions.push(new Instruction(0, '', true));
-    this.zeroInstructions = false;
-  }
-  /************************************************************ */
-  /*details functions*/
-  firstSaveDetails() {
-    /*  this.getFrom = getFrom;
-      this.nameRecipe = nameRecipe;
-      this.comment = comment;
-      this.urlImg = urlImg;*/
-    this.statusDetails = 1;
-    this._recipeService.allMyRecipes.push(this);
-    console.log(this._recipeService);
-  }
-
-  aditDetails() {
-    this.statusDetails = 2;
-  }
-
-  deleteRecipe() {
-    let ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
-    /*.title('Are You Sure?')
-              .textContent('Are you want delete this recipe from your application?')
-              .ariaLabel('delete recipe')
-              .ok('Delete Recipe')
-              .cancel('return without delete');*/
-    if (!ans) {
-      return;
-    }
-    this.statusDetails = 4;
-  }
-
-  saveRepice() {
-    this.statusDetails = 1;
-  }
 
 
 
@@ -153,14 +82,3 @@ export class RecipeComponent implements OnInit {
 }/*end of class*/
 
 /********************************************************* */
-export class Instruction {
-  public constructor(public statusLine: number, public instruction: string, public lastLine: boolean) {
-    /*statusLine:
-    0=>created (before first save)
-    1=> on save
-    2=>in adit*/
-
-  }
-
-}
-
