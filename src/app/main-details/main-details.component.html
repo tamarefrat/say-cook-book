@@ -13,7 +13,7 @@
                 <option *ngFor="let option of _recipeService.optionCategories">{{option}}</option>
             </select>
             <br>
-            <input type="file" name="urlImg">
+            <input type="file" id="choosedImg">
             <br>
             <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
             <br>

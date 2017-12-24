@@ -27,7 +27,7 @@ export class MainDetailsComponent implements OnInit {
     this.getFrom = 'tami';*/
     this.statusDetails = 0;
     this.category = ['', '', ''];
-    this.urlImg = 'assets/saveBtn.png';
+    this.urlImg = 'assets/Say CookBook logo.ico';
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
 
    /* this.keyWords = ['chocalate'];*/
@@ -40,11 +40,18 @@ export class MainDetailsComponent implements OnInit {
 
   /************************************************************************************************* */
 
+
+ /* getImage() {
+    let filepath = document.getElementById('choosedImg').value;
+    let a = filepath.split('\\');
+return a[a.length - 1];
+}*/
   /*details functions*/
   firstSaveDetails() {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 1;
     this.saveRepice();
+  /*  this.urlImg = 'assets/' + this.getImage(image);*/
   }
 
   aditDetails() {
