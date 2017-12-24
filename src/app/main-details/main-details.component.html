@@ -9,17 +9,30 @@
             <br>
 
             <h3>Categories:</h3>
-            <select *ngFor="let cat of category; let i=index" name="category[i]" [(ngModel)]="category[i]">
-                <option *ngFor="let option of _recipeService.optionCategories">{{option}}</option>
-            </select>
+            <mat-form-field>
+                <mat-select name="category[0]" [(ngModel)]="category[0]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select name="category[1]" [(ngModel)]="category[1]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select name="category[2]" [(ngModel)]="category[2]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <br>
             <input type="file" id="choosedImg">
-            <br>
+
             <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
             <br>
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveDetails()">
-          <img src="assets\saveBtn.png" width="100%">
-        </button>
+            <button mat-mini-fab (click)="firstSaveDetails()">
+            <mat-icon class="mat-25" >save</mat-icon>
+            </button>
+
         </div>
 
         <div id="recipeOnSave" *ngSwitchCase="1">

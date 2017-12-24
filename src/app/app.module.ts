@@ -4,14 +4,35 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 /*material*/
-/*import {
+import {
   MatSelectModule,
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatSliderModule,
   MatCheckboxModule,
   MatInputModule,
-  MatCardModule,
-  MatIconModule,
-  MatButtonModule
-} from '@angular/material';*/
+  MatSlideToggleModule,
+  MatStepperModule,
+  MatListModule,
+  MatTableModule,
+  MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatChipsModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatGridListModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatTabsModule,
+  MatPaginatorModule,
+  MatToolbarModule,
+  MatExpansionModule
+} from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
 /*components*/
 import { AppComponent } from './app.component';
 import { RecipeButtonComponent } from './recipe-button/recipe-button.component';
@@ -41,13 +62,33 @@ import { RecipeService } from './services/recipe.service';
   imports: [
     BrowserModule,
     FormsModule,
-   BrowserAnimationsModule,
-   /*MatSelectModule,
-    MatInputModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
     MatButtonModule,
-    MatCardModule,
     MatIconModule,
-    MatCheckboxModule*/
+    MatCardModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatSliderModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatStepperModule,
+    MatListModule,
+    MatTableModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatGridListModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatToolbarModule,
+    MatExpansionModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]

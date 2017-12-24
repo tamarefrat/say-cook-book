@@ -28,6 +28,7 @@ export class RecipeComponent implements OnInit {
     this.instructionLines = new InstructionLineComponent(this._recipeService);
     this.itemLines = new ItemLineComponent(this._recipeService);
     this.mainDetails = new MainDetailsComponent(this._recipeService);
+    this.partToShow = 0;
 
     this.keyWords = [];
     /* this.comment = 'delitios';*/
@@ -62,6 +63,19 @@ export class RecipeComponent implements OnInit {
 
     }
   }
+  deleteRecipe() {
+    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
+    let ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
+    if (!ans) {
+      return;
+    }
+    this.mainDetails.statusDetails = 4;
+    const index = this._recipeService.getIndexOfRecipeByCode(this.code);
+    this._recipeService.allMyRecipes.splice(index, 1);
+  }
+  shareRecipe() {}
+
+
 
 }/*end of class*/
 
