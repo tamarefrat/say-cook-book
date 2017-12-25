@@ -7,25 +7,25 @@
 <button mat-fab (click)="shareRecipe() ">
  <img src="assets\ic_share.png " width="90% "></button>
 <form *ngIf="statusDetails!=4 " role="form ">
-    <app-main-details [code]="this.code " *ngIf="partToShow==0 "></app-main-details>
-    <app-item-line [code]="this.code " *ngIf="partToShow==1 "></app-item-line>
-    <app-instruction-line [code]="this.code " *ngIf="partToShow==2 "></app-instruction-line>
+
 </form>
 
+
+<!--
 <mat-checkbox [(ngModel)]="isNonLinear">Disable linear mode</mat-checkbox>
 
 <h3>Linear Vertical Stepper Demo using a single form</h3>
-<form [formGroup]="formGroup">
-    <mat-vertical-stepper formArrayName="formArray" [linear]="!isNonLinear">
-        <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+<form>
+    <mat-vertical-stepper [linear]="!isNonLinear">
+        <mat-step>
             <ng-template matStepLabel>Fill out your name</ng-template>
             <mat-form-field>
-                <input matInput placeholder="First Name" formControlName="firstNameFormCtrl" required>
+                <input matInput placeholder="First Name" required>
                 <mat-error>This field is required</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Last Name" formControlName="lastNameFormCtrl" required>
+                <input matInput placeholder="Last Name" required>
                 <mat-error>This field is required</mat-error>
             </mat-form-field>
             <div>
@@ -33,12 +33,12 @@
             </div>
         </mat-step>
 
-        <mat-step formGroupName="1" [stepControl]="formArray?.get([1])" optional>
+        <mat-step optional>
             <ng-template matStepLabel>
                 <div>Fill out your email address</div>
             </ng-template>
             <mat-form-field>
-                <input matInput placeholder="Email address" formControlName="emailFormCtrl">
+                <input matInput placeholder="Email address">
                 <mat-error>The input is invalid.</mat-error>
             </mat-form-field>
             <div>
@@ -59,15 +59,15 @@
 
 <h3>Linear Horizontal Stepper Demo using a different form for each step</h3>
 <mat-horizontal-stepper [linear]="!isNonLinear">
-    <mat-step [stepControl]="nameFormGroup">
-        <form [formGroup]="nameFormGroup">
+    <mat-step>
+        <form>
             <ng-template matStepLabel>Fill out your name</ng-template>
             <mat-form-field>
-                <input matInput placeholder="First Name" formControlName="firstNameCtrl" required>
+                <input matInput placeholder="First Name" required>
                 <mat-error>This field is required</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Last Name" formControlName="lastNameCtrl" required>
+                <input matInput placeholder="Last Name" required>
                 <mat-error>This field is required</mat-error>
             </mat-form-field>
             <div>
@@ -76,11 +76,11 @@
         </form>
     </mat-step>
 
-    <mat-step [stepControl]="emailFormGroup" optional>
-        <form [formGroup]="emailFormGroup">
+    <mat-step optional>
+        <form>
             <ng-template matStepLabel>Fill out your email address</ng-template>
             <mat-form-field>
-                <input matInput placeholder="Email address" formControlName="emailCtrl">
+                <input matInput placeholder="Email address">
                 <mat-error>The input is invalid</mat-error>
             </mat-form-field>
             <div>
@@ -100,19 +100,15 @@
         </form>
     </mat-step>
 </mat-horizontal-stepper>
+-->
 
-<h3>Vertical Stepper Demo</h3>
 <mat-checkbox [(ngModel)]="isNonEditable">Make steps non-editable</mat-checkbox>
 <mat-vertical-stepper>
     <mat-step [editable]="!isNonEditable">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="First Name">
-        </mat-form-field>
+        <ng-template matStepLabel>Main Details Of Recipee</ng-template>
 
-        <mat-form-field>
-            <input matInput placeholder="Last Name">
-        </mat-form-field>
+        <app-main-details [code]="this.code "></app-main-details>
+
         <div>
             <button mat-button matStepperNext type="button">Next</button>
         </div>
@@ -120,11 +116,13 @@
 
     <mat-step [editable]="!isNonEditable">
         <ng-template matStepLabel>
-            <div>Fill out your phone number</div>
+            <div>Food stuffs</div>
         </ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Phone number">
-        </mat-form-field>
+
+
+        <app-item-line [code]="this.code "></app-item-line>
+
+
         <div>
             <button mat-button matStepperPrevious type="button">Back</button>
             <button mat-button matStepperNext type="button">Next</button>
@@ -133,11 +131,14 @@
 
     <mat-step [editable]="!isNonEditable">
         <ng-template matStepLabel>
-            <div>Fill out your address</div>
+            <div>Instructions</div>
         </ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Address">
-        </mat-form-field>
+
+
+        <app-instruction-line [code]="this.code "></app-instruction-line>
+
+
+
         <div>
             <button mat-button matStepperPrevious type="button">Back</button>
             <button mat-button matStepperNext type="button">Next</button>
@@ -145,14 +146,14 @@
     </mat-step>
 
     <mat-step>
-        <ng-template matStepLabel>Confirm your information</ng-template>
+        <ng-template matStepLabel>Confirm your recipe</ng-template>
         Everything seems correct.
         <div>
             <button mat-button>Done</button>
         </div>
     </mat-step>
 </mat-vertical-stepper>
-
+<!--
 <h3>Horizontal Stepper Demo with Text Label</h3>
 <mat-horizontal-stepper>
     <mat-step label="Fill out your name">
@@ -218,3 +219,4 @@
         </mat-form-field>
     </mat-step>
 </mat-horizontal-stepper>
+-->
