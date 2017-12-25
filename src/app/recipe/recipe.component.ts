@@ -69,7 +69,7 @@ export class RecipeComponent implements OnInit {
     if (!ans) {
       return;
     }
-    this.mainDetails.statusDetails = 4;
+    this.mainDetails. statusDetails = 4;
     const index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this._recipeService.allMyRecipes.splice(index, 1);
   }

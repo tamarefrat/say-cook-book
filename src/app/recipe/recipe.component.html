@@ -1,4 +1,6 @@
-<h1 *ngIf="mainDetails.statusDetails==0">@say cook book</h1>
+<h1 *ngIf="mainDetails.statusDetails==0">
+
+    @say cook book</h1>
 <h1 *ngIf="mainDetails.statusDetails!=0">{{mainDetails.nameRecipe}}</h1>
 <button mat-fab (click)=" deleteRecipe() ">
  <img src="assets\ic_delete.png " width="90% "></button>
@@ -9,7 +11,7 @@
     <app-item-line [code]="this.code " *ngIf="partToShow==1 "></app-item-line>
     <app-instruction-line [code]="this.code " *ngIf="partToShow==2 "></app-instruction-line>
 </form>
-<!--
+
 <mat-checkbox [(ngModel)]="isNonLinear">Disable linear mode</mat-checkbox>
 
 <h3>Linear Vertical Stepper Demo using a single form</h3>
@@ -216,4 +218,3 @@
         </mat-form-field>
     </mat-step>
 </mat-horizontal-stepper>
--->

@@ -5,7 +5,7 @@
             <p>{{code}}</p>
             <input type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
             <br>
-            <input type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
+            <input matInput name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
             <br>
 
             <h3>Categories:</h3>
@@ -27,7 +27,14 @@
             <br>
             <input type="file" id="choosedImg">
 
-            <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
+            <mat-form-field>
+                <textarea matInput aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
+                <mat-hint>Leave us a comment!</mat-hint>
+                <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
+            </mat-form-field>
+
+
+
             <br>
             <button mat-mini-fab (click)="firstSaveDetails()">
             <mat-icon class="mat-25" >save</mat-icon>
@@ -56,9 +63,16 @@
 
         <div id="recipeInAdit" *ngSwitchCase="2">
             <p>{{code}}</p>
-            <input type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+
             <br>
-            <input type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
+            <mat-form-field>
+                <input matInput type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required #nameModel="ngModel">
+                <mat-error *ngIf="nameModel.hasError('required')">You must enter name of recipe.</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+            </mat-form-field>
             <br>
 
             <h3>Categories:</h3>
@@ -67,7 +81,11 @@
             </select><br>
             <input type="file" name="urlImg">
             <br>
-            <textarea rows="3" name="comment" placeholder="Your Comments" [(ngModel)]="comment"></textarea>
+            <mat-form-field>
+                <textarea matInput aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
+                <mat-hint>Leave us a comment!</mat-hint>
+                <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
+            </mat-form-field>
             <br>
             <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveRepice()">
           <img src="assets\saveBtn.png" width="100%">
