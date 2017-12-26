@@ -19,12 +19,13 @@ export class OptionsForRecipeComponent implements OnInit {
     this._recipeService.allMyRecipes.push(new RecipeComponent(this._recipeService));
     alert('recipe created' + this._recipeService.counter);
   }
-  addCategory() {
-    let category = '';
+  addCategory(category: string) {
+
     if (this._recipeService.optionCategories.indexOf(category) > 0) {
       alert('category appeares');
     } else {
       this._recipeService.optionCategories.push(category);
     }
+
   }
 }

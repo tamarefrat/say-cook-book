@@ -31,7 +31,8 @@ import {
   MatTabsModule,
   MatPaginatorModule,
   MatToolbarModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialog
 } from '@angular/material';
 import { MatIconRegistry } from '@angular/material/icon';
 /*components*/
@@ -43,6 +44,7 @@ import { ItemLineComponent } from './item-line/item-line.component';
 import { InstructionLineComponent } from './instruction-line/instruction-line.component';
 import { MainDetailsComponent } from './main-details/main-details.component';
 import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
+
 
 /*services*/
 import { RecipeService } from './services/recipe.service';
@@ -91,7 +93,7 @@ import { RecipeService } from './services/recipe.service';
     MatToolbarModule,
     MatExpansionModule,
   ],
-  providers: [RecipeService],
+  providers: [RecipeService, MatDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

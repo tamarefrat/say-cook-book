@@ -1,4 +1,40 @@
 <img width="300" src="assets\Say CookBook logo.ico"><br>
-<button type="button" (click)="createRecipe()">Create Recipe</button>
-<button type="button">Search Recipe</button>
-<button type="button" (click)="addCategory()">Add Category</button>
+
+<button mat-raised-button (click)="createRecipe()">Create Recipe</button>
+<button mat-raised-button (click)="addCategory()">Search Recipe</button>
+
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Add Categories in your app
+            </mat-panel-title>
+            <mat-panel-description>
+                Press To Enter New Category
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-card>
+            <mat-form-field class="example-form-field">
+                <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="value" />
+                <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    <mat-icon>close</mat-icon>
+  </button>
+            </mat-form-field>
+
+        </mat-card>
+        <mat-card>
+            <button mat-raised-button (click)="addCategory(newCategory.value)">Add Category</button>
+        </mat-card>
+
+        <mat-card>
+            <mat-list>
+                <h3 mat-subheader>Categories</h3>
+                <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
+                    <mat-icon mat-list-icon>cake</mat-icon>
+                    <h4 mat-line>{{cat}}</h4>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </mat-card>
+    </mat-expansion-panel>
+</mat-accordion>
