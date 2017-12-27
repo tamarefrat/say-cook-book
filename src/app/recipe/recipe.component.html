@@ -1,131 +1,66 @@
-<h1 *ngIf="mainDetails.statusDetails==0">
+<div *ngIf="mainDetails.statusDetails!=4">
+    <h1 *ngIf="mainDetails.statusDetails==0">
 
-    @say cook book</h1>
-<h1 *ngIf="mainDetails.statusDetails!=0">{{mainDetails.nameRecipe}}</h1>
-<button mat-fab (click)=" deleteRecipe() ">
- <img src="assets\ic_delete.png " width="90% "></button>
-<button mat-fab (click)="shareRecipe() ">
- <img src="assets\ic_share.png " width="90% "></button>
-<form *ngIf="statusDetails!=4 " role="form ">
+        @say cook book</h1>
+    <h1 *ngIf="mainDetails.statusDetails!=0">{{mainDetails.nameRecipe}}</h1>
+    <button mat-fab (click)=" deleteRecipe() ">
+ <mat-icon>delete</mat-icon></button>
+    <button mat-fab (click)="shareRecipe() ">
+ <mat-icon>share</mat-icon>></button>
 
-</form>
+    <mat-vertical-stepper>
+        <mat-step>
+            <ng-template matStepLabel>Main Details Of Recipee</ng-template>
 
+            <app-main-details [code]="this.code "></app-main-details>
+            <br><br>
+            <div>
+                <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
+            </div>
+        </mat-step>
 
-
-<mat-vertical-stepper>
-    <mat-step>
-        <ng-template matStepLabel>Main Details Of Recipee</ng-template>
-
-        <app-main-details [code]="this.code "></app-main-details>
-
-        <div>
-            <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
-        </div>
-    </mat-step>
-
-    <mat-step>
-        <ng-template matStepLabel>
-            <div>Food stuffs</div>
-        </ng-template>
+        <mat-step>
+            <ng-template matStepLabel>
+                <div>Food stuffs</div>
+            </ng-template>
 
 
-        <app-item-line [code]="this.code "></app-item-line>
+            <app-item-line [code]="this.code "></app-item-line>
+
+            <br><br>
 
 
-        <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
-        </div>
-    </mat-step>
+            <div>
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+            </div>
+        </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>
-            <div>Instructions</div>
-        </ng-template>
-
-
-        <app-instruction-line [code]="this.code "></app-instruction-line>
+        <mat-step>
+            <ng-template matStepLabel>
+                <div>Instructions</div>
+            </ng-template>
 
 
+            <app-instruction-line [code]="this.code "></app-instruction-line>
+            <br><br>
+            <div>
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button mat-button matStepperNext type="button">Next</button>
+            </div>
+        </mat-step>
 
-        <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
-        </div>
-    </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Confirm your recipe</ng-template>
+            Everything seems correct.
+            <div>
+                <button mat-fab>Done</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>
+<div *ngIf="mainDetails.statusDetails==4">
 
-    <mat-step>
-        <ng-template matStepLabel>Confirm your recipe</ng-template>
-        Everything seems correct.
-        <div>
-            <button mat-button>Done</button>
-        </div>
-    </mat-step>
-</mat-vertical-stepper>
-<!--
-<h3>Horizontal Stepper Demo with Text Label</h3>
-<mat-horizontal-stepper>
-    <mat-step label="Fill out your name">
-        <mat-form-field>
-            <input matInput placeholder="First Name">
-        </mat-form-field>
-
-        <mat-form-field>
-            <input matInput placeholder="Last Name">
-        </mat-form-field>
-        <div>
-            <button mat-button matStepperNext type="button">Next</button>
-        </div>
-    </mat-step>
-
-    <mat-step label="Fill out your phone number">
-        <mat-form-field>
-            <input matInput placeholder="Phone number">
-        </mat-form-field>
-        <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
-        </div>
-    </mat-step>
-
-    <mat-step label="Fill out your address">
-        <mat-form-field>
-            <input matInput placeholder="Address">
-        </mat-form-field>
-        <div>
-            <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button matStepperNext type="button">Next</button>
-        </div>
-    </mat-step>
-
-    <mat-step label="Confirm your information">
-        Everything seems correct.
-        <div>
-            <button mat-button>Done</button>
-        </div>
-    </mat-step>
-</mat-horizontal-stepper>
-
-<h3>Horizontal Stepper Demo with Templated Label</h3>
-<mat-horizontal-stepper>
-    <mat-step *ngFor="let step of steps">
-        <ng-template matStepLabel>{{step.label}}</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Answer" [(ngModel)]="step.content">
-        </mat-form-field>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-        </div>
-    </mat-step>
-</mat-horizontal-stepper>
-
-<h3>Stepper with autosize textarea</h3>
-<mat-horizontal-stepper>
-    <mat-step label="Step 1">
-        <mat-form-field>
-            <textarea matInput placeholder="Autosize textarea" matTextareaAutosize>This is an autosize textarea, it should adjust to the size of its content.</textarea>
-        </mat-form-field>
-    </mat-step>
-</mat-horizontal-stepper>
--->
+    <h2>your {{this.mainDetails.nameRecipe}} was deleted</h2>
+    <img src="assets\ic_delete.png " style="width:250px; opacity:30% ">
+</div>

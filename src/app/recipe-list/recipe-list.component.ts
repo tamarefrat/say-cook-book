@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
-
+import { Component, OnInit, transition } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -11,52 +11,46 @@ import { Component, OnInit } from '@angular/core';
 export class RecipeListComponent implements OnInit {
 
   
-recipeList: recipeName[];
+  recipeList: recipeName[];
 
 
-myFunction() {
-    var input, filter, i,a;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-       console.log(filter);
-    for (i = 0; i < this.recipeList.length; i++) {
-        a =  this.recipeList[i].name ;
-        if (a.toUpperCase().indexOf(filter) > -1) {
-          this.recipeList[i].dsply = true;
-        } else {
-          this.recipeList[i].dsply = false;
-  
-        }
+  myFunction() {
+      var input, filter, i,a;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+        console.log(filter);
+      for (i = 0; i < this.recipeList.length; i++) {
+          a =  this.recipeList[i].name ;
+          if (a.toUpperCase().indexOf(filter) > -1) {
+            this.recipeList[i].disply = true;
+          } else {
+            this.recipeList[i].disply = false;
+    
+          }
+      }
     }
+  i : number;
+  name1:recipeName;
+
+  rec: Observable<any[]>;
+  constructor(db:AngularFireDatabase) { 
+    
+    db.list('/recipes').valueChanges().subscribe(recipes => {
+      this.recipeList = [];   
+      recipes.forEach(recipe =>{
+       this.recipeList.push(new recipeName(JSON.stringify(recipe),JSON.stringify(recipe), true));
+      })
+    });
+
   }
 
-constructor() { 
-  this.recipeList = [
-    new recipeName("Carrot Salad", "carrot_salad",true),
-    new recipeName("Chocolate Cake", "Chocolate_Cake",true),
-    new recipeName("Blintzes Cheese", "Blintzes_cheese",true),
-    new recipeName("Man", "man",true),
-    new recipeName("Tomato Salad", "tomato_salad",true)
-  ]; 
-}
-
-  ngOnInit() {
-  }
-
-  
- 
-  
-
-
+    ngOnInit() {
+    }
 
 }
-
-
 
 
 export class recipeName{
-
-constructor(public name: string, public url: string, public dsply: boolean){
-
-}
+  constructor(public name: string, public url: string, public disply: boolean){
+  }
 }

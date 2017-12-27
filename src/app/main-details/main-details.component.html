@@ -8,7 +8,8 @@
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe">
+                <input matInput type="text" #name name="nameRecipe " placeholder="Name Of Recipe " [(ngModel)]="nameRecipe " required>
+                <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
             </mat-form-field>
             <br>
 
@@ -30,7 +31,7 @@
             </mat-form-field>
             <br>
             <input type="file" id="choosedImg">
-
+            <br>
             <mat-form-field>
                 <textarea matInput aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
                 <mat-hint>Leave us a comment!</mat-hint>
@@ -40,9 +41,9 @@
 
 
             <br>
-            <button mat-mini-fab (click)="firstSaveDetails()">
-            <mat-icon class="mat-25" >save</mat-icon>
-            </button>
+            <button mat-fab color="accent" (click)="firstSaveDetails()" [disabled]='!nameRecipe'>
+          <mat-icon>save</mat-icon>
+        </button>
 
         </div>
 
@@ -57,42 +58,55 @@
             <h5>Comment:</h5>
             <p>{{comment}}</p>
             <br>
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditDetails()">
-          <img src="assets\aditBtn.png" width="100%">
-        </button>
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteRecipe()">
-          <img src="assets\deleteBtn.png" width="100%">
-        </button>
+            <button mat-fab color="accent" (click)="aditDetails()">
+            <mat-icon class="mat-25" >edit</mat-icon>
+            </button>
+            <button mat-fab color="accent" (click)="deleteRecipe() ">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
         </div>
 
-        <div id="recipeInAdit" *ngSwitchCase="2">
+        <div id="recipeInAdit " *ngSwitchCase="2 ">
             <p>code: {{code}}</p>
 
             <br>
             <mat-form-field>
-                <input matInput type="text" name="nameRecipe" placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required #nameModel="ngModel">
-                <mat-error *ngIf="nameModel.hasError('required')">You must enter name of recipe.</mat-error>
+                <input matInput type="text" #name name="nameRecipe " placeholder="Name Of Recipe " [(ngModel)]="nameRecipe " required>
+                <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
             </mat-form-field>
             <br>
             <mat-form-field>
-                <input matInput type="text" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+                <input matInput type="text " name="getFrom " placeholder="Get Recipe From " [(ngModel)]="getFrom ">
             </mat-form-field>
             <br>
 
             <h3>Categories:</h3>
-            <select *ngFor="let cat of category; let i=index" name="category[i]" [(ngModel)]="category[i]">
-                <option *ngFor="let option of _recipeService.optionCategories">{{option}}</option>
-            </select><br>
-            <input type="file" name="urlImg">
+            <mat-form-field>
+                <mat-select name="category[0]" [(ngModel)]="category[0]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select name="category[1]" [(ngModel)]="category[1]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select name="category[2]" [(ngModel)]="category[2]">
+                    <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+            <input type="file " name="urlImg ">
             <br>
             <mat-form-field>
-                <textarea matInput aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
+                <textarea matInput aria-label="Comment " name="comment " [(ngModel)]="comment " matTextareaAutosize [maxlength]="commentMax "></textarea>
                 <mat-hint>Leave us a comment!</mat-hint>
-                <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
+                <mat-hint align="end ">{{commentCount}}/{{commentMax}}</mat-hint>
             </mat-form-field>
             <br>
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveRepice()">
-          <img src="assets\saveBtn.png" width="100%">
+            <br>
+            <button mat-fab color="accent" (click)="saveRepice()" [disabled]='!nameRecipe'>
+          <mat-icon>save</mat-icon>
         </button>
         </div>
 

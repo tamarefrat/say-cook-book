@@ -34,6 +34,7 @@ import {
   MatExpansionModule,
   MatDialog
 } from '@angular/material';
+import 'hammerjs';
 import { MatIconRegistry } from '@angular/material/icon';
 /*components*/
 import { AppComponent } from './app.component';
@@ -44,11 +45,18 @@ import { ItemLineComponent } from './item-line/item-line.component';
 import { InstructionLineComponent } from './instruction-line/instruction-line.component';
 import { MainDetailsComponent } from './main-details/main-details.component';
 import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
+import { SignupComponent } from './signup/signup.component';
+import {LoginComponent} from './login/login.component';
+
 
 
 /*services*/
 import { RecipeService } from './services/recipe.service';
+import { AuthServiceService } from './auth-service.service';
 
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule} from 'angularfire2/database';
 
 
 @NgModule({
@@ -60,7 +68,9 @@ import { RecipeService } from './services/recipe.service';
     ItemLineComponent,
     InstructionLineComponent,
     MainDetailsComponent,
-    OptionsForRecipeComponent
+    OptionsForRecipeComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -92,8 +102,10 @@ import { RecipeService } from './services/recipe.service';
     MatPaginatorModule,
     MatToolbarModule,
     MatExpansionModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule
   ],
-  providers: [RecipeService, MatDialog],
+  providers: [RecipeService, MatDialog, AuthServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

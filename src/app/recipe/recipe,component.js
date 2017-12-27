@@ -2,7 +2,12 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   'this': {
-    'textAlign': 'left'
+    'textAlign': 'center !important'
+  },
+  'bigIcon': {
+    'width': [{ 'unit': 'px', 'value': 250 }],
+    'height': [{ 'unit': 'px', 'value': 250 }],
+    'opacity': '20%'
   },
   'nameRecipe': {
     'fontSize': [{ 'unit': 'string', 'value': 'xx-large' }]
