@@ -47,6 +47,8 @@ import { MainDetailsComponent } from './main-details/main-details.component';
 import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
 import { SignupComponent } from './signup/signup.component';
 import {LoginComponent} from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -70,7 +72,9 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
     MainDetailsComponent,
     OptionsForRecipeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +110,6 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
     AngularFireDatabaseModule
   ],
   providers: [RecipeService, MatDialog, AuthServiceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,FooterComponent,HeaderComponent]
 })
 export class AppModule { }
