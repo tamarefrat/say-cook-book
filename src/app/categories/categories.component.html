@@ -1,3 +1,25 @@
-<p>
-  categories works!
-</p>
+<br><br>
+<mat-toolbar>
+    <mat-panel-title>
+        Your Categories:
+    </mat-panel-title>
+    <mat-panel-description>
+        Manage your categories.
+    </mat-panel-description>
+</mat-toolbar>
+<mat-card>
+
+
+    <mat-list>
+        <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
+            <mat-icon mat-list-icon>category</mat-icon>
+            <h4 mat-line>{{cat}}</h4>
+
+            <mat-checkbox #favorite [checked]="isFavoriteCategory(cat)" (change)="changeFavoriteStatus(favorite.checked, cat)">favorite</mat-checkbox>
+            <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+</mat-card>

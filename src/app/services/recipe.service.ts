@@ -9,14 +9,15 @@ export class RecipeService {
   allMyRecipes: RecipeComponent[];
   optionCategories: string[];
   counter: number; // starts from 0 - and every recipe get the counter++ for his code
-  /* instructions = [];*/
+  favorites: any[];
 
 
   constructor() {
-     this.allMyRecipes = [];
+    this.allMyRecipes = [];
     this.optionCategories = ['cakes', 'parve', 'easy', 'milk', 'coockies', 'similiar'];
     this.counter = 0;
-    }
+    this.favorites = ['milk', 'fishes', 'parve'];
+  }
 
   getRecipe(code): RecipeComponent {
     return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];
@@ -28,7 +29,7 @@ export class RecipeService {
   */
 
 
-  getIndexOfRecipeByCode( code: number) {
+  getIndexOfRecipeByCode(code: number) {
     if (this.allMyRecipes === null) { return null; }
     for (let i = 0; i < this.allMyRecipes.length; i++) {
       if (this.allMyRecipes[i].code === code) {

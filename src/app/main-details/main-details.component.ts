@@ -47,12 +47,7 @@ export class MainDetailsComponent implements OnInit {
  return a[a.length - 1];
  }*/
   /*details functions*/
-  firstSaveDetails() {
-    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-    this.statusDetails = 1;
-    this.saveRepice();
-    /*  this.urlImg = 'assets/' + this.getImage(image);*/
-  }
+
 
   aditDetails() {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
@@ -77,7 +72,7 @@ export class MainDetailsComponent implements OnInit {
     this._recipeService.allMyRecipes.splice(index, 1);
   }
 
-  saveRepice() {
+  saveRecipe() {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.statusDetails = 1;
     const index = this._recipeService.getIndexOfRecipeByCode(this.code);

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RecipeService } from '../services/recipe.service';
 
 
 @Component({
@@ -27,8 +28,9 @@ export class HomePageComponent implements OnInit {
        cols: 2, rows: 1, color: 'pink', icon: 'assets\\homeImg\\addcategory.png'}
   ];
   @Input() favorites: string [];
-  constructor() {
-    this.favorites = ['cakes', 'milk', 'fishes'];
+
+  constructor(private _recipeService: RecipeService) {
+
    }
 
   ngOnInit() {

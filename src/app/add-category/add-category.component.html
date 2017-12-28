@@ -1,3 +1,28 @@
-<p>
-  add-category works!
-</p>
+<br><br><br><br>
+<div class="container">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header color="accent">
+                <mat-panel-title>
+                    Add Categories in your app
+                </mat-panel-title>
+                <mat-panel-description>
+                    Press To Enter New Category
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-card>
+                <mat-input-container class="example-form-field">
+                    <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="category" name="category" />
+                    <button mat-button *ngIf="category" matSuffix mat-icon-button aria-label="Clear" (click)="category=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+                </mat-input-container>
+                <br>
+                <mat-checkbox name="isFavorite" [(ngModel)]="isFavorite">Add category to favorites</mat-checkbox>
+            </mat-card>
+            <mat-card>
+                <button [disabled]="!category" mat-raised-button (click)="addCategory()">Add Category</button>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

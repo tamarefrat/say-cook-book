@@ -26,7 +26,9 @@ export class RecipeComponent implements OnInit {
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.code = this._recipeService.counter++;
     this.instructionLines = new InstructionLineComponent(this._recipeService);
+    this.instructionLines.instructions.push(new Instruction(0, '', true));
     this.itemLines = new ItemLineComponent(this._recipeService);
+    this.itemLines.foodstuffs.push(new Foodstuff(0, 0, '', '', true));
     this.mainDetails = new MainDetailsComponent(this._recipeService);
     this.partToShow = 0;
 
