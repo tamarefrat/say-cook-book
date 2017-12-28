@@ -1,0 +1,35 @@
+.container {
+    width: 95%;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+}
+
+mat-toolbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+mat-grid-tile {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+     :hover {
+        opacity: 0.5;
+    }
+}
+
+mat-card {
+    width: 85%;
+    height: 85%;
+    img {}
+}

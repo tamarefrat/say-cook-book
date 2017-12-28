@@ -1,0 +1,26 @@
+<div class="container">
+    <mat-grid-list cols="8" rowHeight="130px">
+        <mat-grid-tile routerLink="{{tile.route}}" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+            <mat-card [style.background]="tile.color">
+                <mat-card-title>{{tile.text}}</mat-card-title>
+                <mat-card-content>
+                    <p>{{tile.subtext}}</p>
+                    <img mat-card-image [src]="tile.icon" style=" flex:inherit">
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div class="container">
+    <mat-toolbar>
+        <h4 class="float-right">My Favorites</h4>
+        <mat-icon class="float-left">favorite</mat-icon>
+    </mat-toolbar>
+    <mat-grid-list cols="3">
+        <mat-grid-tile *ngFor="let fab of favorites" [style.background]="blue">
+            <h4>{{fab}}</h4>
+            <br>
+            <mat-icon>cake</mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

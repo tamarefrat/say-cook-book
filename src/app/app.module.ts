@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+// import { router } from '@angular/router;
 
 /*material*/
 import {
@@ -47,16 +48,24 @@ import { MainDetailsComponent } from './main-details/main-details.component';
 import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
 import { SignupComponent } from './signup/signup.component';
 import {LoginComponent} from './login/login.component';
-
+import { HomePageComponent } from './home-page/home-page.component';
+import { SearchByCategoryComponent } from './searches/search-by-category/search-by-category.component';
+import { SearchByPictureComponent } from './searches/search-by-picture/search-by-picture.component';
+import { SearchByKeywordsComponent } from './searches/search-by-keywords/search-by-keywords.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { AboutComponent } from './about/about.component';
 
 
 /*services*/
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
+import { routing} from './app.routing';
 
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
+
 
 
 @NgModule({
@@ -70,9 +79,17 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
     MainDetailsComponent,
     OptionsForRecipeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HomePageComponent,
+    SearchByCategoryComponent,
+    SearchByPictureComponent,
+    SearchByKeywordsComponent,
+    AddCategoryComponent,
+    CategoriesComponent,
+    AboutComponent
   ],
   imports: [
+    routing,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
