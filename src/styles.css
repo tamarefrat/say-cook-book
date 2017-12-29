@@ -24,6 +24,10 @@
     padding: 3px;
 }
 
+.float-right {
+    text-align: left;
+}
+
 html,
 body {
     height: 100%;
