@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
       cols: 1, rows: 2, color: 'lihgtred', icon: 'assets\\homeImg\\picture.png' },
     { route: 'search-by-keywords', subtext: 'Search By Key-Word',  text: '',
       cols: 1, rows: 2, color: 'yellow', icon: 'assets\\homeImg\\key.png' },
-    { route: 'add-category', subtext: 'New categories', text: 'Add Category',
+    {route: 'categories/add-category', subtext: 'New categories', text: 'Add Category',
        cols: 2, rows: 1, color: 'pink', icon: 'assets\\homeImg\\addcategory.png'}
   ];
   @Input() favorites: string [];

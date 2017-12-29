@@ -1,8 +1,8 @@
 <mat-sidenav-container fullscreen>
     <mat-sidenav #sidenav>
-        <!--   <app-recipe-list></app-recipe-list>-->
+        <app-recipe-list></app-recipe-list>
     </mat-sidenav>
-    <mat-toolbar color="warn">
+    <mat-toolbar color="accent">
         <button mat-button (click)="sidenav.toggle()"><mat-icon>list</mat-icon></button>
         <h2 class="link" routerLink="/">Say Cook Book</h2>
         <div>
@@ -10,8 +10,9 @@
             <button mat-button (click)="logout()">log out</button>
             <button mat-button routerLink="/about">about us</button></div>
     </mat-toolbar>
-    <router-outlet></router-outlet>
-    <!--  <app-home-page></app-home-page>-->
+    <div class="body-margin">
+        <router-outlet></router-outlet>
+    </div>
 </mat-sidenav-container>
 <!--The content below is only a placeholder and can be replaced.-->
 <!--

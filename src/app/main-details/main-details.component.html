@@ -63,16 +63,17 @@
                 <img mat-card-image width="300" [src]="urlImg">
 
                 <h5 *ngIf="comment">Comment:</h5>
+                <button mat-fab color="accent" (click)="aditDetails()">
+            <mat-icon class="mat-25" >edit</mat-icon>
+            </button>
+                <button mat-fab color="accent" (click)="deleteRecipe() ">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
                 <h6>{{comment}}</h6>
 
 
                 <mat-card-actions>
-                    <button mat-fab color="accent" (click)="aditDetails()">
-            <mat-icon class="mat-25" >edit</mat-icon>
-            </button>
-                    <button mat-fab color="accent" (click)="deleteRecipe() ">
-            <mat-icon class="mat-25" >delete</mat-icon>
-            </button>
+
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>

@@ -77,7 +77,9 @@ export class RecipeComponent implements OnInit {
   }
   shareRecipe() {}
 
-
+saveRecipeInList() {
+  this._recipeService.allMyRecipes.push(this);
+}
 
 }/*end of class*/
 

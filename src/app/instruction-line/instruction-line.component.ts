@@ -16,7 +16,6 @@ export class InstructionLineComponent implements OnInit {
   constructor(private _recipeService: RecipeService) {
     this.instructions = [];
     this.keyWords = [];
-    this.zeroInstructions = true;
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }
 

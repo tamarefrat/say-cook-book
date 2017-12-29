@@ -1,47 +1,50 @@
-<h2>food stoff(how i write it??)</h2>
+<h2>food stoff</h2>
 <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createItemLine(-1)" *ngIf="zeroItems">
     <img src="assets\addBtn.png" width="100%">
   </button>
 
 <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
-    <div id="itemLineDetails" [ngSwitch]="item.statusLine">
-        <div id="itemLineDetailsCreated" *ngSwitchCase="0">
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="firstSaveItemLine(i)">
-          <img src="assets\saveBtn.png" width="100%">
-        </button>
 
-            <input type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
-            <input type="text" name="item.measurement" placeholder="Measurement" [(ngModel)]="item.measurement">
-            <input type="text" name="item.item" placeholder="Food stuff" [(ngModel)]="item.item">
+    <div id="itemLineDetailsCreated" *ngIf="item.statusLine!=1">
 
-        </div>
 
-        <div id="itemLineDetailsInSaved" *ngSwitchCase="1">
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="aditItemLine(i)">
-          <img src="assets\aditBtn.png" width="100%">
-        </button>
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="deleteItemLine(i)">
-          <img src="assets\deleteBtn.png" width="100%">
-        </button>
+        <input type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
+        <input type="text" name="item.measurement" placeholder="Measurement" [(ngModel)]="item.measurement">
+        <input type="text" name="item.item" placeholder="Food stuff" [(ngModel)]="item.item" required>
 
-            <label>{{item.amount}}</label>
-            <label>{{item.measurement}}</label>
-            <label>{{item.item}}</label>
+    </div>
+    <button mat-mini-fab color="primary" (click)="saveItemLine(i)">
+            <mat-icon class="mat-25" >save</mat-icon>
+            </button>
 
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createItemLine(i)" *ngIf="item.lastLine">
-          <img src="assets\addBtn.png" width="100%">
-        </button>
-        </div>
+    <div id="itemLineDetailsInSaved" *ngIf="item.statusLine==1">
 
-        <div id="itemLineDetailsInAdit" *ngSwitchCase="2">
-            <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveItemLine(i)">
-          <img src="assets\saveBtn.png" width="100%">
-        </button>
+        <label *ngIf="item.amount!=0">{{item.amount}}</label>
+        <label *ngIf="item.measurement">{{item.measurement}}</label>
+        <label>{{item.item}}</label>
 
-            <input type="number" name="item.amount" [(ngModel)]="item.amount" placeholder="Amount">
-            <input type="text" name="item.measurement" [(ngModel)]="item.measurement" placeholder="Measurement">
-            <input type="text" name="item.item" [(ngModel)]="item.item" placeholder="Food stuff">
-
-        </div>
+        <button mat-mini-fab color="accent" (click)="aditItemLine(i)">
+            <mat-icon class="mat-25" >edit</mat-icon>
+            </button>
+        <button mat-mini-fab color="accent" (click)="deleteItemLine(i)">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
+        <button mat-mini-fab color="primary" (click)="createItemLine(i)" *ngIf="item.lastLine">
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button>
     </div>
 </div>
+
+<!--
+    <div id="itemLineDetailsInAdit" *ngSwitchCase="2">
+        <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveItemLine(i)">
+          <img src="assets\saveBtn.png" width="100%">
+        </button>
+
+        <input type="number" name="item.amount" [(ngModel)]="item.amount" placeholder="Amount">
+        <input type="text" name="item.measurement" [(ngModel)]="item.measurement" placeholder="Measurement">
+        <input type="text" name="item.item" [(ngModel)]="item.item" placeholder="Food stuff">
+
+    </div>
+</div>
+</div>-->

@@ -65,6 +65,8 @@ import { routing} from './app.routing';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
+import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
+import { ShareComponent } from './recipe/share/share.component';
 
 
 
@@ -86,7 +88,9 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
     SearchByKeywordsComponent,
     AddCategoryComponent,
     CategoriesComponent,
-    AboutComponent
+    AboutComponent,
+    ShowAudioRecipeComponent,
+    ShareComponent
   ],
   imports: [
     routing,

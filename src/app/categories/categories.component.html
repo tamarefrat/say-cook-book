@@ -1,5 +1,5 @@
 <br><br>
-<mat-toolbar>
+<mat-toolbar color="primary">
     <mat-panel-title>
         Your Categories:
     </mat-panel-title>
@@ -8,8 +8,6 @@
     </mat-panel-description>
 </mat-toolbar>
 <mat-card>
-
-
     <mat-list>
         <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
             <mat-icon mat-list-icon>category</mat-icon>
@@ -22,4 +20,7 @@
         </mat-list-item>
         <mat-divider></mat-divider>
     </mat-list>
+</mat-card>
+<mat-card>
+    <button mat-raised-button routerLink="add-category">Add Category</button>
 </mat-card>

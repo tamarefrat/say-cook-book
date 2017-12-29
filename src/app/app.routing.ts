@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'search-by-categories', component: SearchByCategoryComponent },
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
-  { path: 'add-category', component: AddCategoryComponent },
+  { path: 'categories/add-category', component: AddCategoryComponent },
 ];
 
 

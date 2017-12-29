@@ -2,3 +2,8 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
+
+.body-margin {
+    margin: 15px;
+    padding: 3px;
+}

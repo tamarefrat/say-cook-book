@@ -14,6 +14,16 @@
     padding: 7px;
 }
 
+.link {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.body-margin {
+    margin: 15px;
+    padding: 3px;
+}
+
 html,
 body {
     height: 100%;
