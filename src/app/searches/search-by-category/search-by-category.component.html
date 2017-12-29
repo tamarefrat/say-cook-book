@@ -1,3 +1,23 @@
-<p>
-  search-by-category works!
-</p>
+<mat-card>
+    <h2>Find Recipe by Category</h2>
+    <div>
+        <input type="text" id="myInput" ng-model="test" placeholder="Search for category.." name="category" [(ngModel)]="category">
+        <div>
+            <img id="searchImg" src='/assets/search.png'>
+        </div>
+    </div>
+</mat-card>
+
+<mat-card>
+
+    <mat-grid-list cols="3" rowHeight="150px">
+        <div *ngFor="let cat of this._recipeService.optionCategories">
+            <mat-grid-tile *ngIf="isPrefix(cat)" style="background-color:#009688">
+                <mat-icon>category</mat-icon><br><br><br>
+                <h4>{{cat}}</h4>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+
+
+</mat-card>

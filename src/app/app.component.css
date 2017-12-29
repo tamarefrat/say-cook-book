@@ -7,3 +7,15 @@
     margin: 15px;
     padding: 3px;
 }
+
+.main {
+    height: 80%;
+    background-color: #484242;
+    min-height: 400px;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0.67em 0.3em;
+    color: #FF9800;
+}

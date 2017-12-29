@@ -55,6 +55,9 @@ import { SearchByKeywordsComponent } from './searches/search-by-keywords/search-
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+
 
 
 /*services*/
@@ -90,7 +93,9 @@ import { ShareComponent } from './recipe/share/share.component';
     CategoriesComponent,
     AboutComponent,
     ShowAudioRecipeComponent,
-    ShareComponent
+    ShareComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     routing,

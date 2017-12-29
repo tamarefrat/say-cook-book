@@ -1,4 +1,4 @@
-<br><br><br><br>
+<br><br>
 <div class="container">
     <mat-accordion color="primary">
         <mat-expansion-panel color="primary">
@@ -23,6 +23,40 @@
             <mat-card>
                 <button [disabled]="!category" mat-raised-button (click)="addCategory()">Add Category</button>
             </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+
+<br><br>
+<div class="container">
+    <mat-accordion color="primary">
+        <mat-expansion-panel color="primary">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Delete Categories from your app
+                </mat-panel-title>
+                <mat-panel-description>
+                    Press To Delete Categories
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-card>
+                <mat-list>
+                    <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
+                        <mat-icon mat-list-icon>category</mat-icon>
+                        <h4 mat-line>{{cat}}</h4>
+
+
+                        <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
+                <mat-icon>delete</mat-icon>
+            </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </mat-card>
+
+
         </mat-expansion-panel>
     </mat-accordion>
 </div>

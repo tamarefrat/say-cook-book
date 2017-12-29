@@ -1,0 +1,12 @@
+#header {
+    height: 10%;
+    background-color: #5a5a5a;
+    width: 100%;
+    color: orange;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}

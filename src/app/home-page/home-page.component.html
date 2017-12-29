@@ -5,7 +5,7 @@
                 <mat-card-title>{{tile.text}}</mat-card-title>
                 <mat-card-content>
                     <p>{{tile.subtext}}</p>
-                    <img mat-card-image [src]="tile.icon" style=" flex:inherit">
+                    <img mat-card-image [src]="tile.icon" style="width:40px; height:40px">
                 </mat-card-content>
             </mat-card>
         </mat-grid-tile>
@@ -27,10 +27,10 @@
 
 
             <mat-grid-list cols="3" rowHeight="100px">
-                <mat-grid-tile *ngFor="let fab of this._recipeService.favorites" style="background-color:orange">
+                <mat-grid-tile *ngFor="let fab of this._recipeService.favorites" style="background-color:#009688">
                     <h4>{{fab}}</h4>
                     <br>
-                    <mat-icon>cake</mat-icon>
+                    <mat-icon>category</mat-icon>
                 </mat-grid-tile>
             </mat-grid-list>
 
