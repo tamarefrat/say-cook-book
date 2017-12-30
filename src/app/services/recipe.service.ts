@@ -6,27 +6,27 @@ import { RecipeComponent } from '../recipe/recipe.component';
 @Injectable()
 
 export class RecipeService {
+  /*observableAllRecipies:FirebaseListObservable<any[]>;
+  observableOptionCategories: FirebaseListObservable<any[]>;
+  observableFavorites: FirebaseListObservable<any[]>;
+  */
   allMyRecipes: RecipeComponent[];
   optionCategories: string[];
   counter: number; // starts from 0 - and every recipe get the counter++ for his code
   favorites: any[];
 
 
-  constructor() {
+  constructor() {/*(private af:angularFire ) {*/
     this.allMyRecipes = [];
     this.optionCategories = ['cakes', 'parve', 'easy', 'milk', 'coockies', 'similiar'];
     this.counter = 0;
-    this.favorites = ['milk', 'fishes', 'parve'];
+    this.favorites = ['milk', 'easy', 'parve'];
   }
 
   getRecipe(code): RecipeComponent {
     return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];
   }
-  /*
-    getInstructions() {
-      return this.instructions;
-    }
-  */
+
 
 
   getIndexOfRecipeByCode(code: number) {
@@ -39,4 +39,9 @@ export class RecipeService {
     }
   }
 
+  /****************************************************** */
+/*data base functions
+getAllRecipies() {
+  this.observableAllRecipies = this.af.database.list
+}*/
 }

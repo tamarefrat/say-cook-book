@@ -1,39 +1,87 @@
-<h2>food stoff</h2>
-<button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createItemLine(-1)" *ngIf="zeroItems">
-    <img src="assets\addBtn.png" width="100%">
-  </button>
+<mat-card>
+    <mat-list>
+        <h2>food stoff</h2>
 
-<div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
-
-    <div id="itemLineDetailsCreated" *ngIf="item.statusLine!=1">
-
-
-        <input type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
-        <input type="text" name="item.measurement" placeholder="Measurement" [(ngModel)]="item.measurement">
-        <input type="text" name="item.item" placeholder="Food stuff" [(ngModel)]="item.item" required>
-
-    </div>
-    <button mat-mini-fab color="primary" (click)="saveItemLine(i)">
-            <mat-icon class="mat-25" >save</mat-icon>
-            </button>
-
-    <div id="itemLineDetailsInSaved" *ngIf="item.statusLine==1">
-
-        <label *ngIf="item.amount!=0">{{item.amount}}</label>
-        <label *ngIf="item.measurement">{{item.measurement}}</label>
-        <label>{{item.item}}</label>
-
-        <button mat-mini-fab color="accent" (click)="aditItemLine(i)">
-            <mat-icon class="mat-25" >edit</mat-icon>
-            </button>
-        <button mat-mini-fab color="accent" (click)="deleteItemLine(i)">
-            <mat-icon class="mat-25" >delete</mat-icon>
-            </button>
-        <button mat-mini-fab color="primary" (click)="createItemLine(i)" *ngIf="item.lastLine">
+        <button mat-mini-fab color="primary" (click)="createItemLine(-1)" *ngIf="zeroItems">
             <mat-icon class="mat-25" >add</mat-icon>
             </button>
-    </div>
-</div>
+
+        <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
+
+            <mat-list-item id="itemLineDetailsEdit" *ngIf="item.statusLine!=1">
+
+                <table class="fullwidth" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="item.measurement" placeholder="Measurement" [(ngModel)]="item.measurement">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="item.item" placeholder="Food stuff" [(ngModel)]="item.item" required>
+                                <mat-error *ngIf="!item.item">You must enter name of recipe.</mat-error>
+                            </mat-input-container>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="primary" (click)="saveItemLine(i)" [disabled]="!item.item">
+            <mat-icon class="mat-25" >save</mat-icon>
+            </button>
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="accent" (click)="deleteItemLine(i)">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
+                        </td>
+                    </tr>
+                </table>
+            </mat-list-item>
+
+
+            <mat-list-item id="itemLineDetailsInSaved" *ngIf="item.statusLine==1">
+
+
+                <table class="fullwidth" cellspacing="0">
+                    <tr>
+                        <td style="width:75%; max-width:75%; text-align:left">
+                            <label *ngIf="item.amount!=0">{{item.amount}}</label>
+
+                            <label *ngIf="item.measurement">{{item.measurement}}</label>
+
+                            <label>{{item.item}}</label>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="accent" (click)="aditItemLine(i)">
+            <mat-icon class="mat-25" >edit</mat-icon>
+            </button>
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="accent" (click)="deleteItemLine(i)">
+            <mat-icon class="mat-25" >delete</mat-icon>
+            </button>
+                        </td>
+                        <td>
+                            <button mat-mini-fab matSuffix color="primary" (click)="createItemLine(i)" *ngIf="item.lastLine">
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button>
+                        </td>
+                    </tr>
+                </table>
+            </mat-list-item>
+        </div>
+    </mat-list>
+</mat-card>
 
 <!--
     <div id="itemLineDetailsInAdit" *ngSwitchCase="2">

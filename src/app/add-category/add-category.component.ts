@@ -10,7 +10,10 @@ export class AddCategoryComponent implements OnInit {
 
   category: string;
   isFavorite: boolean;
-  constructor(private _recipeService: RecipeService) { }
+  selectedOptions: string[];
+  constructor(private _recipeService: RecipeService) {
+    this.selectedOptions = this._recipeService.favorites;
+  }
 
   addCategory() {
 
@@ -37,6 +40,12 @@ export class AddCategoryComponent implements OnInit {
 isFavoriteCategory(category: string) {
 return (this._recipeService.favorites.indexOf(category) >= 0 );
 }
+
+  onSelectedOptionsChange(values: string[]) {
+    this.selectedOptions = values;
+    this._recipeService.favorites = this.selectedOptions;
+
+  }
   ngOnInit() {
   }
 

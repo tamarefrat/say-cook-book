@@ -7,6 +7,7 @@ import { RecipeService } from '../services/recipe.service';
   styleUrls: ['./item-line.component.css']
 })
 export class ItemLineComponent implements OnInit {
+
   @Input() code: number;
   @Input() foodstuffs: Foodstuff[]; /*change class and prop*/
   /* @Input() keyWords: string[];*/

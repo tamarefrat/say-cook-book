@@ -70,9 +70,15 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
 import { ShareComponent } from './recipe/share/share.component';
-
-
-
+/** ------------------------------------------------------
+export const firebaseConfig = {
+  apiKey: ,
+  authDomain: ,
+  databaseURL: ,
+  stiregeBucket: ,
+  messagingSenderId: ,
+}
+*/
 @NgModule({
   declarations: [
     AppComponent,
