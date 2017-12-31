@@ -3,6 +3,7 @@ import { RecipeService } from '../services/recipe.service';
 import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
 import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
+import { SpeechService } from '../services/speech.service';
 
 @Component({
   selector: 'app-recipe',
@@ -21,7 +22,7 @@ export class RecipeComponent implements OnInit {
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
   @Input() index: number;
 
-  constructor(private _recipeService: RecipeService) {
+  constructor(private _recipeService: RecipeService, private speechRecognitionService: SpeechService) {
    this._recipeService.allMyRecipes.push(this); // have to delete
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.code = this._recipeService.counter++;
@@ -76,6 +77,10 @@ export class RecipeComponent implements OnInit {
     this._recipeService.allMyRecipes.splice(index, 1);
   }
   shareRecipe() {}
+
+  sayIt() {
+    this.speechRecognitionService.callDB();
+  }
 
 saveRecipeInList() {
   this._recipeService.allMyRecipes.push(this);

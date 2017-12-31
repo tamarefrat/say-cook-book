@@ -64,12 +64,13 @@ import { HeaderComponent } from './header/header.component';
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
 import { routing} from './app.routing';
-
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
 import { ShareComponent } from './recipe/share/share.component';
+import { SpeechComponent } from './speech/speech.component';
+import { SpeechService } from './services/speech.service'; 
 
 
 
@@ -95,7 +96,8 @@ import { ShareComponent } from './recipe/share/share.component';
     ShowAudioRecipeComponent,
     ShareComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpeechComponent
   ],
   imports: [
     routing,
@@ -131,7 +133,7 @@ import { ShareComponent } from './recipe/share/share.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
-  providers: [RecipeService, MatDialog, AuthServiceService],
-  bootstrap: [AppComponent]
+  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService],
+  bootstrap: [AppComponent, FooterComponent, HeaderComponent]
 })
 export class AppModule { }
