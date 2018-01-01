@@ -57,6 +57,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 
 
 
@@ -70,7 +71,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
 import { ShareComponent } from './recipe/share/share.component';
 import { SpeechComponent } from './speech/speech.component';
-import { SpeechService } from './services/speech.service'; 
+import { SpeechService } from './services/speech.service';
 
 
 
@@ -97,7 +98,8 @@ import { SpeechService } from './services/speech.service';
     ShareComponent,
     FooterComponent,
     HeaderComponent,
-    SpeechComponent
+    SpeechComponent,
+    VoiceSettingComponent
   ],
   imports: [
     routing,

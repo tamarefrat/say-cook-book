@@ -17,6 +17,7 @@ import { SearchByKeywordsComponent } from './searches/search-by-keywords/search-
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
+import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 
 
 const appRoutes: Routes = [
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'recipe/:id', component: RecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'voice-setting', component: VoiceSettingComponent },
   { path: 'search-by-categories', component: SearchByCategoryComponent },
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
