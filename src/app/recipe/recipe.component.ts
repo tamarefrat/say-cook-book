@@ -25,7 +25,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
   @Input() index: number;
 
-  constructor(private _recipeService: RecipeService,,private route: ActivatedRoute, private speechRecognitionService: SpeechService) {
+  constructor(private _recipeService: RecipeService, private route: ActivatedRoute, private speechRecognitionService: SpeechService) {
 
    this._recipeService.allMyRecipes.push(this); // have to delete
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
