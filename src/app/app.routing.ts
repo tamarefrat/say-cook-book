@@ -20,9 +20,11 @@ import { AboutComponent } from './about/about.component';
 
 
 const appRoutes: Routes = [
+
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
   { path: 'recipe',  component: RecipeComponent }, // add code
+  { path: 'recipe/:id', component: RecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'search-by-categories', component: SearchByCategoryComponent },
@@ -30,6 +32,10 @@ const appRoutes: Routes = [
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
 ];
+
+export const appRoutingProviders: any[] = [
+  
+  ];
 
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

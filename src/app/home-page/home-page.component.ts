@@ -12,7 +12,7 @@ export class HomePageComponent implements OnInit {
   tiles = [
     { route: 'recipeList', subtext: 'Get all the recipies you have',  text: 'List Of Recipies',
       cols: 5, rows: 1, color: '#FF9800', icon: 'assets\\homeImg\\list.png' },
-    { route: 'recipe', subtext: '', text: 'Create Recipe',
+    { route: 'recipe/-3', subtext: '', text: 'Create Recipe',
       cols: 1, rows: 1, color: '#0288D1', icon: 'assets\\homeImg\\newrecipe.png' },
     { route: 'categories', subtext: 'See all categories', text: 'Categories',
       cols: 2, rows: 3, color: '#B3E5FC', icon: 'assets\\homeImg\\categories.png'},

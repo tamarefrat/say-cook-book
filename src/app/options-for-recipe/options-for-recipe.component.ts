@@ -15,9 +15,9 @@ export class OptionsForRecipeComponent implements OnInit {
 
   ngOnInit() {
   }
-  createRecipe() {
-    this._recipeService.allMyRecipes.push(new RecipeComponent(this._recipeService));
+/*  createRecipe() {
+    this._recipeService.allMyRecipes.push(new RecipeComponent(this._recipeService,appRoutes));
     alert('recipe created' + this._recipeService.counter);
-  }
+  }*/
 
 }
