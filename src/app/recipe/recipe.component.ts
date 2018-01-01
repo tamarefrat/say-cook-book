@@ -4,7 +4,7 @@ import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
 import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
 import { ActivatedRoute } from '@angular/router';
-
+import { SpeechService } from '../services/speech.service';
 
 
 @Component({
@@ -25,9 +25,8 @@ export class RecipeComponent implements OnInit, OnDestroy {
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
   @Input() index: number;
 
+  constructor(private _recipeService: RecipeService,,private route: ActivatedRoute, private speechRecognitionService: SpeechService) {
 
-  
-  constructor(private _recipeService: RecipeService,private route: ActivatedRoute) {
    this._recipeService.allMyRecipes.push(this); // have to delete
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.code = this._recipeService.counter++;
@@ -92,6 +91,10 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this._recipeService.allMyRecipes.splice(index, 1);
   }
   shareRecipe() {}
+
+  sayIt() {
+    this.speechRecognitionService.callDB();
+  }
 
 saveRecipeInList() {
   this._recipeService.allMyRecipes.push(this);
