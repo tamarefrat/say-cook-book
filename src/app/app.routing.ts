@@ -18,19 +18,27 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { ShareComponent } from './recipe/share/share.component';
+import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
+
 
 const appRoutes: Routes = [
+
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
   { path: 'recipe',  component: RecipeComponent }, // add code
+  { path: 'recipe/:id', component: RecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'voice-setting', component: VoiceSettingComponent },
   { path: 'search-by-categories', component: SearchByCategoryComponent },
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
+  { path: 'setting', component: VoiceSettingComponent },
 ];
+
+export const appRoutingProviders: any[] = [];
 
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

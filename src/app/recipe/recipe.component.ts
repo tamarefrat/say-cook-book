@@ -1,17 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
 import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
-import {Router} from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
+import { SpeechService } from '../services/speech.service';
+
+
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss']
 })
 
-export class RecipeComponent implements OnInit {
+export class RecipeComponent implements OnInit, OnDestroy {
 
+  private sub: any;
   @Input() code: number;
   @Input() itemLines: ItemLineComponent;
   @Input() instructionLines: InstructionLineComponent;
@@ -22,7 +26,10 @@ export class RecipeComponent implements OnInit {
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
   @Input() index: number;
 
-  constructor(private _recipeService: RecipeService, private router: Router) {
+  constructor(private _recipeService: RecipeService,
+              private router: Router,
+             private route: ActivatedRoute,
+             private speechRecognitionService: SpeechService) {
 
     this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     this.code = this._recipeService.counter++;
@@ -41,8 +48,18 @@ export class RecipeComponent implements OnInit {
   /************************************************************************************************* */
 
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+
 
   ngOnInit() {
+      this.sub = this.route.params.subscribe(params => {
+      this.code = +params['id'];
+      console.log(this.code);
+    });
+      // In a real app: dispatch action to load the details here.
     if (this._recipeService.getRecipe(this.code) != null) {
       const index = this._recipeService.getIndexOfRecipeByCode(this.code);
       this.itemLines.ngOnInit();
@@ -76,6 +93,11 @@ export class RecipeComponent implements OnInit {
     this._recipeService.allMyRecipes.push(this);
     this.router.navigate(['/']);
   }
+  sayIt() {
+    this.speechRecognitionService.callDB();
+  }
+
+
 
 }/*end of class*/
 
