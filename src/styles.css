@@ -8,7 +8,7 @@
  * v1.1.5
  */
 
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .margin-15 {
     margin: 15px;
     padding: 7px;

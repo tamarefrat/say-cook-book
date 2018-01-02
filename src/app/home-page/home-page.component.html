@@ -1,6 +1,6 @@
 <div class="container">
     <mat-grid-list cols="8" rows="6" rowHeight="120px">
-        <mat-grid-tile routerLink="{{tile.route}}" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+        <mat-grid-tile routerLink="{{tile.route}}" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
             <mat-card [style.background]="tile.color">
                 <mat-card-title>{{tile.text}}</mat-card-title>
                 <mat-card-content>

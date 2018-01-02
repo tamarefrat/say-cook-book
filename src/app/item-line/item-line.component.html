@@ -8,9 +8,9 @@
 
         <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
 
-            <mat-list-item id="itemLineDetailsEdit" *ngIf="item.statusLine!=1">
+            <mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="item.statusLine!=1">
+                <table style="width: 90%" cellspacing="0">
 
-                <table class="fullwidth" cellspacing="0">
                     <tr>
                         <td>
                             <mat-input-container>
@@ -43,15 +43,16 @@
                         </td>
                     </tr>
                 </table>
-            </mat-list-item>
+            </mat-card>
+
 
 
             <mat-list-item id="itemLineDetailsInSaved" *ngIf="item.statusLine==1">
 
 
-                <table class="fullwidth" cellspacing="0">
+                <table style="width:90%; max-width:90%; text-align:left" cellspacing="0">
                     <tr>
-                        <td style="width:75%; max-width:75%; text-align:left">
+                        <td style="width:80%; max-width:80%; text-align:left">
                             <label *ngIf="item.amount!=0">{{item.amount}}</label>
 
                             <label *ngIf="item.measurement">{{item.measurement}}</label>
@@ -71,13 +72,13 @@
             <mat-icon class="mat-25" >delete</mat-icon>
             </button>
                         </td>
-                        <td>
-                            <button mat-mini-fab matSuffix color="primary" (click)="createItemLine(i)" *ngIf="item.lastLine">
-            <mat-icon class="mat-25" >add</mat-icon>
-            </button>
-                        </td>
                     </tr>
                 </table>
+                <button mat-mini-fab matSuffix color="primary" (click)="createItemLine(i)" *ngIf="item.lastLine">
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button>
+
+
             </mat-list-item>
         </div>
     </mat-list>

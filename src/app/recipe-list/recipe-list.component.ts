@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class RecipeListComponent implements OnInit {
 
-  
+
   recipeList: recipeName[];
 
 
@@ -25,7 +25,7 @@ export class RecipeListComponent implements OnInit {
             this.recipeList[i].disply = true;
           } else {
             this.recipeList[i].disply = false;
-    
+
           }
       }
     }
@@ -33,15 +33,15 @@ export class RecipeListComponent implements OnInit {
   name1:recipeName;
 
   rec: Observable<any[]>;
-  constructor(db:AngularFireDatabase) { 
-    
+  constructor(db:AngularFireDatabase) {/*
+
     db.list('/recipes').valueChanges().subscribe(recipes => {
-      this.recipeList = [];   
+      this.recipeList = [];
       recipes.forEach(recipe =>{
        this.recipeList.push(new recipeName(JSON.stringify(recipe),JSON.stringify(recipe), true));
       })
     });
-
+*/
   }
 
     ngOnInit() {

@@ -29,6 +29,16 @@ mat-grid-tile {
 }
 
 mat-card {
-    width: 85%;
-    height: 85%;
+    width: 95%;
+    height: 95%;
+    border-width: 7px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 5%;
+    border-bottom-width: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-top-width: 10px;
+    border-top-style: solid;
+    border-top-color: white;
 }

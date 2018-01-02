@@ -18,6 +18,7 @@ export class MainDetailsComponent implements OnInit {
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() partToShow: number; /*options:0=>main details, 1=>items, 2=>instructions*/
+  @Input() path: any;
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
@@ -94,7 +95,7 @@ export class MainDetailsComponent implements OnInit {
       /*  this.keyWords = this._recipeService.allMyRecipes[index].keyWords;*/
       this.comment = this._recipeService.allMyRecipes[index].mainDetails.comment;
       this.statusDetails = this._recipeService.allMyRecipes[index].mainDetails.statusDetails;
-      this.partToShow = this._recipeService.allMyRecipes[index].partToShow;
+
     }
   }
 

@@ -3,7 +3,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// import { router } from '@angular/router;
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+/*import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';*/
+import { environment } from '../environments/environment';
+import { routing } from './app.routing';
+
+/*import { AngularFirestore } from 'angularfire2/firestore';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';*/
+
 
 /*material*/
 import {
@@ -57,28 +67,16 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-
+import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
+import { ShareComponent } from './recipe/share/share.component';
 
 
 /*services*/
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
-import { routing} from './app.routing';
 
-import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
-import { AngularFireDatabaseModule} from 'angularfire2/database';
-import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
-import { ShareComponent } from './recipe/share/share.component';
-/** ------------------------------------------------------
-export const firebaseConfig = {
-  apiKey: ,
-  authDomain: ,
-  databaseURL: ,
-  stiregeBucket: ,
-  messagingSenderId: ,
-}
-*/
+
+
 @NgModule({
   declarations: [
     AppComponent,

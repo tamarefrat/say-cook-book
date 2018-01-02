@@ -1,3 +1,59 @@
-<p>
-  share works!
-</p>
+<mat-card class="full-width">
+
+    <mat-tab-group class="demo-tab-group">
+        <mat-tab label="Sharing Recipes" style="width:50%">
+
+            <div class="demo-tab-content">
+                <mat-card class="full-width">
+                    <mat-selection-list #myRecipes [ngModel]="mySelected" (ngModelChange)="onMySelectedOptionsChange($event)">
+                        <h3 mat-subheader>All Recipes You Can Share:</h3>
+                        <mat-list-option [value]="rec" *ngFor="let rec of this.nameAllRecipes">{{rec}}</mat-list-option>
+                    </mat-selection-list>
+
+                </mat-card>
+                <mat-card>
+                    <p>
+                        <button mat-raised-button (click)="myRecipes.selectAll()">Select all</button>
+                        <button mat-raised-button (click)="myRecipes.deselectAll()">Deselect all</button>
+                    </p>
+                </mat-card>
+                <mat-card class="full-width">
+                    <button mat-fab (click)="shareRecipe() ">
+                            <mat-icon>share</mat-icon>
+                            </button>
+                </mat-card>
+                <p>Selected: {{mySelected | json}}</p>
+
+            </div>
+        </mat-tab>
+        <!-- ******************************************************************************************************** -->
+        <mat-tab label="Recipes Was Shared With You" [disabled]="!recipesIsWaiting">
+            <div class="demo-tab-content">
+                <mat-card class="full-width">
+                    <mat-selection-list #gotRecipes [ngModel]="gotSharedRecipes" (ngModelChange)="ongotRecipesChange($event)">
+                        <h3 mat-subheader>All Recipes You Can Share:</h3>
+                        <mat-list-option [value]="rec" *ngFor="let rec of this.nameAllSharedRecipes">{{rec}}</mat-list-option>
+                    </mat-selection-list>
+
+                </mat-card>
+                <mat-card>
+                    <p>
+                        <button mat-raised-button (click)="gotRecipes.selectAll()">Select all</button>
+                        <button mat-raised-button (click)="gotRecipes.deselectAll()">Deselect all</button>
+                    </p>
+                </mat-card>
+                <mat-card class="full-width">
+                    <button mat-fab (click)="getSharedRecipes() ">
+                            <mat-icon>save</mat-icon>
+                            </button>
+                    <button mat-fab (click)="deleteSharedRecipes() ">
+                            <mat-icon>delete</mat-icon>
+                            </button>
+                </mat-card>
+            </div>
+        </mat-tab>
+
+
+    </mat-tab-group>
+
+</mat-card>

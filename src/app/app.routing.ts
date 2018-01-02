@@ -17,7 +17,7 @@ import { SearchByKeywordsComponent } from './searches/search-by-keywords/search-
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
-
+import { ShareComponent } from './recipe/share/share.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -29,6 +29,7 @@ const appRoutes: Routes = [
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
+  { path: 'share', component: ShareComponent },
 ];
 
 

@@ -11,6 +11,7 @@ export class AddCategoryComponent implements OnInit {
   category: string;
   isFavorite: boolean;
   selectedOptions: string[];
+
   constructor(private _recipeService: RecipeService) {
     this.selectedOptions = this._recipeService.favorites;
   }
