@@ -12,13 +12,13 @@
   </mat-form-field>
 </form>
 <div>
-  <label class="set-label">volume:</label> <mat-slider  [(ngModel)]="volumeSelectedValue" min="0" max="1" step="0.1" value="0.5"></mat-slider>
+  <label class="set-label">volume:</label> <mat-slider  [(ngModel)]="volumeSelectedValue" min="0" max="1" step="0.1" value={{volumeSelectedValue}}></mat-slider>
 </div>
 <div>
-  <label class="set-label">rate:</label> <mat-slider [(ngModel)]="rateSelectedValue" min="0.1" max="10" step="0.5" value="3"></mat-slider>
+  <label class="set-label">rate:</label> <mat-slider [(ngModel)]="rateSelectedValue" min="0.1" max="10" step="0.5" value="{{rateSelectedValue}}"></mat-slider>
 </div>
 <div>
-  <label class="set-label">pitch:</label> <mat-slider [(ngModel)]="pitchSelectedValue" min="0" max="2" step="0.2" value="2"></mat-slider>
+  <label class="set-label">pitch:</label> <mat-slider [(ngModel)]="pitchSelectedValue" min="0" max="2" step="0.2" value="{{pitchSelectedValue}}"></mat-slider>
 </div>
 
 <button mat-fab (click)="writeToDB() ">
