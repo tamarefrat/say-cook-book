@@ -72,6 +72,8 @@ import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-
 import { ShareComponent } from './recipe/share/share.component';
 import { SpeechComponent } from './speech/speech.component';
 import { SpeechService } from './services/speech.service';
+import { DataBaseService } from './services/data-base.service';
+import { AngularFirestoreModule} from "angularfire2/firestore";
 
 
 
@@ -133,9 +135,11 @@ import { SpeechService } from './services/speech.service';
     MatToolbarModule,
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
+    
   ],
-  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService],
+  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService/*, AngularFirestore*/],
   bootstrap: [AppComponent, FooterComponent, HeaderComponent]
 })
 export class AppModule { }

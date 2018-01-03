@@ -39,7 +39,7 @@ export class RecipeListComponent implements OnInit {
     
       this.recipeList = [];   
       recipes.forEach(recipe =>{
-       this.recipeList.push(new recipeName(recipe.name_recipe,recipe.code, true));
+      this.recipeList.push(new recipeName(recipe["name_recipe"], recipe["code"], true));
       })
     });
 
