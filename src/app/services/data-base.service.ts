@@ -35,28 +35,35 @@ export class DataBaseService {
   public ingredientsRef : AngularFirestoreCollection<Ingerdient>;
   public instructionsRef: AngularFirestoreCollection<Instruction>;
 
-  categoryList: Observable<Category[]>;
-  recipeList: Observable<Recipe[]>;
-  ingredientsList: Observable<Ingerdient[]>;
-  instructionsList: Observable<Instruction[]>;
+  categoryObservable: Observable<Category[]>;
+  recipeObservable: Observable<Recipe[]>;
+  ingredientsObservable: Observable<Ingerdient[]>;
+  instructionsObservable: Observable<Instruction[]>;
+
+  public categoryList: Category[];
+  public recipeList: Recipe[];
+  public ingredientsList: Ingerdient[];
+  public instructionsList: Instruction[];
 
   constructor(private afs: AngularFirestore){
     
 
     //get all categories
     this.categoryRef = this.afs.collection("catgories");
-    this.categoryList = this.categoryRef.valueChanges();
-    this.categoryList.subscribe(categories =>{
-      categories.forEach(category => {
+    this.categoryObservable = this.categoryRef.valueChanges();
+    this.categoryObservable.subscribe(categories => {
+      this.categoryList = categories; 
+      this.categoryList.forEach(category => {
         console.log("id: " + category.id + ", name: " + category.name);
       })
     })
 
     //get all recipes:
     this.recipesRef = this.afs.collection("recipes");
-    this.recipeList = this.recipesRef.valueChanges();
-    this.recipeList.subscribe(recipes =>{
-      recipes.forEach(recipe => {
+    this.recipeObservable = this.recipesRef.valueChanges();
+    this.recipeObservable.subscribe(recipes => {
+      this.recipeList = recipes; 
+      this.recipeList.forEach(recipe => {
         console.log("isFavorit: " + recipe.isFavorit + ", name: " + recipe.name);
       })
     })
@@ -65,9 +72,10 @@ export class DataBaseService {
     this.ingredientsRef = this.afs.collection("ingredients", ref => {
       return ref.where('recipeId', '==', 'test');
     });
-    this.ingredientsList = this.ingredientsRef.valueChanges();
-    this.ingredientsList.subscribe(ingredients => {
-      ingredients.forEach(ingredient => {
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredientsList = ingredients;
+      this.ingredientsList.forEach(ingredient => {
         console.log("product: "  + ingredient.product + ", amount: "  +
          ingredient.amount + ", unit: amount: "  + ingredient.unit);
       })
@@ -77,9 +85,10 @@ export class DataBaseService {
      this.instructionsRef = this.afs.collection("instructions", ref => {
       return ref.where('recipeId', '==', 'test');
     });
-    this.instructionsList = this.instructionsRef.valueChanges();
-    this.instructionsList.subscribe(instructions => {
-      instructions.forEach(instruction => {
+    this.instructionsObservable = this.instructionsRef.valueChanges();
+    this.instructionsObservable.subscribe(instructions => {
+      this.instructionsList = instructions;
+      this.instructionsList.forEach(instruction => {
         console.log("description: " + instruction.description);
       })
     })

@@ -65,8 +65,12 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+<<<<<<< HEAD
 import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
 import { ShareComponent } from './recipe/share/share.component';
+=======
+import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
+>>>>>>> c5f8e3d31e9432805fcbaf2bb3f8e94aff68fec5
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 import { SpeechComponent } from './speech/speech.component';
 
@@ -78,6 +82,7 @@ import { SpeechService } from './services/speech.service';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { DataBaseService } from './services/data-base.service';
+
 
 
 
@@ -106,8 +111,12 @@ import { DataBaseService } from './services/data-base.service';
     HeaderComponent,
     SpeechComponent,
     VoiceSettingComponent,
+<<<<<<< HEAD
     NewUserComponent,
     NewRecipeComponent
+=======
+    ReaderRecipeComponent
+>>>>>>> c5f8e3d31e9432805fcbaf2bb3f8e94aff68fec5
   ],
   imports: [
     routing,
