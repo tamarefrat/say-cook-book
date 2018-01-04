@@ -1,1 +1,59 @@
-<p>works</p>
+<mat-card class="fullWidth">
+    <h2>Welcome To Say Cook Book!</h2>
+    <img src="assets\homeImg\logo.png">
+    <mat-card>
+
+        <mat-list>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>stars</mat-icon>
+                <h4 mat-line> Enter With My Existed Accont:</h4>
+
+                <mat-checkbox #old [checked]="withold" (change)="changeoldStatus(old.checked)"></mat-checkbox>
+
+            </mat-list-item>
+            <mat-card class="fullWidth" *ngIf="withold">
+                <form>
+                    <h3>Enter Your Account ID:</h3>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="oldid" name="oldid" placeholder="your account id" style="text-align:right" required>
+
+                        <mat-error *ngIf="!oldid">
+                            This field is required
+                        </mat-error>
+
+                        <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error-->
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button [disabled]="!oldid" (click)="addoldUser()">Log In</button>
+                </form>
+            </mat-card>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>stars</mat-icon>
+                <h4 mat-line> Enter With New Account:</h4>
+                <mat-checkbox #newA [checked]="withnewA" (change)="changeNewAStatus(newA.checked)"></mat-checkbox>
+            </mat-list-item>
+            <mat-card class="fullWidth" *ngIf="withnewA">
+                <form>
+                    <h3>Enter New ID For Your Account:</h3>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="newid" name="newid" placeholder="new account ID" style="text-align:right" required>
+
+                        <mat-error *ngIf="!newid">
+                            This field is required
+                        </mat-error>
+                        <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error>-->
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button [disabled]="!newid" (click)="addNewUser()">Log In</button>
+                </form>
+
+            </mat-card>
+        </mat-list>
+    </mat-card>
+</mat-card>

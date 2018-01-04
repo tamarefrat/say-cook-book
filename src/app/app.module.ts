@@ -77,6 +77,7 @@ import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
+import { DataBaseService } from './services/data-base.service';
 
 
 
@@ -141,10 +142,9 @@ import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence()
   ],
-  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService],
+  providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,7 +19,7 @@ export class NewRecipeComponent implements OnInit {
   @Input() mainDetails: MainDetailsComponent;
   @Input() keyWords: string[];
   @Input() index: number;
-  recipeTmp: any;
+
   constructor(private _recipeService: RecipeService,
     private router: Router,
     private route: ActivatedRoute,
@@ -66,9 +66,9 @@ export class NewRecipeComponent implements OnInit {
     // In a real app: dispatch action to load the details here.
     const rec = this._recipeService.getRecipe(this.code);
     if (rec) {
-      this.itemLines = rec.itemLines;
-      this.instructionLines = rec.instructionLines;
-      this.mainDetails = rec.mainDetails;
+      this.itemLines = rec[1];
+      this.instructionLines = rec[0];
+      this.mainDetails = rec[2];
       this.keyWords = rec.keyWords;
 }
   }
@@ -80,7 +80,7 @@ export class NewRecipeComponent implements OnInit {
     if (!ans) { return; }
     this.mainDetails.statusDetails = 4;
     const rec = this._recipeService.getRecipe(this.code);
-    if(rec) { // exist in db
+    if (rec) { // exist in db
       this._recipeService.allMyRecipes.splice(this._recipeService.allMyRecipes.indexOf(rec), 1);
       this._recipeService.removeRecipeFromDB(rec);
     }

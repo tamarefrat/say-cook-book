@@ -39,22 +39,13 @@ export class RecipeListComponent implements OnInit {
 
       this.recipeList = [];
       recipes.forEach(recipe =>{
-      //  this.recipeList.push(new recipeName(recipe.name_recipe, recipe.code, true));
-      });
-    });
-
-  }
-
-  constructor(db: AngularFireDatabase) {
-
-    db.list('/recipes').valueChanges().subscribe(recipes => {
-      this.recipeList = [];
-      recipes.forEach(recipe =>{
-       this.recipeList.push(new recipeName(JSON.stringify(recipe),JSON.stringify(recipe), true));
+      this.recipeList.push(new recipeName(recipe["name_recipe"], recipe["code"], true));
       })
     });
 
   }
+
+
 
     ngOnInit() {
     }

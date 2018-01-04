@@ -19,12 +19,12 @@ export class AddCategoryComponent implements OnInit {
 
   addCategory() {
 
-    if (this._recipeService.optionCategories.indexOf(new Category(this.category, true)) > 0) {
+    if (this._recipeService.optionCategories.indexOf(new Category(1,this.category, true)) > 0) {
       alert('category appeares');
-    } else if (this._recipeService.optionCategories.indexOf(new Category(this.category, false)) > 0){
+    } else if (this._recipeService.optionCategories.indexOf(new Category(1, this.category, false)) > 0){
       alert('category appeares');
     } else {
-      this._recipeService.optionCategories.push(new Category(this.category, this.isFavorite));
+      this._recipeService.optionCategories.push(new Category(1,this.category, this.isFavorite));
       if (this.isFavorite) {
         this._recipeService.favorites.push(this.category);
         }
@@ -39,7 +39,7 @@ export class AddCategoryComponent implements OnInit {
       this._recipeService.favorites.splice(
         this._recipeService.favorites.indexOf(category), 1);
       this._recipeService.optionCategories.splice(
-        this._recipeService.optionCategories.indexOf(new Category(category, true)), 1);
+        this._recipeService.optionCategories.indexOf(new Category(1,category, true)), 1);
     }
   }
 isFavoriteCategory(category: string) {

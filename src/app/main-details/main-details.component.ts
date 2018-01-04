@@ -15,16 +15,22 @@ export class MainDetailsComponent implements OnInit {
   @Input() category1: string;
   @Input() category2: string;
   @Input() category3: string;
-  @Input() urlImg = 'assets\\homeImg\\logo.png';
+  @Input() urlImg: string;
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
     this.urlImg = 'assets\\homeImg\\logo.png';
-/*this.getFrom = '';
-this.nameRecipe = '';
-this.comment = '';*/
+    this.comment = '';
+    this.getFrom = '';
+    this.category1 = '';
+    this.category2 = '';
+    this.category3 = '';
+    this.statusDetails = 0;
+
+
+
   }
   /*functions*/
   /******************************************************************************************* */

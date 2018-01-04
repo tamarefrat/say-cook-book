@@ -14,12 +14,15 @@ import { InstructionLineComponent } from '../instruction-line/instruction-line.c
 export class RecipeService {
   user: any;
   userRef: AngularFirestoreCollection<any>;
+  recipesDoc: AngularFirestoreDocument<any>;
+  categoryDoc: AngularFirestoreDocument<any>;
+  sharedDoc: AngularFirestoreDocument<any>;
   db: AngularFireDatabase;
-  allMyRecipes: any[] = [];
-  recipe: RecipeComponent;
+  allMyRecipes: any[] = []; // { recipes: any[], counter: any};
+  recipe: any;
   newRecipe: NewRecipeComponent;
   sharedRecipes: any[] = [];
-  optionCategories: Category[] = [];
+  optionCategories: any[] = [];
   counter = 0; // starts from 0 - and every recipe get the counter++ for his code
   favorites: string[] = [];
   tempArr: any[] = [];
@@ -29,25 +32,28 @@ export class RecipeService {
   constructor(db: AngularFireDatabase, private afs: AngularFirestore) {
     // this.newRecipe = new NewRecipeComponent();
     this.db = db;
-    this.user = 'sm5800810';
+    if (!this.user) {// not loged in
+      this.user = 'demoUser';
+      this.userRef = this.afs.collection(this.user);
+    }
     this.userRef = this.afs.collection(this.user);
-    this.userRef.add({'1': '2', '3': '4'});
-    console.log(this.userRef.valueChanges());
+
     this.folder = 'recipeimages';
     this.getAllRecipesFromDB();
     this.getSharedRecipesFromDB();
     this.getAllCategoriesFromDB();
     this.getFavoritesFromOption();
     console.log(this.allMyRecipes);
-    //  this.counter = 0; // ????????????????????????????????????????????????
-    console.log(this.getRecipeByCodeFromDB(5));
+
+
   }
 
   /***************************************************************** */
   /*************          recipes functions     ******************** */
   getRecipe(code) {
 
-    return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];
+    // return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];
+    return this.getRecipeByCodeFromDB(code);
   }
   getIndexOfRecipeByCode(code) {
     this.getAllRecipesFromDB();
@@ -56,8 +62,8 @@ export class RecipeService {
       if (this.allMyRecipes[i].code === code) {
         return i;
       }
-      }
-      return null;
+    }
+    return null;
   }
 
   getNameAllRecipes() {
@@ -80,47 +86,123 @@ export class RecipeService {
   /**************             firebase functions            ********** */
 
   getAllRecipesFromDB() {
-    this.db.list(`/${this.user}/recipes`).valueChanges().subscribe(recipes => {
-      this.tempArr = recipes;
-      this.allMyRecipes = this.tempArr;
-      console.log(this.allMyRecipes);
-      return this.allMyRecipes;
-    });
+    for (let i = 0; i < 999; i++) {// 999 have to change????
+      const obse = this.afs.collection(`${this.user}/recipes/${i}`).valueChanges();
+      if (obse) {
+        // recipe number "i" exist in DB- have to add to list
+        obse.subscribe(rec => {
+          this.recipe = rec;
+          this.allMyRecipes.push(this.recipe);
+          console.log(rec);
+        });
+      } else {
+        // end of list of recipes
+        this.counter = i;
+        return;
+      }
+    }
+    /*this.afs.collection(`${this.user}`).doc('recipes').valueChanges().subscribe(recipes => {
+    //  this.allMyRecipes = recipes;
+    console.log('all recipes:');
+      console.log(recipes);
+      return recipes;
+    });*/
   }
   getAllCategoriesFromDB() {
-    this.db.list(`/${this.user}/categories`).valueChanges().subscribe(cats => {
-      this.tempArr = cats;
-      this.optionCategories = this.tempArr;
-      console.log(this.optionCategories);
-      return this.optionCategories;
+    this.afs.collection('user/category/categories').valueChanges().subscribe(cats => {
+      this.optionCategories = cats;
+      console.log(cats);
+      return cats;
     });
   }
   getSharedRecipesFromDB() {
-    this.db.list(`/${this.user}/shared`).valueChanges().subscribe(recipes => {
-      this.tempArr = recipes;
-      this.sharedRecipes = this.tempArr;
-      console.log(this.sharedRecipes);
-      return this.sharedRecipes;
+    this.afs.collection('user/shared/recipes').valueChanges().subscribe(recipes => {
+      this.sharedRecipes = recipes;
+      console.log(recipes);
+      return recipes;
     });
   }
 
   getRecipeByCodeFromDB(code) {
-    this.db.object(`/${this.user}/recipes/${code}`).valueChanges()
-      .subscribe(rec => {
-        this.tempObj = rec;
-        this.recipe = this.tempObj;
+    const obse = this.afs.collection(`${this.user}/recipes/${code}`).valueChanges();
+    if (obse) {
+      // recipe number "i" exist in DB- have to add to list
+      obse.subscribe(rec => {
+        this.recipe = rec;
+        this.allMyRecipes.push(this.recipe);
+        console.log(rec);
       });
+    } else {
+      // not exsist
+      console.log('recipe not exist!');
+      return;
+    }
     return this.recipe;
   }
-  addNewRecipeToDB(recipe: NewRecipeComponent) {
+  addNewRecipeToDB(recipe) {
     /************************************ */
+    console.log('addddddddddddddddd');
+    recipe.code = this.counter++;
+    console.log(recipe);
+    // const temp = this.convertToObject(recipe);
+    // console.log(temp);
+    //  this.userRef.doc('en li coach').set({ 'code': '1', 'name': '2' });
+    this.afs.collection(`${this.user}/recipes/${recipe.code}`).doc(`mainDetails`).set({
+      'nameRecipe': recipe.mainDetails.nameRecipe,
+      'comment': recipe.mainDetails.comment,
+      'getFrom': recipe.mainDetails.getFrom,
+      'urlImg': recipe.mainDetails.urlImg,
+      'category1': recipe.mainDetails.category1,
+      'category2': recipe.mainDetails.category2,
+      'category3': recipe.mainDetails.category3,
+      'statusDetails': recipe.mainDetails.statusDetails
+    });
+    this.afs.collection(`${this.user}/recipes/${recipe.code}`).doc(`itemLines`).set({
+      'zeroItems': recipe.itemLines.zeroItems,
+      'foodstuffs': []
+    });
+    recipe.itemLines.foodstuffs.forEach(element => {
+      this.afs.collection(`${this.user}/recipes/${recipe.code}/itemLines/foodstuff`).add({
+        'statusLine': element.statusLine,
+        'amount': element.amount,
+        'measurement': element.measurement,
+        'item': element.item,
+        'lastLine': element.lastLine
+      });
+    });
+
+    this.afs.collection(`${this.user}/recipes/${recipe.code}`).doc(`instructionLines`).set({
+      'zeroInstructions': recipe.instructionLines.zeroInstructions,
+      'instructions': []
+    });
+    recipe.instructionLines.instructions.forEach(element => {
+      this.afs.collection(`${this.user}/recipes/${recipe.code}/instructionLines/instructions`).add({
+        'statusLine': element.statusLine,
+        'instruction': element.instruction,
+        'lastLine': element.lastLine
+      });
+    });
+
+    // this.userRef.doc(`recipes/recipes/counter`).set((recipe.code++));
   }
+  addNewCategoryToDB(category) {
+    /************************************ */
+    this.userRef.doc(`category/categories/${category.code}`).set(category);
+    this.userRef.doc(`category/categories/counter`).set((category.code++));
+  }
+
 
   updateMainDetails(code, recipe) {
-
+    this.userRef.doc(`recipes/recipes/${recipe.code}`).set(JSON.stringify(recipe));
+  }
+  updatecategoryDetails(code, category) {
+    this.userRef.doc(`category/categories/${category.code}`).set(category);
   }
   removeRecipeFromDB(recipe) {
-
+    this.userRef.doc(`recipes/recipes/${recipe.code}`).delete();
+  }
+  removeCategoryFromDB(category) {
+    this.userRef.doc(`category/categories/${category.code}`).delete();
   }
   /*
   addRecipeToDB(recipe: RecipeComponent) {
@@ -172,14 +254,31 @@ export class RecipeService {
   }
 
 
-
+  convertToObject(recipe: NewRecipeComponent) {
+    let obj: any;
+    obj.code = 1;
+    obj.nameRecipe = recipe.mainDetails.nameRecipe;
+    obj.getFrom = recipe.mainDetails.getFrom;
+    obj.statusDetails = recipe.mainDetails.statusDetails;
+    obj.urlImg = recipe.mainDetails.urlImg;
+    obj.comment = recipe.mainDetails.comment;
+    obj.category1 = recipe.mainDetails.category1;
+    obj.category2 = recipe.mainDetails.category2;
+    obj.category3 = recipe.mainDetails.category3;
+    obj.index = recipe.mainDetails.index;
+    obj.zeroItems = recipe.itemLines.zeroItems;
+    obj.zeroInstructions = recipe.instructionLines.zeroInstructions;
+    obj.itemLines = recipe.itemLines.foodstuffs;
+    obj.instroctionLines = recipe.instructionLines.instructions;
+    return obj;
+  }
 
 
 
 }
 
 export class Category {
-  constructor(public value: string, public isFavorite: boolean) { }
+  constructor(public code: any, public value: string, public isFavorite: boolean) { }
 
 }
 
@@ -199,16 +298,33 @@ export class MainDetails {
   }
 }
 
-  export class Recipe {
-  constructor(
-    public code: number,
-    public mainDetails: MainDetails,
-    public itemLines: ItemLineComponent,
-    public instructionLines: InstructionLineComponent,
-    public keyWords: string[]
-  ) {
+/*export class Recipe {
+constructor(
+  public code: number,
+  public mainDetails: MainDetails,
+  public itemLines: ItemLineComponent,
+  public instructionLines: InstructionLineComponent,
+  public keyWords: string[]
+) {
 
-  }
 }
+}*/
 
 
+interface Recipe {
+  code: any;
+  nameRecipe?: any;
+  getFrom?: any;
+  statusDetails?: any;
+  urlImg?: any;
+  comment?: any;
+  category1?: any;
+  category2?: any;
+  category3?: any;
+  index?: any;
+  zeroItems?: any;
+  zeroInstructions?: any;
+  itemLines?: any[];
+  instroctionLines?: any[];
+
+}

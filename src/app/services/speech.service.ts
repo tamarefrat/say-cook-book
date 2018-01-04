@@ -1,6 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreDocument,AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireList } from 'angularfire2/database/interfaces';
+import { DataBaseService } from '../services/data-base.service';
 import * as _ from "lodash";
 
 interface IWindow extends Window {
@@ -10,16 +13,22 @@ interface IWindow extends Window {
     SpeechSynthesis: any;
 }
 
+//todo call data base service with new db.
+export interface speechComand{
+    name: string,
+    value: string
+   }
+
+
 @Injectable()
 export class SpeechService {
     speechRecognition: any;
-    speechSynthesis: any;
     db: AngularFireDatabase;
     voice : string;
     lang : string;
     rate : string;
     volume : string;
-
+    pitch : string;
     sayList: any[];
     sayWord : String;
 
@@ -39,6 +48,9 @@ export class SpeechService {
             }
             })
         });
+    constructor(private zone: NgZone,  private  afs: AngularFirestore, db:AngularFireDatabase, private dataBaseService:DataBaseService) {
+        this.db = db;
+        this.getSettingFromDB();
     }
 */
     record(): Observable<string> {
@@ -66,9 +78,9 @@ export class SpeechService {
                         }
                     }
                 }
-                this.zone.run(() => {
+           /*     this.zone.run(() => {
                     observer.next(term);
-                });
+                });*/
             };
 
             this.speechRecognition.onerror = error => {
@@ -90,7 +102,8 @@ export class SpeechService {
     }
 
     callDB(): void {
-        console.log("in myTest");
+
+        console.log("in myTest1")
 
         this.db.list('/DevorahTest').valueChanges().subscribe(recipes => {
             this.sayList = [];
@@ -103,6 +116,7 @@ export class SpeechService {
     }
 
     sayIt(input:String) {
+        this.getSettingFromDB();
       if ('speechSynthesis' in window) {
           console.log('Your browser supports speech synthesis.');
       // speak('hi');
@@ -128,14 +142,43 @@ export class SpeechService {
       }
       // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female'
      // msg.voice = 'native';
-      msg.volume = 1;
-      msg.rate = 1;
-      msg.pitch = 1;
+        msg.volume =this.volume;
+        msg.rate = this.rate;
+        msg.pitch = this.pitch;
      //  msg.onend = function(event) { console.log('Speech complete'); }
       // Queue this utterance.
-    //  var talk = new SpeechSynthesis();
+        //this.speechSynthesis = new SpeechSynthesis();
+        //this.speechSynthesis.speak(msg);
       (<any>window).speechSynthesis.speak(msg);
   }
+
+  getSettingFromDB(){
+
+    this.db.object('firstUser/settings/voiceSettings/voice').valueChanges().subscribe(x => {
+        this.voice = <string>x;
+        console.log("xxx"  + this.voice)
+        }
+    );
+
+    this.db.object('firstUser/settings/voiceSettings/volume').valueChanges().subscribe(x => {
+        this.volume = <string>x;
+        console.log("xxx"  + this.volume)
+
+        }
+    );
+
+    this.db.object('firstUser/settings/voiceSettings/rate').valueChanges().subscribe(x => {
+        this.rate = <string>x;
+        console.log("xxx"  + this.rate)
+
+        }
+    );
+
+    this.db.object('firstUser/settings/voiceSettings/pitch').valueChanges().subscribe(x => {
+        this.pitch = <string>x;
+        }
+    );
+}
 }
 
 

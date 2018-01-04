@@ -115,7 +115,7 @@ aditDetails() {
     console.log(this);
   }
   saveRecipeInList() {
-    this.saveRecipe();
+    // this.saveRecipe();
     if (this.mainDetails.statusDetails === 0) {
       // new recipe- have to add to list
       this._recipeService.allMyRecipes.push(this);

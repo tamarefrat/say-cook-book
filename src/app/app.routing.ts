@@ -36,7 +36,8 @@ const appRoutes: Routes = [
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
   { path: 'setting', component: VoiceSettingComponent },
-  { path: 'newUser', component: NewUserComponent }
+ // { path: 'newUser', component: NewUserComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

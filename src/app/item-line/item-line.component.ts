@@ -16,6 +16,8 @@ export class ItemLineComponent implements OnInit {
 
   constructor(private _recipeService: RecipeService) {
     this.foodstuffs = [];
+    this.zeroItems = false;
+    this.foodstuffs.push(new Foodstuff(0, 0, '', '', true) );
 
    // this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }

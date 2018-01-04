@@ -2,23 +2,29 @@
     <mat-sidenav #sidenav>
         <app-recipe-list></app-recipe-list>
     </mat-sidenav>
+
     <mat-toolbar color="accent">
         <button mat-button (click)="sidenav.toggle()"><mat-icon>list</mat-icon></button>
         <h2 class="link" routerLink="/">Say Cook Book</h2>
 
-        <button mat-button class="float-right" (click)="login()">log in</button>
-        <button mat-button class="float-right" (click)="logout()">log out</button>
-        <button mat-button class="float-right" routerLink="/about">about us</button>
-        <button mat-button class="float-right" routerLink="/newUser">New User</button>
+        <button mat-button class="float-right" routerLink="/login">log in</button>
+        <button mat-button class="float-right " (click)="logout() ">log out</button>
+        <button mat-button class="float-right " routerLink="/about">about us</button>
+        <button mat-button class="float-right " routerLink="/newUser">New User</button>
 
     </mat-toolbar>
-    <div class="body-margin">
+    <div class="body-margin ">
+        <mat-card *ngIf="_recipeService.user=='demoUser'">
+            <mat-icon>warning</mat-icon>
+            <h4>You Are Not In Your Acount!!</h4>
+            <h6>Click on "Log in" in order to get to your Say Cook Book</h6>
+        </mat-card>
         <router-outlet></router-outlet>
     </div>
 </mat-sidenav-container>
 <!--The content below is only a placeholder and can be replaced.-->
 <!--
-<div style="text-align:center">
+<div style="text-align:center ">
     <app-recipe-list></app-recipe-list>
 </div>
 <div>
