@@ -40,10 +40,10 @@ export class DataBaseService {
   ingredientsObservable: Observable<Ingerdient[]>;
   instructionsObservable: Observable<Instruction[]>;
 
-  categoryList: Category[];
-  recipeList: Recipe[];
-  ingredientsList: Ingerdient[];
-  instructionsList: Instruction[];
+  public categoryList: Category[];
+  public recipeList: Recipe[];
+  public ingredientsList: Ingerdient[];
+  public instructionsList: Instruction[];
 
   constructor(private afs: AngularFirestore){
     
