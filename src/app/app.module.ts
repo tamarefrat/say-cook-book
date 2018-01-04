@@ -57,6 +57,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 
 
@@ -74,6 +75,7 @@ import { SpeechComponent } from './speech/speech.component';
 import { SpeechService } from './services/speech.service';
 import { DataBaseService } from './services/data-base.service';
 import { AngularFirestoreModule} from "angularfire2/firestore";
+
 
 
 
@@ -101,7 +103,8 @@ import { AngularFirestoreModule} from "angularfire2/firestore";
     FooterComponent,
     HeaderComponent,
     SpeechComponent,
-    VoiceSettingComponent
+    VoiceSettingComponent,
+    ReaderRecipeComponent
   ],
   imports: [
     routing,

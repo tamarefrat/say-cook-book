@@ -18,7 +18,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
-
+import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 
 const appRoutes: Routes = [
 
@@ -33,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
+  { path: 'reader', component: ReaderRecipeComponent },
 ];
 
 export const appRoutingProviders: any[] = [
