@@ -19,13 +19,10 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { ShareComponent } from './recipe/share/share.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
-<<<<<<< HEAD
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
-=======
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 
->>>>>>> c5f8e3d31e9432805fcbaf2bb3f8e94aff68fec5
 const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent},
@@ -39,14 +36,11 @@ const appRoutes: Routes = [
   { path: 'search-by-picture', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
-<<<<<<< HEAD
   { path: 'share', component: ShareComponent },
   { path: 'setting', component: VoiceSettingComponent },
  // { path: 'newUser', component: NewUserComponent },
   { path: 'login', component: LoginComponent }
-=======
   { path: 'reader', component: ReaderRecipeComponent },
->>>>>>> c5f8e3d31e9432805fcbaf2bb3f8e94aff68fec5
 ];
 
 export const appRoutingProviders: any[] = [];
