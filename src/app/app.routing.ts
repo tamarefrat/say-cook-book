@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   { path: 'share', component: ShareComponent },
   { path: 'setting', component: VoiceSettingComponent },
  // { path: 'newUser', component: NewUserComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
   { path: 'reader', component: ReaderRecipeComponent },
 ];
 
