@@ -1,0 +1,59 @@
+<mat-card class="fullWidth">
+    <h2>Welcome To Say Cook Book!</h2>
+    <img src="assets\homeImg\logo.png">
+    <mat-card>
+
+        <mat-list>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>google</mat-icon>
+                <h4 mat-line> Enter With My Google Acount:</h4>
+
+                <mat-checkbox #google [checked]="withGoogle" (change)="changeGoogleStatus(google.checked)"></mat-checkbox>
+
+            </mat-list-item>
+            <mat-card class="fullWidth" *ngIf="withGoogle">
+                <form>
+                    <h3>Enter Your Gmail Account:</h3>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="gmail" name="gmail" placeholder="gmail" style="text-align:right" required>
+                        <span matSuffix>@gmail.com</span>
+                        <mat-error *ngIf="!gmail">
+                            This field is required
+                        </mat-error>
+
+                        <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error-->
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button [disabled]="!gmail" (click)="addGoogleUser()">Submit</button>
+                </form>
+            </mat-card>
+
+            <mat-list-item>
+                <mat-icon mat-list-icon>mail</mat-icon>
+                <h4 mat-line> Enter With My Email:</h4>
+                <mat-checkbox #email [checked]="withEmail" (change)="changeEmailStatus(email.checked)"></mat-checkbox>
+            </mat-list-item>
+            <mat-card class="fullWidth" *ngIf="withEmail">
+                <form>
+                    <h3>Enter Your Email Account:</h3>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="Email" name="Email" placeholder="email" style="text-align:right" required>
+
+                        <mat-error *ngIf="!email">
+                            This field is required
+                        </mat-error>
+                        <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error>-->
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button [disabled]="!email" (click)="addEmailUser()">Submit</button>
+                </form>
+
+            </mat-card>
+        </mat-list>
+    </mat-card>
+</mat-card>

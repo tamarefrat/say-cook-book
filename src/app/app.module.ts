@@ -5,14 +5,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-/*import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';*/
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule  } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { routing } from './app.routing';
 
-/*import { AngularFirestore } from 'angularfire2/firestore';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';*/
+
 
 
 /*material*/
@@ -77,6 +75,8 @@ import { SpeechComponent } from './speech/speech.component';
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
+import { NewUserComponent } from './home-page/new-user/new-user.component';
+import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 
 
 
@@ -104,7 +104,9 @@ import { SpeechService } from './services/speech.service';
     FooterComponent,
     HeaderComponent,
     SpeechComponent,
-    VoiceSettingComponent
+    VoiceSettingComponent,
+    NewUserComponent,
+    NewRecipeComponent
   ],
   imports: [
     routing,
@@ -138,7 +140,9 @@ import { SpeechService } from './services/speech.service';
     MatToolbarModule,
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [RecipeService, MatDialog, AuthServiceService, SpeechService],
   bootstrap: [AppComponent]

@@ -11,8 +11,7 @@ category = '';
   constructor(private _recipeService: RecipeService) { }
 
   isPrefix(cat) {
-
- let filter = this.category.toUpperCase();
+const filter = this.category.toUpperCase();
   return(cat.toUpperCase().indexOf(filter) > -1);
 }
 

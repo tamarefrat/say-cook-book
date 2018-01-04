@@ -9,11 +9,14 @@
 </mat-toolbar>
 <mat-card>
     <mat-list>
+        <p>
+            {{this._recipeService.optionCategories| json}}
+        </p>
         <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
             <mat-icon mat-list-icon>category</mat-icon>
-            <h4 mat-line>{{cat}}</h4>
+            <h4 mat-line>{{cat.value}}</h4>
 
-            <mat-checkbox #favorite [checked]="isFavoriteCategory(cat)" (change)="changeFavoriteStatus(favorite.checked, cat)">favorite</mat-checkbox>
+            <mat-checkbox #favorite [checked]="isFavoriteCategory(cat.value)" (change)="changeFavoriteStatus(favorite.checked, cat.value)">favorite</mat-checkbox>
             <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
                 <mat-icon>delete</mat-icon>
             </button>

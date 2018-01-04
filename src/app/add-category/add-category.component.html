@@ -11,16 +11,16 @@
                     Press To Enter New Category
                 </mat-panel-description>
             </mat-expansion-panel-header>
-            <mat-card>
-                <mat-input-container class="example-form-field">
-                    <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="category" name="category" />
-                    <button mat-button *ngIf="category" matSuffix mat-icon-button aria-label="Clear" (click)="category=''">
+
+            <mat-input-container class="example-form-field">
+                <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="category" name="category" />
+                <button mat-button *ngIf="category" matSuffix mat-icon-button aria-label="Clear" (click)="category=''">
                   <mat-icon>close</mat-icon>
                 </button>
-                </mat-input-container>
-                <br>
-                <mat-checkbox name="isFavorite" [(ngModel)]="isFavorite">Add category to favorites</mat-checkbox>
-            </mat-card>
+            </mat-input-container>
+            <br>
+            <mat-checkbox name="isFavorite" [(ngModel)]="isFavorite">Add category to favorites</mat-checkbox>
+
             <mat-card>
                 <button [disabled]="!category" mat-raised-button (click)="addCategory()">Add Category</button>
             </mat-card>
@@ -47,7 +47,7 @@
                 <mat-list>
                     <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
                         <mat-icon mat-list-icon>category</mat-icon>
-                        <h4 mat-line>{{cat}}</h4>
+                        <h4 mat-line>{{cat.value}}</h4>
 
 
                         <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
@@ -80,7 +80,7 @@
             <mat-card>
                 <mat-selection-list #cats [ngModel]="selectedOptions" (ngModelChange)="onSelectedOptionsChange($event)">
                     <h3 mat-subheader>Categories</h3>
-                    <mat-list-option [value]="cat" *ngFor="let cat of this._recipeService.optionCategories">{{cat}}</mat-list-option>
+                    <mat-list-option [value]="cat.value" *ngFor="let cat of this._recipeService.optionCategories">{{cat.value}}</mat-list-option>
                 </mat-selection-list>
             </mat-card>
             <mat-card>

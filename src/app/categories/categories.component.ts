@@ -13,9 +13,9 @@ export class CategoriesComponent implements OnInit {
   deleteCategory(category) {
 this._recipeService.optionCategories.splice(
   this._recipeService.optionCategories.indexOf(category), 1);
-  if (this.isFavoriteCategory(category)) {
+  if (category.isFavorite) {
     this._recipeService.favorites.splice(
-      this._recipeService.favorites.indexOf(category), 1);
+      this._recipeService.favorites.indexOf(category.value), 1);
   }
   }
 

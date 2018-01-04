@@ -39,13 +39,13 @@ export class RecipeListComponent implements OnInit {
 
       this.recipeList = [];
       recipes.forEach(recipe =>{
-       this.recipeList.push(new recipeName(recipe.name_recipe, recipe.code, true));
-      })
+      //  this.recipeList.push(new recipeName(recipe.name_recipe, recipe.code, true));
+      });
     });
 
   }
 
- /* constructor(db:AngularFireDatabase) {
+  constructor(db: AngularFireDatabase) {
 
     db.list('/recipes').valueChanges().subscribe(recipes => {
       this.recipeList = [];
@@ -54,7 +54,7 @@ export class RecipeListComponent implements OnInit {
       })
     });
 
-  }*/
+  }
 
     ngOnInit() {
     }

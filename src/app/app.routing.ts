@@ -19,13 +19,13 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { ShareComponent } from './recipe/share/share.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
-
-
+import { NewUserComponent } from './home-page/new-user/new-user.component';
+import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
-  { path: 'recipe',  component: RecipeComponent }, // add code
+   { path: 'recipe',  component: NewRecipeComponent },
   { path: 'recipe/:id', component: RecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
@@ -36,6 +36,7 @@ const appRoutes: Routes = [
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
   { path: 'setting', component: VoiceSettingComponent },
+  { path: 'newUser', component: NewUserComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

@@ -12,9 +12,9 @@
 
     <mat-grid-list cols="3" rowHeight="150px">
         <div *ngFor="let cat of this._recipeService.optionCategories">
-            <mat-grid-tile *ngIf="isPrefix(cat)" style="background-color:#009688">
+            <mat-grid-tile *ngIf="isPrefix(cat.value)" style="background-color:#009688">
                 <mat-icon>category</mat-icon><br><br><br>
-                <h4>{{cat}}</h4>
+                <h4>{{cat.value}}</h4>
             </mat-grid-tile>
         </div>
     </mat-grid-list>

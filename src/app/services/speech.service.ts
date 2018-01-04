@@ -24,7 +24,7 @@ export class SpeechService {
     sayWord : String;
 
 
-    constructor(private zone: NgZone,  db:AngularFireDatabase) {
+   /* constructor(private zone: NgZone,  db:AngularFireDatabase) {
         this.db = db;
         this.db.list('/Setting').valueChanges().subscribe(setting => {
             setting.forEach( oneSetting => {
@@ -35,12 +35,12 @@ export class SpeechService {
                 break;
                 case "lang":
                 this.lang = oneSetting.value;
-                break;  
+                break;
             }
             })
         });
     }
-
+*/
     record(): Observable<string> {
 
         return Observable.create(observer => {
@@ -88,12 +88,12 @@ export class SpeechService {
         if (this.speechRecognition)
             this.speechRecognition.stop();
     }
-    
+
     callDB(): void {
         console.log("in myTest");
-    
+
         this.db.list('/DevorahTest').valueChanges().subscribe(recipes => {
-            this.sayList = [];   
+            this.sayList = [];
             recipes.forEach(say => {
                 this.sayWord = JSON.stringify(say)
             this.sayList.push(JSON.stringify(this.sayIt));
@@ -116,7 +116,7 @@ export class SpeechService {
       var msg = new SpeechSynthesisUtterance();
       // Set the text.
       msg.text = input;
-      
+
      // Set the attributes.
       msg.lang = this.lang;
       var voices = (<any>window).speechSynthesis.getVoices();
@@ -126,9 +126,9 @@ export class SpeechService {
           msg.voice = voices[i];
         }
       }
-      // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female' 
+      // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female'
      // msg.voice = 'native';
-      msg.volume = 1;   
+      msg.volume = 1;
       msg.rate = 1;
       msg.pitch = 1;
      //  msg.onend = function(event) { console.log('Speech complete'); }

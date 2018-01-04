@@ -1,0 +1,75 @@
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { RecipeService } from '../../services/recipe.service';
+import { Foodstuff, ItemLineComponent } from '../../item-line/item-line.component';
+import { Instruction, InstructionLineComponent } from '../../instruction-line/instruction-line.component';
+import { MainDetailsComponent } from '../../main-details/main-details.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SpeechService } from '../../services/speech.service';
+
+@Component({
+  selector: 'app-new-recipe',
+  templateUrl: './new-recipe.component.html',
+  styleUrls: ['./new-recipe.component.scss']
+})
+export class NewRecipeComponent implements OnInit {
+
+  @Input() code: number;
+  @Input() itemLines: ItemLineComponent;
+  @Input() instructionLines: InstructionLineComponent;
+  @Input() mainDetails: MainDetailsComponent;
+  @Input() keyWords: string[];
+  @Input() index: number;
+  recipeTmp: any;
+  constructor(private _recipeService: RecipeService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private speechRecognitionService: SpeechService) {
+    console.log('in contracror');
+this._recipeService.newRecipe = this;
+    this.instructionLines = new InstructionLineComponent(this._recipeService);
+    this.instructionLines.instructions.push(new Instruction(0, '', true));
+    this.itemLines = new ItemLineComponent(this._recipeService);
+    this.itemLines.foodstuffs.push(new Foodstuff(0, 0, '', '', true));
+    this.mainDetails = new MainDetailsComponent(this._recipeService);
+    this.mainDetails.statusDetails = 0;
+    this.keyWords = [];
+    this.code = this._recipeService.counter++;
+
+    console.log('code= ' + this.code);
+  }
+
+  /*functions*/
+  /************************************************************************************************* */
+
+  ngOnInit() {
+
+
+
+  }
+  /*****************get from firebase- hae to check if works */
+
+  /**************************************************************************** */
+  deleteRecipe() {
+    const ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
+    if (ans) {
+      this.router.navigate(['/']);
+    }
+  }
+
+
+  saveRecipeInList() {
+    // new recipe- have to add to list
+    this._recipeService.allMyRecipes.push(this._recipeService.newRecipe); // have to delete?
+    this._recipeService.addNewRecipeToDB(this._recipeService.newRecipe);
+    this.router.navigate(['/']);
+    console.log('in save');
+    console.log(this);
+  }
+  sayIt() {
+    this.speechRecognitionService.callDB();
+  }
+
+
+
+
+}

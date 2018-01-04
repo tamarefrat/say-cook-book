@@ -12,29 +12,30 @@
 
                 <mat-card-title>
                     <mat-input-container class="fullwidth">
-                        <input matInput type="text" #name name="nameRecipe " placeholder="Name Of Recipe " [(ngModel)]="nameRecipe " required>
+                        <input matInput type="text" name="nameRecipe " placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required>
                         <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
                     </mat-input-container>
                 </mat-card-title>
+                <p>{{nameRecipe}}</p>
                 <h3>Categories for recipe:</h3>
 
                 <table class="fullwidth" cellspacing="0">
                     <tr>
                         <td>
 
-                            <mat-select placeholder="category 1" name="category[0]" [(ngModel)]="category[0]">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                            <mat-select placeholder="category 1" name="category1" [(ngModel)]="category1">
+                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
                             </mat-select>
 
                         </td>
                         <td>
-                            <mat-select placeholder="category 2" name="category[1]" [(ngModel)]="category[1]">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories" color="accent">{{option}}</mat-option>
+                            <mat-select placeholder="category 2" name="category2" [(ngModel)]="category2">
+                                <mat-option *ngFor="let option of _recipeService.optionCategories" color="accent">{{option.value}}</mat-option>
                             </mat-select>
                         </td>
                         <td>
-                            <mat-select placeholder="category 3" name="category[2]" [(ngModel)]="category[2]">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option}}</mat-option>
+                            <mat-select placeholder="category 3" name="category3" [(ngModel)]="category3">
+                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
                             </mat-select>
                         </td>
                     </tr>
@@ -64,7 +65,7 @@
     <div id="recipeOnSave" *ngIf="statusDetails==1">
         <mat-card>
             <mat-card-header>
-                category:{{category[0]}} {{category[1]}} {{category[2]}}.
+                category:{{category1}} {{category2}} {{category3}}.
             </mat-card-header>
             <mat-card-content>
                 <div class="row">
@@ -82,19 +83,11 @@
                     </div>
                 </div>
 
-
-
-
-
-
-
                 <mat-card-actions>
                     <button mat-fab color="accent" (click)="aditDetails()">
             <mat-icon class="mat-25" >edit</mat-icon>
             </button>
-                    <button mat-fab color="accent" (click)="deleteRecipe() ">
-            <mat-icon class="mat-25" >delete</mat-icon>
-            </button>
+
                 </mat-card-actions>
             </mat-card-content>
         </mat-card>
