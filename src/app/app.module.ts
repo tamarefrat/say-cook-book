@@ -109,7 +109,8 @@ import { DataBaseService } from './services/data-base.service';
     SpeechComponent,
     VoiceSettingComponent,
     NewUserComponent,
-    NewRecipeComponent
+    NewRecipeComponent,
+    ReaderRecipeComponent
   ],
   imports: [
     routing,
