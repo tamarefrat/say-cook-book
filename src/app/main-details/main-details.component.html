@@ -7,36 +7,38 @@
                 <mat-input-container class="fullwidth">
                     <input matInput name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
                 </mat-input-container>
-
-
-
                 <mat-card-title>
                     <mat-input-container class="fullwidth">
                         <input matInput type="text" name="nameRecipe " placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required>
                         <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
                     </mat-input-container>
                 </mat-card-title>
-                <p>{{nameRecipe}}</p>
+
                 <h3>Categories for recipe:</h3>
 
                 <table class="fullwidth" cellspacing="0">
                     <tr>
                         <td>
-
-                            <mat-select placeholder="category 1" name="category1" [(ngModel)]="category1">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
-                            </mat-select>
+                            <mat-form-field>
+                                <mat-select placeholder="category 1" (change)="category1 = $event.value">
+                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
 
                         </td>
                         <td>
-                            <mat-select placeholder="category 2" name="category2" [(ngModel)]="category2">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories" color="accent">{{option.value}}</mat-option>
-                            </mat-select>
+                            <mat-form-field>
+                                <mat-select placeholder="category 2" (change)="category2 = $event.value">
+                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </td>
                         <td>
-                            <mat-select placeholder="category 3" name="category3" [(ngModel)]="category3">
-                                <mat-option *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
-                            </mat-select>
+                            <mat-form-field>
+                                <mat-select placeholder="category 3" (change)="category3 = $event.value">
+                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </td>
                     </tr>
                 </table>
@@ -64,20 +66,21 @@
 
     <div id="recipeOnSave" *ngIf="statusDetails==1">
         <mat-card>
-            <mat-card-header>
-                category:{{category1}} {{category2}} {{category3}}.
-            </mat-card-header>
+
             <mat-card-content>
                 <div class="row">
                     <div class="col-4">
                         <img mat-card-image [src]="urlImg">
                     </div>
                     <div class="col-8">
+
                         <mat-card-title>
                             <h1>{{nameRecipe}}</h1>
                         </mat-card-title>
                         <mat-card-subtitle *ngIf="getFrom">get recipe from {{getFrom}}</mat-card-subtitle>
-                        <h5 *ngIf="comment">Comment:{{comment}}</h5>
+                        <h4>category: {{category1}} {{category2}} {{category3}}.</h4>
+                        <br><br>
+                        <p *ngIf="comment">Comment: {{comment}}</p>
 
 
                     </div>

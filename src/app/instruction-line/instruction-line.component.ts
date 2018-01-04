@@ -7,7 +7,7 @@ import { RecipeService } from '../services/recipe.service';
   styleUrls: ['./instruction-line.component.css']
 })
 export class InstructionLineComponent implements OnInit {
-  @Input() code: number;
+  @Input() code: any;
   @Input() instructions: Instruction[];
   @Input() keyWords: string[];
   @Input() zeroInstructions: boolean;
@@ -16,7 +16,7 @@ export class InstructionLineComponent implements OnInit {
   constructor(private _recipeService: RecipeService) {
     this.instructions = [];
     this.keyWords = [];
-    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
+    // this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }
 
   ngOnInit() {

@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
    { path: 'recipe',  component: NewRecipeComponent },
-  { path: 'recipe/:id', component: RecipeComponent },
+  { path: 'recipe/:id', component: NewRecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'voice-setting', component: VoiceSettingComponent },

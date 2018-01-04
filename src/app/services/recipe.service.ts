@@ -6,14 +6,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { AngularFireDatabase, DatabaseSnapshot } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { ItemLineComponent } from '../item-line/item-line.component';
+import { InstructionLineComponent } from '../instruction-line/instruction-line.component';
 
 @Injectable()
 
 export class RecipeService {
   user: any;
-  userRef: any;
+  userRef: AngularFirestoreCollection<any>;
   db: AngularFireDatabase;
-  allMyRecipes: any[]= [];
+  allMyRecipes: any[] = [];
   recipe: RecipeComponent;
   newRecipe: NewRecipeComponent;
   sharedRecipes: any[] = [];
@@ -29,30 +31,33 @@ export class RecipeService {
     this.db = db;
     this.user = 'sm5800810';
     this.userRef = this.afs.collection(this.user);
+    this.userRef.add({'1': '2', '3': '4'});
+    console.log(this.userRef.valueChanges());
     this.folder = 'recipeimages';
     this.getAllRecipesFromDB();
     this.getSharedRecipesFromDB();
     this.getAllCategoriesFromDB();
     this.getFavoritesFromOption();
     console.log(this.allMyRecipes);
-   //  this.counter = 0; // ????????????????????????????????????????????????
+    //  this.counter = 0; // ????????????????????????????????????????????????
     console.log(this.getRecipeByCodeFromDB(5));
   }
 
   /***************************************************************** */
   /*************          recipes functions     ******************** */
-  getRecipe(code): RecipeComponent {
-    this.getAllRecipesFromDB();
+  getRecipe(code) {
+
     return this.allMyRecipes[this.getIndexOfRecipeByCode(code)];
   }
-  getIndexOfRecipeByCode(code: number) {
+  getIndexOfRecipeByCode(code) {
+    this.getAllRecipesFromDB();
     if (this.allMyRecipes === null) { return null; }
     for (let i = 0; i < this.allMyRecipes.length; i++) {
       if (this.allMyRecipes[i].code === code) {
         return i;
       }
+      }
       return null;
-    }
   }
 
   getNameAllRecipes() {
@@ -77,7 +82,7 @@ export class RecipeService {
   getAllRecipesFromDB() {
     this.db.list(`/${this.user}/recipes`).valueChanges().subscribe(recipes => {
       this.tempArr = recipes;
-       this.allMyRecipes = this.tempArr;
+      this.allMyRecipes = this.tempArr;
       console.log(this.allMyRecipes);
       return this.allMyRecipes;
     });
@@ -85,14 +90,14 @@ export class RecipeService {
   getAllCategoriesFromDB() {
     this.db.list(`/${this.user}/categories`).valueChanges().subscribe(cats => {
       this.tempArr = cats;
-     this.optionCategories = this.tempArr;
+      this.optionCategories = this.tempArr;
       console.log(this.optionCategories);
       return this.optionCategories;
     });
   }
   getSharedRecipesFromDB() {
     this.db.list(`/${this.user}/shared`).valueChanges().subscribe(recipes => {
-       this.tempArr = recipes;
+      this.tempArr = recipes;
       this.sharedRecipes = this.tempArr;
       console.log(this.sharedRecipes);
       return this.sharedRecipes;
@@ -112,6 +117,9 @@ export class RecipeService {
   }
 
   updateMainDetails(code, recipe) {
+
+  }
+  removeRecipeFromDB(recipe) {
 
   }
   /*
@@ -174,3 +182,33 @@ export class Category {
   constructor(public value: string, public isFavorite: boolean) { }
 
 }
+
+export class MainDetails {
+  constructor(
+    public nameRecipe: string,
+    public getFrom: string,
+    public category1: string,
+    public category2: string,
+    public category3: string,
+    public urlImg = 'assets/Say CookBook logo.ico',
+    public comment: string,
+    public statusDetails = 1, /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
+    public index: number
+  ) {
+
+  }
+}
+
+  export class Recipe {
+  constructor(
+    public code: number,
+    public mainDetails: MainDetails,
+    public itemLines: ItemLineComponent,
+    public instructionLines: InstructionLineComponent,
+    public keyWords: string[]
+  ) {
+
+  }
+}
+
+

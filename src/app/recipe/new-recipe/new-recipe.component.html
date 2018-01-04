@@ -8,69 +8,67 @@
             <button mat-fab (click)=" deleteRecipe() ">
             <mat-icon>delete</mat-icon>
             </button>
+            <button mat-fab (click)="shareRecipe() ">
+            <mat-icon>share</mat-icon>
+            </button>
+            <button mat-fab (click)="sayIt() ">
+                <mat-icon>keyboard_voice</mat-icon>
+            </button>
         </mat-card-actions>
 
 
 
-        <mat-form-field>
-            <mat-select value="ceramic">
-                <mat-option value="glass">Glass</mat-option>
-                <mat-option value="ceramic">Ceramic</mat-option>
-                <mat-option value="steel">Steel</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <mat-horizontal-stepper>
+            <mat-step>
+                <ng-template matStepLabel>Main Details Of Recipee</ng-template>
 
-    </mat-card>
-    <mat-vertical-stepper>
-        <mat-step>
-            <ng-template matStepLabel>Main Details Of Recipee</ng-template>
-
-            <app-main-details class="margin-15" [code]="this.code "></app-main-details>
-            <br><br>
-            <div>
-                <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
-            </div>
-        </mat-step>
-
-        <mat-step>
-            <ng-template matStepLabel>
-                <div>Food stuffs</div>
-            </ng-template>
-            <mat-card>
-                <app-item-line class="margin-15" [code]="this.code "></app-item-line>
-                <mat-card-actions>
-                    <button mat-button matStepperPrevious type="button">Back</button>
-                    <button mat-button matStepperNext type="button">Next</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-step>
-
-        <mat-step>
-            <ng-template matStepLabel>
-                <div>Instructions</div>
-            </ng-template>
-            <mat-card>
-                <app-instruction-line [code]="this.code "></app-instruction-line>
-                <mat-card-actions>
-                    <button mat-button matStepperPrevious type="button">Back</button>
-                    <button mat-button matStepperNext type="button">Next</button>
-                </mat-card-actions>
-            </mat-card>
-        </mat-step>
-
-        <mat-step>
-            <ng-template matStepLabel>Confirm your recipe</ng-template>
-            <mat-card>
-                <h4>{{mainDetails.nameRecipe}}</h4>
-                <p>
-                    If everything seems correct click on done to enter recipe to recipe list....
-                </p>
+                <app-main-details class="margin-15" [code]="this.code "></app-main-details>
+                <br><br>
                 <div>
-                    <button mat-fab (click)="saveRecipeInList()" *ngIf="mainDetails.statusDetails==1">Done</button>
+                    <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
                 </div>
-            </mat-card>
-        </mat-step>
-    </mat-vertical-stepper>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>
+                    <div>Food stuffs</div>
+                </ng-template>
+                <mat-card>
+                    <app-item-line class="margin-15" [code]="this.code "></app-item-line>
+                    <mat-card-actions>
+                        <button mat-button matStepperPrevious type="button">Back</button>
+                        <button mat-button matStepperNext type="button">Next</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>
+                    <div>Instructions</div>
+                </ng-template>
+                <mat-card>
+                    <app-instruction-line [code]="this.code "></app-instruction-line>
+                    <mat-card-actions>
+                        <button mat-button matStepperPrevious type="button">Back</button>
+                        <button mat-button matStepperNext type="button">Next</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Confirm your recipe</ng-template>
+                <mat-card>
+                    <h4>{{mainDetails.nameRecipe}}</h4>
+                    <p>
+                        If everything seems correct click on done to enter recipe to recipe list....
+                    </p>
+                    <div>
+                        <button mat-fab (click)="saveRecipeInList()" *ngIf="mainDetails.statusDetails==1">Done</button>
+                    </div>
+                </mat-card>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </mat-card>
 </div>
 <div *ngIf="mainDetails.statusDetails==4">
     <mat-card class="margin-15">

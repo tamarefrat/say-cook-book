@@ -15,12 +15,13 @@ export class MainDetailsComponent implements OnInit {
   @Input() category1: string;
   @Input() category2: string;
   @Input() category3: string;
-  @Input() urlImg = 'assets/Say CookBook logo.ico';
+  @Input() urlImg = 'assets\\homeImg\\logo.png';
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
+    this.urlImg = 'assets\\homeImg\\logo.png';
 /*this.getFrom = '';
 this.nameRecipe = '';
 this.comment = '';*/
@@ -84,7 +85,9 @@ this.comment = '';*/
 
       this.nameRecipe = rec.mainDetails.nameRecipe;
       this.getFrom = rec.mainDetails.getFrom;
-      this.category = rec.mainDetails.category;
+      this.category1 = rec.mainDetails.category1;
+      this.category2 = rec.mainDetails.category2;
+      this.category3 = rec.mainDetails.category3;
       this.urlImg = rec.mainDetails.urlImg;
 
       this.comment = rec.mainDetails.comment;

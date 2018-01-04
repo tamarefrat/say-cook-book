@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { RecipeService } from '../services/recipe.service';
+import { RecipeService, MainDetails } from '../services/recipe.service';
 import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
 import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
@@ -19,7 +19,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   @Input() code: number;
   @Input() itemLines: ItemLineComponent;
   @Input() instructionLines: InstructionLineComponent;
-  @Input() mainDetails: MainDetailsComponent;
+  @Input() mainDetails: MainDetails;
   @Input() keyWords: string[];
   @Input() index: number;
 
@@ -96,9 +96,26 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this._recipeService.allMyRecipes.splice(index, 1);
   }
   shareRecipe() { }
-
+aditDetails() {
+    this.mainDetails.statusDetails = 2;
+  }
+  saveRecipeDetails() {
+    const rec = this._recipeService.getRecipe(this.code);
+    if (rec) {
+      // a old recipe
+      this.index = this._recipeService.getIndexOfRecipeByCode(this.code); // ?????????????????????????????????
+      this._recipeService.allMyRecipes[this.index].mainDetails = this; // ????????????????????????????????????????
+      rec.mainDetails = this.mainDetails;
+      this._recipeService.updateMainDetails(this.code, rec);
+    } else {
+      // a new recipe
+      // this._recipeService.newRecipe.mainDetails = this.mainDetails;
+    }
+    this.mainDetails.statusDetails = 1;
+    console.log(this);
+  }
   saveRecipeInList() {
-    this.mainDetails.saveRecipe();
+    this.saveRecipe();
     if (this.mainDetails.statusDetails === 0) {
       // new recipe- have to add to list
       this._recipeService.allMyRecipes.push(this);

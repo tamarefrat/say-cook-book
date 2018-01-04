@@ -8,16 +8,16 @@ import { RecipeService } from '../services/recipe.service';
 })
 export class ItemLineComponent implements OnInit {
 
-  @Input() code: number;
+  @Input() code: any;
   @Input() foodstuffs: Foodstuff[]; /*change class and prop*/
-  /* @Input() keyWords: string[];*/
+
   @Input() zeroItems: boolean;
   @Input() index: number;
 
   constructor(private _recipeService: RecipeService) {
     this.foodstuffs = [];
-    /* this.keyWords = [];*/
-    this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
+
+   // this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }
 
   ngOnInit() {
