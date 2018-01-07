@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseListObservable } from "angularfire2/database-deprecated"; 
+import { SpeechService, speechSettings } from '../services/speech.service';
 
 @Component({
   selector: 'app-voice-setting',
@@ -10,10 +11,13 @@ import { FirebaseListObservable } from "angularfire2/database-deprecated";
 export class VoiceSettingComponent implements OnInit {
 
   db: AngularFireDatabase;
+  speechService: SpeechService;
   voiceSelectedValue: string;
   volumeSelectedValue: number;
   pitchSelectedValue: number;
   rateSelectedValue: number;
+
+  speechSettings: speechSettings;
 
   settings$ :any // FirebaseListObservable<any>
 
@@ -23,12 +27,15 @@ export class VoiceSettingComponent implements OnInit {
     {key: "Google UK English Male", value: "UK English Male"}
   ];
   
-  constructor(db:AngularFireDatabase) { 
+  constructor(db:AngularFireDatabase, speechService: SpeechService) { 
     this.db = db;
-    this.voiceSelectedValue = null;
-    this.volumeSelectedValue = null;
-    this.rateSelectedValue = null;
-    this.pitchSelectedValue = null;
+    //this.speechService = speechService;
+    this.speechSettings = speechService.getSettingFromDB();
+    console.log(this.speechSettings.voice + "testtttttt  " + this.speechSettings.volume);
+     this.voiceSelectedValue = this.speechSettings.voice;
+    this.volumeSelectedValue = +this.speechSettings.volume;
+    this.rateSelectedValue = +this.speechSettings.rate;
+    this.pitchSelectedValue = +this.speechSettings.pitch;
   }
 
   ngOnInit() {
@@ -38,8 +45,7 @@ export class VoiceSettingComponent implements OnInit {
   writeToDB()
   {
     var path = 'firstUser/settings/voiceSettings';
-    console.log(path);
-
+  
     this.settings$ = this.db.object(path);
     if(this.voiceSelectedValue != null)
         this.settings$.update({voice: this.voiceSelectedValue});

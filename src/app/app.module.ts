@@ -82,6 +82,8 @@ import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
 import { ExampleComponent } from './about/example/example.component';
 
+import { MenuComponent } from './menu/menu.component';
+
 
 
 
@@ -114,7 +116,8 @@ import { ExampleComponent } from './about/example/example.component';
     NewRecipeComponent,
     ReaderRecipeComponent,
     RecipesForCategoryComponent,
-    ExampleComponent
+    ExampleComponent,
+    MenuComponent
   ],
   imports: [
     routing,
