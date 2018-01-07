@@ -19,6 +19,14 @@ export interface speechComand{
     value: string
    }
 
+export interface speechSettings{
+    voice : string;
+    lang : string;
+    rate : string;
+    volume : string;
+    pitch : string;
+}
+
 
 @Injectable()
 export class SpeechService {
@@ -31,28 +39,15 @@ export class SpeechService {
     pitch : string;
     sayList: any[];
     sayWord : String;
-
-
-   /* constructor(private zone: NgZone,  db:AngularFireDatabase) {
-        this.db = db;
-        this.db.list('/Setting').valueChanges().subscribe(setting => {
-            setting.forEach( oneSetting => {
-            switch ( oneSetting.name)
-            {
-                case "voice":
-                this.voice = oneSetting.value;
-                break;
-                case "lang":
-                this.lang = oneSetting.value;
-                break;
-            }
-            })
-        });
-    constructor(private zone: NgZone,  private  afs: AngularFirestore, db:AngularFireDatabase, private dataBaseService:DataBaseService) {
+    
+    
+    constructor(private zone: NgZone,  db:AngularFireDatabase) {
         this.db = db;
         this.getSettingFromDB();
-    }
-*/
+    };
+
+
+
     record(): Observable<string> {
 
         return Observable.create(observer => {
@@ -117,42 +112,44 @@ export class SpeechService {
 
     sayIt(input:String) {
         this.getSettingFromDB();
-      if ('speechSynthesis' in window) {
+        if ('speechSynthesis' in window) {
           console.log('Your browser supports speech synthesis.');
-      // speak('hi');
-      } else {
-          alert('Sorry your browser does not support speech synthesis. Try this in <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>.');
-      }
-      const {SpeechSynthesisUtterance}: IWindow = <IWindow>window;
-      const {SpeechSynthesis}: IWindow = <IWindow>window;
-
-     // Create a new instance of SpeechSynthesisUtterance.
-      var msg = new SpeechSynthesisUtterance();
-      // Set the text.
-      msg.text = input;
-
-     // Set the attributes.
-      msg.lang = this.lang;
-      var voices = (<any>window).speechSynthesis.getVoices();
-      for(var i = 0; i < voices.length; i++) {
-        console.log(voices[i].name);
-        if(voices[i].name === this.voice) {
-          msg.voice = voices[i];
+        // speak('hi');
+        } else {
+            alert('Sorry your browser does not support speech synthesis. Try this in <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>.');
         }
-      }
-      // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female'
-     // msg.voice = 'native';
-        msg.volume =this.volume;
-        msg.rate = this.rate;
-        msg.pitch = this.pitch;
-     //  msg.onend = function(event) { console.log('Speech complete'); }
-      // Queue this utterance.
-        //this.speechSynthesis = new SpeechSynthesis();
-        //this.speechSynthesis.speak(msg);
-      (<any>window).speechSynthesis.speak(msg);
+        const {SpeechSynthesisUtterance}: IWindow = <IWindow>window;
+        const {SpeechSynthesis}: IWindow = <IWindow>window;
+
+        // Create a new instance of SpeechSynthesisUtterance.
+        var msg = new SpeechSynthesisUtterance();
+        // Set the text.
+        msg.text = input;
+
+        // Set the attributes.
+        msg.lang = this.lang;
+        var voices = (<any>window).speechSynthesis.getVoices();
+        for(var i = 0; i < voices.length; i++) {
+            console.log(voices[i].name);
+            if(voices[i].name === this.voice) {
+            msg.voice = voices[i];
+            }
+        }
+        // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female'
+        // msg.voice = 'native';
+            msg.volume =this.volume;
+            msg.rate = this.rate;
+            msg.pitch = this.pitch;
+        //  msg.onend = function(event) { console.log('Speech complete'); }
+        // Queue this utterance.
+            //this.speechSynthesis = new SpeechSynthesis();
+            //this.speechSynthesis.speak(msg);
+        (<any>window).speechSynthesis.speak(msg);
   }
 
-  getSettingFromDB(){
+  getSettingFromDB() : speechSettings {
+
+    
 
     this.db.object('firstUser/settings/voiceSettings/voice').valueChanges().subscribe(x => {
         this.voice = <string>x;
@@ -178,6 +175,15 @@ export class SpeechService {
         this.pitch = <string>x;
         }
     );
+
+    return {
+        voice: this.voice,
+        lang: this.lang,
+        rate: this.rate,
+        volume: this.volume,
+        pitch: this.pitch,
+
+    }
 }
 }
 

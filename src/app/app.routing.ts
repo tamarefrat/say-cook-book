@@ -27,7 +27,7 @@ const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
-   { path: 'recipe',  component: NewRecipeComponent },
+  { path: 'recipe',  component: NewRecipeComponent },
   { path: 'recipe/:id', component: NewRecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
@@ -37,7 +37,6 @@ const appRoutes: Routes = [
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
-  { path: 'setting', component: VoiceSettingComponent },
  // { path: 'newUser', component: NewUserComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reader', component: ReaderRecipeComponent },

@@ -79,6 +79,7 @@ import { SpeechService } from './services/speech.service';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { DataBaseService } from './services/data-base.service';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -110,7 +111,8 @@ import { DataBaseService } from './services/data-base.service';
     VoiceSettingComponent,
     NewUserComponent,
     NewRecipeComponent,
-    ReaderRecipeComponent
+    ReaderRecipeComponent,
+    MenuComponent
   ],
   imports: [
     routing,
