@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { RecipeService, MainDetails } from '../services/recipe.service';
 import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
-import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
+// import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SpeechService } from '../services/speech.service';
@@ -18,7 +18,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   private sub: any;
   @Input() code: number;
   @Input() itemLines: ItemLineComponent;
-  @Input() instructionLines: InstructionLineComponent;
+ //  @Input() instructionLines: InstructionLineComponent;
   @Input() mainDetails: MainDetails;
   @Input() keyWords: string[];
   @Input() index: number;
@@ -35,7 +35,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
     const rec = this._recipeService.getRecipe(this.code);
     if (rec) {
       this.itemLines = rec.itemLines;
-      this.instructionLines = rec.instructionLines;
+      // this.instructionLines = rec.instructionLines;
       this.mainDetails = rec.mainDetails;
       this.keyWords = rec.keyWords;
     }
@@ -64,7 +64,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
     const rec = this._recipeService.getRecipe(this.code);
     if (rec) {
       this.itemLines = rec.itemLines;
-      this.instructionLines = rec.instructionLines;
+     // this.instructionLines = rec.instructionLines;
       this.mainDetails = rec.mainDetails;
       this.keyWords = rec.keyWords;
 }

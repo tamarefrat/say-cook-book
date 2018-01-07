@@ -254,7 +254,7 @@ export class RecipeService {
   }
 
 
-  convertToObject(recipe: NewRecipeComponent) {
+  /*convertToObject(recipe: NewRecipeComponent) {
     let obj: any;
     obj.code = 1;
     obj.nameRecipe = recipe.mainDetails.nameRecipe;
@@ -271,16 +271,16 @@ export class RecipeService {
     obj.itemLines = recipe.itemLines.foodstuffs;
     obj.instroctionLines = recipe.instructionLines.instructions;
     return obj;
-  }
+  }*/
 
 
 
 }
 
-export class Category {
+/*export class Category {
   constructor(public code: any, public value: string, public isFavorite: boolean) { }
 
-}
+}*/
 
 export class MainDetails {
   constructor(

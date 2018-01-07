@@ -1,3 +1,105 @@
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<mat-card>
+    <mat-list>
+        <h2>Instructions:</h2>
+
+        <div id='itemLine' *ngFor="let item of instructions; let i = index">
+            <mat-list-item id="itemLineDetailsInSaved">
+
+
+                <table style="width:90%; max-width:90%; text-align:left" cellspacing="0">
+                    <tr>
+                        <td style="width:10%">
+
+                            <label>{{i+1}}.</label>
+                        </td>
+                        <td>
+                            <label>{{item.description}}</label>
+
+                        </td>
+                    </tr>
+                </table>
+                <button mat-mini-fab matSuffix color="accent" (click)="editInstructionLine(item)">
+          <mat-icon class="mat-25">edit</mat-icon>
+        </button>
+
+                <button mat-mini-fab matSuffix color="accent" (click)="deleteInstructionLine(item)">
+          <mat-icon class="mat-25">delete</mat-icon>
+        </button>
+            </mat-list-item>
+
+            <!--              for edit:                  -->
+
+            <mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="inEditState && instructionToEdit==item">
+                <table style="width: 95%" cellspacing="0">
+
+                    <tr>
+                        <td>
+
+                            <mat-input-container>
+                                <input matInput type="text" name="item.description" placeholder="instruction" [(ngModel)]="item.description" required>
+
+                                <mat-error *ngIf="!item.description">You must enter some instruction.</mat-error>
+                            </mat-input-container>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="primary" (click)="updateInstructionLine(item)" [disabled]="!item.description">
+
+                <mat-icon class="mat-25">save</mat-icon>
+              </button>
+                        </td>
+                        <td>
+                            <button mat-mini-fab color="accent" (click)="deleteInstructionLine(item)">
+                <mat-icon class="mat-25">delete</mat-icon>
+              </button>
+                        </td>
+                    </tr>
+                </table>
+            </mat-card>
+        </div>
+    </mat-list>
+
+
+
+    <!--                          for new instruction                    -->
+
+
+    <button mat-mini-fab matSuffix color="primary" *ngIf="newItemEnable" (click)="createItemLine()">
+    <mat-icon class="mat-25">add</mat-icon>
+  </button>
+    <mat-card class="fullWidth" *ngIf="!newItemEnable">
+        <mat-card style="width: 95%" id="itemLineDetailsEdit">
+            <table style="width: 90%" cellspacing="0">
+
+                <tr>
+                    <td>
+                        <mat-input-container>
+                            <input matInput type="text" name="nDescrib" placeholder="Instruction" [(ngModel)]="nDescrib" required>
+                            <mat-error *ngIf="!nDescrib">You must enter some instruction.</mat-error>
+
+
+                        </mat-input-container>
+                    </td>
+
+
+                </tr>
+            </table>
+        </mat-card>
+
+        <button mat-mini-fab color="primary" (click)="saveItemLine()" [disabled]="!nDescrib">
+
+
+      <mat-icon class="mat-25">save</mat-icon>
+    </button>
+
+    </mat-card>
+</mat-card>
+
+
+<!--
 <form>
     <h2>instruction</h2>
     <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="createInstructionLine(-1)" *ngIf="zeroInstructions">
@@ -41,4 +143,4 @@
             </div>
         </div>
     </div>
-</form>
+</form>-->

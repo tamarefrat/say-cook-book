@@ -22,6 +22,8 @@ import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
+import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
+import { ExampleComponent } from './about/example/example.component';
 
 const appRoutes: Routes = [
 
@@ -39,8 +41,10 @@ const appRoutes: Routes = [
   { path: 'share', component: ShareComponent },
   { path: 'setting', component: VoiceSettingComponent },
  // { path: 'newUser', component: NewUserComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
   { path: 'reader', component: ReaderRecipeComponent },
+  { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
+  { path: 'example', component: ExampleComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

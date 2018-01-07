@@ -21,13 +21,16 @@
                         <mat-error *ngIf="!oldid">
                             This field is required
                         </mat-error>
+                        <mat-error *ngIf="!apears(newid)">
+                            The User Name Is Not Exist!
+                        </mat-error>
 
                         <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
                             Please enter a valid email address
                         </mat-error-->
                     </mat-form-field>
                     <br>
-                    <button mat-raised-button [disabled]="!oldid" (click)="addoldUser()">Log In</button>
+                    <button mat-raised-button [disabled]="!oldid || !apears(newid)" (click)="addoldUser()">Log In</button>
                 </form>
             </mat-card>
 
@@ -45,12 +48,15 @@
                         <mat-error *ngIf="!newid">
                             This field is required
                         </mat-error>
+                        <mat-error *ngIf="apears(newid)">
+                            The User Name apears!
+                        </mat-error>
                         <!--mat-error *ngIf="emailFormControl.hasError('pattern')">
                             Please enter a valid email address
                         </mat-error>-->
                     </mat-form-field>
                     <br>
-                    <button mat-raised-button [disabled]="!newid" (click)="addNewUser()">Log In</button>
+                    <button mat-raised-button [disabled]="!newid || apears(newid)" (click)="addNewUser()">Log In</button>
                 </form>
 
             </mat-card>

@@ -45,9 +45,9 @@
 
             <mat-card>
                 <mat-list>
-                    <mat-list-item *ngFor="let cat of this._recipeService.optionCategories">
+                    <mat-list-item *ngFor="let cat of this.dbs.categoryList">
                         <mat-icon mat-list-icon>category</mat-icon>
-                        <h4 mat-line>{{cat.value}}</h4>
+                        <h4 mat-line>{{cat.name}}</h4>
 
 
                         <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
@@ -80,7 +80,7 @@
             <mat-card>
                 <mat-selection-list #cats [ngModel]="selectedOptions" (ngModelChange)="onSelectedOptionsChange($event)">
                     <h3 mat-subheader>Categories</h3>
-                    <mat-list-option [value]="cat.value" *ngFor="let cat of this._recipeService.optionCategories">{{cat.value}}</mat-list-option>
+                    <mat-list-option [value]="cat.name" *ngFor="let cat of this.dbs.categoryList">{{cat.name}}</mat-list-option>
                 </mat-selection-list>
             </mat-card>
             <mat-card>

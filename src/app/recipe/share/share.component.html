@@ -4,10 +4,10 @@
         <mat-tab label="Sharing Recipes" style="width:50%">
 
             <div class="demo-tab-content">
-                <mat-card class="full-width">
+                <mat-card class="fullWidth">
                     <mat-selection-list #myRecipes [ngModel]="mySelected" (ngModelChange)="onMySelectedOptionsChange($event)">
                         <h3 mat-subheader>All Recipes You Can Share:</h3>
-                        <mat-list-option [value]="rec" *ngFor="let rec of this.nameAllRecipes">{{rec}}</mat-list-option>
+                        <mat-list-option [value]="rec.nameRrecipe" *ngFor="let rec of this.allRecipes">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
                 </mat-card>
@@ -17,10 +17,22 @@
                         <button mat-raised-button (click)="myRecipes.deselectAll()">Deselect all</button>
                     </p>
                 </mat-card>
-                <mat-card class="full-width">
-                    <button mat-fab (click)="shareRecipe() ">
+                <mat-card class="fullWidth">
+                    <button mat-raised-button (click)="chooseFreind = true">
+                            Choose Friend to Share with:
+                            </button>
+                    <mat-card *ngIf="chooseFreind">
+
+                        <mat-input-container class="fullwidth">
+                            <input matInput type="text" #friend placeholder="ID of User You Want Share With:" required>
+                            <mat-error *ngIf="!friend">You must enter any ID.</mat-error>
+                            <mat-error *ngIf="!apears(friend.value)">You must enter any ID.</mat-error>
+                        </mat-input-container>
+                        <mat-divider></mat-divider>
+                        <button mat-fab (click)="shareRecipe(friend.value)" *ngIf="!friend && !apears(friend.value)">
                             <mat-icon>share</mat-icon>
                             </button>
+                    </mat-card>
                 </mat-card>
                 <p>Selected: {{mySelected | json}}</p>
 
@@ -31,8 +43,8 @@
             <div class="demo-tab-content">
                 <mat-card class="full-width">
                     <mat-selection-list #gotRecipes [ngModel]="gotSharedRecipes" (ngModelChange)="ongotRecipesChange($event)">
-                        <h3 mat-subheader>All Recipes You Can Share:</h3>
-                        <mat-list-option [value]="rec" *ngFor="let rec of this.nameAllSharedRecipes">{{rec}}</mat-list-option>
+                        <h3 mat-subheader>All Recipes You Can Get To Your App:</h3>
+                        <mat-list-option [value]="rec.nameRecipe" *ngFor="let rec of this.allSharedRecipes">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
                 </mat-card>
@@ -42,7 +54,7 @@
                         <button mat-raised-button (click)="gotRecipes.deselectAll()">Deselect all</button>
                     </p>
                 </mat-card>
-                <mat-card class="full-width">
+                <mat-card class="fullWidth">
                     <button mat-fab (click)="getSharedRecipes() ">
                             <mat-icon>save</mat-icon>
                             </button>

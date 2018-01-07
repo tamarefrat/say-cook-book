@@ -8,7 +8,7 @@
         <h2 class="link" routerLink="/">Say Cook Book</h2>
 
         <button mat-button class="float-right" routerLink="/login">log in</button>
-        <button mat-button class="float-right " (click)="logout() ">log out</button>
+        <button mat-button class="float-right " (click)="this.dbs.user= demoUser ">log out</button>
         <button mat-button class="float-right " routerLink="/about">about us</button>
         <button mat-button class="float-right " routerLink="/newUser">New User</button>
 
@@ -19,7 +19,7 @@
             <h4>You Are Not In Your Acount!!</h4>
             <h6>Click on "Log in" in order to get to your Say Cook Book</h6>
         </mat-card>
-        <router-outlet></router-outlet>
+        <router-outlet style="background: black"></router-outlet>
     </div>
 </mat-sidenav-container>
 <!--The content below is only a placeholder and can be replaced.-->

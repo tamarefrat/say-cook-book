@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { RecipeService } from '../services/recipe.service';
 import { NewRecipeComponent } from '../recipe/new-recipe/new-recipe.component';
+import { DataBaseService } from '../services/data-base.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor( private afs: AngularFirestore,
+  constructor( private dbs: DataBaseService,
      private _recipeService: RecipeService ,
     private route: Router) {
     this.withold = false;
@@ -42,40 +43,30 @@ export class LoginComponent implements OnInit {
       this.withold = false;
     }
   }
-  /*
-    customErrorStateMatcher: ErrorStateMatcher = {
-      isErrorState: (control: FormControl | null) => {
-        if (control) {
-          const hasInteraction = control.dirty || control.touched;
-          const isInvalid = control.invalid;
 
-          return !!(hasInteraction && isInvalid);
-        }
-
-        return false;
-      }
-    };
-  */
   addoldUser() {
-    this._recipeService.user = this.oldid;
-    this._recipeService.userRef = this.afs.collection(this.oldid); // get to his collection
-    console.log(this._recipeService.userRef.valueChanges());
+    this.dbs.user = this.oldid;
+
+   /* this._recipeService.user = this.oldid;
+   this._recipeService.userRef = this.afs.collection(this.oldid); // get to his collection
+    console.log(this._recipeService.userRef.valueChanges());*/
     this.route.navigate(['/']);
 
   }
   addNewUser() {
     // add check if exist
     console.log(this.newid);
-    this._recipeService.user = this.newid;
-    this._recipeService.userRef = this.afs.collection(this.newid);
-    this._recipeService.userRef.doc('recipes').set({'recipes': [], 'counter': '0'});
-    this._recipeService.userRef.doc('category').set({ 'categories': [], 'counter': '0' });
-    this._recipeService.userRef.doc('voiceSetting').set({});
-    this._recipeService.userRef.doc('shared').set({ 'recipes': [], 'counter': '0' });
-    /*this._recipeService.addNewRecipeToDB({'code': '1', 'name': '2'});
-    this._recipeService.addNewRecipeToDB({ 'code': '2', 'name': '2' });
-    this._recipeService.addNewRecipeToDB({ 'code': '3', 'name': '2' });*/
+
+    this.dbs.user = this.newid;
+    this.dbs.counterRef.doc('counterRecipe').set({ counter: 0 });
+    this.dbs.counterRef.doc('counterIngredients').set({ counter: 0 });
+    this.dbs.counterRef.doc('counterInstructions').set({ counter: 0 });
+    this.dbs.allUsersRef.doc(this.newid).set({userName: this.newid, password: 1234});
     this.route.navigate(['/']);
+  }
+
+  apears(user) {
+    return (this.dbs.userNameList.indexOf(user) > 0);
   }
 
   ngOnInit() {

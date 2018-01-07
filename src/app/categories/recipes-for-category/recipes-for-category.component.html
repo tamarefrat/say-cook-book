@@ -1,0 +1,15 @@
+<div class="center">
+    <mat-card class="fullwidth">
+        <mat-card-content>
+            <button mat-button routerLink="categories">Back</button>
+            <mat-list>
+                <h2 mat-subheader>All Recipes For Category: {{category}}</h2>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let recipe of recipeList" [routerLink]="['/recipe', recipe.id]">
+                    {{recipe.nameRecipe}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

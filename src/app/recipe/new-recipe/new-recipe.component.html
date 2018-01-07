@@ -31,7 +31,7 @@
 
             <mat-step>
                 <ng-template matStepLabel>
-                    <div>Food stuffs</div>
+                    <div>Ingredients</div>
                 </ng-template>
                 <mat-card>
                     <app-item-line class="margin-15" [code]="this.code "></app-item-line>
@@ -60,7 +60,7 @@
                 <mat-card>
                     <h4>{{mainDetails.nameRecipe}}</h4>
                     <p>
-                        If everything seems correct click on done to enter recipe to recipe list....
+                        If everything seems correct click on done to get recipe list....
                     </p>
                     <div>
                         <button mat-fab (click)="saveRecipeInList()" *ngIf="mainDetails.statusDetails==1">Done</button>

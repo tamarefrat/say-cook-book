@@ -70,15 +70,17 @@ import { ShareComponent } from './recipe/share/share.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 import { SpeechComponent } from './speech/speech.component';
+import { NewUserComponent } from './home-page/new-user/new-user.component';
+import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
+import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
 
 
 /*services*/
+import { DataBaseService } from './services/data-base.service';
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
-import { NewUserComponent } from './home-page/new-user/new-user.component';
-import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
-import { DataBaseService } from './services/data-base.service';
+import { ExampleComponent } from './about/example/example.component';
 
 
 
@@ -110,7 +112,9 @@ import { DataBaseService } from './services/data-base.service';
     VoiceSettingComponent,
     NewUserComponent,
     NewRecipeComponent,
-    ReaderRecipeComponent
+    ReaderRecipeComponent,
+    RecipesForCategoryComponent,
+    ExampleComponent
   ],
   imports: [
     routing,

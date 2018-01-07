@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { RecipeComponent } from '../recipe/recipe.component';
+import { DataBaseService } from '../services/data-base.service';
 
 @Component({
   selector: 'app-main-details',
@@ -20,7 +21,9 @@ export class MainDetailsComponent implements OnInit {
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() index: number;
 
-  constructor(private _recipeService: RecipeService) {
+  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+    this.code = this.dbs.recipeInWork.code;
+    this.dbs.recipeInWork.mainDetails = this;
     this.urlImg = 'assets\\homeImg\\logo.png';
     this.comment = '';
     this.getFrom = '';
@@ -67,7 +70,7 @@ export class MainDetailsComponent implements OnInit {
 }*/
 
   saveRecipe() {
-    const rec = this._recipeService.getRecipe(this.code);
+   /* const rec = this._recipeService.getRecipe(this.code);
     if (rec) {
       // a old recipe
       this.index = this._recipeService.getIndexOfRecipeByCode(this.code); // ?????????????????????????????????
@@ -79,13 +82,26 @@ export class MainDetailsComponent implements OnInit {
       this._recipeService.newRecipe.mainDetails = this;
     }
     this.statusDetails = 1;
-    console.log(this);
+    console.log(this);*/
+    const rec = this.dbs.getRecipeByID(this.code);
+    if (rec) {
+      // recipe axist in db- have to update
+      this.dbs.updateRecipe(this.dbs.recipeInWork);
+      this.statusDetails = 1;
+
+    } else {
+      // new recipe- have to add to list
+      this.dbs.addRecipe(this.dbs.recipeInWork);
+      this.statusDetails = 1;
+      // this._recipeService.allMyRecipes.push(this._recipeService.newRecipe); // have to delete?
+      // this._recipeService.addNewRecipeToDB(this._recipeService.newRecipe);
+    }
   }
 
 
 
   ngOnInit() {
-    const rec = this._recipeService.getRecipe(this.code);
+    /*const rec = this._recipeService.getRecipe(this.code);
     console.log('status' + this.statusDetails);
     if (rec) {
 
@@ -97,13 +113,37 @@ export class MainDetailsComponent implements OnInit {
       this.urlImg = rec.mainDetails.urlImg;
 
       this.comment = rec.mainDetails.comment;
-      this.statusDetails = rec.mainDetails.statusDetails;
+      this.statusDetails = rec.mainDetails.statusDetails;*/
+      this.code = this.dbs.recipeInWork.code;
+
+    if (this.code) {
+      this.dbs.recipeInWork.mainDetails = this;
+      const rec = this.dbs.getRecipeByID(this.code);
+      if (rec) {
+        this.nameRecipe = rec.nameRecipe;
+
+        this.comment = rec.comment;
+        this.urlImg = rec.urlImg;
+        this.category1 = rec.category1;
+        this.category2 = rec.category2;
+        this.category3 = rec.category3;
+        this.getFrom = rec.getFrom;
+        this.statusDetails = 1;
+      } else {
+        // didnt found recipe
+        console.log('error');
+
+      }
+    } else {
+      // it is a new recipe!!!!!!!!!!!!!!!!!!!!!!!
+      this.code = this.dbs.counterRecipe;
+      this.statusDetails = 0;
+    }
 
     }
   }
 
-
-}/*end of class*/
+/*end of class*/
 
 /********************************************************* */
 

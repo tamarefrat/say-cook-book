@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService, Category } from '../services/recipe.service';
+import { RecipeService } from '../services/recipe.service';
+import { DataBaseService, Category } from '../services/data-base.service';
 
 @Component({
   selector: 'app-add-category',
@@ -13,50 +14,65 @@ export class AddCategoryComponent implements OnInit {
 
   selectedOptions: string[];
 
-  constructor(private _recipeService: RecipeService) {
-    this.selectedOptions = this._recipeService.favorites;
+  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+    this.selectedOptions = this.dbs.getFavoritesFromOption();
   }
 
   addCategory() {
+    let cat1 = {
+      name: this.category,
+      isFavorite: true
+    };
 
-    if (this._recipeService.optionCategories.indexOf(new Category(1,this.category, true)) > 0) {
+    let cat2 = {
+      name: this.category,
+      isFavorite: false
+    };
+
+    if (this.dbs.categoryList.indexOf(cat1) > 0) {
       alert('category appeares');
-    } else if (this._recipeService.optionCategories.indexOf(new Category(1, this.category, false)) > 0){
+      return;
+    } else if (this._recipeService.optionCategories.indexOf(cat2) > 0) {
       alert('category appeares');
+      return;
     } else {
-      this._recipeService.optionCategories.push(new Category(1,this.category, this.isFavorite));
-      if (this.isFavorite) {
-        this._recipeService.favorites.push(this.category);
-        }
-        this.category = '';
-        this.isFavorite = false;
-    }
-}
-
-  deleteCategory(category) {
-
-    if (this.isFavoriteCategory(this.category)) {
-      this._recipeService.favorites.splice(
-        this._recipeService.favorites.indexOf(category), 1);
-      this._recipeService.optionCategories.splice(
-        this._recipeService.optionCategories.indexOf(new Category(1,category, true)), 1);
+      this.dbs.addCategory(this.category, this.isFavorite);
+      /*  if (this.isFavorite) {
+          this._recipeService.favorites.push(this.category);
+          }*/
+      this.category = '';
+      this.isFavorite = false;
     }
   }
-isFavoriteCategory(category: string) {
-return (this._recipeService.favorites.indexOf(category) >= 0 );
-}
+
+  deleteCategory(category: Category) {
+    this.dbs.deleteCategory(category);
+    /*  if (this.isFavoriteCategory(this.category)) {
+        this._recipeService.favorites.splice(
+          this._recipeService.favorites.indexOf(category), 1);
+        this._recipeService.optionCategories.splice(
+          this._recipeService.optionCategories.indexOf(new Category(1,category, true)), 1);
+      }*/
+  }
+  isFavoriteCategory(category: string) {
+    return (this.dbs.getFavoritesFromOption().indexOf(category) >= 0);
+  }
 
   onSelectedOptionsChange(values: string[]) {
     this.selectedOptions = values;
-    this._recipeService.favorites = this.selectedOptions;
-    this._recipeService.optionCategories.forEach(element => {
-      if (this._recipeService.favorites.indexOf(element.value) > -1) {
-        element.isFavorite = true;
-      }
+    // this._recipeService.favorites = this.selectedOptions;
+    this.selectedOptions.forEach(element => {
+      const cat = {
+        name: element,
+        isFavorite: true
+      };
+      this.dbs.updateCategory(cat);
+
     });
 
   }
   ngOnInit() {
+    this.selectedOptions = this.dbs.getFavoritesFromOption();
   }
 
 }
