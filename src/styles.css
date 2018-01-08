@@ -9,6 +9,11 @@
  */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.tooltipDiv {
+    display: inline-flex;
+    align-items: center;
+}
+
 .margin-15 {
     margin: 15px;
     padding: 7px;

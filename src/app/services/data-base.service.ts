@@ -88,9 +88,7 @@ export class DataBaseService {
   public mailsForUser: boolean;
 
   constructor(private afs: AngularFirestore) {
-    /*this.counterRecipe = 0;
-    this.counterIngredients = 0;
-    this.counterInstructions = 0;*/
+
     this.allUsersRef = this.afs.collection('users');
     this.allUsersRef.valueChanges().subscribe(users => {
       users.forEach(user => {
@@ -98,7 +96,7 @@ export class DataBaseService {
       });
     });
     // get counters
-    this.counterRef = this.afs.collection(`counter`);
+    this.counterRef = this.afs.collection(`users/${this.user}/counter`);
     this.settigObservable = this.counterRef.valueChanges();
     this.settigObservable.subscribe(set => {
       console.log('counters');
@@ -113,29 +111,34 @@ export class DataBaseService {
     });
 
     // get all categories
-    this.categoryRef = this.afs.collection(`catgories`);
+    /*this.categoryRef = this.afs.collection(`users/${this.user}/catgories`);
     this.categoryObservable = this.categoryRef.valueChanges();
     this.categoryObservable.subscribe(categories => {
       this.categoryList = categories;
       this.categoryList.forEach(category => {
         console.log('name:' + category.name);
       });
-    });
+    });*/
 
     // get all recipes:
-    this.recipesRef = this.afs.collection(`recipes`, ref => {
-      return ref.where('enable', '==', 'true');
-    });
+    this.recipesRef = this.afs.collection(`users/${this.user}/recipes`); /*, ref => {
+      //return ref.where('enable', '==', 'true');
+    });*/
     this.recipeObservable = this.recipesRef.valueChanges();
     this.recipeObservable.subscribe(recipes => {
+      console.log("user");
+      console.log(this.user);
+      console.log('recipes');
+      console.log(recipes);
       this.recipeList = recipes;
       this.recipeList.forEach(recipe => {
+
         console.log("isFavorit: " + recipe.isFavorit + ", name: " + recipe.nameRecipe);
       });
     });
 
     // get all shared recipes:- recipes was shared with me
-    this.shareRecipesRef = this.afs.collection(`recipes`, ref => {
+    this.shareRecipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
       return ref.where('enable', '==', 'false');
     });
     this.sharedRecipeObservable = this.shareRecipesRef.valueChanges();
@@ -150,7 +153,7 @@ export class DataBaseService {
 
 
     // get recipe "test" ingredients
-    this.ingredientsRef = this.afs.collection(`ingredients`, ref => {
+    this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
       return ref.where('recipeId', '==', 'test');
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
@@ -163,7 +166,7 @@ export class DataBaseService {
     });
 
     // get recipe "test" instructions
-    this.instructionsRef = this.afs.collection(`instructons`, ref => {
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructons`, ref => {
       return ref.where('recipeId', '==', 'test');
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();
@@ -191,14 +194,14 @@ export class DataBaseService {
 
     });
   }
-  addIngredient(amount, measurement, item, recipeId: any) {// order!!!!!!!!!!!!!!!!
+  addIngredient(namount, nmeasurement, nitem, recId: any) {// order!!!!!!!!!!!!!!!!
     // console.log(name);
     const ingredient = {
       id: this.counterIngredients,
-      recipeId: recipeId,
-      amount: amount,
-      product: item,
-      unit: measurement
+      recipeId: recId,
+      amount: namount,
+      product: nitem,
+      unit: nmeasurement
     };
     this.counterIngredients++;
     this.counterRef.doc('counterIngredients').set({ counter: this.counterIngredients });
@@ -251,7 +254,7 @@ console.log(res);
   getRecipeByID(recID) {
     // get one recipe by id:
     const stringId = recID;
-    this.recipesRef = this.afs.collection(`recipes`, ref => {
+    this.recipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
       return ref.where('id', '==', 'recID');
     });
     this.recipeTempObservable = this.recipesRef.valueChanges();
@@ -267,7 +270,7 @@ console.log(res);
   // get ingredients by recipes id
   getIngredientsByRecipeID(id) {
     const stringId = id;
-    this.ingredientsRef = this.afs.collection(`ingredients`, ref => {
+    this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
       return ref.where('recipeId', '==', 'id');
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
@@ -284,7 +287,7 @@ console.log(res);
   // get instuctions by recipe id
   getInstructionsByRecipeID(id) {
     const stringId = 'recipe' + id; // ?????
-    this.instructionsRef = this.afs.collection(`instructions`, ref => {
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`, ref => {
       return ref.where('recipeId', '==', 'id');
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();

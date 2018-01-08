@@ -28,8 +28,7 @@ export class RecipeService {
   tempArr: any[] = [];
   tempObj: any;
   folder: any;
-
-  constructor(db: AngularFireDatabase, private afs: AngularFirestore) {
+  /* constructor(db: AngularFireDatabase, private afs: AngularFirestore) {
     // this.newRecipe = new NewRecipeComponent();
     this.db = db;
     if (!this.user) {// not loged in
@@ -46,7 +45,11 @@ export class RecipeService {
     console.log(this.allMyRecipes);
 
 
-  }
+  }*/
+
+  /****
+
+  /****
 
   /***************************************************************** */
   /*************          recipes functions     ******************** */

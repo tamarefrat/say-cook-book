@@ -82,6 +82,7 @@ this.itemToEdit = item;
 
   saveItemLine() {
     this.dbs.addIngredient(this.nAmount, this.nMeasurment, this.nProduct, this.dbs.recipeInWork.code);
+    console.log(this.nProduct);
     this.newItemEnable = true;
     this.nProduct = '';
     this.nMeasurment = '';

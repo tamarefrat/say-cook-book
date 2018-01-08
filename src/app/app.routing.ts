@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
- // { path: 'newUser', component: NewUserComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'reader', component: ReaderRecipeComponent },
   { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },

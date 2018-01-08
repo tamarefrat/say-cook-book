@@ -1,28 +1,29 @@
 <p>
-  voice-setting works!
+    voice-setting
 </p>
 
 <form>
-  <mat-form-field>
-    <mat-select placeholder="Language" [(ngModel)]="voiceSelectedValue" name="lang">
-      <mat-option *ngFor="let lang of languages" [value]="lang.key">
-        {{lang.value}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Language" [(ngModel)]="voiceSelectedValue" name="lang">
+            <mat-option *ngFor="let lang of languages" [value]="lang.key">
+                {{lang.value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </form>
 <div>
-  <label class="set-label">volume:</label> <mat-slider  [(ngModel)]="volumeSelectedValue" min="0" max="1" step="0.1" value={{volumeSelectedValue}}></mat-slider>
+    <label class="set-label">volume:</label>
+    <mat-slider [(ngModel)]="volumeSelectedValue" min="0" max="1" step="0.1" value={{volumeSelectedValue}}></mat-slider>
 </div>
 <div>
-  <label class="set-label">rate:</label> <mat-slider [(ngModel)]="rateSelectedValue" min="0.1" max="10" step="0.5" value="{{rateSelectedValue}}"></mat-slider>
+    <label class="set-label">rate:</label>
+    <mat-slider [(ngModel)]="rateSelectedValue" min="0.1" max="10" step="0.5" value="{{rateSelectedValue}}"></mat-slider>
 </div>
 <div>
-  <label class="set-label">pitch:</label> <mat-slider [(ngModel)]="pitchSelectedValue" min="0" max="2" step="0.2" value="{{pitchSelectedValue}}"></mat-slider>
+    <label class="set-label">pitch:</label>
+    <mat-slider [(ngModel)]="pitchSelectedValue" min="0" max="2" step="0.2" value="{{pitchSelectedValue}}"></mat-slider>
 </div>
 
 <button mat-fab (click)="writeToDB() ">
   save
-</button>    
-
-
+</button>
