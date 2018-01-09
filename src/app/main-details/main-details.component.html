@@ -21,7 +21,7 @@
                         <td>
                             <mat-form-field>
                                 <mat-select placeholder="category 1" (change)="category1 = $event.value">
-                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
 
@@ -29,14 +29,14 @@
                         <td>
                             <mat-form-field>
                                 <mat-select placeholder="category 2" (change)="category2 = $event.value">
-                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field>
                                 <mat-select placeholder="category 3" (change)="category3 = $event.value">
-                                    <mat-option [value]="option.value" *ngFor="let option of _recipeService.optionCategories">{{option.value}}</mat-option>
+                                    <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </td>

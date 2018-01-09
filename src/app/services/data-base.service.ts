@@ -83,7 +83,7 @@ export class DataBaseService {
   public counterRecipe: number; // for uniqe id for recipe-!!-isnot amount of recipes if recipes was  deleted!!
   public counterIngredients: number;
   public counterInstructions: number;
-  public recipeInWork: NewRecipeComponent;
+  public recipeInWork: any;
 
   public mailsForUser: boolean;
 
@@ -111,41 +111,41 @@ export class DataBaseService {
     });
 
     // get all categories
-    /*this.categoryRef = this.afs.collection(`users/${this.user}/catgories`);
+    this.categoryRef = this.afs.collection(`users/${this.user}/catgories`);
     this.categoryObservable = this.categoryRef.valueChanges();
     this.categoryObservable.subscribe(categories => {
       this.categoryList = categories;
       this.categoryList.forEach(category => {
         console.log('name:' + category.name);
       });
-    });*/
+    });
 
     // get all recipes:
-    this.recipesRef = this.afs.collection(`users/${this.user}/recipes`); /*, ref => {
-      //return ref.where('enable', '==', 'true');
-    });*/
+    this.recipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
+      return ref.where('enable', '==', true);
+    });
     this.recipeObservable = this.recipesRef.valueChanges();
     this.recipeObservable.subscribe(recipes => {
-      console.log("user");
+      console.log('user');
       console.log(this.user);
       console.log('recipes');
       console.log(recipes);
       this.recipeList = recipes;
       this.recipeList.forEach(recipe => {
 
-        console.log("isFavorit: " + recipe.isFavorit + ", name: " + recipe.nameRecipe);
+        console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
       });
     });
 
     // get all shared recipes:- recipes was shared with me
     this.shareRecipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
-      return ref.where('enable', '==', 'false');
+      return ref.where('enable', '==', false);
     });
     this.sharedRecipeObservable = this.shareRecipesRef.valueChanges();
     this.recipeObservable.subscribe(recipes => {
       this.sharedRecipeList = recipes;
       this.sharedRecipeList.forEach(recipe => {
-        console.log("isFavorit: " + recipe.isFavorit + ", name: " + recipe.nameRecipe);
+        console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
       });
     });
     this.mailsForUser = (this.sharedRecipeList.length > 0);
@@ -160,8 +160,8 @@ export class DataBaseService {
     this.ingredientsObservable.subscribe(ingredients => {
       this.ingredientsList = ingredients;
       this.ingredientsList.forEach(ingredient => {
-        console.log("product: " + ingredient.product + ", amount: " +
-          ingredient.amount + ", unit: amount: " + ingredient.unit);
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
       });
     });
 
@@ -173,13 +173,13 @@ export class DataBaseService {
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;
       this.instructionsList.forEach(instruction => {
-        console.log("description: " + instruction.description);
+        console.log('description: ' + instruction.description);
       });
     });
 
 
-    //add category to list
-    //this.addCategory("Soup");
+    // add category to list
+    // this.addCategory("Soup");
 
   }
 
@@ -190,6 +190,7 @@ export class DataBaseService {
       name: name,
       isFavorite: isFavorite
     };
+    console.log('name' + name);
     this.categoryRef.doc(category.name).set(category).then(res => {
 
     });
@@ -224,7 +225,7 @@ export class DataBaseService {
     });
   }
 
-  addRecipe(rec: NewRecipeComponent) {
+  addRecipe(rec: any) {
     console.log(name);
     const recipe = {
       id: this.counterRecipe,
@@ -255,7 +256,7 @@ console.log(res);
     // get one recipe by id:
     const stringId = recID;
     this.recipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
-      return ref.where('id', '==', 'recID');
+      return ref.where('id', '==', recID);
     });
     this.recipeTempObservable = this.recipesRef.valueChanges();
     this.recipeObservable.subscribe(recipes => {
@@ -271,14 +272,14 @@ console.log(res);
   getIngredientsByRecipeID(id) {
     const stringId = id;
     this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
-      return ref.where('recipeId', '==', 'id');
+      return ref.where('recipeId', '==', id);
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
     this.ingredientsObservable.subscribe(ingredients => {
       this.ingredientsList = ingredients;
       this.ingredientsList.forEach(ingredient => {
-        console.log("product: " + ingredient.product + ", amount: " +
-          ingredient.amount + ", unit: amount: " + ingredient.unit);
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
       });
     });
     return this.ingredientsList;
@@ -288,13 +289,13 @@ console.log(res);
   getInstructionsByRecipeID(id) {
     const stringId = 'recipe' + id; // ?????
     this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`, ref => {
-      return ref.where('recipeId', '==', 'id');
+      return ref.where('recipeId', '==', id);
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;
       this.instructionsList.forEach(instruction => {
-        console.log("description: " + instruction.description);
+        console.log('description: ' + instruction.description);
       });
     });
     return this.instructionsList;
@@ -303,16 +304,16 @@ console.log(res);
 
   // delete functions
   deleteIngredient(recId, ingre: Ingerdient) {
-    this.ingredientsRef.doc(ingre.id).delete();
+    this.ingredientsRef.doc('num' + ingre.id).delete();
   }
 
   deleteInstruction(recId, instruction: Instruction) {
-    this.instructionsRef.doc(instruction.id).delete();
+    this.instructionsRef.doc('num' + instruction.id).delete();
   }
 
   deleteRecipe(id) {
     // have to delete recipe , ingredients and instruction????????????????????????????????????????
-    this.recipesRef.doc(id).delete();
+    this.recipesRef.doc('num' + id).delete();
 
   }
   deleteCategory(category: Category) {
@@ -322,13 +323,13 @@ console.log(res);
 
   // update functions
   updateIngredient(item: Ingerdient) {
-    this.ingredientsRef.doc(item.id).update(item);
+    this.ingredientsRef.doc('num' + item.id).update(item);
   }
   updateInstruction(recId, instruction: Instruction) {
-    this.instructionsRef.doc(instruction.id).update(instruction);
+    this.instructionsRef.doc('num' + instruction.id).update(instruction);
   }
 
-  updateRecipe(rec: NewRecipeComponent) {
+  updateRecipe(rec: any) {
     const recipe = {
       id: rec.code,
       nameRecipe: rec.mainDetails.nameRecipe,
@@ -343,7 +344,7 @@ console.log(res);
       enable: true
     };
 
-    this.recipesRef.doc(recipe.id).update(recipe);
+    this.recipesRef.doc('num' + recipe.id).update(recipe);
 
   }
 
@@ -391,7 +392,7 @@ console.log(res);
     recipe.id = countRec2;
     recipe.enable = false;
     // add recipe to other user
-    this.afs.collection((`users/${this.userToShare}/recipes`)).doc(recipe.id).set(recipe).then(res => {
+    this.afs.collection((`users/${this.userToShare}/recipes`)).doc('num' + recipe.id).set(recipe).then(res => {
 
     });
     // update counter for other user
@@ -404,7 +405,7 @@ console.log(res);
     ingredients.forEach(ing => {
       // change id of ingredient for other user
       ing.id = countIngre2;
-      this.afs.collection((`users/${this.userToShare}/ingerdients`)).doc(ing.id).set(ing).then(res => {
+      this.afs.collection((`users/${this.userToShare}/ingerdients`)).doc('num' + ing.id).set(ing).then(res => {
 
       });
       // update counter for next ing
@@ -448,7 +449,7 @@ console.log(res);
   }
   enableRecipeFromShare(recipe: Recipe) {
     recipe.enable = true;
-    this.recipesRef.doc(recipe.id).update(recipe);
+    this.recipesRef.doc('num' + recipe.id).update(recipe);
   }
 
   /************************************************************* */
@@ -472,7 +473,7 @@ console.log(res);
     let recByCatObservable: Observable<Recipe[]>;
     // get recipes of category1
     recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
-      return ref.where('category1', '==', 'cat');
+      return ref.where('category1', '==', cat);
     });
     recByCatObservable = this.recipesRef.valueChanges();
     recByCatObservable.subscribe(recipes => {
@@ -484,7 +485,7 @@ console.log(res);
 
     // get recipes of category2
     recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
-      return ref.where('category2', '==', 'cat');
+      return ref.where('category2', '==', cat);
     });
     recByCatObservable = this.recipesRef.valueChanges();
     recByCatObservable.subscribe(recipes => {
@@ -496,7 +497,7 @@ console.log(res);
 
     // get recipes of category3
     recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
-      return ref.where('category3', '==', 'cat');
+      return ref.where('category3', '==', cat);
     });
     recByCatObservable = this.recipesRef.valueChanges();
     recByCatObservable.subscribe(recipes => {

@@ -83,6 +83,7 @@ import { SpeechService } from './services/speech.service';
 import { ExampleComponent } from './about/example/example.component';
 
 import { MenuComponent } from './menu/menu.component';
+import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 
 
@@ -117,7 +118,8 @@ import { MenuComponent } from './menu/menu.component';
     ReaderRecipeComponent,
     RecipesForCategoryComponent,
     ExampleComponent,
-    MenuComponent
+    MenuComponent,
+    OldRecipeComponent
   ],
   imports: [
     routing,

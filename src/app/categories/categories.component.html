@@ -10,7 +10,7 @@
 <mat-card>
     <mat-list>
 
-        <mat-list-item *ngFor="let cat of this.optionCategories" [routerLink]="['/recipesForCategory', cat.name]">
+        <mat-list-item *ngFor="let cat of this.optionCategories">
             <mat-icon mat-list-icon>category</mat-icon>
             <h4 mat-line>{{cat.name}}</h4>
 

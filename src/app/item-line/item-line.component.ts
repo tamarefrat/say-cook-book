@@ -26,6 +26,7 @@ export class ItemLineComponent implements OnInit {
       this.code = this.dbs.recipeInWork.code;
     }
     this.foodstuffs = this.dbs.getIngredientsByRecipeID(this.code);
+    console.log(this.foodstuffs);
     this.newItemEnable = (this.foodstuffs.length > 0);
 
 
@@ -41,6 +42,7 @@ export class ItemLineComponent implements OnInit {
     this.code = this.dbs.recipeInWork.code;
     if (this.dbs.getRecipeByID(this.code) != null) {
      this.foodstuffs =  this.dbs.getIngredientsByRecipeID(this.code);
+     console.log(this.foodstuffs);
       if (this.foodstuffs.length <= 0) {
         this.newItemEnable = false;
       }
@@ -87,6 +89,7 @@ this.itemToEdit = item;
     this.nProduct = '';
     this.nMeasurment = '';
     this.nAmount = '';
+    this.foodstuffs = this.dbs.getIngredientsByRecipeID(this.dbs.recipeInWork.code);
     /*this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
     if (this.foodstuffs[i].statusLine === 0) {
       this.foodstuffs[i].lastLine = true;

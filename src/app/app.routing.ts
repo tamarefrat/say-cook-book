@@ -24,13 +24,14 @@ import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
 import { ExampleComponent } from './about/example/example.component';
+import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
   { path: 'recipe',  component: NewRecipeComponent },
-  { path: 'recipe/:id', component: NewRecipeComponent },
+  { path: 'recipe/:id', component: OldRecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'voice-setting', component: VoiceSettingComponent },

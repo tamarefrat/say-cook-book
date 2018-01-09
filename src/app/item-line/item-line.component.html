@@ -84,126 +84,135 @@
 
 
 
-
+<!--div *ngIf="!foodstaffs">
+    <mat-card>
+        <h4>loading...</h4>
+        <mat-spinner></mat-spinner>
+        </mat-progress-spinner>
+    </mat-card>
+</div-->
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<form>
+<div>
+    <form>
 
-    <mat-card>
-        <mat-list>
-            <h2>Ingredients:</h2>
+        <mat-card>
+            <mat-list>
+                <h2>Ingredients:</h2>
 
-            <div id='itemLine' *ngFor="let item of foodstuffs; let i = index">
-                <mat-list-item id="itemLineDetailsInSaved">
+                <div id='itemLine' *ngFor="let item of this.dbs.ingredientsList; let i = index">
+                    <mat-list-item id="itemLineDetailsInSaved">
 
 
-                    <table style="width:90%; max-width:90%; text-align:left" cellspacing="0">
-                        <tr>
-                            <td>
-                                <!--style="width:80%; max-width:80%; text-align:left"-->
-                                <label *ngIf="item.amount!=0">{{item.amount}}</label>
+                        <table style="width:90%; max-width:90%; text-align:left" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <label>{{i+1}}.</label>
+                                    <!--style="width:80%; max-width:80%; text-align:left"-->
+                                    <label *ngIf="item.amount!=0">{{item.amount}}</label>
 
-                                <label *ngIf="item.unit">{{item.unit}}</label>
+                                    <label *ngIf="item.unit">{{item.unit}}</label>
 
-                                <label>{{item.product}}</label>
-                            </td>
-                        </tr>
-                    </table>
-                    <button mat-mini-fab matSuffix color="accent" (click)="editItemLine(item)">
+                                    <label>{{item.product}}</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <button mat-mini-fab matSuffix color="accent" (click)="editItemLine(item)">
             <mat-icon class="mat-25" >edit</mat-icon>
             </button>
 
-                    <button mat-mini-fab matSuffix color="accent" (click)="deleteItemLine(item)">
+                        <button mat-mini-fab matSuffix color="accent" (click)="deleteItemLine(item)">
             <mat-icon class="mat-25" >delete</mat-icon>
             </button>
-                </mat-list-item>
+                    </mat-list-item>
 
-                <!--              for edit:                  -->
+                    <!--              for edit:                  -->
 
-                <mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="inEditState && itemToEdit==item">
-                    <table style="width: 95%" cellspacing="0">
+                    <mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="inEditState && itemToEdit==item">
+                        <table style="width: 95%" cellspacing="0">
 
-                        <tr>
-                            <td>
-                                <mat-input-container>
-                                    <input matInput type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
-                                </mat-input-container>
-                            </td>
-                            <td>
-                                <mat-input-container>
-                                    <input matInput type="text" name="item.unit" placeholder="Unit" [(ngModel)]="item.unit">
-                                </mat-input-container>
-                            </td>
-                            <td>
-                                <mat-input-container>
-                                    <input matInput type="text" name="item.product" placeholder="Product" [(ngModel)]="item.product" required>
-                                    <mat-error *ngIf="!item.product">You must enter name of recipe.</mat-error>
-                                </mat-input-container>
-                            </td>
-                            <td>
+                            <tr>
+                                <td>
+                                    <mat-input-container>
+                                        <input matInput type="number" name="item.amount" placeholder="Amount" [(ngModel)]="item.amount">
+                                    </mat-input-container>
+                                </td>
+                                <td>
+                                    <mat-input-container>
+                                        <input matInput type="text" name="item.unit" placeholder="Unit" [(ngModel)]="item.unit">
+                                    </mat-input-container>
+                                </td>
+                                <td>
+                                    <mat-input-container>
+                                        <input matInput type="text" name="item.product" placeholder="Product" [(ngModel)]="item.product" required>
+                                        <mat-error *ngIf="!item.product">You must enter name of recipe.</mat-error>
+                                    </mat-input-container>
+                                </td>
+                                <td>
 
-                            </td>
-                            <td>
-                                <button mat-mini-fab color="primary" (click)="updateItemLine(item)" [disabled]="!item.product">
+                                </td>
+                                <td>
+                                    <button mat-mini-fab color="primary" (click)="updateItemLine(item)" [disabled]="!item.product">
             <mat-icon class="mat-25" >save</mat-icon>
             </button>
-                            </td>
-                            <td>
-                                <button mat-mini-fab color="accent" (click)="deleteItemLine(item)">
+                                </td>
+                                <td>
+                                    <button mat-mini-fab color="accent" (click)="deleteItemLine(item)">
             <mat-icon class="mat-25" >delete</mat-icon>
             </button>
-                            </td>
-                        </tr>
-                    </table>
-                </mat-card>
-            </div>
-        </mat-list>
-    </mat-card>
-
-
-    <!--                          for new item                    -->
-
-
-    <button mat-mini-fab matSuffix color="primary" *ngIf="newItenEnable" (click)="createItemLine()">
-            <mat-icon class="mat-25" >add</mat-icon>
-            </button>
-    <mat-card class="fullWidth" *ngIf="!newItemEnable">
-        <mat-card style="width: 95%" id="itemLineDetailsEdit">
-            <table style="width: 90%" cellspacing="0">
-
-                <tr>
-                    <td>
-                        <mat-input-container>
-                            <input matInput type="number" name="nAmount" placeholder="Amount" [(ngModel)]="nAmount">
-                        </mat-input-container>
-                    </td>
-                    <td>
-                        <mat-input-container>
-                            <input matInput type="text" name="nMeasurement" placeholder="Measurement" [(ngModel)]="nMeasurement">
-                        </mat-input-container>
-                    </td>
-                    <td>
-                        <mat-input-container>
-                            <input matInput type="text" name="nItem" placeholder="Product" [(ngModel)]="nItem" required>
-                            <mat-error *ngIf="!nItem">You must enter name of recipe.</mat-error>
-                        </mat-input-container>
-                    </td>
-                    <td>
-
-                    </td>
-
-                </tr>
-            </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </mat-card>
+                </div>
+            </mat-list>
         </mat-card>
 
-        <button mat-mini-fab color="primary" (click)="saveItemLine()" [disabled]="!nItem">
+
+        <!--                          for new item                    -->
+
+
+        <button mat-mini-fab matSuffix color="primary" *ngIf="newItemEnable" (click)="createItemLine()">
+            <mat-icon class="mat-25" >add</mat-icon>
+            </button>
+        <mat-card class="fullWidth" *ngIf="!newItemEnable">
+            <mat-card style="width: 95%" id="itemLineDetailsEdit">
+                <table style="width: 90%" cellspacing="0">
+
+                    <tr>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="number" name="nAmount" placeholder="Amount" [(ngModel)]="nAmount">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="nMeasurement" placeholder="Measurement" [(ngModel)]="nMeasurement">
+                            </mat-input-container>
+                        </td>
+                        <td>
+                            <mat-input-container>
+                                <input matInput type="text" name="nProduct" placeholder="Product" [(ngModel)]="nProduct" required>
+                                <mat-error *ngIf="!nProduct">You must enter name of recipe.</mat-error>
+                            </mat-input-container>
+                        </td>
+                        <td>
+
+                        </td>
+
+                    </tr>
+                </table>
+            </mat-card>
+
+            <button mat-mini-fab color="primary" (click)="saveItemLine()" [disabled]="!nProduct">
 
             <mat-icon class="mat-25" >save</mat-icon>
             </button>
 
-    </mat-card>
+        </mat-card>
 
-</form>
+    </form>
+</div>
 <!--
     <div id="itemLineDetailsInAdit" *ngSwitchCase="2">
         <button class="md-fab md-mini md-button md-ink-ripple md-recipe" type="button" (click)="saveItemLine(i)">

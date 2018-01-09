@@ -7,7 +7,7 @@
                 <mat-card class="fullWidth">
                     <mat-selection-list #myRecipes [ngModel]="mySelected" (ngModelChange)="onMySelectedOptionsChange($event)">
                         <h3 mat-subheader>All Recipes You Can Share:</h3>
-                        <mat-list-option [value]="rec.nameRrecipe" *ngFor="let rec of this.allRecipes">{{rec.nameRecipe}}</mat-list-option>
+                        <mat-list-option [value]="rec.nameRrecipe" *ngFor="let rec of this.dbs.recipeList">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
                 </mat-card>
@@ -29,7 +29,7 @@
                             <mat-error *ngIf="!apears(friend.value)">You must enter any ID.</mat-error>
                         </mat-input-container>
                         <mat-divider></mat-divider>
-                        <button mat-fab (click)="shareRecipe(friend.value)" *ngIf="!friend && !apears(friend.value)">
+                        <button mat-fab (click)="shareRecipe(friend.value)" [disabled]="friend && apears(friend.value)">
                             <mat-icon>share</mat-icon>
                             </button>
                     </mat-card>
@@ -39,12 +39,12 @@
             </div>
         </mat-tab>
         <!-- ******************************************************************************************************** -->
-        <mat-tab label="Recipes Was Shared With You" [disabled]="!recipesIsWaiting">
+        <mat-tab label="Recipes Was Shared With You" [disabled]="this.dbs.sharedRecipeList.lenght>0">
             <div class="demo-tab-content">
                 <mat-card class="full-width">
                     <mat-selection-list #gotRecipes [ngModel]="gotSharedRecipes" (ngModelChange)="ongotRecipesChange($event)">
                         <h3 mat-subheader>All Recipes You Can Get To Your App:</h3>
-                        <mat-list-option [value]="rec.nameRecipe" *ngFor="let rec of this.allSharedRecipes">{{rec.nameRecipe}}</mat-list-option>
+                        <mat-list-option [value]="rec.nameRecipe" *ngFor="let rec of this.dbs.sharedRecipeList">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
                 </mat-card>
