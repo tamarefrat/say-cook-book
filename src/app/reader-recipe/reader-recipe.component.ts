@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { DataBaseService, Ingerdient } from '../services/data-base.service';
 import { SpeechService } from '../services/speech.service';
 
@@ -12,6 +13,8 @@ export class ReaderRecipeComponent implements OnInit {
   speech:SpeechService;
   myIngerdient:Ingerdient;
   index:number;
+  operation:string;
+  recordString:Observable<string>;
   
   constructor(dbService:DataBaseService,speech:SpeechService) {
     this.dbService = dbService;
@@ -22,19 +25,25 @@ export class ReaderRecipeComponent implements OnInit {
   ngOnInit() {
   }
 
+  record() {
+    this.recordString = this.speech.record();
+    this.recordString.subscribe(a=>{
+      console.log(a);
+    }); 
+  }
+
   reader() {
+    console.log(this.dbService.getIngredientsByRecipeID(88));
     this.myIngerdient = this.dbService.ingredientsList[this.index];
     console.log(this.myIngerdient);
-    alert(this.myIngerdient.product);
-    this.speech.sayIt(this.myIngerdient.product);
-    /*
-      this.speech.sayIt(a.amount.toString());
-      this.speech.sayIt(a.unit);
-      this.speech.sayIt(a.product);
-    */
+    let ingred_string = this.myIngerdient.amount + " " + this.myIngerdient.unit + " " + this.myIngerdient.product;
+    this.operation = ingred_string;
+    this.speech.sayIt(ingred_string);
   }
   nextClick(){
     console.log('hi read next');
+    
+
     this.index++;
     if(this.index >= this.dbService.ingredientsList.length) {
       this.index = 0;
