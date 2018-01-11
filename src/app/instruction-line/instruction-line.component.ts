@@ -5,7 +5,7 @@ import { Instruction, DataBaseService } from '../services/data-base.service';
 @Component({
   selector: 'app-instruction-line',
   templateUrl: './instruction-line.component.html',
-  styleUrls: ['./instruction-line.component.css']
+  styleUrls: ['./instruction-line.component.scss']
 })
 export class InstructionLineComponent implements OnInit {
   @Input() code: any;

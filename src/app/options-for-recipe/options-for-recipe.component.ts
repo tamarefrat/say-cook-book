@@ -5,7 +5,7 @@ import { RecipeComponent } from '../recipe/recipe.component';
 @Component({
   selector: 'app-options-for-recipe',
   templateUrl: './options-for-recipe.component.html',
-  styleUrls: ['./options-for-recipe.component.css']
+  styleUrls: ['./options-for-recipe.component.scss']
 })
 export class OptionsForRecipeComponent implements OnInit {
 

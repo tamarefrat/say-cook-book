@@ -5,7 +5,7 @@ import { Category, DataBaseService } from '../../services/data-base.service';
 @Component({
   selector: 'app-search-by-category',
   templateUrl: './search-by-category.component.html',
-  styleUrls: ['./search-by-category.component.css']
+  styleUrls: ['./search-by-category.component.scss']
 })
 export class SearchByCategoryComponent implements OnInit {
 category = '';

@@ -5,14 +5,14 @@ import { SpeechService } from '../services/speech.service';
 @Component({
   selector: 'app-reader-recipe',
   templateUrl: './reader-recipe.component.html',
-  styleUrls: ['./reader-recipe.component.css']
+  styleUrls: ['./reader-recipe.component.scss']
 })
 export class ReaderRecipeComponent implements OnInit {
   dbService:DataBaseService;
   speech:SpeechService;
   myIngerdient:Ingerdient;
   index:number;
-  
+
   constructor(dbService:DataBaseService,speech:SpeechService) {
     this.dbService = dbService;
     this.speech = speech;

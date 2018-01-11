@@ -511,4 +511,31 @@ console.log(res);
     return allRecByCatList;
   }
 
+
+  getAllIngredients() {
+    this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`);
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredientsList = ingredients;
+      this.ingredientsList.forEach(ingredient => {
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
+      });
+    });
+  }
+
+  getIngredientsByProduct(product) {
+    this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
+      return ref.where('product', '==', product);
+    });
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredientsList = ingredients;
+      this.ingredientsList.forEach(ingredient => {
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
+      });
+    });
+  }
+
 }

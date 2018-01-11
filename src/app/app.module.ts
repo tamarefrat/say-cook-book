@@ -86,6 +86,10 @@ import { MenuComponent } from './menu/menu.component';
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 
+import {  NO_ERRORS_SCHEMA } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { ToastModule } from 'ng-mdb-pro/pro/alerts';
+
 
 
 @NgModule({
@@ -154,9 +158,12 @@ import { OldRecipeComponent } from './old-recipe/old-recipe.component';
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    // ToastModule.forRoot(),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class AppModule { }

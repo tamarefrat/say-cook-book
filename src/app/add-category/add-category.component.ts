@@ -5,7 +5,7 @@ import { DataBaseService, Category } from '../services/data-base.service';
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.css']
+  styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent implements OnInit {
 

@@ -1,15 +1,67 @@
-<div class="center">
+<!--div class="center">
     <mat-card class="fullwidth">
         <mat-card-content>
             <button mat-button routerLink="categories">Back</button>
             <mat-list>
                 <h2 mat-subheader>All Recipes For Category: {{category}}</h2>
                 <mat-divider></mat-divider>
-                <mat-list-item *ngFor="let recipe of recipeList" [routerLink]="['/recipe', recipe.id]">
+                <mat-list-item *ngFor="let recipe of recipeList">
                     {{recipe.nameRecipe}}
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>
         </mat-card-content>
     </mat-card>
+</div-->
+
+
+
+
+<!--Main layout-->
+<div class="container">
+
+    <!--Page heading-->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="h1-responsive">{{category}}
+                <small class="text-muted">All recipes for category {{category}}</small>
+            </h1>
+        </div>
+    </div>
+    <!--/.Page heading-->
+    <hr>
+
+    <div class="row">
+        <!--First column-->
+        <div *ngFor="let recipe of arr" class="col-lg-3 col-md-12 mb-r" data-wow-delay="0.2s">
+
+            <!--Card-->
+            <div class="card view hm-zoom" [routerLink]="['/recipe', recipe.id]">
+
+                <!--Card image-->
+                <img class=" img-fluid " src='assets\\homeImg\\logo.png' alt="Card image cap ">
+
+                <!--Card content-->
+                <div class="card-body ">
+                    <!--Title-->
+                    <h4 class="card-title ">Coocies</h4>
+                    <!--Text-->
+                    <p class="card-text ">get recipe from sara</p>
+                    <!--a class="btn btn-primary " ">Go To Recipe</a-->
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--/.First column-->
+
+    </div>
+    <hr>
+
+
 </div>
+<!--/.Main layout-->
+
+
+<!------------------------------------------------------------------------------------->

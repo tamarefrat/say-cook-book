@@ -5,7 +5,7 @@ import { DataBaseService, Ingerdient } from '../services/data-base.service';
 @Component({
   selector: 'app-item-line',
   templateUrl: './item-line.component.html',
-  styleUrls: ['./item-line.component.css']
+  styleUrls: ['./item-line.component.scss']
 })
 export class ItemLineComponent implements OnInit {
 

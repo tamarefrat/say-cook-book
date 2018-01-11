@@ -4,7 +4,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 @Component({
   selector: 'app-example',
   templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
+  styleUrls: ['./example.component.scss']
 })
 export class ExampleComponent  {
   touch: boolean;

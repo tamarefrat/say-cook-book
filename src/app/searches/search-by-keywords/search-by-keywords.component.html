@@ -1,3 +1,24 @@
-<p>
-  search-by-keywords works!
-</p>
+<mat-card>
+    <h2>Find Recipe by any product:</h2>
+    <div>
+
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input #product type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of dbs.ingredientsList" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <p>{{product.value}}</p>
+        </form>
+
+
+
+
+        <div>
+            <img id="searchImg" src='/assets/search.png'>
+        </div>
+    </div>
+</mat-card>

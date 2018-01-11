@@ -5,7 +5,7 @@ import { Category, DataBaseService } from '../services/data-base.service';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
   optionCategories: Category[] = [];

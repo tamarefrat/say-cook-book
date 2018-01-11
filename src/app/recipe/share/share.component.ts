@@ -5,7 +5,7 @@ import { DataBaseService, Recipe } from '../../services/data-base.service';
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
-  styleUrls: ['./share.component.css']
+  styleUrls: ['./share.component.scss']
 })
 export class ShareComponent implements OnInit {
   recipesIsWaiting: boolean;

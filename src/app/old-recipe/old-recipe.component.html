@@ -9,7 +9,7 @@
 <div *ngIf="code">
 
     <!--recipe is not deleted-->
-    <div *ngIf="mainDetails.statusDetails!=4">
+    <div *ngIf="statusDetails!=4">
         <mat-card class="margin-15">
             <h1 *ngIf="!mainDetails.nameRecipe">
                 @say cook book</h1>
@@ -32,7 +32,7 @@
                 <mat-step>
                     <ng-template matStepLabel>Main Details Of Recipee</ng-template>
 
-                    <app-main-details class="margin-15" [code]="this.code "></app-main-details>
+                    <app-main-details class="margin-15" [statusDetails]="this.status" [code]="this.code "></app-main-details>
                     <br><br>
                     <div>
                         <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
@@ -80,7 +80,7 @@
             </mat-horizontal-stepper>
         </mat-card>
     </div>
-    <div *ngIf="mainDetails.statusDetails==4">
+    <div *ngIf="statusDetails==4">
         <mat-card class="margin-15">
             <h2>your {{this.mainDetails.nameRecipe}} was deleted</h2>
             <img mat-card-image src="assets\ic_delete.png " style="width:250px; opacity:30% ">

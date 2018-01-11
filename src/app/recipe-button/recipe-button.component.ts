@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-recipe-button',
   templateUrl: './recipe-button.component.html',
-  styleUrls: ['./recipe-button.component.css']
+  styleUrls: ['./recipe-button.component.scss']
 })
 export class RecipeButtonComponent implements OnInit {
 

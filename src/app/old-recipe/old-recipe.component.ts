@@ -18,6 +18,7 @@ export class OldRecipeComponent implements OnInit {
   @Input() mainDetails: MainDetailsComponent;
   @Input() keyWords: string[];
   @Input() index: number;
+  status = 1;
 
   constructor(private _recipeService: RecipeService,
     private router: Router,
