@@ -1,14 +1,20 @@
-<div class="container">
-    <mat-grid-list cols="8" rows="6" rowHeight="120px">
-        <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows">
-            <mat-card [style.background]="tile.color">
+<div class="container"  [style.width.px]="width" >
+    <mat-grid-list [cols]="cols" rows="4"  >
+        <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" 
+        class='gray' >
+          
+<!-- 
+                <mat-card-title>{{tile.text}}</mat-card-title> -->
+            
+                <mat-icon class="white-icon">
+                    {{tile.icon}}
+                </mat-icon>
 
-                <mat-card-title>{{tile.text}}</mat-card-title>
-                <mat-card-content>
+                                <!-- <mat-card-content>
                     <p>{{tile.subtext}}</p>
-                    <img mat-card-image [src]="tile.icon" [style.width]="tile.width" [style.heigth]="tile.height">
-                </mat-card-content>
-            </mat-card>
+                    <img mat-card-image [src]="tile.icon">
+                </mat-card-content>  -->
+           
         </mat-grid-tile>
     </mat-grid-list>
 </div>

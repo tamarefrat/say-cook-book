@@ -73,6 +73,8 @@ import { SpeechComponent } from './speech/speech.component';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
+import { IconModule } from 'angular-icon'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 /*services*/
@@ -154,7 +156,9 @@ import { OldRecipeComponent } from './old-recipe/old-recipe.component';
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    IconModule , 
+    FlexLayoutModule
   ],
   providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
   bootstrap: [AppComponent]

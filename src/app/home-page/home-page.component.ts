@@ -1,68 +1,83 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { IconModule } from 'angular-icon'; 
+import {MediaChange, ObservableMedia} from "@angular/flex-layout";  
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
 
+
+
+export class HomePageComponent implements OnInit {
+cols:any;
+width:any;
+
+
+
+ngAfterViewInit() {
+        // ObservableMedia does not fire on init so you have to manually update the grid first.
+        this.updateGrid();
+	this.media.subscribe(change => { this.updateGrid(); });
+}
+
+updateGrid(): void {
+	if (this.media.isActive('xl')) { this.cols = 6; this.width = 600;}
+	else if (this.media.isActive('lg')) { this.cols = 4; this.width = 500;}
+	else if (this.media.isActive('md')) { this.cols = 4; this.width = 400;}
+	else if (this.media.isActive('sm')) { this.cols = 3; this.width = 350;}
+	else if (this.media.isActive('xs')) { this.cols = 3; this.width = 250;}
+}
+
+  color:string;
 
   tiles = [
     {
-      width: '20%', height: '20%',
-      route: '/recipeList', subtext: 'Get all the recipies you have', text: 'List Of Recipies',
-      cols: 5, rows: 1, color: '#FF9800', icon: 'assets\\homeImg\\list.png'
+      route: '/recipeList', text: 'List Of Recipies', icon: 'list'
     },
     {
-      width: '50%', height: '30%',
-      route: '/recipe', subtext: '', text: 'Create Recipe',
-      cols: 1, rows: 2, color: '#0288D1', icon: 'assets\\homeImg\\newrecipe.png'
+      route: '/recipe', subtext: '', text: '2', icon: 'add'
     },
     {
-      width: '95%', height: '45%',
-      route: 'categories', subtext: 'See all categories', text: 'Categories',
-      cols: 2, rows: 3, color: '#B3E5FC', icon: 'assets\\homeImg\\categories.png'
+      route: 'categories', text: '3', icon: 'category'
     },
     {
-      width: '40%', height: '15%',
-      route: 'search-by-categories', subtext: '', text: 'Search By Category',
-      cols: 2, rows: 1, color: '#009688', icon: 'assets\\homeImg\\search.png'
+      route: 'search-by-categories',  text: '4', icon: 'search'
     },
     {
-      width: '90%', height: '60%',
-      route: 'about', subtext: 'Read more about Say Cook Book', text: '@Say Cook Book',
-      cols: 3, rows: 3, color: '#757575', icon: 'assets\\homeImg\\logo.png'
-    },
-
-
-    {
-      width: '100%', height: '40%',
-      route: 'search-by-keywords', subtext: 'Search By Key-Word', text: '',
-      cols: 1, rows: 2, color: '#212121', icon: 'assets\\homeImg\\key.png'
+      route: 'about', text: '5', icon: 'home'
     },
     {
-      width: '100%', height: '40%',
-      route: 'search-by-picture', subtext: 'Search By Picture', text: '',
-      cols: 1, rows: 2, color: '#FBC02D', icon: 'assets\\homeImg\\picture.png'
+      route: 'search-by-keywords', text: '6', icon: 'search'
     },
     {
-      width: '30%', height: '30%',
-      route: 'share', subtext: '', text: 'Sharing Recipes',
-      cols: 1, rows: 2, color: 'orange', icon: 'assets\\homeImg\\share.png'
+      route: 'search-by-picture', text: '7', icon: 'search'
     },
     {
-      width: '15%', height: '15%',
-      route: 'categories/add-category', subtext: 'Manage your categories', text: 'Category manager',
-      cols: 2, rows: 1, color: '#00BCD4', icon: 'assets\\homeImg\\addcategory.png'
+      route: 'share',text: '8', icon: 'share'
+    },
+    {
+      route: 'categories/add-category', text: '9', icon: 'github'
+    }
+    ,
+    {
+      route: 'voice-setting', text: '7', icon: 'settings'
+    },
+    {
+      route: 'share', text: '8', icon: 'share'
+    },
+    {
+      route: 'categories/add-category',  text: '9', icon: 'add'
     }
   ];
   @Input() favorites: string[];
 
-  constructor(private _recipeService: RecipeService, private router: Router) {
-
+  constructor(private _recipeService: RecipeService, private router: Router, private media: ObservableMedia) {
+    this.color = 'red';
+    this.cols = 3;
   }
 
   onSelect(route) {
@@ -70,6 +85,10 @@ export class HomePageComponent implements OnInit {
 
     this.router.navigate([route]);
 
+  }
+
+  changeStyle($event){
+    this.color = $event.type == 'mouseover' ?'yellow' : 'red';// '#dd5303' : '#1c1e3ac0';
   }
 
   ngOnInit() {
