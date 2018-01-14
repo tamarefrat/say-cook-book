@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { IconModule } from 'angular-icon'; 
-import {MediaChange, ObservableMedia} from "@angular/flex-layout";  
+import { MediaChange, ObservableMedia} from "@angular/flex-layout";  
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',

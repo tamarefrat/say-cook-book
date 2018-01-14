@@ -5,9 +5,15 @@
       <mat-icon>settings</mat-icon>
       <span>Settings</span>
   </button>
+
+  <button mat-menu-item [routerLink]="['']"> 
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+
   <button mat-menu-item [routerLink]="['about']"> 
-      <mat-icon>home</mat-icon>
-      <span>About</span>
+    <img src="/assets/cook.png" class="menu"/>
+    <span>About</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="recipes">
       <mat-icon>description</mat-icon>
