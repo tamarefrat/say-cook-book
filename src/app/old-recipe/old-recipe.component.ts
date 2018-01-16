@@ -1,9 +1,9 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MainDetailsComponent } from '../main-details/main-details.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import * as firebase from 'firebase';
 import { SpeechService } from '../services/speech.service';
-import { DataBaseService } from '../services/data-base.service';
+import { DataBaseService, Recipe } from '../services/data-base.service';
 import { RecipeService } from '../services/recipe.service';
 
 @Component({
@@ -14,120 +14,123 @@ import { RecipeService } from '../services/recipe.service';
 export class OldRecipeComponent implements OnInit {
 
   @Input() code: any;
+  keyWords: string[] = [];
+  statusDetails;
+  nameRecipe = null;
+  getFrom = '';
+  comment = '';
+  urlImg = '';
+  category1 = '';
+  category2 = '';
+  category3 = '';
+  otherUser;
 
-  @Input() mainDetails: MainDetailsComponent;
-  @Input() keyWords: string[];
-  @Input() index: number;
-  status = 1;
 
   constructor(private _recipeService: RecipeService,
     private router: Router,
     private route: ActivatedRoute,
     private speechRecognitionService: SpeechService,
     private dbs: DataBaseService) {
-    console.log('in contracror');
+    // get code from routing
     this.code = this.route.snapshot.params['id'];
     if (!this.code) {
-
-      console.log('error');
+      // a new recipe
+      this.statusDetails = 0;
+      this.nameRecipe = '';
+      this.code = this.dbs.counterRecipe;
+    } else if (this.code !== this.dbs.counterRecipe) {// make sure it is an old recipe
+      this.getRecipeByID(this.code);
+      this.statusDetails = 1;
     }
+
     this.dbs.recipeInWork = this;
 
-
-    this.mainDetails = new MainDetailsComponent(this._recipeService, this.dbs);
-    this.mainDetails.statusDetails = 1;
-    this.keyWords = [];
-
-      const rec = this.dbs.getRecipeByID(this.code);
-      if (rec) {
-
-        this.mainDetails.nameRecipe = rec.nameRecipe;
-        this.keyWords = rec.keyWords;
-        this.mainDetails.comment = rec.comment;
-        this.mainDetails.urlImg = rec.urlImg;
-        this.mainDetails.category1 = rec.category1;
-        this.mainDetails.category2 = rec.category2;
-        this.mainDetails.category3 = rec.category3;
-        this.mainDetails.getFrom = rec.getFrom;
-      } else {
-        // didnt found recipe
-        console.log('error');
-
-      }
   }
 
   /*functions*/
   /************************************************************************************************* */
 
   ngOnInit() {
-    console.log('in init');
-    console.log(this);
-    // get code from url
-    this.code = this.route.snapshot.params['id'];
-    if (!this.code) {
-      console.log('error');
-    }
-    this.dbs.recipeInWork = this;
-    // In a real app: dispatch action to load the details here.
-
-      const rec = this.dbs.getRecipeByID(this.code);
-      if (rec) {
-        this.mainDetails.nameRecipe = rec.nameRecipe;
-        this.keyWords = rec.keyWords;
-        this.mainDetails.comment = rec.comment;
-        this.mainDetails.urlImg = rec.urlImg;
-        this.mainDetails.category1 = rec.category1;
-        this.mainDetails.category2 = rec.category2;
-        this.mainDetails.category3 = rec.category3;
-        this.mainDetails.getFrom = rec.getFrom;
-      } else {
-        // didnt found recipe
-        console.log('error');
-
-      }
+    // maybe have move from constractor
   }
 
   /*****************get from firebase- hae to check if works */
 
   /**************************************************************************** */
   deleteRecipe() {
-    const ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
-    if (!ans) { return; }
-    this.mainDetails.statusDetails = 4;
-    const rec = this._recipeService.getRecipe(this.code);
-    if (rec) { // exist in db
-      // this._recipeService.allMyRecipes.splice(this._recipeService.allMyRecipes.indexOf(rec), 1);
-      // this._recipeService.removeRecipeFromDB(rec);
+
+    if (this.statusDetails !== 0) { // this recipe exist already in db
       this.dbs.deleteRecipe(this.code);
     }
+
     this.router.navigate(['/']);
+    this.dbs.createAlert('success', 'recipe deleted successfully', '');
   }
 
   shareRecipe() {
-    this.dbs.shareOneRecipe(this.code);
+    this.dbs.shareWithOtherUserMyRecipe(this.code, this.otherUser);
+    this.dbs.createAlert('success', 'Shared successfully with' + this.otherUser, '');
+    this.otherUser = '';
   }
-  saveRecipeInList() {
-    const rec = this.dbs.getRecipeByID(this.code);
-    if (rec) {
+  saveRecipe() {
+    if (this.statusDetails !== 0) { // this recipe exist already in db
       // recipe axist in db- have to update
       this.dbs.updateRecipe(this);
 
     } else {
       // new recipe- have to add to list
       this.dbs.addRecipe(this);
-      // this._recipeService.allMyRecipes.push(this._recipeService.newRecipe); // have to delete?
-      // this._recipeService.addNewRecipeToDB(this._recipeService.newRecipe);
-    }
 
+    }
+    this.statusDetails = 1;
+
+  }
+
+  saveAndGoBack() {
+    // this.saveRecipe();
     this.router.navigate(['/']);
-    console.log('in save');
-    console.log(this);
   }
   sayIt() {
     this.speechRecognitionService.callDB();
   }
 
+  /********************************************************* */
+  /**********************     main details functions    *********** */
 
+  aditDetails() {
+    this.statusDetails = 2;
+  }
 
+   getRecipeByID(recID) {
+    // get one recipe by id:
+    const stringId = '' + recID;
+    this.nameRecipe = null;
+    this.dbs.recDoc = this.dbs.recipeTempsRef.doc<Recipe>('num' + recID);
+    this.dbs.recipeTempObservable = this.dbs.recDoc.valueChanges();
+    this.dbs.recipeTempObservable.subscribe(recipe => {
+      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log(recipe);
+      this.nameRecipe = recipe.nameRecipe;
+      this.getFrom = recipe.getFrom;
+      this.comment = recipe.comment;
+      this.urlImg = recipe.urlImg;
+      this.category1 = recipe.category1;
+      this.category2 = recipe.category2;
+      this.category3 = recipe.category3;
+
+      const spaceRef = firebase.storage().ref().child(this.urlImg).getDownloadURL().then((url) => {
+        // set image url
+        this.urlImg = url;
+
+      }).catch((error) => {
+        console.log(error);
+      });
+    });
+
+  }
+
+  apears(user) {
+    return (this.dbs.userNameList.indexOf(user) > 0);
+  }
 
 }

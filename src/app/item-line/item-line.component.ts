@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { DataBaseService, Ingerdient } from '../services/data-base.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-item-line',
@@ -11,49 +12,31 @@ export class ItemLineComponent implements OnInit {
 
   @Input() code: any;
   @Input() foodstuffs: Ingerdient[]; /*change class and prop*/
-
-  @Input() zeroItems: boolean;
-  @Input() index: number;
+  zeroItems: boolean;
+  @Input() nameRecipe;
+  @Input() statusDetails;
   newItemEnable: any;
   nAmount = '';
-  nMeasurment = '';
+  nMeasurement = '';
   nProduct = '';
   inEditState = false;
   itemToEdit: Ingerdient;
+  itemToDelete: Ingerdient;
 
-  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+  constructor(private afs: AngularFirestore, private dbs: DataBaseService) {
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }
-    this.foodstuffs = this.dbs.getIngredientsByRecipeID(this.code);
-    console.log(this.foodstuffs);
-    this.newItemEnable = (this.foodstuffs.length > 0);
+   this.getIngredientsByRecipeID(this.code);
 
 
-
-  /*  this.foodstuffs = [];
-    this.zeroItems = false;
-    this.foodstuffs.push(new Foodstuff(0, 0, '', '', true) );*/
-
-   // this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
   }
 
   ngOnInit() {
-    this.code = this.dbs.recipeInWork.code;
-    if (this.dbs.getRecipeByID(this.code) != null) {
-     this.foodstuffs =  this.dbs.getIngredientsByRecipeID(this.code);
-     console.log(this.foodstuffs);
-      if (this.foodstuffs.length <= 0) {
-        this.newItemEnable = false;
-      }
-     //  this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-
-     // this.foodstuffs = this._recipeService.allMyRecipes[this.index].itemLines.foodstuffs;
-      /*this.keyWords = this._recipeService.allMyRecipes[this.index].itemLines.keyWords;*/
-     // this.zeroItems = this._recipeService.allMyRecipes[this.index].itemLines.zeroItems;
+    // this.code = this.dbs.recipeInWork.code;
     }
 
-  }
+
   /*functions*/
   /******************************************************************************************* */
   /*item line functions*/
@@ -65,47 +48,28 @@ this.inEditState = true;
 this.itemToEdit = item;
   }
 
-  deleteItemLine(item: Ingerdient) {
-   /* this.index = this._recipeService.getIndexOfRecipeByCode(this.code);*/
-  const ans = confirm('Are You Sure?\nAre you want delete this line from your recipe?');
-    if (!ans) {
-      return;
-    }
+  deleteItemLine() {
 
-  /*  if (this.foodstuffs[i].lastLine) {/* this is the last line*/
-      /*if (i > 0) {/*there is more then 1 line*/
-     /*   this.foodstuffs[i - 1].lastLine = true;
-      } else {/* there is 1 line
-        this.zeroItems = true;
-      }
-}*/
-    this.dbs.deleteIngredient(this.code, item);
+    this.dbs.deleteIngredient(this.code, this.itemToDelete);
+    this.itemToDelete = null;
+  }
+
+  canselFromDelete() {
+    this.itemToDelete = null;
   }
 
   saveItemLine() {
-    this.dbs.addIngredient(this.nAmount, this.nMeasurment, this.nProduct, this.dbs.recipeInWork.code);
+    this.dbs.addIngredient(this.nAmount, this.nMeasurement, this.nProduct, this.dbs.recipeInWork.code, this.dbs.recipeInWork.nameRecipe );
     console.log(this.nProduct);
     this.newItemEnable = true;
     this.nProduct = '';
-    this.nMeasurment = '';
+    this.nMeasurement = '';
     this.nAmount = '';
-    this.foodstuffs = this.dbs.getIngredientsByRecipeID(this.dbs.recipeInWork.code);
-    /*this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-    if (this.foodstuffs[i].statusLine === 0) {
-      this.foodstuffs[i].lastLine = true;
-    }
-    this.foodstuffs[i].statusLine = 1;*/
+
   }
 
   createItemLine() {
-   /* this.index = this._recipeService.getIndexOfRecipeByCode(this.code);
-    if (i >= 0) {
-      this.foodstuffs[i].lastLine = false;
-    }
-    this.foodstuffs.push(new Foodstuff(0, 0, '', '', true));
-    this.zeroItems = false;
-    console.log(this.index);
-    console.log(this._recipeService);*/
+
     this.newItemEnable = false;
   }
 
@@ -115,6 +79,19 @@ this.itemToEdit = item;
   }
 
 
+
+  // get ingredients by recipes id
+  getIngredientsByRecipeID(id) {
+    this.dbs.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
+      return ref.where('recipeId', '==', id);
+    });
+    this.dbs.ingredientsObservable = this.dbs.ingredientsRef.valueChanges();
+    this.dbs.ingredientsObservable.subscribe(ingredients => {
+      this.foodstuffs = ingredients;
+      this.newItemEnable = (this.foodstuffs.length > 0);
+
+    });
+  }
 
   /************************************************************************************************* */
 }

@@ -9,6 +9,61 @@
  */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.jaspero__dialog {
+    color: white !important;
+    background-color: black !important;
+    position: absolute !important;
+    top: 3%; //65%;
+    right: 3%;
+    height: 130px !important; //15%;
+    weight:300px !important; //50%;
+    border-style:double;
+    border: white;
+}
+svg{
+height: 35px !important;
+    weight:35px !important;
+    display:inline !important;
+}
+.jaspero__dialog-actions{
+  height:1px !important;
+      min-height:1px !important;
+}
+.jaspero__dialog-icon {
+  padding: 10px 5px 0 !important;
+ display:inline !important;
+ font-size: 20px;
+}
+
+.jaspero__dialog-title {
+    font-size: 25px !important;
+    letter-spacing: .005em;
+    line-height: 20px !important;
+    margin-bottom: 5px !important;
+    padding: 8px 8px 0 !important;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 450 !important;
+}
+.jaspero__dialog-content {
+    padding: 0 5px 10px !important;
+    -ms-flex: 1;
+    flex: 1;
+ font-weight: 300 !important;
+}
+
+.ground {
+    background: rgba(74, 64, 64, 0.6509803921568628);
+}
+
+.modal-backdrop {
+    z-index: 0;
+}
+
+.modal-content {
+    z-index: 5000;
+}
+
 .center {
     margin-right: auto;
     margin-left: auto;

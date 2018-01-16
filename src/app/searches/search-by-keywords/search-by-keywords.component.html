@@ -1,24 +1,82 @@
-<mat-card>
-    <h2>Find Recipe by any product:</h2>
-    <div>
+<div class=" center grey my-5 py-5" *ngIf="!dbs.ingredientsList">
+    <h3 class="center">search...</h3>
+    <mat-spinner class="center"></mat-spinner>
+</div>
 
-        <form class="example-form">
-            <mat-form-field class="example-full-width">
-                <input #product type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of dbs.ingredientsList" [value]="option">
-                        {{ option }}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <p>{{product.value}}</p>
-        </form>
+<div class=" center " *ngIf="dbs.ingredientsList">
+    <!--                 search                    -->
+    <div *ngIf="!inShoeRecipes">
+        <mat-card class="black text-white mb-5">
+            <i class="fa fa-search fa-5x my-2"></i>
+            <h2>Find Recipe by any product:</h2>
+            <div>
+
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <input #product type="text" name="choProduct" placeholder="Pick one" aria-label="product" matInput [(ngModel)]="choProduct" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of dbs.ingredientsList" [value]="option.product">
+                                {{ option.product }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                </form>
+                <div>
+                    <button type="button" class="btn btn-outline-amber mr-auto" (click)="getRecipes()">search
+             <i class="fa fa-search ml-2"></i>
+            </button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+    <!--                 list of recipes                    -->
+
+    <div class="container" *ngIf="inShoeRecipes">
+        <div class="d-flex flex-row">
+            <button type="button" class="btn btn-outline-grey mr-auto" (click)="restart()">back to search
+                <i class="fa fa-search ml-2"></i>
+            </button>
+        </div>
 
 
+        <h3 class="center responsive">All recipes contains <strong>{{choProduct}}</strong></h3>
+        <div class="container">
+
+            <div class="row">
+                <div *ngFor="let recipe of dbs.ingredientsList" class="col-md-3 col-lg-3 col-sm-6 mb-r">
+
+                    <div class="card" [routerLink]="['/recipe', recipe.recipeId]">
+                        <div class="view overlay hm-blue-strong">
+                            <!--Card image-->
+                            <img class="img-fluid" mdbRippleRadius style="width:110%" src='assets\\homeImg\\halflogo.png' alt="Card image cap ">
+                            <div class="mask flex-center">
+                                <strong>
+                               <h3 *ngIf="recipe.amount!=0" class="white-text mb-2 ml-3">{{recipe.amount}}</h3>
+                             </strong>
+                                <strong>
+                                <h3 class="white-text mb-2 ml-3">{{recipe.unit}}</h3>
+                             </strong>
 
 
-        <div>
-            <img id="searchImg" src='/assets/search.png'>
+                            </div>
+                        </div>
+
+
+                        <!--Card content-->
+                        <div class="card-body orange z-depth-1">
+                            <!--Title-->
+                            <h4 class="card-title "> {{recipe.nameRecipe}}</h4>
+                            <!--Text-->
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+            </div>
         </div>
     </div>
-</mat-card>
+</div>

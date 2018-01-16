@@ -12,7 +12,7 @@ export class InstructionLineComponent implements OnInit {
   @Input() instructions: Instruction[];
 
   @Input() zeroInstructions: boolean;
-  @Input() index: number;
+  @Input() statusDetails;
   nDescrib = '';
   newItemEnable = false;
   inEditState = false;

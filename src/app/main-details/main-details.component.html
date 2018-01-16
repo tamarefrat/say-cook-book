@@ -42,13 +42,9 @@
                         </td>
                     </tr>
                 </table>
-                <div class="tooltipDiv" matTooltip="load image of recipe">
-                    <mat-card>
-                        <input type="file" id="choosedImg">
-                    </mat-card>
-                </div>
-                <mat-card>
-                    <input type="file" id="choosedImg">
+
+                <mat-card *ngIf="statusDetails==0">
+                    <input type="file" id="imageFile">
                 </mat-card>
                 <mat-form-field class="fullwidth">
                     <textarea matInput placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>

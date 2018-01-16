@@ -19,6 +19,12 @@
 
 <!--Main layout-->
 <div class="container">
+    <div class="d-flex flex-row">
+        <button type="button" class="btn btn-outline-grey mr-auto" (click)="goBack()">back
+  <i class="fa fa-book ml-2"></i>
+</button>
+    </div>
+
 
     <!--Page heading-->
     <div class="row">
@@ -31,9 +37,15 @@
     <!--/.Page heading-->
     <hr>
 
-    <div class="row">
+    <div class="container  center" *ngIf="!recipeList">
+        <p>search...</p>
+        <mat-spinner class="center"></mat-spinner>
+    </div>
+
+    <div class="row" *ngIf="recipeList">
         <!--First column-->
-        <div *ngFor="let recipe of arr" class="col-lg-3 col-md-12 mb-r" data-wow-delay="0.2s">
+        <div *ngFor="let recipe of recipeList" class="col-lg-3 col-md-12 mb-r" data-wow-delay="0.2s">
+
 
             <!--Card-->
             <div class="card view hm-zoom" [routerLink]="['/recipe', recipe.id]">
@@ -44,9 +56,9 @@
                 <!--Card content-->
                 <div class="card-body ">
                     <!--Title-->
-                    <h4 class="card-title ">Coocies</h4>
+                    <h4 class="card-title ">{{recipe.nameRecipe}}}</h4>
                     <!--Text-->
-                    <p class="card-text ">get recipe from sara</p>
+                    <p class="card-text ">get recipe from {{recipe.getFrom}}</p>
                     <!--a class="btn btn-primary " ">Go To Recipe</a-->
                 </div>
 
@@ -64,4 +76,4 @@
 <!--/.Main layout-->
 
 
-<!------------------------------------------------------------------------------------->
+<!-- --------------------------------------------------------------------------------- -->

@@ -39,8 +39,8 @@ export class SpeechService {
     pitch : string;
     sayList: any[];
     sayWord : String;
-    
-    
+
+
     constructor(private zone: NgZone,  db:AngularFireDatabase) {
         this.db = db;
         this.getSettingFromDB();
@@ -149,7 +149,7 @@ export class SpeechService {
 
   getSettingFromDB() : speechSettings {
 
-    
+
 
     this.db.object('firstUser/settings/voiceSettings/voice').valueChanges().subscribe(x => {
         this.voice = <string>x;

@@ -10,7 +10,7 @@ import { DataBaseService } from '../services/data-base.service';
 })
 export class MainDetailsComponent implements OnInit {
 
-  @Input() code: number;
+  @Input() code: string;
   @Input() nameRecipe: string;
   @Input() getFrom: string;
   @Input() category1: string;
@@ -20,11 +20,12 @@ export class MainDetailsComponent implements OnInit {
   @Input() comment: string;
   @Input() statusDetails: number; /*options: 0=>created, 1=>i=on save, 2=>in adit, 4=>deleted*/
   @Input() index: number;
+  path: any;
 
   constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
     this.code = this.dbs.recipeInWork.code;
     this.dbs.recipeInWork.mainDetails = this;
-    this.urlImg = 'assets\\homeImg\\logo.png';
+
     this.comment = '';
     this.getFrom = '';
     this.category1 = '';
@@ -136,7 +137,7 @@ export class MainDetailsComponent implements OnInit {
       }
     } else {
       // it is a new recipe!!!!!!!!!!!!!!!!!!!!!!!
-      this.code = this.dbs.counterRecipe;
+      this.code = '' + this.dbs.counterRecipe;
       this.statusDetails = 0;
     }
 

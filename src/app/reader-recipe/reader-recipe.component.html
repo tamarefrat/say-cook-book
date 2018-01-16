@@ -1,7 +1,11 @@
-<p>
-  reader-recipe works!
-</p>
-<label>{{line}}</label>
+<div ng-animate="'animate'">
+    {{operation}}
+</div>
+<br/>
 <button mat-raised-button (click)="nextClick()">Next</button>
 <button mat-raised-button (click)="prevClick()">Prev</button>
 <button mat-raised-button (click)="againClick()">Again</button>
+
+<button mat-fab (click)="record()">
+  <mat-icon>keyboard_voice</mat-icon>
+</button>

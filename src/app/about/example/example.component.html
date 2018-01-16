@@ -1,94 +1,98 @@
-<h2>Options</h2>
-<p>
-    <mat-checkbox [(ngModel)]="touch">Use touch UI</mat-checkbox>
-    <mat-checkbox [(ngModel)]="filterOdd">Filter odd months and dates</mat-checkbox>
-    <mat-checkbox [(ngModel)]="yearView">Start in year view</mat-checkbox>
-    <mat-checkbox [(ngModel)]="datepickerDisabled">Disable datepicker</mat-checkbox>
-    <mat-checkbox [(ngModel)]="inputDisabled">Disable input</mat-checkbox>
-</p>
-<p>
-    <mat-form-field>
-        <input matInput [matDatepicker]="minDatePicker" [(ngModel)]="minDate" placeholder="Min date" [disabled]="inputDisabled">
-        <mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #minDatePicker [touchUi]="touch" [disabled]="datepickerDisabled"></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput [matDatepicker]="maxDatePicker" [(ngModel)]="maxDate" placeholder="Max date" [disabled]="inputDisabled">
-        <mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #maxDatePicker [touchUi]="touch" [disabled]="datepickerDisabled"></mat-datepicker>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field>
-        <input matInput [matDatepicker]="startAtPicker" [(ngModel)]="startAt" placeholder="Start at date" [disabled]="inputDisabled">
-        <mat-datepicker-toggle matSuffix [for]="startAtPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startAtPicker [touchUi]="touch" [disabled]="datepickerDisabled"></mat-datepicker>
-    </mat-form-field>
-</p>
+<!--button type="button" class="btn btn-primary waves-light" (click)="style.show()" mdbRippleRadius>Central Modal</button>
 
-<h2>Result</h2>
+<div-- mdbModal #style="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Modal Danger</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit iusto nulla aperiam blanditiis ad consequatur in dolores culpa, dignissimos, eius non possimus fugiat. Esse ratione fuga, enim, ab officiis totam.</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary-modal waves-light" mdbRippleRadius>Get it now <i class="fa fa-diamond ml-1"></i></a>
+                <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="style.hide()" mdbRippleRadius>No, thanks</a>
+            </div>
+        </div>
+    </div>
+</div-->
 
-<p>
-    <mat-datepicker-toggle [for]="resultPicker"></mat-datepicker-toggle>
-    <mat-form-field>
-        <input matInput #resultPickerModel="ngModel" [matDatepicker]="resultPicker" [(ngModel)]="date" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="filterOdd ? dateFilter : null" [disabled]="inputDisabled" placeholder="Pick a date" (dateInput)="onDateInput($event)"
-            (dateChange)="onDateChange($event)">
-        <mat-datepicker #resultPicker [touchUi]="touch" [disabled]="datepickerDisabled" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'">
-        </mat-datepicker>
-        <mat-error *ngIf="resultPickerModel.hasError('matDatepickerParse')">
-            "{{resultPickerModel.getError('matDatepickerParse').text}}" is not a valid date!
-        </mat-error>
-        <mat-error *ngIf="resultPickerModel.hasError('matDatepickerMin')">Too early!</mat-error>
-        <mat-error *ngIf="resultPickerModel.hasError('matDatepickerMax')">Too late!</mat-error>
-        <mat-error *ngIf="resultPickerModel.hasError('matDatepickerFilter')">Date unavailable!</mat-error>
-    </mat-form-field>
-</p>
-<p>Last input: {{lastDateInput}}</p>
-<p>Last change: {{lastDateChange}}</p>
-<br>
-<p>
-    <input #resultPickerModel2 [matDatepicker]="resultPicker2" [(ngModel)]="date" [min]="minDate" [max]="maxDate" [disabled]="inputDisabled" [matDatepickerFilter]="filterOdd ? dateFilter : null" placeholder="Pick a date">
-    <mat-datepicker-toggle [for]="resultPicker2"></mat-datepicker-toggle>
-    <mat-datepicker #resultPicker2 [touchUi]="touch" [disabled]="datepickerDisabled" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'">
-    </mat-datepicker>
-</p>
 
-<h2>Input disabled datepicker</h2>
-<p>
-    <mat-datepicker-toggle [for]="datePicker1"></mat-datepicker-toggle>
-    <mat-form-field>
-        <input matInput [matDatepicker]="datePicker1" [(ngModel)]="date" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="filterOdd ? dateFilter : null" disabled placeholder="Input disabled">
-        <mat-datepicker #datePicker1 [touchUi]="touch" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'"></mat-datepicker>
-    </mat-form-field>
-</p>
+<!--div class="bd-example">
+    <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" (click)="show( '@mdo' )" mdbRippleRadius>Open modal for @mdo</button>
+    <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat" (click)="show( '@fat' )" mdbRippleRadius>Open modal for @fat</button>
+    <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" (click)="show( '@getbootstrap' )" mdbRippleRadius>Open modal for @getbootstrap</button>
 
-<h2>Input disabled via FormControl</h2>
-<p>
-    <mat-datepicker-toggle [for]="datePicker2"></mat-datepicker-toggle>
-    <mat-form-field>
-        <input matInput [matDatepicker]="datePicker2" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="filterOdd ? dateFilter : null" placeholder="FormControl disabled">
-        <mat-datepicker #datePicker2 [touchUi]="touch" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'"></mat-datepicker>
-    </mat-form-field>
+    <div mdbModal #content="mdb-modal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">New message to {{ name }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="content.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="md-form">
+                            <input type="text" class="form-control" id="recipient-name" [value]="name">
+                        </div>
+                        <div class="md-form">
+                            <textarea type="text" id="message-text" class="md-textarea"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="content.hide()" mdbRippleRadius>Close</button>
+                    <button type="button" class="btn btn-primary waves-light" mdbRippleRadius>Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div-->
 
-    <button mat-button (click)="dateCtrl.disabled ? dateCtrl.enable() : dateCtrl.disable()">
-    {{dateCtrl.disabled ? 'Enable' : 'Disable'}} FormControl
-  </button>
-</p>
 
-<h2>Input disabled, datepicker popup enabled</h2>
-<p>
-    <mat-datepicker-toggle [for]="datePicker3"></mat-datepicker-toggle>
-    <mat-form-field>
-        <input matInput disabled [matDatepicker]="datePicker3" [(ngModel)]="date" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="filterOdd ? dateFilter : null" placeholder="Input disabled, datepicker enabled">
-        <mat-datepicker #datePicker3 [touchUi]="touch" [disabled]="false" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'"></mat-datepicker>
-    </mat-form-field>
-</p>
 
-<h2>Datepicker with value property binding</h2>
-<p>
-    <mat-datepicker-toggle [for]="datePicker4"></mat-datepicker-toggle>
-    <mat-form-field>
-        <input matInput [matDatepicker]="datePicker4" [value]="date" [min]="minDate" [max]="maxDate" [matDatepickerFilter]="filterOdd ? dateFilter : null" placeholder="Value binding">
-        <mat-datepicker #datePicker4 [touchUi]="touch" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'"></mat-datepicker>
-    </mat-form-field>
-</p>
+<!-- Central Modal Medium Success -->
+<div class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit iusto nulla aperiam blanditiis ad consequatur in dolores culpa, dignissimos, eius non possimus fugiat. Esse ratione fuga, enim, ab officiis totam.</p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a>
+                <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">No, thanks</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Success-->
+
+
+<div class="row">
+    <mdb-image-modal [modalImages]="images" type="margin"></mdb-image-modal>
+</div>

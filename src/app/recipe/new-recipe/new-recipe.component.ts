@@ -112,8 +112,6 @@ export class NewRecipeComponent implements OnInit {
 
   /**************************************************************************** */
   deleteRecipe() {
-    const ans = confirm('Are You Sure?\nAre you want delete this recipe from your application?');
-    if (!ans) { return; }
     this.mainDetails.statusDetails = 4;
     const rec = this._recipeService.getRecipe(this.code);
     if (rec) { // exist in db
@@ -125,7 +123,7 @@ export class NewRecipeComponent implements OnInit {
   }
 
   shareRecipe() {
-    this.dbs.shareOneRecipe(this.code);
+   // this.dbs.shareOneRecipe(this.code);
   }
   saveRecipeInList() {
     const rec = this.dbs.getRecipeByID(this.code);

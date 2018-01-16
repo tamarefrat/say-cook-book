@@ -1,7 +1,7 @@
 import { Component, OnInit, transition } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-
+import { DataBaseService } from '../services/data-base.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -33,15 +33,19 @@ export class RecipeListComponent implements OnInit {
   name1:recipeName;
 
   rec: Observable<any[]>;
-  constructor(db:AngularFireDatabase) {
+  constructor(db:AngularFireDatabase, private dbs: DataBaseService) {
 
-    db.list('/recipe_list').valueChanges().subscribe(recipes => {
-
+      console.log('in contracror');
+      
+      this.dbs.recipeInWork = this;
+     
+      const rec = this.dbs.recipesRef;
       this.recipeList = [];
-      recipes.forEach(recipe =>{
-      this.recipeList.push(new recipeName(recipe["name_recipe"], recipe["code"], true));
-      })
-    });
+      this.dbs.recipeList.forEach(recipe => {
+        this.recipeList.push(new recipeName(recipe.nameRecipe, recipe.id, recipe.enable));
+        console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
+        });
+
 
   }
 

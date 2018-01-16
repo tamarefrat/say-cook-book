@@ -1,17 +1,55 @@
-<mat-sidenav-container fullscreen>
+<!--mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-pink scrolling-navbar" [containerInside]="false">
+    <logo>
+        <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
+    </logo>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active waves-light" mdbRippleRadius>
+                <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link">Features</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link">Pricing</a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link">Opinions</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li class="nav-item waves-light" mdbRippleRadius>
+                <a class="nav-link"><i class="fa fa-instagram"></i></a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar-->
 
+
+
+
+<mat-sidenav-container fullscreen>
+    <jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
     <mat-toolbar color="accent">
 
-        <app-menu></app-menu>
+        <app-menu (focus)="chackImails()"></app-menu>
         <h2 class="link" routerLink="/">Say Cook Book</h2>
 
-        <button mat-button class="float-right" routerLink="/login">log in</button>
-        <button mat-button class="float-right " (click)="this.dbs.user= demoUser ">log out</button>
-        <button mat-button class="float-right " routerLink="/about">about us</button>
-        <button mat-button class="float-right ">New User</button>
+        <button mat-button class="float-right" *ngIf="!isLogin()" (click)="form.show()">Log In</button>
+        <button mat-button class="float-right " *ngIf="isLogin()" (click)="logout()">log out</button>
+        <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
+
 
     </mat-toolbar>
     <div class="body-margin ">
+
+
         <mat-card *ngIf="_recipeService.user=='demoUser'">
             <mat-icon>warning</mat-icon>
             <h4>You Are Not In Your Acount!!</h4>
@@ -34,3 +72,98 @@
 
 </div>
 -->
+
+<!--                       login                            -->
+<!--button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbRippleRadius>Login with avatar form</button-->
+<!--Modal: Login with Avatar Form-->
+<div mdbModal #form="mdb-modal" class="modal fade ground" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- -->
+    <!-- -->
+
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src='assets\\homeImg\\logo1.png' class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+
+                <h5 class="mt-1 mb-2">Say Cook Book</h5>
+
+                <div class="ml-0 mr-0 mb-2 ">
+                    <mat-form-field>
+                        <input matInput name="oldid" [(ngModel)]="oldid" placeholder="Enter User Name" style="text-align:right" required>
+
+                        <mat-error *ngIf="!oldid">
+                            This field is required
+                        </mat-error>
+                        <mat-error *ngIf="!apears(oldid)">
+                            The User Name Is Not Exist!
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="options text-center text-md-right mt-1">
+                    <p>Not a member? <strong><a class="blue-text" (click)="form2.show(); form.hide()">Sign Up</a></strong></p>
+
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-cyan mt-1 waves-light" [disabled]="(!apears(oldid))||(!oldid)" mdbRippleRadius (click)="form.hide(); login()">Login <i class="fa fa-sign-in ml-1"></i></button>
+                </div>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<!--                       register                           -->
+<!--button type="button" class="btn btn-primary waves-light" (click)="form2.show()" mdbRippleRadius>Login with avatar form</button-->
+<!--Modal: Login with Avatar Form-->
+<div mdbModal #form2="mdb-modal" class="modal fade ground" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- -->
+    <!-- -->
+
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src='assets\\homeImg\\logo1.png' class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+
+                <h5 class="mt-1 mb-2">Sign Up to:</h5>
+                <h5 class="mt-1 mb-2">Say Cook Book</h5>
+
+                <div class="ml-0 mr-0 mb-2 ">
+                    <mat-form-field>
+                        <input matInput name="newid" [(ngModel)]="newid" placeholder="Enter New User Name" style="text-align:right" required>
+
+                        <mat-error *ngIf="!newid">
+                            This field is required
+                        </mat-error>
+                        <mat-error *ngIf="apears(newid)">
+                            The User Name Is Exist!
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <div class="text-center">
+                        <button class="btn btn-cyan mt-1 waves-light" mdbRippleRadius [disabled]="(apears(newid))||(!newid)" (click)="form2.hide(); signUp()">Sign In <i class="fa fa-sign-in ml-1"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: Login with Avatar Form-->

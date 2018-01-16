@@ -9,7 +9,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule  } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { routing } from './app.routing';
-
+import {JasperoAlertsModule} from '@jaspero/ng2-alerts';
 
 
 
@@ -88,7 +88,7 @@ import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-// import { ToastModule } from 'ng-mdb-pro/pro/alerts';
+// import { ToastService } from 'ng-mdb-pro/pro/';
 
 
 
@@ -160,7 +160,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     // ToastModule.forRoot(),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    JasperoAlertsModule
   ],
   providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
   bootstrap: [AppComponent],

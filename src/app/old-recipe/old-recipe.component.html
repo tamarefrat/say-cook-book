@@ -1,4 +1,4 @@
-<div *ngIf="!code">
+<div *ngIf="nameRecipe==null">
     <mat-card>
         <h4>loading...</h4>
         <mat-spinner></mat-spinner>
@@ -10,80 +10,222 @@
 
     <!--recipe is not deleted-->
     <div *ngIf="statusDetails!=4">
-        <mat-card class="margin-15">
-            <h1 *ngIf="!mainDetails.nameRecipe">
-                @say cook book</h1>
-            <h1 *ngIf="mainDetails.nameRecipe">{{mainDetails.nameRecipe}}</h1>
-            <mat-card-actions>
-                <button mat-fab (click)=" deleteRecipe() ">
-            <mat-icon>delete</mat-icon>
-            </button>
-                <button mat-fab (click)="shareRecipe() ">
-            <mat-icon>share</mat-icon>
-            </button>
-                <button mat-fab (click)="sayIt() ">
-                <mat-icon>keyboard_voice</mat-icon>
-            </button>
-            </mat-card-actions>
+        <mat-card-actions>
+            <button mat-fab (click)="style.show()">
+        <mat-icon>delete</mat-icon>
+      </button>
+            <button mat-fab (click)="frame.show() ">
+        <mat-icon>share</mat-icon>
+      </button>
+            <button mat-fab (click)="sayIt() ">
+        <mat-icon>keyboard_voice</mat-icon>
+      </button>
+        </mat-card-actions>
 
 
 
-            <mat-horizontal-stepper>
-                <mat-step>
-                    <ng-template matStepLabel>Main Details Of Recipee</ng-template>
+        <mat-vertical-stepper>
+            <mat-step>
+                <ng-template matStepLabel>Main Details Of Recipee</ng-template>
+                <!--                          main details             -->
+                <form>
 
-                    <app-main-details class="margin-15" [statusDetails]="this.status" [code]="this.code "></app-main-details>
-                    <br><br>
-                    <div>
-                        <button mat-button matStepperNext type="button" [disabled]="this.mainDetails.statusDetails!=1">Next</button>
+
+                    <div class="container d-flex" id="recipeInEdit" *ngIf="statusDetails!=1">
+
+                        <mat-card-content>
+                            <mat-input-container class="fullwidth">
+                                <input matInput name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
+                            </mat-input-container>
+                            <mat-card-title>
+                                <mat-input-container class="fullwidth">
+                                    <input matInput type="text" name="nameRecipe " placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required>
+                                    <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
+                                </mat-input-container>
+                            </mat-card-title>
+                            <div class="row">
+                                <div class="col-md-9 center col-sm-9 mb-1">
+                                    <h5 class="responsive">Categories for recipe:</h5>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <mat-form-field>
+                                        <mat-select [value]="category1" placeholder="category 1" (change)="category1 = $event.value">
+                                            <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 mb-3" *ngIf="category1">
+                                    <mat-form-field>
+                                        <mat-select [value]="category2" placeholder="category 2" (change)="category2 = $event.value">
+                                            <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4 mb-3" *ngIf="category2">
+                                    <mat-form-field>
+                                        <mat-select [value]="category3" placeholder="category 3" (change)="category3 = $event.value">
+                                            <mat-option [value]="option.name" *ngFor="let option of dbs.categoryList">{{option.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <mat-card>
+                                <input type="file" id="imageFile" class="center">
+                            </mat-card>
+
+                            <mat-form-field class="fullwidth">
+                                <textarea matInput placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
+                                <mat-hint>Leave us a comment!</mat-hint>
+                                <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
+                            </mat-form-field>
+                        </mat-card-content>
+
+                        <button mat-fab color="accent" (click)="saveRecipe()" [disabled]='!nameRecipe'>
+                <mat-icon>save</mat-icon>
+              </button>
+
+
                     </div>
-                </mat-step>
 
-                <mat-step>
-                    <ng-template matStepLabel>
-                        <div>Ingredients</div>
-                    </ng-template>
-                    <mat-card>
-                        <app-item-line class="margin-15" [code]="this.code "></app-item-line>
-                        <mat-card-actions>
-                            <button mat-button matStepperPrevious type="button">Back</button>
-                            <button mat-button matStepperNext type="button">Next</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-step>
+                    <div id="recipeOnSave" *ngIf="statusDetails==1">
 
-                <mat-step>
-                    <ng-template matStepLabel>
-                        <div>Instructions</div>
-                    </ng-template>
-                    <mat-card>
-                        <app-instruction-line [code]="this.code "></app-instruction-line>
-                        <mat-card-actions>
-                            <button mat-button matStepperPrevious type="button">Back</button>
-                            <button mat-button matStepperNext type="button">Next</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-step>
+                        <mat-card>
 
-                <mat-step>
-                    <ng-template matStepLabel>Confirm your recipe</ng-template>
-                    <mat-card>
-                        <h4>{{mainDetails.nameRecipe}}</h4>
-                        <p>
-                            If everything seems correct click on done to get recipe list....
-                        </p>
-                        <div>
-                            <button mat-fab (click)="saveRecipeInList()" *ngIf="mainDetails.statusDetails==1">Done</button>
-                        </div>
-                    </mat-card>
-                </mat-step>
-            </mat-horizontal-stepper>
-        </mat-card>
+                            <mat-card-content>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <img mat-card-image [src]="urlImg">
+                                    </div>
+                                    <div class="col-md-8 col-sm-12">
+
+                                        <mat-card-title>
+                                            <h1 class="card-title">{{nameRecipe}}</h1>
+                                        </mat-card-title>
+                                        <mat-card-subtitle *ngIf="getFrom">get recipe from {{getFrom}}</mat-card-subtitle>
+                                        <h4 *ngIf="category1">category: {{category1}} {{category2}} {{category3}}.</h4>
+                                        <br>
+                                        <br>
+                                        <p *ngIf="comment">Comment: {{comment}}</p>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 center">
+                                    <button mat-fab color="accent" (click)="aditDetails()">
+                                  <mat-icon class="mat-25">edit</mat-icon>
+                                </button>
+                                </div>
+
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </form>
+                <!--                    end main details        -->
+                <br>
+                <br>
+                <div>
+                    <button mat-button matStepperNext type="button" [disabled]="this.statusDetails!=1">Next</button>
+                </div>
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>
+                    <div>Ingredients</div>
+                </ng-template>
+
+                <app-item-line class="margin-15" [statusDetails]="statusDetails" [code]="this.code" [nameRecipe]="nameRecipe"></app-item-line>
+                <mat-card-actions>
+                    <button mat-button matStepperPrevious type="button">Back</button>
+                    <button mat-button matStepperNext type="button">Next</button>
+                </mat-card-actions>
+
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>
+                    <div>Instructions</div>
+                </ng-template>
+
+                <app-instruction-line [code]="this.code" [statusDetails]="statusDetails"></app-instruction-line>
+
+                <mat-card-actions>
+                    <button mat-button matStepperPrevious type="button">Back</button>
+                    <button mat-button matStepperNext type="button">Next</button>
+                </mat-card-actions>
+
+            </mat-step>
+
+            <mat-step>
+                <ng-template matStepLabel>Confirm your recipe</ng-template>
+                <mat-card>
+                    <h4>{{nameRecipe}}</h4>
+                    <p>
+                        If everything seems correct click on done to get recipe list....
+                    </p>
+                    <div>
+                        <button mat-fab (click)="saveAndGoBack()" *ngIf="statusDetails==1">Done</button>
+                    </div>
+                </mat-card>
+            </mat-step>
+        </mat-vertical-stepper>
+
     </div>
-    <div *ngIf="statusDetails==4">
-        <mat-card class="margin-15">
-            <h2>your {{this.mainDetails.nameRecipe}} was deleted</h2>
-            <img mat-card-image src="assets\ic_delete.png " style="width:250px; opacity:30% ">
-        </mat-card>
+
+</div>
+
+
+
+<div mdbModal #style="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger ground" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Are You Sure?</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="style.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>Do you want delete this recipe from your app?</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary-modal waves-light" mdbRippleRadius (click)="style.hide(); deleteRecipe();">delete
+          <i class="fa fa-delete ml-1"></i>
+        </a>
+                <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="style.hide()" mdbRippleRadius>cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div mdbModal #frame="mdb-modal" class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog modal-frame modal-bottom" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row px-4">
+                    <mat-form-field>
+                        <input matInput name="otherUser" [(ngModel)]="otherUser" placeholder="Enter User Name" style="text-align:right" required>
+
+                        <mat-error class="mb-1" *ngIf="!otherUser">
+                            This field is required
+                        </mat-error>
+                        <mat-error class="mb-1" *ngIf="!apears(otherUser)">
+                            The User Name Is Not Exist!
+                        </mat-error>
+
+                    </mat-form-field>
+                    <p class="pt-1 pr-2">Choose user to share with:</p>
+                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="frame.hide()" mdbRippleRadius>Close</button>
+                    <button type="button" class="btn btn-primary waves-light" mdbRippleRadius [disabled]="!apears(otherUser)" (click)="shareRecipe()">Share</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

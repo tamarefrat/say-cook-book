@@ -6,32 +6,35 @@
             <div class="demo-tab-content">
                 <mat-card class="fullWidth">
                     <mat-selection-list #myRecipes [ngModel]="mySelected" (ngModelChange)="onMySelectedOptionsChange($event)">
-                        <h3 mat-subheader>All Recipes You Can Share:</h3>
+                        <strong>
+                          <h3 mat-subheader>All Recipes You Can Share:</h3>
+                        </strong>
                         <mat-list-option [value]="rec.nameRrecipe" *ngFor="let rec of this.dbs.recipeList">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
                 </mat-card>
                 <mat-card>
                     <p>
-                        <button mat-raised-button (click)="myRecipes.selectAll()">Select all</button>
-                        <button mat-raised-button (click)="myRecipes.deselectAll()">Deselect all</button>
+                        <button mat-raised-button color="primary" (click)="myRecipes.selectAll()">Select all</button>
+                        <button mat-raised-button color="primary" (click)="myRecipes.deselectAll()">Deselect all</button>
                     </p>
                 </mat-card>
                 <mat-card class="fullWidth">
-                    <button mat-raised-button (click)="chooseFreind = true">
+                    <button mat-raised-button (click)="chooseFreind = true" color="accent">
                             Choose Friend to Share with:
                             </button>
                     <mat-card *ngIf="chooseFreind">
 
-                        <mat-input-container class="fullwidth">
+                        <mat-input-container class="center">
                             <input matInput type="text" #friend placeholder="ID of User You Want Share With:" required>
                             <mat-error *ngIf="!friend">You must enter any ID.</mat-error>
                             <mat-error *ngIf="!apears(friend.value)">You must enter any ID.</mat-error>
                         </mat-input-container>
                         <mat-divider></mat-divider>
-                        <button mat-fab (click)="shareRecipe(friend.value)" [disabled]="friend && apears(friend.value)">
-                            <mat-icon>share</mat-icon>
-                            </button>
+
+                        <button type="button" class="btn btn-outline-primary" (click)="shareRecipe(friend.value)" [disabled]="!friend || !apears(friend.value)">share
+                          <i class="fa fa-share ml-2"></i>
+                        </button>
                     </mat-card>
                 </mat-card>
                 <p>Selected: {{mySelected | json}}</p>

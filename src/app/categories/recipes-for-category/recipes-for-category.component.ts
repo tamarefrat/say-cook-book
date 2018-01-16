@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataBaseService, Recipe } from '../../services/data-base.service';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 
@@ -9,9 +9,12 @@ import { Router, ActivatedRoute, Params} from '@angular/router';
   styleUrls: ['./recipes-for-category.component.scss']
 })
 export class RecipesForCategoryComponent implements OnInit {
-category: any;
+@Input() category: any;
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-recipeList: Recipe[] = [];
+recipeList: Recipe[];
+
+  @ViewChild('content') public contentModal;
+  public name: string;
   constructor(private dbs: DataBaseService,
     private router: Router,
     private route: ActivatedRoute ) {
@@ -19,9 +22,18 @@ recipeList: Recipe[] = [];
     this.recipeList = this.dbs.getRecipesByCategory(this.category);
 
   }
+  show(value: string) {
+    this.name = value;
+    this.contentModal.show();
+  }
 
   onRecipeSelect(recipe: Recipe) {
 
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
+    // this.router.navigate(['search-by-category']);
   }
 
   ngOnInit() {

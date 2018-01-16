@@ -7,6 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchByPictureComponent implements OnInit {
 
+   images = [
+     {
+       img: 'assets\\homeImg\\logo.png',
+       thumb: 'assets\\homeImg\\logo.png',
+        description: "Image 1" },
+     {
+       img: 'assets\\homeImg\\logo.png',
+       thumb: 'assets\\homeImg\\logo.png',
+        description: "Image 2" },
+     {
+       img: 'assets\\homeImg\\logo.png',
+       thumb: 'assets\\homeImg\\logo.png',
+        description: "Image 3" },
+     {
+       img: 'assets\\homeImg\\logo.png',
+       thumb: 'assets\\homeImg\\logo.png',
+        description: "Image 4" }
+
+    ];
+
   constructor() { }
 
   ngOnInit() {

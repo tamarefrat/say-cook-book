@@ -11,32 +11,28 @@ import { map } from 'rxjs/operators/map';
   styleUrls: ['./search-by-keywords.component.scss']
 })
 export class SearchByKeywordsComponent implements OnInit {
-nameRecipesByIngredients: Ingerdient[] = [];
+  arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+choProduct = '';
 inShoeRecipes = false;
-
-
-
-
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
-
-
+inSearch = false;
 
   constructor(private dbs: DataBaseService) {
     this.dbs.getAllIngredients();
   }
 
-getRecipesByIngredients(product) {
-  this.dbs.getIngredientsByProduct(product);
+getRecipes() {
+  this.dbs.getIngredientsByProduct(this.choProduct);
   this.inShoeRecipes = true;
+
 }
+
 
 restart() {
   this.inShoeRecipes = false;
+  this.inSearch = false;
   this.dbs.getAllIngredients();
+  this.choProduct = '';
 }
 
  ngOnInit() {

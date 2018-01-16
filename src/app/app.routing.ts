@@ -30,7 +30,7 @@ const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent},
   { path: 'about', component: AboutComponent },
-  { path: 'recipe',  component: NewRecipeComponent },
+  { path: 'recipe',  component: OldRecipeComponent },
   { path: 'recipe/:id', component: OldRecipeComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },

@@ -62,5 +62,10 @@
             "spec": false
         },
         "component": {}
+    },
+
+
+    "warnings": {
+        "typescriptMismatch": false
     }
 }
