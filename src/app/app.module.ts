@@ -73,6 +73,8 @@ import { SpeechComponent } from './speech/speech.component';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
 import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
+import { IconModule } from 'angular-icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 /*services*/
@@ -161,7 +163,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AngularFirestoreModule.enablePersistence(),
     // ToastModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    JasperoAlertsModule
+    JasperoAlertsModule,
+    IconModule ,
+    FlexLayoutModule
   ],
   providers: [RecipeService, MatDialog, AuthServiceService, SpeechService, DataBaseService],
   bootstrap: [AppComponent],

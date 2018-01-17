@@ -33,12 +33,12 @@ this.showWarning();
     }
 
 showWarning() {
-  this.modeClass = "modal fade top in show";
+  this.modeClass = 'modal fade top in show';
 this.modeDisplay = 'block';
 }
 
 hideWarning() {
-  this.modeClass = "modal fade top";
+  this.modeClass = 'modal fade top';
 this.modeDisplay = 'none';
 }
 
@@ -73,7 +73,7 @@ this.oldid = '';
   }
    logout() {
 this.dbs.user = 'demoUser';
-this.createAlert('info', 'You Loged out!', 'attention');
+this.createAlert('success', 'You Loged Out Successfully!', '');
 this.dbs.changeUser();
 this.showWarning();
    }

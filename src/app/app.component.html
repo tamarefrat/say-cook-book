@@ -10,7 +10,7 @@
             <li class="nav-item waves-light" mdbRippleRadius>
                 <a class="nav-link">About</a>
             </li>
-          
+
         </ul>
         <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item waves-light" mdbRippleRadius>
@@ -42,7 +42,7 @@
 </div>
 
 <jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
-<mat-toolbar color="accent">
+<mat-toolbar class="orange">
 
     <app-menu></app-menu>
     <h2 class="link" routerLink="/">Say Cook Book</h2>
@@ -50,7 +50,7 @@
     <button mat-button class="float-right" *ngIf="!isLogin()" (click)="form.show()">Log In</button>
     <button mat-button class="float-right " *ngIf="isLogin()" (click)="logout()">log out</button>
     <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
-    
+
 
 </mat-toolbar>
 <div class="body-margin ">
