@@ -489,41 +489,86 @@ return this.recipeTemp;
     return favorites;
   }
   getRecipesByCategory(cat) {
-    let recByCatRef: AngularFirestoreCollection<Recipe>;
+    let recByCat1Ref: AngularFirestoreCollection<Recipe>;
+    let recByCat2Ref: AngularFirestoreCollection<Recipe>;
+    let recByCat3Ref: AngularFirestoreCollection<Recipe>;
     let recByCat1List: Recipe[] = [];
     let recByCat2List: Recipe[] = [];
     let recByCat3List: Recipe[] = [];
-    // let allRecByCatList: Recipe[] = [];
-    let recByCatObservable: Observable<Recipe[]>;
+    this.recipeByCategoryList = [];
+    let recByCat1Observable: Observable<Recipe[]>;
+     let recByCat2Observable: Observable<Recipe[]>;
+      let recByCat3Observable: Observable<Recipe[]>;
     // get recipes of category1
-    recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
+    recByCat1Ref = this.afs.collection(`users/${this.user}/recipes`, ref => {
       return ref.where('category1', '==', cat);
     });
-    recByCatObservable = recByCatRef.valueChanges();
-    recByCatObservable.subscribe(recipes => {
-      recByCat1List = recipes;
-      this.recipeByCategoryList.concat(recByCat1List);
+    recByCat1Observable = recByCat1Ref.valueChanges();
+    recByCat1Observable.subscribe(recipes1 => {
+      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+     
+      
+      // get images
+      /*recByCat1List.forEach(rec => {
+        
+      });*/ //end for 
+      console.log(recipes1);
+       recipes1.forEach(rec => {
+         if(this.recipeByCategoryList.indexOf(rec)<0) {
+           // dont exist in list
+        const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
+        // set image url
+        rec.urlImg = url;
+
+      }).catch((error) => {
+        console.log(error);
+      });
+        console.log(rec);
+        this.recipeByCategoryList.push(rec);
+    }// end if
+      });// end for
+     
+      console.log(this.recipeByCategoryList);
     });
 
     // get recipes of category2
-    recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
+    recByCat2Ref = this.afs.collection(`users/${this.user}/recipes`, ref => {
       return ref.where('category2', '==', cat);
     });
-    recByCatObservable = recByCatRef.valueChanges();
-    recByCatObservable.subscribe(recipes => {
-      recByCat2List = recipes;
-      this.recipeByCategoryList.concat(recByCat2List);
-    });
+    recByCat2Observable = recByCat2Ref.valueChanges();
+    recByCat2Observable.subscribe(recipes2 => {
+       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  
+      console.log(recipes2);
+       recipes2.forEach(rec => {
+         if(this.recipeByCategoryList.indexOf(rec)<0) {
+           // dont exist in list
+        console.log(rec);
+        this.recipeByCategoryList.push(rec);
+         }// end if
+      });// end for
+      console.log(this.recipeByCategoryList);
+    });// end subscribe
 
     // get recipes of category3
-    recByCatRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
+    recByCat3Ref = this.afs.collection(`users/${this.user}/recipes`, ref => {
       return ref.where('category3', '==', cat);
     });
-    recByCatObservable = recByCatRef.valueChanges();
-    recByCatObservable.subscribe(recipes => {
-      recByCat3List = recipes;
-      this.recipeByCategoryList.concat(recByCat3List);
-    });
+    recByCat3Observable = recByCat3Ref.valueChanges();
+    recByCat3Observable.subscribe(recipes3 => {
+       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log(recipes3);
+      
+      recipes3.forEach(rec => {
+        if(this.recipeByCategoryList.indexOf(rec)<0) {
+           // dont exist in list
+        console.log(rec);
+        this.recipeByCategoryList.push(rec);
+        }//end if
+      });// end for
+      
+      console.log(this.recipeByCategoryList);
+    });// end subscribe
 
   }
 

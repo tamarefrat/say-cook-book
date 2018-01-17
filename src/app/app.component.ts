@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RecipeService } from './services/recipe.service';
 import { DataBaseService } from './services/data-base.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { document } from 'angular-bootstrap-md/utils/facade/browser';
 // import { ToastService } from '../../typescripts/pro/alerts'
 @Component({
   selector: 'app-root',
@@ -13,28 +14,38 @@ export class AppComponent {
   overlay: false,
   overlayClickToClose: true,
   showCloseButton: false,
-  duration: 4000
+  duration: 3000
 };
 oldid= '';
 newid = '';
+modeClass;
+modeDisplay;
   constructor(private _recipeService: RecipeService,
     private dbs: DataBaseService,
     private _alert: AlertsService) {
 
-if(this.dbs.user ==='demoUser') {
-  this.createAlert('warning', 'You Are Not Log In!', '');
+if (this.dbs.user === 'demoUser') {
+this.showWarning();
+  // this.createAlert('warning', 'You Are Not Log In!', '');
 }
-if(this.dbs.sharedRecipeList.length > 0) {
-  this.createAlert('info', 'There Are Shared Recipes Waiting for You', '');
-}
+
 
     }
 
+showWarning() {
+  this.modeClass = "modal fade top in show";
+this.modeDisplay = 'block';
+}
+
+hideWarning() {
+  this.modeClass = "modal fade top";
+this.modeDisplay = 'none';
+}
 
 createAlert(type, message, tytle) {
   if (tytle === '') {
     this._alert.create(type, message);
-  } else{
+  } else {
   this._alert.create(type, message, tytle);
   }
 }
@@ -64,6 +75,7 @@ this.oldid = '';
 this.dbs.user = 'demoUser';
 this.createAlert('info', 'You Loged out!', 'attention');
 this.dbs.changeUser();
+this.showWarning();
    }
    isLogin() {
      return this.dbs.user !== 'demoUser';

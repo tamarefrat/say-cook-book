@@ -37,26 +37,26 @@
     <!--/.Page heading-->
     <hr>
 
-    <div class="container  center" *ngIf="!recipeList">
+    <div class="container  center" *ngIf="dbs.recipeByCategoryList.length==0">
         <p>search...</p>
         <mat-spinner class="center"></mat-spinner>
     </div>
 
-    <div class="row" *ngIf="recipeList">
+    <div class="row" *ngIf="true">
         <!--First column-->
-        <div *ngFor="let recipe of recipeList" class="col-lg-3 col-md-12 mb-r" data-wow-delay="0.2s">
+        <div *ngFor="let recipe of this.dbs.recipeByCategoryList" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-r" data-wow-delay="0.2s">
 
 
             <!--Card-->
             <div class="card view hm-zoom" [routerLink]="['/recipe', recipe.id]">
 
                 <!--Card image-->
-                <img class=" img-fluid " src='assets\\homeImg\\logo.png' alt="Card image cap ">
+                <img class=" img-fluid " [src]='recipe.urlImg' alt="Card image cap ">
 
                 <!--Card content-->
                 <div class="card-body ">
                     <!--Title-->
-                    <h4 class="card-title ">{{recipe.nameRecipe}}}</h4>
+                    <h4 class="card-title ">{{recipe.nameRecipe}}</h4>
                     <!--Text-->
                     <p class="card-text ">get recipe from {{recipe.getFrom}}</p>
                     <!--a class="btn btn-primary " ">Go To Recipe</a-->

@@ -1,6 +1,6 @@
-<!--mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-pink scrolling-navbar" [containerInside]="false">
+<!--mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-orange" [containerInside]="false">
     <logo>
-        <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
+        <a class="logo navbar-brand" href="#"><strong>Say Cook Book</strong></a>
     </logo>
     <links>
         <ul class="navbar-nav mr-auto">
@@ -8,24 +8,16 @@
                 <a class="nav-link">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">Features</a>
+                <a class="nav-link">About</a>
             </li>
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">Pricing</a>
-            </li>
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">Opinions</a>
-            </li>
+          
         </ul>
         <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link"><i class="fa fa-facebook"></i></a>
+                <a class="nav-link">Login</a>
             </li>
             <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link"><i class="fa fa-instagram"></i></a>
+                <a class="nav-link">Logout</a>
             </li>
         </ul>
     </links>
@@ -34,30 +26,40 @@
 
 
 
-<mat-sidenav-container fullscreen>
-    <jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
-    <mat-toolbar color="accent">
 
-        <app-menu (focus)="chackImails()"></app-menu>
-        <h2 class="link" routerLink="/">Say Cook Book</h2>
+<div mdbModal #frame="mdb-modal" [class]="modeClass" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" [config]="{backdrop: false, ignoreBackdropClick: true}" [style.display]="modeDisplay">
+    <div class="modal-dialog modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row px-4">
+                    <p class="pt-2 pr-2 mr-auto ml-3"><strong>Atenttion!!</strong> you are not log in</p>
+                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="hideWarning();frame.hide()" mdbRippleRadius>Close</button>
 
-        <button mat-button class="float-right" *ngIf="!isLogin()" (click)="form.show()">Log In</button>
-        <button mat-button class="float-right " *ngIf="isLogin()" (click)="logout()">log out</button>
-        <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
-
-
-    </mat-toolbar>
-    <div class="body-margin ">
-
-
-        <mat-card *ngIf="_recipeService.user=='demoUser'">
-            <mat-icon>warning</mat-icon>
-            <h4>You Are Not In Your Acount!!</h4>
-            <h6>Click "Log in" in order to get to your Say Cook Book</h6>
-        </mat-card>
-        <router-outlet style="background: black"></router-outlet>
+                </div>
+            </div>
+        </div>
     </div>
-</mat-sidenav-container>
+</div>
+
+<jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
+<mat-toolbar color="accent">
+
+    <app-menu></app-menu>
+    <h2 class="link" routerLink="/">Say Cook Book</h2>
+
+    <button mat-button class="float-right" *ngIf="!isLogin()" (click)="form.show()">Log In</button>
+    <button mat-button class="float-right " *ngIf="isLogin()" (click)="logout()">log out</button>
+    <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
+    
+
+</mat-toolbar>
+<div class="body-margin ">
+
+
+
+    <router-outlet style="background: black"></router-outlet>
+</div>
+
 <!--The content below is only a placeholder and can be replaced.-->
 <!--
 <div style="text-align:center ">

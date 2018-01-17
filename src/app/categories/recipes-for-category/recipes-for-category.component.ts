@@ -19,7 +19,7 @@ recipeList: Recipe[];
     private router: Router,
     private route: ActivatedRoute ) {
     this.category = this.route.snapshot.params['id'];
-    this.recipeList = this.dbs.getRecipesByCategory(this.category);
+   this.dbs.getRecipesByCategory(this.category);
 
   }
   show(value: string) {
@@ -38,7 +38,7 @@ recipeList: Recipe[];
 
   ngOnInit() {
     this.category = this.route.snapshot.params['id'];
-    this.recipeList = this.dbs.getRecipesByCategory(this.category);
+    // this.dbs.getRecipesByCategory(this.category);
 
   }
 
