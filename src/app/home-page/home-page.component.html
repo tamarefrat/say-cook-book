@@ -1,45 +1,37 @@
-<div class="container" [style.width.px]="width">
-    <mat-grid-list [cols]="cols" rows="4">
-        <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray' [mdbTooltip]="tile.tooltip" placement="rihgt">
-
-            <!--
-                <mat-card-title>{{tile.text}}</mat-card-title> -->
-
-            <mat-icon class="white-icon">
-                {{tile.icon}}
-            </mat-icon>
-
-            <!-- <mat-card-content>
-                    <p>{{tile.subtext}}</p>
-                    <img mat-card-image [src]="tile.icon">
-                </mat-card-content>  -->
-
-        </mat-grid-tile>
-    </mat-grid-list>
-</div>
-<div class="container ">
-
-    <mat-accordion>
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-icon mat-list-icon>favorite</mat-icon>
-                <mat-panel-title>
-                    My Favorites
-                </mat-panel-title>
-                <mat-panel-description>
-                    Go to favorite categories.
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-
-
-            <mat-grid-list cols="3 " rowHeight="100px ">
-                <mat-grid-tile *ngFor="let fab of this._recipeService.favorites " style="background-color:#009688 ">
-                    <h4>{{fab}}</h4>
-                    <br>
-                    <mat-icon>category</mat-icon>
-                </mat-grid-tile>
-            </mat-grid-list>
-
-        </mat-expansion-panel>
-    </mat-accordion>
-</div>
+<div class="container"  [style.width.px]="width" >
+        <mat-grid-list [cols]="cols" [rows]= "rows"  >
+            <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host'             [matTooltip]="tile.tooltip" matTooltipPosition="above">
+        
+                    <mat-icon class="white-icon">
+                        {{tile.icon}}
+                    </mat-icon>
+         
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="container ">
+    
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-icon mat-list-icon>favorite</mat-icon>
+                    <mat-panel-title>
+                        My Favorites
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Go to favorite categories.
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+    
+    
+                <mat-grid-list cols="3 " rowHeight="100px ">
+                    <mat-grid-tile *ngFor="let fab of this._recipeService.favorites " style="background-color:#009688 ">
+                        <h4>{{fab}}</h4>
+                        <br>
+                        <mat-icon>category</mat-icon>
+                    </mat-grid-tile>
+                </mat-grid-list>
+    
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>

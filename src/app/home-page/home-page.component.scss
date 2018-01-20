@@ -21,6 +21,12 @@
 //     padding: 0.5rem 1rem;
 // }
 
+.example-tooltip-host {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+
 .white-icon {
     color: #fa9f36;
 }
@@ -53,18 +59,3 @@ mat-grid-tile {
         ///border-top-style: solid;
         border-top-color: white;
 }
-
-    mat-card {
-    // width: 95%;
-    // height: 95%;
-    //     border-width: 200px;
-    //     border-color: white;
-    //    // border-style: solid;
-    //     border-radius: 4%;
-    //     border-bottom-width: 100px;
-    //     //border-bottom-style: solid;
-    //     border-bottom-color: white;
-    //     border-top-width: 100px;
-    //     ///border-top-style: solid;
-    //     border-top-color: white;
-    }

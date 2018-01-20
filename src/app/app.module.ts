@@ -10,7 +10,7 @@ import { AngularFireAuthModule  } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { routing } from './app.routing';
 import {JasperoAlertsModule} from '@jaspero/ng2-alerts';
-
+import { MatTooltipModule} from '@angular/material/tooltip';
 
 
 /*material*/
@@ -157,6 +157,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatTabsModule,
     MatPaginatorModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatExpansionModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
