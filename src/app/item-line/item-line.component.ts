@@ -87,6 +87,8 @@ this.itemToEdit = item;
     });
     this.dbs.ingredientsObservable = this.dbs.ingredientsRef.valueChanges();
     this.dbs.ingredientsObservable.subscribe(ingredients => {
+      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log(ingredients);
       this.foodstuffs = ingredients;
       this.newItemEnable = (this.foodstuffs.length > 0);
 

@@ -114,11 +114,11 @@
 
                     <label class="mr-2 responsive mb-1">{{item.product}}</label>
 
-                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="accent" class="ml-auto" (click)="editItemLine(item)">
+                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="orange" class="ml-auto" (click)="editItemLine(item)">
                       <mat-icon class="mat-25" >edit</mat-icon>
                     </button>
 
-                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="accent" (click)="styleDel.show();itemToDelete=item">
+                    <button *ngIf="!(inEditState && itemToEdit==item)" mat-mini-fab matSuffix color="orange" (click)="styleDel.show();itemToDelete=item">
                     <mat-icon class="mat-25" >delete</mat-icon>
                     </button>
                 </mat-list-item>
@@ -147,7 +147,7 @@
                             <button mat-mini-fab color="primary" (click)="updateItemLine(item)" [disabled]="!item.product">
             <mat-icon class="mat-25" >save</mat-icon>
             </button>
-                            <button mat-mini-fab color="accent" (click)="styleDel.show();itemToDelete=item">
+                            <button mat-mini-fab color="orange" (click)="styleDel.show();itemToDelete=item">
             <mat-icon class="mat-25" >delete</mat-icon>
             </button>
                         </div>

@@ -1,6 +1,49 @@
-<p>
+<!--p>
     works
 </p>
 <div class="row">
     <mdb-image-modal [modalImages]="images" type="margin"></mdb-image-modal>
+</div-->
+
+
+<div class="container-fluid grey lighten-1">
+
+    <div class="d-flex flex-row align-items-end mb-5 py-2">
+        <!--h6>
+            Size Of Images:
+        </h6-->
+
+        <i (click)="bigger()" class="fa fa-search-plus fa-2x ml-3" [disabled]="sizeImage>11" mdbTooltip="Zoom In" placement="bottom"></i>
+
+        <i (click)="smaller()" class="fa fa-search-minus fa-2x ml-3" [disabled]="sizeImage<2" mdbTooltip="Zoom Out" placement="bottom"></i>
+
+    </div>
+
+    <div class="row d-flex flex-row justify-content-center">
+
+
+        <div *ngFor="let recipe of dbs.recipeList" [class]="classImage" data-wow-delay="0.2s">
+
+
+            <!--Card-->
+            <div class="card view hm-zoom overlay" [routerLink]="['/recipe', recipe.id]">
+
+                <!--Card image-->
+                <img class="img-fluid blue-border" [src]='recipe.urlImg' alt="image">
+                <div class="mask align-items-end d-flex flex-row">
+
+                    <div class="orange mb-2 mu-5 align-self-end align-items-center" style="height:25%; width:100%">
+                        <h3 class="responsive mu-auto mb-auto">
+                            {{recipe.nameRecipe}}
+                        </h3>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
 </div>

@@ -97,7 +97,7 @@ export class DataBaseService {
   public recipeInWork: any;
   public folder = 'images';
   public mailsForUser: boolean;
-
+  classForMails;
   constructor(private afs: AngularFirestore, private _alert: AlertsService) {
 
     // get all users
@@ -138,6 +138,16 @@ export class DataBaseService {
     this.recipeObservable.subscribe(recipes => {
 
       this.recipeList = recipes;
+      this.recipeList.forEach(rec => {
+        const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
+          // set image url
+          rec.urlImg = url;
+          console.log(rec);
+
+        }).catch((error) => {
+          console.log(error);
+        });
+      });
      /* this.recipeList.forEach(recipe => {
 
         console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
@@ -506,15 +516,15 @@ return this.recipeTemp;
     recByCat1Observable = recByCat1Ref.valueChanges();
     recByCat1Observable.subscribe(recipes1 => {
       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-     
-      
+
+
       // get images
       /*recByCat1List.forEach(rec => {
-        
-      });*/ //end for 
+
+      });*/ //end for
       console.log(recipes1);
        recipes1.forEach(rec => {
-         if(this.recipeByCategoryList.indexOf(rec)<0) {
+         if (this.recipeByCategoryList.indexOf(rec) < 0) {
            // dont exist in list
         const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
         // set image url
@@ -527,7 +537,7 @@ return this.recipeTemp;
         this.recipeByCategoryList.push(rec);
     }// end if
       });// end for
-     
+
       console.log(this.recipeByCategoryList);
     });
 
@@ -538,7 +548,7 @@ return this.recipeTemp;
     recByCat2Observable = recByCat2Ref.valueChanges();
     recByCat2Observable.subscribe(recipes2 => {
        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-  
+
       console.log(recipes2);
        recipes2.forEach(rec => {
          if(this.recipeByCategoryList.indexOf(rec)<0) {
@@ -558,7 +568,7 @@ return this.recipeTemp;
     recByCat3Observable.subscribe(recipes3 => {
        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       console.log(recipes3);
-      
+
       recipes3.forEach(rec => {
         if(this.recipeByCategoryList.indexOf(rec)<0) {
            // dont exist in list
@@ -566,7 +576,7 @@ return this.recipeTemp;
         this.recipeByCategoryList.push(rec);
         }//end if
       });// end for
-      
+
       console.log(this.recipeByCategoryList);
     });// end subscribe
 
@@ -696,6 +706,13 @@ return this.recipeTemp;
       this._alert.create(type, message);
     } else {
       this._alert.create(type, message, tytle);
+    }
+  }
+  checkIfThereIsMails() {
+    if (this.mailsForUser || this.user === 'demoUser') {
+      this.classForMails = 'fa fa-envelope fa-x animated flash infinite';
+    } else {
+      this.classForMails = 'fa fa-envelope';
     }
   }
 }

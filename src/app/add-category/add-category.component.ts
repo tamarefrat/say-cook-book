@@ -19,12 +19,12 @@ export class AddCategoryComponent implements OnInit {
   }
 
   addCategory() {
-    let cat1 = {
+    const cat1 = {
       name: this.category,
       isFavorite: true
     };
 
-    let cat2 = {
+    const cat2 = {
       name: this.category,
       isFavorite: false
     };

@@ -9,6 +9,26 @@
  */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.blue-border{
+     border: 3px solid #6cc5e7 !important;
+}
+.fixed-top {
+   
+    z-index: 1000 !important;
+} 
+
+
+main {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+.navbar .btn-group .dropdown-menu a:hover {
+    color: #000 !important;
+}
+.navbar .btn-group .dropdown-menu a:active {
+    color: #fff !important;
+}
 .jaspero__dialog {
     color: white !important;
     background-color: black !important;

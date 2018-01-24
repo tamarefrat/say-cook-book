@@ -4,67 +4,58 @@
         <mat-tab label="Sharing Recipes" style="width:50%">
 
             <div class="demo-tab-content">
-                <mat-card class="fullWidth">
-                    <mat-selection-list #myRecipes [ngModel]="mySelected" (ngModelChange)="onMySelectedOptionsChange($event)">
+                <div class="fullWidth mb-3">
+                    <mat-selection-list #myRecipes >
+                        
                         <strong>
                           <h3 mat-subheader>All Recipes You Can Share:</h3>
                         </strong>
                         <mat-list-option [value]="rec.nameRrecipe" *ngFor="let rec of this.dbs.recipeList">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
-                </mat-card>
-                <mat-card>
+                </div>
+                <hr>
+                <div class="mb-2 ">
+                    
                     <p>
-                        <button mat-raised-button color="primary" (click)="myRecipes.selectAll()">Select all</button>
-                        <button mat-raised-button color="primary" (click)="myRecipes.deselectAll()">Deselect all</button>
+                        <button type="button " class="btn btn-outline-orange " (click)="myRecipes.selectAll() ">Select all</button>
+                        <button type="button " class="btn btn-orange " (click)="myRecipes.deselectAll() ">Deselect all</button>
                     </p>
-                </mat-card>
-                <mat-card class="fullWidth">
-                    <button mat-raised-button (click)="chooseFreind = true" color="accent">
-                            Choose Friend to Share with:
-                            </button>
-                    <mat-card *ngIf="chooseFreind">
-
-                        <mat-input-container class="center">
-                            <input matInput type="text" #friend placeholder="ID of User You Want Share With:" required>
-                            <mat-error *ngIf="!friend">You must enter any ID.</mat-error>
-                            <mat-error *ngIf="!apears(friend.value)">You must enter any ID.</mat-error>
-                        </mat-input-container>
-                        <mat-divider></mat-divider>
-
-                        <button type="button" class="btn btn-outline-primary" (click)="shareRecipe(friend.value)" [disabled]="!friend || !apears(friend.value)">share
-                          <i class="fa fa-share ml-2"></i>
+                </div>
+                <div class="fullWidth ">
+                    <button type="button " class="btn btn-blue" (click)="form.show() ">share
+                          <i class="fa fa-share ml-2 "></i>
                         </button>
-                    </mat-card>
-                </mat-card>
-                <p>Selected: {{mySelected | json}}</p>
+
+                </div>
+                
 
             </div>
         </mat-tab>
         <!-- ******************************************************************************************************** -->
-        <mat-tab label="Recipes Was Shared With You" [disabled]="this.dbs.sharedRecipeList.lenght>0">
-            <div class="demo-tab-content">
-                <mat-card class="full-width">
-                    <mat-selection-list #gotRecipes [ngModel]="gotSharedRecipes" (ngModelChange)="ongotRecipesChange($event)">
+        <mat-tab label="Recipes Was Shared With You " [disabled]="!this.dbs.mailsForUser ">
+            <div class="demo-tab-content ">
+                <div class="full-width ">
+                    <mat-selection-list #gotRecipes >
                         <h3 mat-subheader>All Recipes You Can Get To Your App:</h3>
-                        <mat-list-option [value]="rec.nameRecipe" *ngFor="let rec of this.dbs.sharedRecipeList">{{rec.nameRecipe}}</mat-list-option>
+                        <mat-list-option [value]="rec.nameRecipe " *ngFor="let rec of this.dbs.sharedRecipeList ">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
 
-                </mat-card>
-                <mat-card>
+                </div>
+                <div>
                     <p>
-                        <button mat-raised-button (click)="gotRecipes.selectAll()">Select all</button>
-                        <button mat-raised-button (click)="gotRecipes.deselectAll()">Deselect all</button>
+                        <button mat-raised-button (click)="gotRecipes.selectAll() ">Select all</button>
+                        <button mat-raised-button (click)="gotRecipes.deselectAll() ">Deselect all</button>
                     </p>
-                </mat-card>
-                <mat-card class="fullWidth">
-                    <button mat-fab (click)="getSharedRecipes() ">
+                </div>
+                <div class="fullWidth ">
+                    <button mat-fab (click)="getSharedRecipes(gotRecipes.options._results) ">
                             <mat-icon>save</mat-icon>
                             </button>
-                    <button mat-fab (click)="deleteSharedRecipes() ">
+                    <button mat-fab (click)="deleteSharedRecipes(gotRecipes.options._results) ">
                             <mat-icon>delete</mat-icon>
                             </button>
-                </mat-card>
+                </div>
             </div>
         </mat-tab>
 
@@ -72,3 +63,48 @@
     </mat-tab-group>
 
 </mat-card>
+
+
+
+
+
+<div mdbModal #form="mdb-modal" class="modal fade " id="modalSubscription " tabindex="-1 " role="dialog " aria-labelledby="myModalLabel " aria-hidden="true ">
+    <div class="modal-dialog cascading-modal " role="document ">
+        <!--Content-->
+        <div class="modal-content ">
+
+            <!--Header-->
+            <div class="modal-header orange darken-3 white-text ">
+                <h4 class="title "><i class="fa fa-share "></i> Share With</h4>
+                <button type="button " class="close waves-effect waves-light " data-dismiss="modal " aria-label="Close " (click)="form.hide() ">
+                    <span aria-hidden="true ">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0 ">
+
+                <div>
+
+                    <mat-input-container class="center ">
+                        <i class="fa fa-user prefix "></i>
+                        <input matInput type="text " #friend placeholder="ID of User You Want Share With: " required>
+                        <mat-error *ngIf="!friend ">You must enter any ID.</mat-error>
+                        <mat-error *ngIf="!apears(friend.value) ">You must enter any ID.</mat-error>
+                    </mat-input-container>
+                    <mat-divider></mat-divider>
+
+
+                </div>
+
+
+
+                <div class="text-center mt-1-half ">
+                    <button class="btn btn-info mb-1 waves-light " mdbRippleRadius (click)="shareRecipe(friend.value, myRecipes.options._results);friend.value='' ; form.hide() " [disabled]="!friend || !apears(friend.value) ">Submit <i class="fa fa-check ml-1 "></i></button>
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Subscription From-->

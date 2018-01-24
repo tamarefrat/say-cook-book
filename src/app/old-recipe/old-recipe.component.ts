@@ -67,8 +67,8 @@ export class OldRecipeComponent implements OnInit {
     this.dbs.createAlert('success', 'recipe deleted successfully', '');
   }
 
-  shareRecipe() {
-    this.dbs.shareWithOtherUserMyRecipe(this.code, this.otherUser);
+  shareRecipe(otherUser) {
+    this.dbs.shareWithOtherUserMyRecipe(this.code, otherUser);
     this.dbs.createAlert('success', 'Shared successfully with' + this.otherUser, '');
     this.otherUser = '';
   }
