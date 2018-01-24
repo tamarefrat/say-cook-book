@@ -12,9 +12,10 @@
   </button>
 
   <button mat-menu-item [routerLink]="['about']"> 
-    <img src="/assets/cook.png" class="menu"/>
+    <img src="/assets/cook.png" id="menu"/>
     <span>About</span>
   </button>
+  
   <button mat-menu-item [matMenuTriggerFor]="recipes">
       <mat-icon>description</mat-icon>
       <span>Recipes</span>
