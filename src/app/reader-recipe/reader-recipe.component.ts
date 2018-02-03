@@ -53,7 +53,7 @@ export class ReaderRecipeComponent implements OnInit {
 
   getIngredientsByRecipeID(id) {
     console.log("test idddddddd: " + id);
-    this.ingredientsRef = this.afs.collection(`users/devorah/ingredients`, ref => {
+    this.ingredientsRef = this.afs.collection(`users/${this.dbService.user}/ingredients`, ref => {
       return ref.where('recipeId', '==', +id);
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
