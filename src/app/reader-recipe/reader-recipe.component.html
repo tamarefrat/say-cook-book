@@ -1,4 +1,17 @@
+
+
+<button mat-button (click)="record()">
+  <mat-icon>keyboard_voice</mat-icon>
+</button> 
+  <br/>
 <div class="container"><div class=" animated  slideInRight ">
+  <div>
+    <h1>
+      {{operationType}}
+    </h1>
+  </div>
+
+  <br>
   <div>
       <h2 class="text-weight-bold">
         {{operation}}
@@ -11,6 +24,3 @@
 <button mat-raised-button (click)="prevClick()">Prev</button>
 <button mat-raised-button (click)="againClick()">Again</button>
 
-<button mat-fab (click)="record()">
-  <mat-icon>keyboard_voice</mat-icon>
-</button> 
