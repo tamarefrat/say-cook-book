@@ -14,7 +14,7 @@ export class SpeechComponent implements OnInit , OnDestroy {
     db: AngularFireDatabase;
     rec: Observable<any[]>;
     sayList: any[];
-    sayIt : String;
+    sayIt : string;
 
     constructor(private speechRecognitionService: SpeechService , db:AngularFireDatabase) {
         this.showSearchButton = true;

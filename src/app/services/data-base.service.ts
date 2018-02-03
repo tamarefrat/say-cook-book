@@ -302,7 +302,7 @@ return this.recipeTemp;
   getIngredientsByRecipeID(id) {
    this.ingredientsList = null;
     this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
-      return ref.where('recipeId', '==', id);
+      return ref.where('recipeId', '==', +id);
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
     this.ingredientsObservable.subscribe(ingredients => {

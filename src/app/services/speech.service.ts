@@ -3,14 +3,14 @@ import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreDocument,AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList } from 'angularfire2/database/interfaces';
-import { DataBaseService } from '../services/data-base.service';
+import { DataBaseService, Ingerdient } from '../services/data-base.service';
 import * as _ from "lodash";
 
 interface IWindow extends Window {
     webkitSpeechRecognition: any;
     SpeechRecognition: any;
-    SpeechSynthesisUtterance: any;
-    SpeechSynthesis: any;
+   // SpeechSynthesisUtterance: any;
+    //SpeechSynthesis: any;
 }
 
 //todo call data base service with new db.
@@ -38,7 +38,9 @@ export class SpeechService {
     volume : string;
     pitch : string;
     sayList: any[];
-    sayWord : String;
+    sayWord : string;
+    index: number;
+    ingredients: Ingerdient[];
 
 
     constructor(private zone: NgZone,  db:AngularFireDatabase) {
@@ -47,6 +49,12 @@ export class SpeechService {
     };
 
 
+    recordIngredient(ingredients, index):Observable<string> 
+    {
+        this.index = index;
+        this.ingredients = ingredients;
+        return this.record();
+    }
 
     record(): Observable<string> {
 
@@ -70,6 +78,21 @@ export class SpeechService {
                         else {
                             term = _.trim(transcript);
                             console.log("Did you said? -> " + term + " , If not then say something else...");
+                            if(term == "next")
+                            {
+                                console.log("nextnextnextnextnextnext");
+                                this.nextClick();
+                            }                           
+                            if(term == "back")
+                            {
+                                console.log("backbackbackbackbackback");
+                                this.prevClick();
+                            }
+                            if(term == "repeat")
+                            {
+                                console.log("repeatrepeatrepeatrepeat");
+                                this.againClick();
+                            }
                         }
                     }
                 }
@@ -96,6 +119,37 @@ export class SpeechService {
             this.speechRecognition.stop();
     }
 
+
+    nextClick(){
+        console.log('hi read next');
+        this.index++;
+        if(this.index >= this.ingredients.length) {
+          this.index = 0;
+        }
+        this.reader();
+      }
+    
+      prevClick(){
+        console.log('hi read prev');
+        this.index--;
+        if(this.index < 0) {
+          this.index = this.ingredients .length-1;
+        }
+        this.reader();
+      }
+    
+      againClick(){
+        console.log('hi read again');
+        this.reader();
+      }
+
+      reader() {
+        var myIngerdient = this.ingredients[this.index];
+        let ingred_string = myIngerdient.amount + " " + myIngerdient.unit + " " + myIngerdient.product;
+        this.sayIt(ingred_string);
+      }
+    
+
     callDB(): void {
 
         console.log("in myTest1")
@@ -110,41 +164,48 @@ export class SpeechService {
         });
     }
 
-    sayIt(input:String) {
-        this.getSettingFromDB();
+    sayIt(input:string) {
+        //this.getSettingFromDB();
         if ('speechSynthesis' in window) {
           console.log('Your browser supports speech synthesis.');
         // speak('hi');
         } else {
             alert('Sorry your browser does not support speech synthesis. Try this in <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>.');
         }
-        const {SpeechSynthesisUtterance}: IWindow = <IWindow>window;
-        const {SpeechSynthesis}: IWindow = <IWindow>window;
+        // const {SpeechSynthesisUtterance}: IWindow = <IWindow>window;
+        // const {SpeechSynthesis}: IWindow = <IWindow>window;
 
         // Create a new instance of SpeechSynthesisUtterance.
+       
         var msg = new SpeechSynthesisUtterance();
         // Set the text.
         msg.text = input;
+        console.log(input);
 
         // Set the attributes.
         msg.lang = this.lang;
-        var voices = (<any>window).speechSynthesis.getVoices();
+        var voices = window.speechSynthesis.getVoices();
         for(var i = 0; i < voices.length; i++) {
-            console.log(voices[i].name);
+            //console.log(voices[i].name);
             if(voices[i].name === this.voice) {
-            msg.voice = voices[i];
+                msg.voice = voices[i];
             }
         }
         // msg.voice = this.voice;// 'native'; msg.voice = 'Google US English'; //  'Google UK English Female'
         // msg.voice = 'native';
-            msg.volume =this.volume;
-            msg.rate = this.rate;
-            msg.pitch = this.pitch;
+            msg.volume = +this.volume;
+            msg.rate = +this.rate;
+            msg.pitch = +this.pitch;
+
         //  msg.onend = function(event) { console.log('Speech complete'); }
         // Queue this utterance.
             //this.speechSynthesis = new SpeechSynthesis();
             //this.speechSynthesis.speak(msg);
-        (<any>window).speechSynthesis.speak(msg);
+        //(<any>window).speechSynthesis.speak(msg);
+        window.speechSynthesis.speak(msg);
+
+        // var msg2 = new SpeechSynthesisUtterance("hello world");
+        // (<any>window).speechSynthesis.speak(msg2)
   }
 
   getSettingFromDB() : speechSettings {
