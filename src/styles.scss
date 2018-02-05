@@ -9,26 +9,63 @@
  */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-.blue-border{
-     border: 3px solid #6cc5e7 !important;
+.scrollable {
+    max-height: 90%;
+    overflow-y: scroll;
 }
-.fixed-top {
-   
-    z-index: 1000 !important;
-} 
 
+ /* Carousel*/
+        
+        .carousel,
+        .carousel-item,
+        .active {
+            height: 100%;
+        }
+        
+        .carousel-inner {
+            height: 100%;
+        }
+        /*Caption*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        @media (min-width: 776px) {
+            .carousel .view ul li {
+                display: inline;
+            }
+            .carousel .view .full-bg-img ul li .flex-item {
+                margin-bottom: 1.5rem;
+            }
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+.blue-border {
+    border: 3px solid #6cc5e7 !important;
+}
+
+.fixed-top {
+    z-index: 1000 !important;
+}
 
 main {
     padding-top: 3rem;
     padding-bottom: 2rem;
 }
+
 .navbar .btn-group .dropdown-menu a:hover {
     color: #000 !important;
 }
+
 .navbar .btn-group .dropdown-menu a:active {
     color: #fff !important;
 }
+
 .jaspero__dialog {
     color: white !important;
     background-color: black !important;
@@ -36,23 +73,26 @@ main {
     bottom: 10%; //65%;
     right: 3%;
     height: 130px !important; //15%;
-    weight:300px !important; //50%;
-    border-style:double;
+    weight: 300px !important; //50%;
+    border-style: double;
     border: white;
 }
-svg{
-height: 35px !important;
-    weight:35px !important;
-    display:inline !important;
+
+svg {
+    height: 35px !important;
+    weight: 35px !important;
+    display: inline !important;
 }
-.jaspero__dialog-actions{
-  height:1px !important;
-      min-height:1px !important;
+
+.jaspero__dialog-actions {
+    height: 1px !important;
+    min-height: 1px !important;
 }
+
 .jaspero__dialog-icon {
-  padding: 10px 5px 0 !important;
- display:inline !important;
- font-size: 20px;
+    padding: 10px 5px 0 !important;
+    display: inline !important;
+    font-size: 20px;
 }
 
 .jaspero__dialog-title {
@@ -65,11 +105,12 @@ height: 35px !important;
     text-align: center;
     font-weight: 450 !important;
 }
+
 .jaspero__dialog-content {
     padding: 0 5px 10px !important;
     -ms-flex: 1;
     flex: 1;
- font-weight: 300 !important;
+    font-weight: 300 !important;
 }
 
 .ground {

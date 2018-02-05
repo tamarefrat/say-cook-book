@@ -9,7 +9,7 @@ import * as firebase from 'firebase';
 export class SearchByPictureComponent implements OnInit {
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
    sizeImage = 4;
-   classImage = 'col-4 mb-2';
+   classImage = 'col-md-6 col-lg-4 col-sm-12 mb-2';
 
   constructor(private dbs: DataBaseService) {
    /* this.dbs.recipeList.forEach(recipe => {

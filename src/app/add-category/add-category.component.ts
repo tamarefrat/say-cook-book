@@ -16,6 +16,8 @@ export class AddCategoryComponent implements OnInit {
 
   constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
     this.selectedOptions = this.dbs.getFavoritesFromOption();
+
+    
   }
 
   addCategory() {

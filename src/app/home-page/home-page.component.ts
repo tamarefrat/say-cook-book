@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RecipeService } from '../services/recipe.service';
+import { DataBaseService } from '../services/data-base.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { IconModule } from 'angular-icon'; 
 import { MediaChange, ObservableMedia} from "@angular/flex-layout";  
@@ -78,7 +78,7 @@ updateGrid(): void {
   ];
   @Input() favorites: string[];
 
-  constructor(private _recipeService: RecipeService, private router: Router, private media: ObservableMedia) {
+  constructor(private dbs: DataBaseService, private router: Router, private media: ObservableMedia) {
     this.color = 'red';
     this.cols = 3;
   }

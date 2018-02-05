@@ -11,7 +11,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class ItemLineComponent implements OnInit {
 
   @Input() code: any;
-  @Input() foodstuffs: Ingerdient[]; /*change class and prop*/
+  foodstuffs: Ingerdient[]; /*change class and prop*/
   zeroItems: boolean;
   @Input() nameRecipe;
   @Input() statusDetails;
@@ -27,8 +27,8 @@ export class ItemLineComponent implements OnInit {
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }
-   this.getIngredientsByRecipeID(this.code);
-
+    dbs.getIngredientsByRecipeID(dbs.recipeInWork.code);
+// have to check if have a name
 
   }
 

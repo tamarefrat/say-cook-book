@@ -5,8 +5,8 @@
 
             <div class="demo-tab-content">
                 <div class="fullWidth mb-3">
-                    <mat-selection-list #myRecipes >
-                        
+                    <mat-selection-list #myRecipes>
+
                         <strong>
                           <h3 mat-subheader>All Recipes You Can Share:</h3>
                         </strong>
@@ -16,7 +16,7 @@
                 </div>
                 <hr>
                 <div class="mb-2 ">
-                    
+
                     <p>
                         <button type="button " class="btn btn-outline-orange " (click)="myRecipes.selectAll() ">Select all</button>
                         <button type="button " class="btn btn-orange " (click)="myRecipes.deselectAll() ">Deselect all</button>
@@ -28,7 +28,7 @@
                         </button>
 
                 </div>
-                
+
 
             </div>
         </mat-tab>
@@ -36,7 +36,7 @@
         <mat-tab label="Recipes Was Shared With You " [disabled]="!this.dbs.mailsForUser ">
             <div class="demo-tab-content ">
                 <div class="full-width ">
-                    <mat-selection-list #gotRecipes >
+                    <mat-selection-list #gotRecipes>
                         <h3 mat-subheader>All Recipes You Can Get To Your App:</h3>
                         <mat-list-option [value]="rec.nameRecipe " *ngFor="let rec of this.dbs.sharedRecipeList ">{{rec.nameRecipe}}</mat-list-option>
                     </mat-selection-list>
@@ -74,7 +74,7 @@
         <div class="modal-content ">
 
             <!--Header-->
-            <div class="modal-header orange darken-3 white-text ">
+            <div class="modal-header blue darken-3 white-text ">
                 <h4 class="title "><i class="fa fa-share "></i> Share With</h4>
                 <button type="button " class="close waves-effect waves-light " data-dismiss="modal " aria-label="Close " (click)="form.hide() ">
                     <span aria-hidden="true ">×</span>

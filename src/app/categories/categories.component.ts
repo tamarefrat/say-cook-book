@@ -10,10 +10,19 @@ import { Category, DataBaseService } from '../services/data-base.service';
 export class CategoriesComponent implements OnInit {
   optionCategories: Category[] = [];
   favorites: string[] = [];
-
+/***************************************** */
+// for modals
+  category: string;
+  isFavorite = false;
+  selectedOptions: string[];
+  /********************************************** */
   constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
     this.optionCategories = this.dbs.categoryList;
     this.favorites = this.dbs.getFavoritesFromOption();
+    /*********************************************************************************** */
+    // for modals
+    this.selectedOptions = this.dbs.getFavoritesFromOption();
+    /*********************************************** */
    }
 
   deleteCategory(category: Category) {
@@ -44,5 +53,57 @@ this.dbs.updateCategory(category);
     this.optionCategories = this.dbs.categoryList;
     this.favorites = this.dbs.getFavoritesFromOption();
   }
+
+
+  /******************************************* */
+  // for modals
+  addCategory() {
+    const cat1 = {
+      name: this.category,
+      isFavorite: true
+    };
+
+    const cat2 = {
+      name: this.category,
+      isFavorite: false
+    };
+    console.log(this.dbs.categoryList.indexOf({isFavorite: false, name: "diat"}));
+
+    if (this.dbs.categoryList.indexOf(cat1) > -1) {
+      this.dbs.createAlert('attention', 'category appeares', '');
+      this.isFavorite = false;
+       this.category = '';
+       return;
+    } else if (this.dbs.categoryList.indexOf(cat2) > -1) {
+      this.isFavorite = false;
+      this.category = '';
+      this.dbs.createAlert('attention', 'category appeares', '');
+      return;
+    } else {
+      this.dbs.addCategory(this.category, this.isFavorite);
+      /*  if (this.isFavorite) {
+          this._recipeService.favorites.push(this.category);
+          }*/
+      this.category = '';
+      this.isFavorite = false;
+      this.dbs.createAlert('success', 'new category addad successfuly', '');
+    }
+  }
+
+
+  onSelectedOptionsChange(values: string[]) {
+    this.selectedOptions = values;
+    // this._recipeService.favorites = this.selectedOptions;
+    this.selectedOptions.forEach(element => {
+      const cat = {
+        name: element,
+        isFavorite: true
+      };
+      this.dbs.updateCategory(cat);
+
+    });
+
+  }
+  /********************************************************** */
 
 }
