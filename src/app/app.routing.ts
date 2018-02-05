@@ -42,7 +42,7 @@ const appRoutes: Routes = [
   { path: 'share', component: ShareComponent },
 
   { path: 'login', component: LoginComponent },
-  { path: 'reader', component: ReaderRecipeComponent },
+  { path: 'reader/:id', component: ReaderRecipeComponent },
   { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
   { path: 'example', component: ExampleComponent }
 ];

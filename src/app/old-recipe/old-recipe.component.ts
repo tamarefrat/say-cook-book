@@ -90,8 +90,9 @@ export class OldRecipeComponent implements OnInit {
     // this.saveRecipe();
     this.router.navigate(['/']);
   }
-  sayIt() {
-    this.speechRecognitionService.callDB();
+  sayIt() {    
+    this.router.navigate(['/read', this.code]);
+
   }
 
   /********************************************************* */
@@ -110,6 +111,7 @@ export class OldRecipeComponent implements OnInit {
     this.dbs.recipeTempObservable.subscribe(recipe => {
       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       console.log(recipe);
+      this.code = recipe.id;
       this.nameRecipe = recipe.nameRecipe;
       this.getFrom = recipe.getFrom;
       this.comment = recipe.comment;
