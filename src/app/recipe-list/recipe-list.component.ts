@@ -10,7 +10,6 @@ import { DataBaseService } from '../services/data-base.service';
 })
 export class RecipeListComponent implements OnInit {
 
-
   recipeList: recipeName[];
 
 
