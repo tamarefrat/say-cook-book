@@ -19,6 +19,7 @@ export class ReaderRecipeComponent implements OnInit {
   index:number;
   ingredientsLength:number;
   id:number;
+  recordId:string;
   operation:string = "";
   operationType:string = "";
   recordString:Observable<string>;
@@ -39,6 +40,7 @@ export class ReaderRecipeComponent implements OnInit {
     this.dbService = dbService;
     this.speech = speech;
     this.index = -1;
+    this.recordId="record_stop";
    }
 
    ngOnInit(): void {
@@ -86,6 +88,12 @@ export class ReaderRecipeComponent implements OnInit {
     this.recordString.subscribe(a=>{
       console.log(a);
     });
+    if(this.recordId == "record_stop") {
+      this.recordId="record_play"; 
+    } else {
+      this.recordId = "record_stop"
+    }
+   
   }
 
   readIngredient() {
