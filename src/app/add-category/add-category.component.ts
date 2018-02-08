@@ -16,15 +16,17 @@ export class AddCategoryComponent implements OnInit {
 
   constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
     this.selectedOptions = this.dbs.getFavoritesFromOption();
+
+    
   }
 
   addCategory() {
-    let cat1 = {
+    const cat1 = {
       name: this.category,
       isFavorite: true
     };
 
-    let cat2 = {
+    const cat2 = {
       name: this.category,
       isFavorite: false
     };

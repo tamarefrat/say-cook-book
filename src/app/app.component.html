@@ -1,33 +1,76 @@
-<!--mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-orange" [containerInside]="false">
-    <logo>
-        <a class="logo navbar-brand" href="#"><strong>Say Cook Book</strong></a>
-    </logo>
-    <links>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active waves-light" mdbRippleRadius>
-                <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">About</a>
-            </li>
+<div class="container-fluid ">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-orange" [containerInside]="false">
+        <logo>
+            <!--app-menu></app-menu-->
+            <a class="logo navbar-brand" routerLink="/"><strong>Say Cook Book</strong></a>
+        </logo>
+        <links>
 
-        </ul>
-        <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">Login</a>
-            </li>
-            <li class="nav-item waves-light" mdbRippleRadius>
-                <a class="nav-link">Logout</a>
-            </li>
-        </ul>
-    </links>
-</mdb-navbar-->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item waves-light" mdbRippleRadius *ngIf="!isLogin()" (click)="form.show()">
+                    <a class="nav-link ml-auto">login <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius *ngIf="isLogin()" (click)="logout()">
+                    <a class="nav-link ml-auto">Logout</a>
+                </li>
 
 
+            </ul>
+
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/about" mdbTooltip="Read More" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-home 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/recipeList" mdbTooltip="Recipe List" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-list 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/recipe" mdbTooltip="New Recipe" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-plus 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/share" mdbTooltip="Share" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-share 2x"></i></a>
+                </li>
+
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/categories" mdbTooltip="Categories" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-folder-open 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/galery" mdbTooltip="Galery" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-image 2x"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius routerLink="/voice-setting" mdbTooltip="Setting" placement="bottom">
+                    <a class="nav-link"><i class="fa fa-gears 2x"></i></a>
+                </li>
+                <li *ngIf="dbs.mailsForUser||dbs.user=='demoUser'" class="nav-item waves-light" mdbRippleRadius mdbTooltip="Read More" placement="bottom">
+                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated flash infinite"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius [matMenuTriggerFor]="search" mdbTooltip="Search" placement="bottom">
+
+                    <a class="nav-link dropdown-toggle" id="navbarSearcMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-search 2x"></i></a>
+                    <mat-menu #search="matMenu">
+                        <button mat-menu-item routerLink="/search-by-keywords">By Product</button>
+                        <button mat-menu-item routerLink="/search-by-categories">By Category</button>
+
+                    </mat-menu>
+                </li>
 
 
 
-<div mdbModal #frame="mdb-modal" [class]="modeClass" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" [config]="{backdrop: false, ignoreBackdropClick: true}" [style.display]="modeDisplay">
+
+            </ul>
+        </links>
+
+    </mdb-navbar>
+</div>
+
+<main>
+    <div class="container">
+        <router-outlet style="background: black"></router-outlet>
+    </div>
+</main>
+
+
+<!--div mdbModal #frame="mdb-modal" [class]="modeClass" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" [config]="{backdrop: false, ignoreBackdropClick: true}" [style.display]="modeDisplay">
     <div class="modal-dialog modal-frame modal-top" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -39,10 +82,15 @@
             </div>
         </div>
     </div>
-</div>
+</div-->
 
-<jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
-<mat-toolbar class="orange">
+
+
+
+
+
+
+<!--mat-toolbar class="orange">
 
     <app-menu></app-menu>
     <h2 class="link" routerLink="/">Say Cook Book</h2>
@@ -52,28 +100,10 @@
     <button mat-button mdbTooltip="Read More" placement="bottom" class="float-right " routerLink="/about">about</button>
 
 
-</mat-toolbar>
-<div class="body-margin ">
+</mat-toolbar-->
 
 
-
-    <router-outlet style="background: black"></router-outlet>
-</div>
-
-<!--The content below is only a placeholder and can be replaced.-->
-<!--
-<div style="text-align:center ">
-    <app-recipe-list></app-recipe-list>
-</div>
-<div>
-    <app-home-page></app-home-page>
-    <app-options-for-recipe></app-options-for-recipe>
-    <app-recipe></app-recipe>
-
-
-
-</div>
--->
+<jaspero-alerts class="alerts" [defaultSettings]="options"></jaspero-alerts>
 
 <!--                       login                            -->
 <!--button type="button" class="btn btn-primary waves-light" (click)="form.show()" mdbRippleRadius>Login with avatar form</button-->
@@ -168,4 +198,42 @@
             <!--/.Content-->
         </div>
     </div>
-    <!--Modal: Login with Avatar Form-->
+</div>
+<!--Modal: Login with Avatar Form-->
+
+
+<!-- mails-->
+<div mdbModal #mails="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info ground modal-frame modal-top" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Hi!</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="mails.hide()">
+                      <span aria-hidden="true" class="white-text">×</span>
+                     </button>
+            </div>
+            <div class="modal-body" *ngIf="dbs.user=='demoUser'">
+                <div class="text-center">
+                    <i class="fa fa-warning fa-4x mb-3 animated rotateIn"></i>
+                    <p>You are not Login, Click "login" to get your Say Cook Book</p>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="dbs.mailsToUser">
+                <div class="text-center">
+                    <i class="fa fa-info fa-4x mb-3 animated rotateIn"></i>
+                    <p>There are recipes are waiting share with you!</p>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="!(dbs.mailsForUser||dbs.user=='demoUser')">
+                <div class="text-center">
+
+                    <p>No Information</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+
+                <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="mails.hide()" mdbRippleRadius>close</a>
+            </div>
+        </div>
+    </div>
+</div>

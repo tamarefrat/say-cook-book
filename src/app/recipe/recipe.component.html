@@ -51,7 +51,7 @@
                                 </td>
                                 <td>
                                     <mat-select placeholder="category 2" name="mainDetails.category2" [(ngModel)]="mainDetails.category2">
-                                        <mat-option *ngFor="let option of _recipeService.optionCategories" color="accent">{{option.value}}</mat-option>
+                                        <mat-option *ngFor="let option of _recipeService.optionCategories" color="orange">{{option.value}}</mat-option>
                                     </mat-select>
                                 </td>
                                 <td>
@@ -72,7 +72,7 @@
                         </mat-form-field>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-fab color="accent" (click)="saveRecipeDetails()" [disabled]='!mainDetails.nameRecipe'>
+                        <button mat-fab color="orange" (click)="saveRecipeDetails()" [disabled]='!mainDetails.nameRecipe'>
           <mat-icon>assignment_turned</mat-icon>
         </button>
                     </mat-card-actions>
@@ -105,7 +105,7 @@
                         </div>
 
                         <mat-card-actions>
-                            <button mat-fab color="accent" (click)="aditDetails()">
+                            <button mat-fab color="orange" (click)="aditDetails()">
             <mat-icon class="mat-25" >edit</mat-icon>
             </button>
 

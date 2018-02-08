@@ -36,13 +36,13 @@ const appRoutes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: 'voice-setting', component: VoiceSettingComponent },
   { path: 'search-by-categories', component: SearchByCategoryComponent },
-  { path: 'search-by-picture', component: SearchByPictureComponent },
+  { path: 'galery', component: SearchByPictureComponent },
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
 
   { path: 'login', component: LoginComponent },
-  { path: 'reader', component: ReaderRecipeComponent },
+  { path: 'reader/:id', component: ReaderRecipeComponent },
   { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
   { path: 'example', component: ExampleComponent }
 ];

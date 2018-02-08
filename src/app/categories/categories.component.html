@@ -1,4 +1,3 @@
-<br><br>
 <mat-toolbar color="primary">
     <mat-panel-title>
         Your Categories:
@@ -10,11 +9,11 @@
 <mat-card>
     <mat-list>
 
-        <mat-list-item *ngFor="let cat of this.optionCategories">
+        <mat-list-item *ngFor="let cat of this.dbs.categoryList">
             <mat-icon mat-list-icon>category</mat-icon>
             <h4 mat-line>{{cat.name}}</h4>
 
-            <mat-checkbox #favorite [checked]="isFavoriteCategory(cat.name)" (change)="changeFavoriteStatus(favorite.checked, cat)">favorite</mat-checkbox>
+            <mat-checkbox #favorite [checked]="cat.isFavorite" (change)="changeFavoriteStatus(favorite.checked, cat)">favorite</mat-checkbox>
             <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
                 <mat-icon>delete</mat-icon>
             </button>
@@ -23,5 +22,114 @@
     </mat-list>
 </mat-card>
 <mat-card>
-    <button mat-raised-button routerLink="add-category">Add Category</button>
+    <button class="btn btn-orange mb-4 waves-light" (click)="addform.show()">Add Category</button>
+    <br>
+    <button mat-raised-button class="mb-4" (click)="deleteform.show()">Delete Categories</button>
+
+    <button mat-raised-button class="mb-4" (click)="updateform.show()">Update Favorite</button>
 </mat-card>
+
+<!--                          add category                 -->
+<div mdbModal #addform="mdb-modal" class="modal fade" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header orange darken-3 white-text">
+                <h4 class="title"><i class="fa fa-plus"></i> New Category</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="addform.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+
+                <mat-input-container class="example-form-field">
+                    <input matInput type="text" placeholder="Category" #newCategory [(ngModel)]="category" name="category" />
+                    <button mat-button *ngIf="category" matSuffix mat-icon-button aria-label="Clear" (click)="category=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+                </mat-input-container>
+                <br>
+                <mat-checkbox name="isFavorite" [(ngModel)]="isFavorite">Add category to favorites</mat-checkbox>
+                <mat-divider></mat-divider>
+                <div class="text-center mt-1-half">
+                    <button class="btn btn-orange mb-1 waves-light" [disabled]="!category" mdbRippleRadius (click)="addform.hide();addCategory()">Add <i class="fa fa-check ml-1"></i></button>
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<!-- *******************************************  delete category***********     -->
+
+<div mdbModal #deleteform="mdb-modal" class="modal fade scrollable" style="overflow: auto;" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header orange darken-3 white-text">
+                <h4 class="title"><i class="fa fa-delete"></i>Delete Categories</h4>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+
+
+                <mat-list>
+                    <mat-list-item *ngFor="let cat of this.dbs.categoryList">
+                        <mat-icon mat-list-icon>category</mat-icon>
+                        <h4 mat-line>{{cat.name}}</h4>
+
+
+                        <button mat-button matSuffix mat-icon-button (click)="deleteCategory(cat)">
+                <mat-icon>delete</mat-icon>
+            </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+                <div class="text-center mt-1-half">
+                    <button class="btn btn-orange mb-1 waves-light" mdbRippleRadius (click)="deleteform.hide();">close <i class="fa fa-check ml-1"></i></button>
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--************************update favorite ***********************************-->
+<div mdbModal #updateform="mdb-modal" style="overflow: auto;" class="modal fade scrollable" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header orange darken-3 white-text">
+                <h4 class="title"><i class="fa fa-hearth"></i>Edit Favorite</h4>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
+
+                <mat-selection-list #cats [ngModel]="selectedOptions" (ngModelChange)="onSelectedOptionsChange($event)">
+                    <h3 mat-subheader>Categories</h3>
+                    <mat-list-option [value]="cat.name" *ngFor="let cat of this.dbs.categoryList">{{cat.name}}</mat-list-option>
+                </mat-selection-list>
+
+                <p>
+                    <button mat-raised-button (click)="cats.selectAll()">Select all</button>
+                    <button mat-raised-button (click)="cats.deselectAll()">Deselect all</button>
+                </p>
+
+                <mat-divider></mat-divider>
+                <div class="text-center mt-1-half">
+                    <button class="btn btn-orange mb-1 waves-light" mdbRippleRadius (click)="updateform.hide();">close <i class="fa fa-check ml-1"></i></button>
+                </div>
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>

@@ -1,18 +1,14 @@
-<div class="container" [style.width.px]="width">
-    <mat-grid-list [cols]="cols" rows="4">
-        <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray' [mdbTooltip]="tile.tooltip" placement="rihgt">
 
-            <!--
-                <mat-card-title>{{tile.text}}</mat-card-title> -->
+
+
+
+<div class="container" [style.width.px]="width">
+    <mat-grid-list [cols]="cols" [rows]="rows">
+        <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above">
 
             <mat-icon class="white-icon">
                 {{tile.icon}}
             </mat-icon>
-
-            <!-- <mat-card-content>
-                    <p>{{tile.subtext}}</p>
-                    <img mat-card-image [src]="tile.icon">
-                </mat-card-content>  -->
 
         </mat-grid-tile>
     </mat-grid-list>
@@ -33,7 +29,7 @@
 
 
             <mat-grid-list cols="3 " rowHeight="100px ">
-                <mat-grid-tile *ngFor="let fab of this._recipeService.favorites " style="background-color:#009688 ">
+                <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]">
                     <h4>{{fab}}</h4>
                     <br>
                     <mat-icon>category</mat-icon>

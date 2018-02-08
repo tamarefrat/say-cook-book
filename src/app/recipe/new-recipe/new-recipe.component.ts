@@ -143,7 +143,9 @@ export class NewRecipeComponent implements OnInit {
     console.log(this);
   }
   sayIt() {
-    this.speechRecognitionService.callDB();
+
+    this.router.navigate(['/read', this.code]);
+
   }
 
 

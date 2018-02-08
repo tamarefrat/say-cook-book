@@ -14,12 +14,12 @@
             <button mat-fab (click)="style.show()">
         <mat-icon>delete</mat-icon>
       </button>
-            <button mat-fab (click)="frame.show() ">
+            <button mat-fab (click)="form.show() ">
         <mat-icon>share</mat-icon>
       </button>
-            <button mat-fab (click)="sayIt() ">
-        <mat-icon>keyboard_voice</mat-icon>
-      </button>
+        <button mat-fab [routerLink]="['/reader', code]">
+            <mat-icon>keyboard_voice</mat-icon>
+        </button>
         </mat-card-actions>
 
 
@@ -70,10 +70,11 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-
-                            <mat-card>
-                                <input type="file" id="imageFile" class="center">
-                            </mat-card>
+                            <br>
+                            <div class="container borded">
+                                <input type="file" id="imageFile">
+                                <!--class=" custom-file-control"-->
+                            </div>
 
                             <mat-form-field class="fullwidth">
                                 <textarea matInput placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
@@ -82,7 +83,7 @@
                             </mat-form-field>
                         </mat-card-content>
 
-                        <button mat-fab color="accent" (click)="saveRecipe()" [disabled]='!nameRecipe'>
+                        <button mat-fab color="orange" (click)="saveRecipe()" [disabled]='!nameRecipe'>
                 <mat-icon>save</mat-icon>
               </button>
 
@@ -114,7 +115,7 @@
                                 </div>
 
                                 <div class="col-12 center">
-                                    <button mat-fab color="accent" (click)="aditDetails()">
+                                    <button mat-fab color="orange" (click)="aditDetails()">
                                   <mat-icon class="mat-25">edit</mat-icon>
                                 </button>
                                 </div>
@@ -148,7 +149,7 @@
                 <ng-template matStepLabel>
                     <div>Instructions</div>
                 </ng-template>
-
+                
                 <app-instruction-line [code]="this.code" [statusDetails]="statusDetails"></app-instruction-line>
 
                 <mat-card-actions>
@@ -204,28 +205,42 @@
 </div>
 
 
-
-<div mdbModal #frame="mdb-modal" class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-    <div class="modal-dialog modal-frame modal-bottom" role="document">
+<div mdbModal #form="mdb-modal" class="modal fade" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+        <!--Content-->
         <div class="modal-content">
-            <div class="modal-body">
-                <div class="row px-4">
-                    <mat-form-field>
-                        <input matInput name="otherUser" [(ngModel)]="otherUser" placeholder="Enter User Name" style="text-align:right" required>
 
-                        <mat-error class="mb-1" *ngIf="!otherUser">
-                            This field is required
-                        </mat-error>
-                        <mat-error class="mb-1" *ngIf="!apears(otherUser)">
-                            The User Name Is Not Exist!
-                        </mat-error>
+            <!--Header-->
+            <div class="modal-header blue darken-3 white-text">
+                <h4 class="title"><i class="fa fa-share"></i> Share With</h4>
+                <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="form.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-0">
 
-                    </mat-form-field>
-                    <p class="pt-1 pr-2">Choose user to share with:</p>
-                    <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="frame.hide()" mdbRippleRadius>Close</button>
-                    <button type="button" class="btn btn-primary waves-light" mdbRippleRadius [disabled]="!apears(otherUser)" (click)="shareRecipe()">Share</button>
+                <div>
+
+                    <mat-input-container class="center">
+                        <i class="fa fa-user prefix"></i>
+                        <input matInput type="text" #friend placeholder="ID of User You Want Share With:" required>
+                        <mat-error *ngIf="!friend">You must enter any ID.</mat-error>
+                        <mat-error *ngIf="!apears(friend.value)">You must enter any ID.</mat-error>
+                    </mat-input-container>
+                    <mat-divider></mat-divider>
+
+
                 </div>
+
+
+
+                <div class="text-center mt-1-half">
+                    <button class="btn btn-info mb-1 waves-light" mdbRippleRadius (click)="shareRecipe(friend.value);friend.value=''; form.hide()" [disabled]="!friend || !apears(friend.value)">Submit <i class="fa fa-check ml-1"></i></button>
+                </div>
+
             </div>
         </div>
+        <!--/.Content-->
     </div>
 </div>
