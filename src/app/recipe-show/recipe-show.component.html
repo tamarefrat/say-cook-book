@@ -2,43 +2,64 @@
 
   <div class="container">
     
-        <div class="signup-screen">
+       
+          <div class="app_button">
+            <mat-card-actions>
+                <button mat-fab (click)="style.show()">
+            <mat-icon>delete</mat-icon>
+            </button>
+                <button mat-fab (click)="shareRecipe() ">
+            <mat-icon>share</mat-icon>
+            </button>
+            <button id = "read" mat-fab (click)="sayIt() "> 
+                <mat-icon>keyboard_voice</mat-icon>
+            </button>
+            </mat-card-actions>
+          </div>
+          <div class="signup-screen" >
+          <div class="recipe">
+            <div class="divider"></div>
            <div class="space-bot text-center">
               <h1>name recipe</h1>
               <div class="divider"></div>
               <table>
                <tr>
                  <td >
+                   
                    <label>at  aaaaa</label><br/>
                    <label>at  aaaaa</label><br/>
                    <label>time aaaa</label><br/>
                    <label>time aaaaa</label>
                  </td>
-                 <td>           
-                   <img ng-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBnB2qU0zNZiHhidIEvkJKffyo2vg7rOrE9aMk5VbZ203KUNDM"> 
+                 <td> 
+                    <img id="searchImg" src='/assets/blank.png' >   
                </td>
              </tr>
              </table>
   
              <div class="divider"></div>
            </div>
-             <form class="form-register" method="post" name="register" novalidate>
-                 <div >
-                    <h3>ingredient</h3>
-                    <div><label>ingredient1</label><br/></div>
-                    <div><label>ingredient2</label><br/></div>
-                    <div><label>ingredient3</label><br/></div>
-                    <div><label>ingredient4</label><br/></div>
-                    <div><label>ingredient5</label><br/></div>
-                    <div><label>ingredient666666666666666666666666666666666666666666666666666666</label><br/></div>
-                    <div class="divider"></div>
-                    <h3>Instructions</h3>
-                    <div><label>Instructions1</label><br/></div>
-                    <div><label>Instructions2</label><br/></div>
-                    <div><label>Instructions3</label><br/></div>
+                <form class="form-register" method="post" name="register" novalidate>
+                  <div >
+                      <h3>ingredient</h3>
+                      <div  class="ingred">
+                        <div >ingredient1</div><br/>
+                        <div >ingredient2</div><br/>
+                        <div >ingredient3</div><br/>
+                        <div >ingredient4</div><br/>
+                        <div >ingredient5</div><br/>
+                        <div >ingredien t6666666666 66666666666 6666666666 6666666666666666666666611</div><br/>
                   </div>
-                <div class="space-top text-center"></div>
-             </form>
+                  <div class="divider"></div>
+                    <h3>Instructions</h3>
+                    <div  class="Instruc">
+                      <div>Instructions1</div><br/>
+                      <div>Instructions2</div><br/>
+                      <div>Instructions3</div><br/>
+                    </div>
+                  </div>
+                </form>
+            </div>
              </div>
           </div>
     

@@ -1,4 +1,4 @@
-import { Component, OnInit ,, Input} from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DataBaseService } from '../services/data-base.service';
 
@@ -21,7 +21,13 @@ export class RecipeShowComponent implements OnInit {
     this.code = this.route.snapshot.params['id'];
     console.log(this.code);
   }
-
+  sayIt() {
+    
+        this.router.navigate(['/read', this.code]);
+    
+      }
 }
+
+
 
 
