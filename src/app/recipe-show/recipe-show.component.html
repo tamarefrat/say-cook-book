@@ -20,18 +20,20 @@
           <div class="recipe">
             <div class="divider"></div>
            <div class="space-bot text-center">
-              <h1>name recipe</h1>
+              <h1>{{nameRecipe}}</h1>
               <div class="divider"></div>
               <table>
                <tr>
                  <td >
-                   
-                   <label>at  aaaaa</label><br/>
-                   <label>at  aaaaa</label><br/>
-                   <label>time aaaa</label><br/>
-                   <label>time aaaaa</label>
+                   <label>recipe received from {{getFrom}}</label><br/><br/>
+                   <label>{{comment}}</label><br/><br/>
+                   <h6>Categories:</h6>
+                   <label>{{category1}}</label><br/>
+                   <label>{{category2}}</label><br/>
+                   <label>{{category3}}</label><br/>
                  </td>
                  <td> 
+                    <img mat-card-image [src]="urlImg">
                     <img id="searchImg" src='/assets/blank.png' >   
                </td>
              </tr>
@@ -43,12 +45,15 @@
                   <div >
                       <h3>ingredient</h3>
                       <div  class="ingred">
-                        <div >ingredient1</div><br/>
-                        <div >ingredient2</div><br/>
-                        <div >ingredient3</div><br/>
-                        <div >ingredient4</div><br/>
-                        <div >ingredient5</div><br/>
-                        <div >ingredien t6666666666 66666666666 6666666666 6666666666666666666666611</div><br/>
+                        
+                          <div id='itemLine' *ngFor="let item of this.dbs.ingredientsList; let i = index">
+                              <mat-list-item id="itemLineDetailsInSaved" >
+                                  <label *ngIf="item.amount!=0" class="mr-2 mb-1 responsive">{{item.amount}}</label>              
+                                  <label class="mr-2 responsive mb-1">{{item.unit}}  {{item.product}}</label>              
+                              </mat-list-item>
+                          </div>
+
+                  
                   </div>
                   <div class="divider"></div>
                     <h3>Instructions</h3>
