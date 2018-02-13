@@ -49,7 +49,7 @@
                           <div id='itemLine' *ngFor="let item of this.dbs.ingredientsList; let i = index">
                               <mat-list-item id="itemLineDetailsInSaved" > 
                                 <ul>      
-                                  <li><label class="mr-2 responsive mb-1">{{get_amount(item.amount)}} {{item.unit}} {{item.product}}</label> </li>             
+                                  <li>{{get_amount(item.amount)}} {{item.unit}} {{item.product}} </li>             
                                 </ul>     
                                 </mat-list-item>
                           </div>
@@ -63,7 +63,7 @@
                         <div id='itemLine' *ngFor="let item of this.dbs.instructionsList;  let i = index">
                             <mat-list-item id="itemLineDetailsInSaved" > 
                               <ul>      
-                                <li><label class="mr-2 responsive mb-1"> {{item.description}}</label> </li>             
+                                <li> {{item.description}}</li>             
                               </ul>     
                               </mat-list-item>
                         </div>
