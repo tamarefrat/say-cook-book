@@ -1,6 +1,8 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DataBaseService } from '../services/data-base.service';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-recipe-show',
@@ -14,11 +16,14 @@ export class RecipeShowComponent implements OnInit {
   nameRecipe = null;
   getFrom = '';
   comment = '';
-  urlImg = '';
+  urlImg = 'none';
   category1 = '';
   category2 = '';
   category3 = '';
   otherUser;
+  ingredients;
+  instructions;
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -28,13 +33,18 @@ export class RecipeShowComponent implements OnInit {
       this.getRecipeByID(this.code);
       this.statusDetails = 1;
     }
+    dbs.getIngredientsByRecipeID(this.code);
+    dbs.getInstructionsByRecipeID(this.code);
+    console.log('-------------------------------------- ');
+    console.log('description: ' + this.dbs.instructionsList);
+  
 
-    this.dbs.recipeInWork = this;
      }
 
   ngOnInit() {
 
   }
+
 
   getRecipeByID(recID) {
     // get one recipe by id:
@@ -43,7 +53,7 @@ export class RecipeShowComponent implements OnInit {
     this.dbs.recDoc = this.dbs.recipeTempsRef.doc<Recipe>('num' + recID);
     this.dbs.recipeTempObservable = this.dbs.recDoc.valueChanges();
     this.dbs.recipeTempObservable.subscribe(recipe => {
-      console.log(recipe);
+      
       this.code = recipe.id;
       this.nameRecipe = recipe.nameRecipe;
       this.getFrom = recipe.getFrom;
@@ -52,6 +62,7 @@ export class RecipeShowComponent implements OnInit {
       this.category1 = recipe.category1;
       this.category2 = recipe.category2;
       this.category3 = recipe.category3;
+    
 
       const spaceRef = firebase.storage().ref().child(this.urlImg).getDownloadURL().then((url) => {
         // set image url
@@ -63,7 +74,13 @@ export class RecipeShowComponent implements OnInit {
     });
 
   }
-
+get_amount(amount)
+{
+ if (amount == 0)
+  return "";
+ else  
+  return amount;
+}
   sayIt() {
     
         this.router.navigate(['/read', this.code]);
