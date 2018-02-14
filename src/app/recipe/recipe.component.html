@@ -29,7 +29,7 @@
                 <mat-card>
                     <mat-card-content>
                         <mat-input-container class="fullwidth">
-                            <input matInput name="mainDetails.getFrom" placeholder="Get Recipe From" [(ngModel)]="mainDetails.getFrom">
+                            <input matInput name="mainDetails.getFrom" placeholder="Recipe received from" [(ngModel)]="mainDetails.getFrom">
                         </mat-input-container>
                         <mat-card-title>
                             <mat-input-container class="fullwidth">
@@ -38,7 +38,7 @@
                             </mat-input-container>
                         </mat-card-title>
                         <p>{{mainDetails.nameRecipe}}</p>
-                        <h3>Categories for recipe:</h3>
+                        <h3>Categories:</h3>
 
                         <table class="fullwidth" cellspacing="0">
                             <tr>
@@ -97,7 +97,7 @@
                                 <mat-card-title>
                                     <h1>{{mainDetails.nameRecipe}}</h1>
                                 </mat-card-title>
-                                <mat-card-subtitle *ngIf="mainDetails.getFrom">get recipe from {{mainDetails.getFrom}}</mat-card-subtitle>
+                                <mat-card-subtitle *ngIf="mainDetails.getFrom">Recipe received from: {{mainDetails.getFrom}}</mat-card-subtitle>
                                 <h5 *ngIf="comment">Comment:{{mainDetails.comment}}</h5>
 
 

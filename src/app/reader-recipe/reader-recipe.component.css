@@ -21,3 +21,17 @@
 .animate-leave.animate-leave-active{
     left: -100%;
 }
+mat-icon.record_icon.animated.flash.infinite.mat-icon.material-icons {
+    font-size: 200px;
+    color: red;
+    margin-bottom: 120px;
+    text-align: center;
+    width: 100%;
+}
+#rec {
+font-size: 200px;
+color: red;
+margin-bottom: 120px;
+text-align: center;
+width: 100%;
+}

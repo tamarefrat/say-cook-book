@@ -57,7 +57,7 @@ updateGrid(): void {
       route: 'search-by-keywords', text: '6', icon: 'search', tooltip: 'Search by Key words'
     },
     {
-      route: 'search-by-picture', text: '7', icon: 'search', tooltip: 'Search by Picture'
+      route: 'galery', text: '7', icon: 'image', tooltip: 'Galery'
     },
     {
       route: 'share',text: '8', icon: 'share', tooltip: 'Share'
