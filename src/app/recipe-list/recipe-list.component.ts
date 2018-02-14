@@ -13,7 +13,7 @@ export class RecipeListComponent implements OnInit {
   recipeList: recipeName[];
 
 
-  myFunction() {
+  search() {
       var input, filter, i,a;
       input = document.getElementById("myInput");
       filter = input.value.toUpperCase();
@@ -36,7 +36,7 @@ export class RecipeListComponent implements OnInit {
 
       console.log('in contracror');
       
-      this.dbs.recipeInWork = this;
+      ///this.dbs.recipeInWork = this;
      
       const rec = this.dbs.recipesRef;
       this.recipeList = [];
@@ -44,7 +44,7 @@ export class RecipeListComponent implements OnInit {
         this.recipeList.push(new recipeName(recipe.nameRecipe, recipe.id, recipe.enable));
         console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
         });
-
+ 
 
   }
 

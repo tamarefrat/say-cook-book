@@ -3,13 +3,13 @@
     
 <h2>Recipe List</h2>
 <div>
-    <input type="text" id="myInput" (keyup)="myFunction()" ng-model="test" placeholder="Search for recipe.." title="Type in a name">
+    <input type="text" id="myInput" (keyup)="search()" ng-model="test" placeholder="Search for recipe.." title="Type in a name">
     <div>
         
         <img id="searchImg" src='/assets/search.png' >
     </div>
 </div>
-
+<br/>
 <app-recipe-button id="myUL" *ngFor="let recipe of recipeList" [hidden]="!recipe.disply"
   [name]="recipe.name"  [routerLink]="['/recipe-show', recipe.url]"></app-recipe-button>
 </div>
