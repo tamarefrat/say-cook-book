@@ -5,15 +5,8 @@
        
           <div class="app_button">
             <mat-card-actions>
-                <button mat-fab (click)="style.show()">
-            <mat-icon>delete</mat-icon>
-            </button>
-                <button mat-fab (click)="shareRecipe() ">
-            <mat-icon>share</mat-icon>
-            </button>
-            <button id = "read" mat-fab (click)="sayIt() "> 
-                <mat-icon>keyboard_voice</mat-icon>
-            </button>
+                <button mat-fab (click)="edit() "><mat-icon>edit</mat-icon></button>
+            <button id = "read" mat-fab (click)="sayIt() "> <mat-icon>keyboard_voice</mat-icon></button>
             </mat-card-actions>
           </div>
           <div class="signup-screen" >
@@ -49,7 +42,7 @@
                           <div id='itemLine' *ngFor="let item of this.dbs.ingredientsList; let i = index">
                               <mat-list-item id="itemLineDetailsInSaved" > 
                                 <ul>      
-                                  <li>{{get_amount(item.amount)}} {{item.unit}} {{item.product}} </li>             
+                                  <li>{{get_amount(item.amount)}} {{item.unit}} {{item.product}}</li>             
                                 </ul>     
                                 </mat-list-item>
                           </div>
@@ -63,7 +56,7 @@
                         <div id='itemLine' *ngFor="let item of this.dbs.instructionsList;  let i = index">
                             <mat-list-item id="itemLineDetailsInSaved" > 
                               <ul>      
-                                <li> {{item.description}}</li>             
+                                <li>{{item.description}}</li>             
                               </ul>     
                               </mat-list-item>
                         </div>

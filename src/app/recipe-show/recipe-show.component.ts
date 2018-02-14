@@ -1,6 +1,6 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataBaseService } from '../services/data-base.service';
+import { DataBaseService, Recipe } from '../services/data-base.service';
 import * as firebase from 'firebase';
 
 
@@ -35,8 +35,6 @@ export class RecipeShowComponent implements OnInit {
     }
     dbs.getIngredientsByRecipeID(this.code);
     dbs.getInstructionsByRecipeID(this.code);
-    console.log('-------------------------------------- ');
-    console.log('description: ' + this.dbs.instructionsList);
   
 
      }
@@ -74,17 +72,17 @@ export class RecipeShowComponent implements OnInit {
     });
 
   }
-get_amount(amount)
-{
- if (amount == 0)
-  return "";
- else  
-  return amount;
-}
-  sayIt() {
-    
-        this.router.navigate(['/read', this.code]);
-    
+    get_amount(amount){
+     if (amount == 0)
+          return "";
+     else  
+         return amount;
+    }
+      sayIt() {
+        this.router.navigate(['/reader', this.code]);
+      }
+      edit() {
+        this.router.navigate(['/recipe', this.code]);
       }
 }
 
