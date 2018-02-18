@@ -1,0 +1,62 @@
+body {
+    min-height:100%;
+    background-color: white;
+}
+
+div.app_button {
+    background-color: white;
+}
+div.recipe {
+    background-color: #263238;
+}
+
+/* Title */
+
+h1 {
+    color: white;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 25px;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: left;
+}
+
+img {
+    width: 70%; 
+    height: auto;
+}
+
+
+div.divider {
+    outline-style: solid;
+    outline-width: thin;
+}
+
+div.ingred {
+    text-align: left;
+    padding: 20px;
+}
+/* Sign Up */
+
+div.Instruc{
+    text-align: left;
+    padding: 20px;
+}
+ 
+
+.signup-screen {
+	padding: 20px;
+    margin-top: 20px;
+    background-color:#263238;
+    border-radius: 10px;
+    color: white;
+}

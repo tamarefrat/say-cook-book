@@ -142,7 +142,7 @@ export class DataBaseService {
         const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
           // set image url
           rec.urlImg = url;
-          console.log(rec);
+          //console.log(rec);
 
         }).catch((error) => {
           console.log(error);
@@ -177,8 +177,8 @@ export class DataBaseService {
     this.ingredientsObservable.subscribe(ingredients => {
       this.ingredientsList = ingredients;
       this.ingredientsList.forEach(ingredient => {
-        console.log('product: ' + ingredient.product + ', amount: ' +
-          ingredient.amount + ', unit: amount: ' + ingredient.unit);
+        //console.log('product: ' + ingredient.product + ', amount: ' +
+          //ingredient.amount + ', unit: amount: ' + ingredient.unit);
       });
     });
 
@@ -190,7 +190,7 @@ export class DataBaseService {
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;
       this.instructionsList.forEach(instruction => {
-        console.log('description: ' + instruction.description);
+       // console.log('description: ' + instruction.description);
       });
     });
 
@@ -198,7 +198,7 @@ export class DataBaseService {
 
 
   addCategory(name: string, isFavorite: boolean) {
-    console.log(name);
+    //console.log(name);
     const category = {
       // id: name,
       name: name,
@@ -262,7 +262,7 @@ export class DataBaseService {
       });
 
     } else {
-      path = 'images/logo.png';
+      path = '/assets/blank.png';
     }
     const recipe = {
       id: this.counterRecipe,
@@ -459,8 +459,8 @@ return this.recipeTemp;
       recipe.enable = false;
       // add recipe to other user
       this.afs.collection((`users/${userToShare}/recipes`)).doc('num' + recipe.id).set(recipe).then(res => {
-        console.log('shared recipe');
-        console.log(recipe);
+        //console.log('shared recipe');
+        //console.log(recipe);
       });
     });
 
@@ -555,14 +555,14 @@ return this.recipeTemp;
     });
     recByCat1Observable = recByCat1Ref.valueChanges();
     recByCat1Observable.subscribe(recipes1 => {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      //console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
 
       // get images
       /*recByCat1List.forEach(rec => {
 
       });*/ //end for
-      console.log(recipes1);
+     // console.log(recipes1);
        recipes1.forEach(rec => {
          if (this.recipeByCategoryList.indexOf(rec) < 0) {
            // dont exist in list
@@ -587,9 +587,9 @@ return this.recipeTemp;
     });
     recByCat2Observable = recByCat2Ref.valueChanges();
     recByCat2Observable.subscribe(recipes2 => {
-       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+       //console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-      console.log(recipes2);
+      //console.log(recipes2);
        recipes2.forEach(rec => {
          if(this.recipeByCategoryList.indexOf(rec)<0) {
            // dont exist in list
@@ -606,8 +606,8 @@ return this.recipeTemp;
     });
     recByCat3Observable = recByCat3Ref.valueChanges();
     recByCat3Observable.subscribe(recipes3 => {
-       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      console.log(recipes3);
+      // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+     // console.log(recipes3);
 
       recipes3.forEach(rec => {
         if(this.recipeByCategoryList.indexOf(rec)<0) {
@@ -617,7 +617,7 @@ return this.recipeTemp;
         }//end if
       });// end for
 
-      console.log(this.recipeByCategoryList);
+      //console.log(this.recipeByCategoryList);
     });// end subscribe
 
   }
@@ -682,15 +682,15 @@ return this.recipeTemp;
     this.counterRef = this.afs.collection(`users/${this.user}/counter`);
     this.settigObservable = this.counterRef.valueChanges();
     this.settigObservable.subscribe(set => {
-      console.log('counters');
-      console.log(set);
+     // console.log('counters');
+      //console.log(set);
       // get counter of recipes
       this.counterRecipe = set[2].counter;
       // get counter of Ingredients
       this.counterIngredients = set[0].counter;
       // get counter of Instructions
       this.counterInstructions = set[1].counter;
-      console.log('counter= ' + this.counterRecipe);
+      //console.log('counter= ' + this.counterRecipe);
     });
 
     // get all categories
