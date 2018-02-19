@@ -1,0 +1,15 @@
+#footer {
+  height: 10%;
+  background-color: #5a5a5a;
+  width: 100%;
+  color: orange;
+  /*display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+    align-items: flex-end;*/
+}
+
+.left {
+  float: left;
+}
+/*# sourceMappingURL=footer.component.css.map */

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { RecipeService, MainDetails } from '../services/recipe.service';
-import { Foodstuff, ItemLineComponent } from '../item-line/item-line.component';
+import { ItemLineComponent } from '../item-line/item-line.component';
 // import { Instruction, InstructionLineComponent } from '../instruction-line/instruction-line.component';
 import { MainDetailsComponent } from '../main-details/main-details.component';
 import { Router, ActivatedRoute, Params } from '@angular/router';

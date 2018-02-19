@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "speech.component.scss"
+    ],
+    "names": [],
+    "file": "speech.component.css"
+}

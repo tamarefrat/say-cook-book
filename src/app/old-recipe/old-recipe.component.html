@@ -1,7 +1,7 @@
-<div *ngIf="nameRecipe==null">
-    <mat-card>
-        <h4>loading...</h4>
-        <mat-spinner></mat-spinner>
+<div *ngIf="nameRecipe==null" class="center">
+    <mat-card class="center">
+        <h4 class="center">loading...</h4>
+        <mat-spinner class="center"></mat-spinner>
 
     </mat-card>
 </div>
@@ -10,6 +10,7 @@
 
     <!--recipe is not deleted-->
     <div *ngIf="statusDetails!=4">
+
         <mat-card-actions>
             <button mat-fab (click)="style.show()">
         <mat-icon>delete</mat-icon>
@@ -17,7 +18,7 @@
             <button mat-fab (click)="form.show() ">
         <mat-icon>share</mat-icon>
       </button>
-        <button mat-fab [routerLink]="['/reader', code]">
+            <button mat-fab [routerLink]="['/reader', code]">
             <mat-icon>keyboard_voice</mat-icon>
         </button>
         </mat-card-actions>
@@ -34,6 +35,13 @@
                     <div class="container" id="recipeInEdit" *ngIf="statusDetails!=1">
 
                         <mat-card-content>
+                            <div class="row d-flex pl-1 mt-4">
+                                <h5 class="font-weight-bold mb-3">
+                                    <i *ngIf="isFavorit" class="fa fa-star fa-2x orange-text link-cosmo" (click)="isFavorit=false;"></i>
+                                    <i *ngIf="!isFavorit" class="fa fa-star-o fa-2x orange-text link-cosmo" (click)="isFavorit=true;"></i> Favorite Recipe
+                                </h5>
+                            </div>
+
                             <mat-input-container class="fullwidth">
                                 <input matInput name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
                             </mat-input-container>
@@ -43,9 +51,11 @@
                                     <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
                                 </mat-input-container>
                             </mat-card-title>
+
+
                             <div class="row">
                                 <div class="col-md-9 center col-sm-9 mb-1">
-                                    <h5 class="responsive">Categories for recipe:</h5>
+                                    <h6 class="responsive">Categories for recipe:</h6>
                                 </div>
 
                                 <div class="col-md-4 mb-3">
@@ -70,11 +80,6 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <br>
-                            <div class="container borded">
-                                <input type="file" id="imageFile">
-                                <!--class=" custom-file-control"-->
-                            </div>
 
                             <mat-form-field class="fullwidth">
                                 <textarea matInput placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
@@ -83,45 +88,48 @@
                             </mat-form-field>
                         </mat-card-content>
 
-                        <button mat-fab color="orange" (click)="saveRecipe()" [disabled]='!nameRecipe'>
-                <mat-icon>save</mat-icon>
-              </button>
+                        <div class="container borded">
+                            <input type="file" id="imageFile">
+                            <!--class=" custom-file-control" style="display:inherit"-->
+                        </div>
+                        <br>
+
+                        <button mat-fab (click)="saveRecipe()" [disabled]='!nameRecipe'>
+                          <mat-icon>save</mat-icon>
+                        </button>
 
 
                     </div>
 
                     <div id="recipeOnSave" *ngIf="statusDetails==1">
 
-                        <mat-card>
-
-                            <mat-card-content>
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-12">
-                                        <img mat-card-image [src]="urlImg">
-                                    </div>
-                                    <div class="col-md-8 col-sm-12">
-
-                                        <mat-card-title>
-                                            <h1 class="card-title">{{nameRecipe}}</h1>
-                                        </mat-card-title>
-                                        <mat-card-subtitle *ngIf="getFrom">get recipe from {{getFrom}}</mat-card-subtitle>
-                                        <h4 *ngIf="category1">category: {{category1}} {{category2}} {{category3}}.</h4>
-                                        <br>
-                                        <br>
-                                        <p *ngIf="comment">Comment: {{comment}}</p>
-
-
-                                    </div>
+                        <mat-card-content>
+                            <div class="row">
+                                <div class="col-md-5 col-sm-12 ml-5">
+                                    <img mat-card-image [src]="urlImg">
                                 </div>
+                                <div class="col-md-7 col-sm-12" style="text-align:left">
+                                    <mat-card-title>
+                                        <h1 class="card-title"><i *ngIf="isFavorit" class="fa fa-star mr-2"></i>{{nameRecipe}}</h1>
+                                    </mat-card-title>
+                                    <mat-card-subtitle *ngIf="getFrom">get recipe from {{getFrom}}</mat-card-subtitle>
+                                    <h6 *ngIf="category1">category: {{category1}} {{category2}} {{category3}}.</h6>
+                                    <br>
+                                    <br>
+                                    <p *ngIf="comment">Comment: {{comment}}</p>
 
-                                <div class="col-12 center">
-                                    <button mat-fab color="orange" (click)="aditDetails()">
+
+                                </div>
+                            </div>
+
+                            <div class="col-12 center">
+                                <button mat-fab (click)="aditDetails()">
                                   <mat-icon class="mat-25">edit</mat-icon>
                                 </button>
-                                </div>
+                            </div>
 
-                            </mat-card-content>
-                        </mat-card>
+                        </mat-card-content>
+
                     </div>
                 </form>
                 <!--                    end main details        -->
@@ -149,7 +157,7 @@
                 <ng-template matStepLabel>
                     <div>Instructions</div>
                 </ng-template>
-                
+
                 <app-instruction-line [code]="this.code" [statusDetails]="statusDetails"></app-instruction-line>
 
                 <mat-card-actions>

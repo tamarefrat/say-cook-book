@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { NewRecipeComponent } from '../recipe/new-recipe/new-recipe.component';
-import { Foodstuff } from '../item-line/item-line.component';
 // import { Instruction } from '../instruction-line/instruction-line.component';
 import * as firebase from 'firebase';
 import { AlertsService } from '@jaspero/ng2-alerts';
@@ -62,6 +61,7 @@ export class DataBaseService {
   public recipesRef: AngularFirestoreCollection<Recipe>;
   public recipesByCategoryRef: AngularFirestoreCollection<Recipe>;
   public shareRecipesRef: AngularFirestoreCollection<Recipe>;
+  public favoriteRecipesRef: AngularFirestoreCollection<Recipe>;
   public ingredientsRef: AngularFirestoreCollection<Ingerdient>;
   public instructionsRef: AngularFirestoreCollection<Instruction>;
   public counterRef: AngularFirestoreCollection<Counter>;
@@ -73,6 +73,7 @@ export class DataBaseService {
   recipeObservable: Observable<Recipe[]>;
   recipesByCategoryObservable: Observable<Recipe[]>;
   sharedRecipeObservable: Observable<Recipe[]>;
+  favoriteRecipeObservable: Observable<Recipe[]>;
   recipeTempObservable: Observable<Recipe>;
   ingredientsObservable: Observable<Ingerdient[]>;
   instructionsObservable: Observable<Instruction[]>;
@@ -84,13 +85,13 @@ export class DataBaseService {
  // public recipeTempList: Recipe[] = [];
   public recipeTemp: Recipe;
   public sharedRecipeList: Recipe[] = [];
+  public favoriteRecipeList: Recipe[] = [];
   public recipe: any;
   public ingredientsList: Ingerdient[] = [];
   public instructionsList: Instruction[] = [];
   public userNameList: string[] = [];
 
   public user = 'demoUser';
-  public userToShare: string;
   public counterRecipe: number; // for uniqe id for recipe-!!-isnot amount of recipes if recipes was  deleted!!
   public counterIngredients: number;
   public counterInstructions: number;
@@ -98,6 +99,14 @@ export class DataBaseService {
   public folder = 'images';
   public mailsForUser: boolean;
   classForMails;
+// for sharing
+countRec2 = 0;
+countIngre2 = 0;
+countInstr2 = 0;
+copyFlag = false;
+sharedFlag = false;
+public userToShare: string;
+
   constructor(private afs: AngularFirestore, private _alert: AlertsService) {
 
     // get all users
@@ -145,13 +154,32 @@ export class DataBaseService {
           console.log(rec);
 
         }).catch((error) => {
+          rec.urlImg = 'assets\\homeImg\\logo1.png';
           console.log(error);
         });
       });
-     /* this.recipeList.forEach(recipe => {
 
-        console.log('isFavorit: ' + recipe.isFavorit + ', name: ' + recipe.nameRecipe);
-      });*/
+    });
+
+     // get all favorite recipes:
+    this.favoriteRecipesRef = this.afs.collection(`users/${this.user}/recipes`, ref => {
+      return ref.where('isFavorit', '==', true);
+    });
+    this.favoriteRecipeObservable = this.favoriteRecipesRef.valueChanges();
+    this.favoriteRecipeObservable.subscribe(recipes => {
+
+      this.favoriteRecipeList = recipes;
+      this.favoriteRecipeList.forEach(rec => {
+        const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
+          // set image url
+          rec.urlImg = url;
+          console.log(rec);
+
+        }).catch((error) => {
+          rec.urlImg = 'assets\\homeImg\\logo1.png';
+          console.log(error);
+        });
+      });
     });
 
     // get all shared recipes:- recipes was shared with me
@@ -256,6 +284,7 @@ export class DataBaseService {
           rec.urlImg = url;
 
         }).catch((error) => {
+          rec.urlImg = 'assets\\homeImg\\logo1.png';
           console.log(error);
         });
 
@@ -267,7 +296,7 @@ export class DataBaseService {
     const recipe = {
       id: this.counterRecipe,
       nameRecipe: rec.nameRecipe,
-      isFavorit: true,
+      isFavorit: rec.isFavorit,
       getFrom: rec.getFrom,
       comment: rec.comment,
       category1: rec.category1,
@@ -309,7 +338,7 @@ return this.recipeTemp;
   public getIngredientsByRecipeID(id) {
    this.ingredientsList = null;
     this.ingredientsRef = this.afs.collection(`users/${this.user}/ingredients`, ref => {
-      return ref.where('recipeId', '==', +id);
+      return ref.where('recipeId', '==', id);
     });
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
     this.ingredientsObservable.subscribe(ingredients => {
@@ -381,6 +410,7 @@ return this.recipeTemp;
           rec.urlImg = url;
 
         }).catch((error) => {
+          rec.urlImg = 'assets\\homeImg\\logo1.png';
           console.log(error);
         });
 
@@ -391,7 +421,7 @@ return this.recipeTemp;
     const recipe = {
       id: rec.code,
       nameRecipe: rec.nameRecipe,
-      isFavorit: true,
+      isFavorit: rec.isFavorit,
       getFrom: rec.getFrom,
       comment: rec.comment,
       category1: rec.category1,
@@ -421,6 +451,19 @@ return this.recipeTemp;
   // add recipe to shared list- disable untill coosed by user
   // it addes the recipe to another user- to his shared list
   shareWithOtherUserMyRecipe(id, userToShare) {
+    // while(this.copyFlag) {} //if is now copying another recipe
+    this.copyRecipe(id, userToShare,  res => {
+      this.updateCounters();
+    });
+  // this.updateCounters(this.countRec2, this.countIngre2, this.countInstr2, this.userToShare);
+   // });
+    // while(!this.sharedFlag) {} // didnot finish copy this recipe
+
+  }
+
+  copyRecipe( id, userToShare, callback) {
+    this.copyFlag = true;
+    this.sharedFlag = false;
     // have copy recipe from me to other user with disable mode
     // have update id by other user to new id and update counters
     // have also copy ingredients and instructions
@@ -456,13 +499,21 @@ return this.recipeTemp;
       recipeShareObservable.subscribe(recipe => { // have to wait till update
       // change id for other user
       recipe.id = countRec2;
+      console.log('countRec');
+       console.log(countRec2);
+        console.log(recipe.id);
+      // remove categoris from recipe for new user????????????????????????
+      recipe.category1 = '';
+      recipe.category2 = '';
+      recipe.category3 = '';
       recipe.enable = false;
+      recipe.isFavorit = false;
       // add recipe to other user
       this.afs.collection((`users/${userToShare}/recipes`)).doc('num' + recipe.id).set(recipe).then(res => {
         console.log('shared recipe');
         console.log(recipe);
       });
-    });
+    }); // end copy recipe
 
 
       // copy ingredients
@@ -474,9 +525,14 @@ return this.recipeTemp;
 
         ingredients = ingre; // have to wait till update
         ingredients.forEach(ing => {
+          console.log('shared ing');
+            console.log(ing);
           // change id of ingredient for other user
           ing.id = countIngre2;
           ing.recipeId = countRec2;
+          console.log('rec id');
+       console.log(countRec2);
+        console.log(ing.recipeId);
           this.afs.collection((`users/${userToShare}/ingerdients`)).doc('num' + ing.id).set(ing).then(res => {
 
             console.log('shared ing');
@@ -485,10 +541,9 @@ return this.recipeTemp;
           // update counter for next ing
           countIngre2++;
         }); // end for
-      });
+      }); // end copy ingredients
 
-      // update counter in DB
-      counterOtherRef.doc('counterIngredients').set({ counter: countIngre2 });
+
 
 
       // copy instructions
@@ -502,24 +557,61 @@ return this.recipeTemp;
           // change id of instruction for other user
           ins.id = countInstr2;
           ins.recipeId = countRec2;
-          this.afs.collection((`users/${userToShare}/instructions`)).doc('num'+ins.id).set(ins).then(res => {
+          this.afs.collection((`users/${userToShare}/instructions`)).doc('num' + ins.id).set(ins).then(res => {
 
           });
           // update counter for next ing
           countInstr2++;
         }); // end for
 
-      });
- // update counter in DB
+      }); // end copy instructions
+ // update flags and counters
+ /*this.countRec2 = countRec2;
+ this.countIngre2 = countIngre2;
+ this.countInstr2 = countInstr2;
+ this.userToShare = userToShare;
+  this.copyFlag = false;
+  this.sharedFlag = true;
+      callback();*/
+
+      // remove value changes
+/*
+      counterOtherObser = null;
+      console.log(counterOtherObser);
+      console.log('inupdate');
+      console.log(countIngre2);
+
+      counterOtherRef = this.afs.collection(`users/${userToShare}/counter`);
+      // update counter in DB
+      counterOtherRef.doc('counterIngredients').set({ counter: countIngre2 });
+      console.log(countIngre2);
+      // update instruction counter in DB
       counterOtherRef.doc('counterInstructions').set({ counter: countInstr2 });
 
-// update counter for other user
-    countRec2++;
-    counterOtherRef.doc('counterRecipe').set({ counter: countRec2 });
- });
+      // update recipe counter for other user
+      countRec2++;
+      counterOtherRef.doc('counterRecipe').set({ counter: countRec2 });*/
+});
+
 
  } // end share recipe with all details- end function
 
+
+  updateCounters() {
+    console.log('inupdate');
+    console.log(this.countIngre2);
+    let counterOtherRef: AngularFirestoreCollection<Counter>;
+    counterOtherRef = this.afs.collection(`users/${this.userToShare}/counter`);
+    // update counter in DB
+    counterOtherRef.doc('counterIngredients').set({ counter: this.countIngre2 });
+    console.log(this.countIngre2);
+    // update instruction counter in DB
+    counterOtherRef.doc('counterInstructions').set({ counter: this.countInstr2 });
+
+    // update recipe counter for other user
+    this.countRec2++;
+    counterOtherRef.doc('counterRecipe').set({ counter: this.countRec2 });
+  }
 
   enableRecipeFromShare(recipe: Recipe) {
     recipe.enable = true;
@@ -542,9 +634,9 @@ return this.recipeTemp;
     let recByCat1Ref: AngularFirestoreCollection<Recipe>;
     let recByCat2Ref: AngularFirestoreCollection<Recipe>;
     let recByCat3Ref: AngularFirestoreCollection<Recipe>;
-    let recByCat1List: Recipe[] = [];
-    let recByCat2List: Recipe[] = [];
-    let recByCat3List: Recipe[] = [];
+    const recByCat1List: Recipe[] = [];
+    const recByCat2List: Recipe[] = [];
+    const recByCat3List: Recipe[] = [];
     this.recipeByCategoryList = [];
     let recByCat1Observable: Observable<Recipe[]>;
      let recByCat2Observable: Observable<Recipe[]>;
@@ -561,7 +653,7 @@ return this.recipeTemp;
       // get images
       /*recByCat1List.forEach(rec => {
 
-      });*/ //end for
+      });*/ // end for
       console.log(recipes1);
        recipes1.forEach(rec => {
          if (this.recipeByCategoryList.indexOf(rec) < 0) {
@@ -571,12 +663,13 @@ return this.recipeTemp;
         rec.urlImg = url;
 
       }).catch((error) => {
+        rec.urlImg = 'assets\\homeImg\\logo1.png';
         console.log(error);
       });
         console.log(rec);
         this.recipeByCategoryList.push(rec);
     }// end if
-      });// end for
+      }); // end for
 
       console.log(this.recipeByCategoryList);
     });
@@ -591,14 +684,14 @@ return this.recipeTemp;
 
       console.log(recipes2);
        recipes2.forEach(rec => {
-         if(this.recipeByCategoryList.indexOf(rec)<0) {
+         if (this.recipeByCategoryList.indexOf(rec) < 0) {
            // dont exist in list
         console.log(rec);
         this.recipeByCategoryList.push(rec);
          }// end if
-      });// end for
+      }); // end for
       console.log(this.recipeByCategoryList);
-    });// end subscribe
+    }); // end subscribe
 
     // get recipes of category3
     recByCat3Ref = this.afs.collection(`users/${this.user}/recipes`, ref => {
@@ -610,15 +703,15 @@ return this.recipeTemp;
       console.log(recipes3);
 
       recipes3.forEach(rec => {
-        if(this.recipeByCategoryList.indexOf(rec)<0) {
+        if (this.recipeByCategoryList.indexOf(rec) < 0) {
            // dont exist in list
         console.log(rec);
         this.recipeByCategoryList.push(rec);
-        }//end if
-      });// end for
+        } // end if
+      }); // end for
 
       console.log(this.recipeByCategoryList);
-    });// end subscribe
+    }); // end subscribe
 
   }
 

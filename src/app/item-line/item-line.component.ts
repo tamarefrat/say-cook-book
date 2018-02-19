@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { DataBaseService, Ingerdient } from '../services/data-base.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-
+import { AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-item-line',
   templateUrl: './item-line.component.html',
@@ -11,7 +12,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class ItemLineComponent implements OnInit {
 
   @Input() code: any;
-  foodstuffs: Ingerdient[]; /*change class and prop*/
+  ingredients: Ingerdient[];
   zeroItems: boolean;
   @Input() nameRecipe;
   @Input() statusDetails;
@@ -22,18 +23,23 @@ export class ItemLineComponent implements OnInit {
   inEditState = false;
   itemToEdit: Ingerdient;
   itemToDelete: Ingerdient;
+  ingredientsRef: AngularFirestoreCollection<Ingerdient>;
+
+  ingredientsObservable: Observable<Ingerdient[]>;
+
 
   constructor(private afs: AngularFirestore, private dbs: DataBaseService) {
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }
-    dbs.getIngredientsByRecipeID(dbs.recipeInWork.code);
+    this.getIngredientsByRecipeID(this.code);
 // have to check if have a name
 
   }
 
   ngOnInit() {
     // this.code = this.dbs.recipeInWork.code;
+    this.getIngredientsByRecipeID(this.code);
     }
 
 
@@ -81,33 +87,35 @@ this.itemToEdit = item;
 
 
   // get ingredients by recipes id
-  getIngredientsByRecipeID(id) {
-    this.dbs.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
+  /*getIngredientsByRecipeID(id) {
+    this.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
       return ref.where('recipeId', '==', id);
     });
-    this.dbs.ingredientsObservable = this.dbs.ingredientsRef.valueChanges();
-    this.dbs.ingredientsObservable.subscribe(ingredients => {
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       console.log(ingredients);
-      this.foodstuffs = ingredients;
-      this.newItemEnable = (this.foodstuffs.length > 0);
+      this.ingredients = ingredients;
+      this.newItemEnable = (this.ingredients.length > 0);
 
     });
+  }*/
+
+  getIngredientsByRecipeID(id) {
+    this.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
+      return ref.where('recipeId', '==', id);
+    });
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredients = ingredients;
+     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log(ingredients);
+    });
   }
+
+
+
 
   /************************************************************************************************* */
 }
 
-export class Foodstuff {
-
-  constructor(/*public statusLine: number,*/
-    public amount: any,
-    public measurement: string,
-    public item: string,
-    /*public lastLine: boolean*/) {
-    /*statusLine:
-    0=>created (before first save)
-    1=> on save
-    2=>in adit*/
-  }
-}

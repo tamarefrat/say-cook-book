@@ -10,7 +10,7 @@
         </div>
         <mat-list>
 
-            <div id='itemLine' *ngFor="let item of this.dbs.instructionsList; let i = index">
+            <div id='itemLine' *ngFor="let item of instructions; let i = index">
                 <mat-list-item id="itemLineDetailsInSaved" class="mb-2">
                     <strong>
                       <label class="mr-3 responsive mb-1">{{i+1}}.</label>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                           
+
                             <mat-input-container>
                                 <input matInput type="text" name="nDescription" placeholder="Description" [(ngModel)]="nDescription" required>
                                 <mat-error *ngIf="!nDescription">You must enter some description.</mat-error>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-      
+
         <mat-divider></mat-divider>
     </form>
 
@@ -158,9 +158,9 @@
         </button>
             </mat-list-item-->
 
-            <!--              for edit:                  -->
+<!--              for edit:                  -->
 
-            <!--mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="inEditState && instructionToEdit==item">
+<!--mat-card style="width: 95%" id="itemLineDetailsEdit" *ngIf="inEditState && instructionToEdit==item">
                 <table style="width: 95%" cellspacing="0">
 
                     <tr>
@@ -194,10 +194,10 @@
 
 
 
-    <!--                          for new instruction                    -->
+<!--                          for new instruction                    -->
 
 
-    <!--button mat-mini-fab matSuffix color="primary" *ngIf="newItemEnable" (click)="createItemLine()">
+<!--button mat-mini-fab matSuffix color="primary" *ngIf="newItemEnable" (click)="createItemLine()">
     <mat-icon class="mat-25">add</mat-icon>
   </button>
     <mat-card class="fullWidth" *ngIf="!newItemEnable">
@@ -227,4 +227,3 @@
 
     </mat-card>
 </mat-card-->
-

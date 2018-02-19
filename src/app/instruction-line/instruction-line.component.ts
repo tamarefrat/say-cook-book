@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 import { Instruction, DataBaseService } from '../services/data-base.service';
-
+import { AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-instruction-line',
   templateUrl: './instruction-line.component.html',
@@ -17,30 +18,44 @@ export class InstructionLineComponent implements OnInit {
   inEditState = false;
   instructionToEdit: Instruction;
    itemToDelete: Instruction;
+  instructionsRef: AngularFirestoreCollection<Instruction>;
+  instructionsObservable: Observable<Instruction[]>;
 
-  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+  constructor(private afs: AngularFirestore, private dbs: DataBaseService) {
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }
-    dbs.getInstructionsByRecipeID(dbs.recipeInWork.code);
+    this.getInstructionsByRecipeID(this.code);
   }
 
   ngOnInit() {
-
+    this.getInstructionsByRecipeID(this.code);
   }
   /*functions*/
   /******************************************************************************************* */
   /*instruction line functions*/
 
+  getInstructionsByRecipeID(id) {
+    this.instructionsRef = this.afs.collection(`users/${this.dbs.user}/instructions`, ref => {
+      return ref.where('recipeId', '==', id);
+    });
+    this.instructionsObservable = this.instructionsRef.valueChanges();
+    this.instructionsObservable.subscribe(instructions => {
+      this.instructions = instructions;
+      this.instructions.forEach(instruction => {
+        console.log('description: ' + instruction.description);
+      });
+    });
+  }
 
- 
+
   editInstructionLine(instruction: Instruction) {
     this.inEditState = true;
     this.instructionToEdit = instruction;
   }
 
   deleteItemLine(instruction: Instruction) {
-    
+
     this.itemToDelete = null;
     this.dbs.deleteInstruction(this.code, this.itemToDelete);
   }
@@ -78,4 +93,3 @@ export class InstructionLineComponent implements OnInit {
 
 
 
-  

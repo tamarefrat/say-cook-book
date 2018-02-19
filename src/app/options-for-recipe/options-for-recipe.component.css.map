@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACX,KAAK,EAAE,qBAAqB;CAC/B",
+    "sources": [
+        "options-for-recipe.component.scss"
+    ],
+    "names": [],
+    "file": "options-for-recipe.component.css"
+}

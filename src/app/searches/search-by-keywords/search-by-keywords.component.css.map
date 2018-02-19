@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "search-by-keywords.component.scss"
+    ],
+    "names": [],
+    "file": "search-by-keywords.component.css"
+}

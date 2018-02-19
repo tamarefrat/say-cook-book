@@ -1,9 +1,6 @@
-
-
-
-
 <div class="container" [style.width.px]="width">
-    <mat-grid-list [cols]="cols" [rows]="rows">
+
+    <mat-grid-list class="white" [cols]="cols" [rows]="rows">
         <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above">
 
             <mat-icon class="white-icon">
@@ -13,6 +10,7 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
+
 <div class="container ">
 
     <mat-accordion>

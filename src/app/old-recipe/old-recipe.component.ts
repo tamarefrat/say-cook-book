@@ -13,12 +13,13 @@ import { RecipeService } from '../services/recipe.service';
 })
 export class OldRecipeComponent implements OnInit {
 
-  @Input() code: any;
+  code: any;
   keyWords: string[] = [];
   statusDetails;
   nameRecipe = null;
   getFrom = '';
   comment = '';
+  isFavorit = false;
   urlImg = '';
   category1 = '';
   category2 = '';
@@ -69,7 +70,7 @@ export class OldRecipeComponent implements OnInit {
 
   shareRecipe(otherUser) {
     this.dbs.shareWithOtherUserMyRecipe(this.code, otherUser);
-    this.dbs.createAlert('success', 'Shared successfully with' + this.otherUser, '');
+    this.dbs.createAlert('success', 'Shared successfully with ' + this.otherUser, '');
     this.otherUser = '';
   }
   saveRecipe() {
@@ -90,7 +91,7 @@ export class OldRecipeComponent implements OnInit {
     // this.saveRecipe();
     this.router.navigate(['/']);
   }
-  sayIt() {    
+  sayIt() {
     this.router.navigate(['/read', this.code]);
 
   }
@@ -115,6 +116,7 @@ export class OldRecipeComponent implements OnInit {
       this.nameRecipe = recipe.nameRecipe;
       this.getFrom = recipe.getFrom;
       this.comment = recipe.comment;
+      this.isFavorit = recipe.isFavorit;
       this.urlImg = recipe.urlImg;
       this.category1 = recipe.category1;
       this.category2 = recipe.category2;
@@ -125,6 +127,7 @@ export class OldRecipeComponent implements OnInit {
         this.urlImg = url;
 
       }).catch((error) => {
+        this.urlImg = 'assets\\homeImg\\logo1.png';
         console.log(error);
       });
     });

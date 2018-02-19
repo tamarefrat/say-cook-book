@@ -25,16 +25,15 @@ export class AppComponent {
     private dbs: DataBaseService,
     private _alert: AlertsService,
     private router: Router) {
+setInterval(() => {this.chackImails(); }
+                       , 400000);
 
-    if (this.dbs.user === 'demoUser') {
-      this.showWarning();
-      // this.createAlert('warning', 'You Are Not Log In!', '');
-    }
+
 
 
   }
 
-  showWarning() {
+ /* showWarning() {
     this.modeClass = 'modal fade top in show';
     this.modeDisplay = 'block';
   }
@@ -42,7 +41,7 @@ export class AppComponent {
   hideWarning() {
     this.modeClass = 'modal fade top';
     this.modeDisplay = 'none';
-  }
+  }*/
 
   createAlert(type, message, tytle) {
     if (tytle === '') {
@@ -80,12 +79,18 @@ export class AppComponent {
     this.createAlert('success', 'You Loged Out Successfully!', '');
     this.router.navigate(['/']);
     this.dbs.changeUser();
-    this.showWarning();
+    this.chackImails();
   }
   isLogin() {
     return this.dbs.user !== 'demoUser';
   }
   chackImails() {
-    alert('sihjbn');
+    if (this.dbs.mailsForUser && this.dbs.user !== 'demoUser') {
+      this.createAlert('info', 'There are recipes was shared with you!', '');
+    } else if (this.dbs.user === 'demoUser' && !this.dbs.mailsForUser) {
+      this.createAlert('warning', 'You are not loged in!!!', '');
+    } else if (this.dbs.user === 'demoUser' && this.dbs.mailsForUser) {
+
+    }
   }
 }
