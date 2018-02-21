@@ -7,9 +7,9 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { ItemLineComponent } from './item-line/item-line.component';
 import { InstructionLineComponent } from './instruction-line/instruction-line.component';
 import { MainDetailsComponent } from './main-details/main-details.component';
-import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
+// import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
 import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchByCategoryComponent } from './searches/search-by-category/search-by-category.component';
 import { SearchByPictureComponent } from './searches/search-by-picture/search-by-picture.component';
@@ -20,7 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { ShareComponent } from './recipe/share/share.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
-import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
+// import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
 import { ExampleComponent } from './about/example/example.component';
@@ -40,8 +40,6 @@ const appRoutes: Routes = [
   { path: 'search-by-keywords', component: SearchByKeywordsComponent },
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
-
-  { path: 'login', component: LoginComponent },
   { path: 'reader/:id', component: ReaderRecipeComponent },
   { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
   { path: 'example', component: ExampleComponent }

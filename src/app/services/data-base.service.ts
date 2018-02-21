@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { NewRecipeComponent } from '../recipe/new-recipe/new-recipe.component';
-// import { Instruction } from '../instruction-line/instruction-line.component';
 import * as firebase from 'firebase';
 import { AlertsService } from '@jaspero/ng2-alerts';
 export interface Category {
@@ -92,6 +90,7 @@ export class DataBaseService {
   public userNameList: string[] = [];
 
   public user = 'demoUser';
+  public userImg = 'assets\\homeImg\\logo1.png';
   public counterRecipe: number; // for uniqe id for recipe-!!-isnot amount of recipes if recipes was  deleted!!
   public counterIngredients: number;
   public counterInstructions: number;
@@ -343,10 +342,6 @@ return this.recipeTemp;
     this.ingredientsObservable = this.ingredientsRef.valueChanges();
     this.ingredientsObservable.subscribe(ingredients => {
       this.ingredientsList = ingredients;
-      /*this.ingredientsList.forEach(ingredient => {
-        console.log('product: ' + ingredient.product + ', amount: ' +
-          ingredient.amount + ', unit: amount: ' + ingredient.unit);
-      });*/
     });
   }
 
@@ -847,5 +842,45 @@ return this.recipeTemp;
     } else {
       this.classForMails = 'fa fa-envelope';
     }
+  }
+
+
+  updateProfileImg() {
+    let path;
+
+    // create root ref
+    const storegRef = firebase.storage().ref();
+    const selectedFile = (<HTMLInputElement>document.getElementById('imageUser')).files[0];
+    if (selectedFile) {
+      path = `/users/${this.user}`;
+      const iRef = storegRef.child(path);
+      iRef.put(selectedFile).then((snapshot) => {
+        this.userImg = path;
+        const spaceRef = firebase.storage().ref().child(this.userImg).getDownloadURL().then((url) => {
+          // set image url
+          this.userImg = url;
+
+        }).catch((error) => {
+          this.userImg = 'assets\\homeImg\\logo1.png';
+          console.log(error);
+        });
+
+      });
+
+    } else {
+      path = 'images/logo.png';
+    }
+
+    const user = {
+      userName: this.user,
+      password: 1234,
+      urlProfilImg: path
+    };
+
+    // have to update in db
+
+    this.allUsersRef.doc(this.user).set(user).then(res => {
+
+    });
   }
 }

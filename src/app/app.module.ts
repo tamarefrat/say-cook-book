@@ -53,9 +53,9 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { ItemLineComponent } from './item-line/item-line.component';
 import { InstructionLineComponent } from './instruction-line/instruction-line.component';
 import { MainDetailsComponent } from './main-details/main-details.component';
-import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
+// import { OptionsForRecipeComponent } from './options-for-recipe/options-for-recipe.component';
 import { SignupComponent } from './signup/signup.component';
-import {LoginComponent} from './login/login.component';
+// import {LoginComponent} from './login/login.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchByCategoryComponent } from './searches/search-by-category/search-by-category.component';
 import { SearchByPictureComponent } from './searches/search-by-picture/search-by-picture.component';
@@ -65,13 +65,13 @@ import { CategoriesComponent } from './categories/categories.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
+// import { ShowAudioRecipeComponent } from './recipe/show-audio-recipe/show-audio-recipe.component';
 import { ShareComponent } from './recipe/share/share.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { VoiceSettingComponent } from './voice-setting/voice-setting.component';
 import { SpeechComponent } from './speech/speech.component';
 import { NewUserComponent } from './home-page/new-user/new-user.component';
-import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
+// import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
 import { IconModule } from 'angular-icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -90,7 +90,7 @@ import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FilterPipe } from './filter.pipe';
+
 // import { ToastService } from 'ng-mdb-pro/pro/';
 
 
@@ -104,8 +104,6 @@ import { FilterPipe } from './filter.pipe';
     ItemLineComponent,
     InstructionLineComponent,
     MainDetailsComponent,
-    OptionsForRecipeComponent,
-    LoginComponent,
     SignupComponent,
     HomePageComponent,
     SearchByCategoryComponent,
@@ -114,20 +112,17 @@ import { FilterPipe } from './filter.pipe';
     AddCategoryComponent,
     CategoriesComponent,
     AboutComponent,
-    ShowAudioRecipeComponent,
     ShareComponent,
     FooterComponent,
     HeaderComponent,
     SpeechComponent,
     VoiceSettingComponent,
     NewUserComponent,
-    NewRecipeComponent,
     ReaderRecipeComponent,
     RecipesForCategoryComponent,
     ExampleComponent,
     MenuComponent,
-    OldRecipeComponent,
-    FilterPipe
+    OldRecipeComponent
   ],
   imports: [
     routing,

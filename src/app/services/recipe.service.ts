@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NewRecipeComponent } from '../recipe/new-recipe/new-recipe.component';
+// import { NewRecipeComponent } from '../recipe/new-recipe/new-recipe.component';
 import { RecipeComponent } from '../recipe/recipe.component';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
@@ -20,7 +20,7 @@ export class RecipeService {
   db: AngularFireDatabase;
   allMyRecipes: any[] = []; // { recipes: any[], counter: any};
   recipe: any;
-  newRecipe: NewRecipeComponent;
+
   sharedRecipes: any[] = [];
   optionCategories: any[] = [];
   counter = 0; // starts from 0 - and every recipe get the counter++ for his code

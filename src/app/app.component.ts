@@ -19,6 +19,7 @@ export class AppComponent {
   };
   oldid = '';
   newid = '';
+  urlProfilImg = 'assets\\homeImg\\logo1.png';
   modeClass;
   modeDisplay;
   constructor(private _recipeService: RecipeService,
@@ -33,15 +34,6 @@ setInterval(() => {this.chackImails(); }
 
   }
 
- /* showWarning() {
-    this.modeClass = 'modal fade top in show';
-    this.modeDisplay = 'block';
-  }
-
-  hideWarning() {
-    this.modeClass = 'modal fade top';
-    this.modeDisplay = 'none';
-  }*/
 
   createAlert(type, message, tytle) {
     if (tytle === '') {
@@ -61,6 +53,7 @@ setInterval(() => {this.chackImails(); }
     this.dbs.counterRef.doc('counterIngredients').set({ counter: 0 });
     this.dbs.counterRef.doc('counterInstructions').set({ counter: 0 });
     this.dbs.allUsersRef.doc(this.newid).set({ userName: this.newid, password: 1234 });
+    this.setProfile();
     this.createAlert('success', 'You Signed In Successfully!', '');
     this.router.navigate(['/']);
     this.newid = '';
@@ -92,5 +85,8 @@ setInterval(() => {this.chackImails(); }
     } else if (this.dbs.user === 'demoUser' && this.dbs.mailsForUser) {
 
     }
+  }
+  setProfile() {
+this.dbs.updateProfileImg();
   }
 }

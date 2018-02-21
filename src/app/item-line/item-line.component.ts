@@ -100,7 +100,7 @@ this.itemToEdit = item;
 
     });
   }*/
-
+/*
   getIngredientsByRecipeID(id) {
     this.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
       return ref.where('recipeId', '==', id);
@@ -110,6 +110,23 @@ this.itemToEdit = item;
       this.ingredients = ingredients;
      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       console.log(ingredients);
+    });
+  }*/
+
+
+  getIngredientsByRecipeID(id) {
+
+    this.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
+      return ref.where('recipeId', '==', +id);
+    });
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredients = ingredients;
+
+      ingredients.forEach(ingredient => {
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
+      });
     });
   }
 

@@ -127,7 +127,7 @@
 
                 <div class="ml-0 mr-0 mb-2 ">
                     <mat-form-field>
-                        <input matInput name="oldid" [(ngModel)]="oldid" placeholder="Enter User Name" style="text-align:right" required>
+                        <input matInput name="oldid" [(ngModel)]="oldid" placeholder="Enter User Name" style="text-align:left" required>
 
                         <mat-error *ngIf="!oldid">
                             This field is required
@@ -173,12 +173,12 @@
             <!--Body-->
             <div class="modal-body text-center mb-1">
 
-                <h5 class="mt-1 mb-2">Sign Up to:</h5>
-                <h5 class="mt-1 mb-2">Say Cook Book</h5>
+                <h5 class="mt-1 mb-3">Sign Up to:</h5>
+                <h5 class="mt-1 mb-3">Say Cook Book</h5>
 
                 <div class="ml-0 mr-0 mb-2 ">
                     <mat-form-field>
-                        <input matInput name="newid" [(ngModel)]="newid" placeholder="Enter New User Name" style="text-align:right" required>
+                        <input matInput name="newid" [(ngModel)]="newid" placeholder="Enter New User Name" style="text-align:left" required>
 
                         <mat-error *ngIf="!newid">
                             This field is required
@@ -188,6 +188,14 @@
                         </mat-error>
 
                     </mat-form-field>
+
+                    <div class="container blue-border center mt-4 pt-2 pb-2">
+                        <p>
+                            Uplode Profile Image
+                        </p>
+                        <input type="file" id="imageFile">
+                        <!--class=" custom-file-control"-->
+                    </div>
 
                     <div class="text-center">
                         <button class="btn btn-cyan mt-1 waves-light" mdbRippleRadius [disabled]="(apears(newid))||(!newid)" (click)="form2.hide(); signUp()">Sign In <i class="fa fa-sign-in ml-1"></i></button>

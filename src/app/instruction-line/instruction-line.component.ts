@@ -35,9 +35,22 @@ export class InstructionLineComponent implements OnInit {
   /******************************************************************************************* */
   /*instruction line functions*/
 
-  getInstructionsByRecipeID(id) {
+ /* getInstructionsByRecipeID(id) {
     this.instructionsRef = this.afs.collection(`users/${this.dbs.user}/instructions`, ref => {
       return ref.where('recipeId', '==', id);
+    });
+    this.instructionsObservable = this.instructionsRef.valueChanges();
+    this.instructionsObservable.subscribe(instructions => {
+      this.instructions = instructions;
+      this.instructions.forEach(instruction => {
+        console.log('description: ' + instruction.description);
+      });
+    });
+  }*/
+
+  getInstructionsByRecipeID(id) {
+    this.instructionsRef = this.afs.collection(`users/${this.dbs.user}/instructions`, ref => {
+      return ref.where('recipeId', '==', +id);
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();
     this.instructionsObservable.subscribe(instructions => {

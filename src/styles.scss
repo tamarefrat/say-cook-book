@@ -9,6 +9,15 @@
  */
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.inputDiv {
+    background-color: white;
+    border-radius: 5%;
+}
+
+.custom-file-control {
+    position: relative;
+}
+
 .w-60 {
     width: 60% !important;
 }

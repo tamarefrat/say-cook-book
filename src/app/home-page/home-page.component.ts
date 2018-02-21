@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-page',
-  templateUrl: './home-page2.component.html',
+  templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
 
