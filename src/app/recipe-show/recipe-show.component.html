@@ -1,0 +1,70 @@
+
+
+  <div class="container">
+    
+       
+          <div class="app_button">
+            <mat-card-actions>
+                <button mat-fab (click)="edit() "><mat-icon>edit</mat-icon></button>
+            <button id = "read" mat-fab (click)="sayIt() "> <mat-icon>keyboard_voice</mat-icon></button>
+            </mat-card-actions>
+          </div>
+          <div class="signup-screen" >
+          <div class="recipe">
+            <div class="divider"></div>
+           <div class="space-bot text-center">
+              <h1>{{nameRecipe}}</h1>
+              <div class="divider"></div>
+              <table>
+               <tr>
+                 <td >
+                   <label *ngIf="getFrom!=''"  >recipe received from {{getFrom}}</label><br/><br/>
+                   <label>{{comment}}</label><br/><br/>
+                   <h6>Categories:</h6>
+                   <label>{{category1}}</label><br/>
+                   <label>{{category2}}</label><br/>
+                   <label>{{category3}}</label><br/>
+                 </td>
+                 <td> 
+                    <img  *ngIf="urlImg!='none'"  mat-card-image [src]="urlImg">
+                    <img *ngIf="urlImg=='none'"  id="searchImg" src='/assets/blank.png' >   
+               </td>
+             </tr>
+             </table>
+  
+             <div class="divider"></div>
+           </div>
+                <form class="form-register" method="post" name="register" novalidate>
+                  <div >
+                      <h3>Ingredients</h3>
+                      <div  class="ingred">
+                        
+                          <div id='itemLine' *ngFor="let item of this.dbs.ingredientsList; let i = index">
+                              <mat-list-item id="itemLineDetailsInSaved" > 
+                                <ul>      
+                                  <li>{{get_amount(item.amount)}} {{item.unit}} {{item.product}}</li>             
+                                </ul>     
+                                </mat-list-item>
+                          </div>
+
+                  
+                  </div>
+                  <div class="divider"></div>
+                    <h3>Instructions</h3>
+                    <div  class="Instruc">
+                       
+                        <div id='itemLine' *ngFor="let item of this.dbs.instructionsList;  let i = index">
+                            <mat-list-item id="itemLineDetailsInSaved" > 
+                              <ul>      
+                                <li>{{item.description}}</li>             
+                              </ul>     
+                              </mat-list-item>
+                        </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+             </div>
+          </div>
+    
+  

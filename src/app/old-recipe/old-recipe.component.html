@@ -32,7 +32,7 @@
                 <form>
 
 
-                    <div class="container grey lighten-2 pt-2 pb-2" id="recipeInEdit" *ngIf="statusDetails!=1">
+                    <div class="container  lighten-2 pt-2 pb-2" id="recipeInEdit" *ngIf="statusDetails!=1">
 
                         <mat-card-content>
                             <div class="row d-flex pl-1 mt-4 align-content-center  grey lighten-2 ">
@@ -42,11 +42,11 @@
                                 </h5>
                             </div>
 
-                            <mat-input-container class="fullwidth ">
+                            <mat-input-container class="fullwidth">
                                 <input matInput class="pl-3 inputDiv" name="getFrom" placeholder="Get Recipe From" [(ngModel)]="getFrom">
                             </mat-input-container>
                             <mat-card-title>
-                                <mat-input-container class="fullwidth ">
+                                <mat-input-container class="fullwidth">
                                     <input matInput class="pl-3 inputDiv" type="text" name="nameRecipe " placeholder="Name Of Recipe" [(ngModel)]="nameRecipe" required>
                                     <mat-error *ngIf="!nameRecipe">You must enter name of recipe.</mat-error>
                                 </mat-input-container>
@@ -55,7 +55,7 @@
 
                             <div class="row">
                                 <div class="col-md-9 center col-sm-9 mb-1">
-                                    <h6 class="responsive">Categories for recipe:</h6>
+                                    <h5 class="responsive">Categories:</h5>
                                 </div>
 
                                 <div class="col-md-4 mb-3">
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
 
-                            <mat-form-field class="fullwidth  ">
+                            <mat-form-field class="fullwidth ">
                                 <textarea matInput class="pl-3 inputDiv" placeholder="comment" aria-label="Comment" name="comment" [(ngModel)]="comment" matTextareaAutosize [maxlength]="commentMax"></textarea>
                                 <mat-hint>Leave us a comment!</mat-hint>
                                 <mat-hint align="end">{{commentCount}}/{{commentMax}}</mat-hint>
@@ -115,7 +115,7 @@
                                         <i *ngIf="isFavorit" class="fa fa-star mr-2 fa-2x center orange-text"></i>
                                         <h1 class="card-title">{{nameRecipe}}</h1>
                                     </mat-card-title>
-                                    <mat-card-subtitle *ngIf="getFrom">get recipe from {{getFrom}}</mat-card-subtitle>
+                                    <mat-card-subtitle *ngIf="getFrom">Recipe received from {{getFrom}}</mat-card-subtitle>
                                     <h5 *ngIf="category1">category: {{category1}} {{category2}} {{category3}}.</h5>
                                     <br>
                                     <br>

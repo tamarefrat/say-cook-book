@@ -1,7 +1,7 @@
 <div class="container-fluid ">
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-orange" [containerInside]="false">
         <logo>
-            <!--app-menu></app-menu-->
+            <app-menu></app-menu>
             <a class="logo navbar-brand" routerLink="/"><strong>Say Cook Book</strong></a>
         </logo>
         <links>
@@ -41,7 +41,7 @@
                     <a class="nav-link"><i class="fa fa-gears 2x"></i></a>
                 </li>
                 <li *ngIf="dbs.mailsForUser||dbs.user=='demoUser'" class="nav-item waves-light" mdbRippleRadius mdbTooltip="Read More" placement="bottom">
-                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated flash infinite"></i></a>
+                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated pulse infinite"></i></a>
                 </li>
                 <li class="nav-item waves-light" mdbRippleRadius [matMenuTriggerFor]="search" mdbTooltip="Search" placement="bottom">
 
@@ -189,11 +189,11 @@
 
                     </mat-form-field>
 
-                    <div class="container blue-border center mt-4 pt-2 pb-2">
+                    <div class="container center mt-4 pt-2 pb-2">
                         <p>
                             Uplode Profile Image
                         </p>
-                        <input type="file" id="imageFile">
+                        <input type="file" id="imageUser">
                         <!--class=" custom-file-control"-->
                     </div>
 

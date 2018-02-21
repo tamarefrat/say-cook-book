@@ -1,0 +1,20 @@
+
+    mat-icon#record_play.record_icon.animated.pulse.infinite.material-icons {
+        font-size: 200px;
+        color: rgb(75, 64, 64);
+        height: 210px;
+        text-align: center;
+        width: 100%;
+    }
+    mat-icon#record_stop.record_icon.animated.pulse.infinite.material-icons {
+        font-size: 200px;
+        color: #4b4040;
+        height: 210px;
+        text-align: center;
+        width: 100%;
+        animation-iteration-count: unset;
+    }
+    h1 {
+        font-weight: 500;
+        color: rgb(75, 64, 64);
+    }

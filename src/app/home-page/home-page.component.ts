@@ -37,10 +37,10 @@ export class HomePageComponent implements OnInit {
  images = [
     { route: 'recipeList', src: '45.jpg', head: 'Recipes List', sub: 'get list of all your recipes' },
     { route: 'recipe', src: '22.jpg', head: 'New Recipe', sub: 'add new recipes to your app' },
-    { route: 'recipeList', src: '24.jpg', head: 'Favorites', sub: 'goto your favorite recipes' },
+    { route: '/#fav', src: '24.jpg', head: 'Favorites', sub: 'goto your favorite recipes' },
     { route: 'recipeList', src: '47.jpg', head: 'Recipes List', sub: 'get list of all your recipes' },
     { route: 'recipe', src: '29.jpg', head: 'New Recipe', sub: 'add new recipes to your app' },
-    { route: 'recipeList', src: '16.jpg', head: 'Favorites', sub: 'goto your favorite recipes' }
+    { route: '/#fav', src: '16.jpg', head: 'Favorites', sub: 'goto your favorite recipes' }
   ];
   filterargs = {isFavorit: true};
 
@@ -88,7 +88,7 @@ export class HomePageComponent implements OnInit {
       route: 'search-by-keywords', text: '6', icon: 'search', tooltip: 'Search by Key words'
     },
     {
-      route: 'search-by-picture', text: '7', icon: 'search', tooltip: 'Search by Picture'
+      route: 'galery', text: '7', icon: 'image', tooltip: 'Galery'
     },
     {
       route: 'share', text: '8', icon: 'share', tooltip: 'Share'

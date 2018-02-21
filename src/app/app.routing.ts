@@ -25,6 +25,7 @@ import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
 import { ExampleComponent } from './about/example/example.component';
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
+import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 
 const appRoutes: Routes = [
 
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'recipe',  component: OldRecipeComponent },
   { path: 'recipe/:id', component: OldRecipeComponent },
+  { path: 'recipe-show/:id', component: RecipeShowComponent },
   { path: 'recipeList', component: RecipeListComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'voice-setting', component: VoiceSettingComponent },

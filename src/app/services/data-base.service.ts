@@ -150,7 +150,6 @@ public userToShare: string;
         const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
           // set image url
           rec.urlImg = url;
-          console.log(rec);
 
         }).catch((error) => {
           rec.urlImg = 'assets\\homeImg\\logo1.png';
@@ -204,8 +203,6 @@ public userToShare: string;
     this.ingredientsObservable.subscribe(ingredients => {
       this.ingredientsList = ingredients;
       this.ingredientsList.forEach(ingredient => {
-        console.log('product: ' + ingredient.product + ', amount: ' +
-          ingredient.amount + ', unit: amount: ' + ingredient.unit);
       });
     });
 
@@ -217,7 +214,7 @@ public userToShare: string;
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;
       this.instructionsList.forEach(instruction => {
-        console.log('description: ' + instruction.description);
+       // console.log('description: ' + instruction.description);
       });
     });
 
@@ -225,7 +222,6 @@ public userToShare: string;
 
 
   addCategory(name: string, isFavorite: boolean) {
-    console.log(name);
     const category = {
       // id: name,
       name: name,
@@ -290,7 +286,7 @@ public userToShare: string;
       });
 
     } else {
-      path = 'images/logo.png';
+      path = '/assets/blank.png';
     }
     const recipe = {
       id: this.counterRecipe,
@@ -505,8 +501,6 @@ return this.recipeTemp;
       recipe.isFavorit = false;
       // add recipe to other user
       this.afs.collection((`users/${userToShare}/recipes`)).doc('num' + recipe.id).set(recipe).then(res => {
-        console.log('shared recipe');
-        console.log(recipe);
       });
     }); // end copy recipe
 
@@ -642,7 +636,6 @@ return this.recipeTemp;
     });
     recByCat1Observable = recByCat1Ref.valueChanges();
     recByCat1Observable.subscribe(recipes1 => {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
 
       // get images
@@ -675,9 +668,7 @@ return this.recipeTemp;
     });
     recByCat2Observable = recByCat2Ref.valueChanges();
     recByCat2Observable.subscribe(recipes2 => {
-       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-      console.log(recipes2);
        recipes2.forEach(rec => {
          if (this.recipeByCategoryList.indexOf(rec) < 0) {
            // dont exist in list
@@ -694,8 +685,8 @@ return this.recipeTemp;
     });
     recByCat3Observable = recByCat3Ref.valueChanges();
     recByCat3Observable.subscribe(recipes3 => {
-       console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-      console.log(recipes3);
+      // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+     // console.log(recipes3);
 
       recipes3.forEach(rec => {
         if (this.recipeByCategoryList.indexOf(rec) < 0) {
@@ -770,15 +761,13 @@ return this.recipeTemp;
     this.counterRef = this.afs.collection(`users/${this.user}/counter`);
     this.settigObservable = this.counterRef.valueChanges();
     this.settigObservable.subscribe(set => {
-      console.log('counters');
-      console.log(set);
+     // console.log('counters');
       // get counter of recipes
       this.counterRecipe = set[2].counter;
       // get counter of Ingredients
       this.counterIngredients = set[0].counter;
       // get counter of Instructions
       this.counterInstructions = set[1].counter;
-      console.log('counter= ' + this.counterRecipe);
     });
 
     // get all categories
@@ -797,6 +786,16 @@ return this.recipeTemp;
     this.recipeObservable.subscribe(recipes => {
 
       this.recipeList = recipes;
+      this.recipeList.forEach(rec => {
+        const spaceRef = firebase.storage().ref().child(rec.urlImg).getDownloadURL().then((url) => {
+          // set image url
+          rec.urlImg = url;
+
+        }).catch((error) => {
+          rec.urlImg = 'assets\\homeImg\\logo1.png';
+          console.log(error);
+        });
+      });
 
     });
 
@@ -825,6 +824,7 @@ return this.recipeTemp;
       this.instructionsList = instructions;
 
     });
+    this.updateProfileImg();
  }
 
  /****************************************************************** */

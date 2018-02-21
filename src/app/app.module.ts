@@ -90,6 +90,7 @@ import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 
 import {  NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 
 // import { ToastService } from 'ng-mdb-pro/pro/';
 
@@ -122,7 +123,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     RecipesForCategoryComponent,
     ExampleComponent,
     MenuComponent,
-    OldRecipeComponent
+    OldRecipeComponent,
+    RecipeShowComponent
   ],
   imports: [
     routing,
