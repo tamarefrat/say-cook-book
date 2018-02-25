@@ -80,17 +80,14 @@ export class SpeechService {
                             console.log("Did you said? -> " + term + " , If not then say something else...");
                             if(term == "next")
                             {
-                                console.log("nextnextnextnextnextnext");
                                 this.nextClick();
                             }                           
-                            if(term == "back")
+                            if(term == "back" || term == "prev")
                             {
-                                console.log("backbackbackbackbackback");
                                 this.prevClick();
                             }
-                            if(term == "repeat")
+                            if(term == "repeat" || term == "again")
                             {
-                                console.log("repeatrepeatrepeatrepeat");
                                 this.againClick();
                             }
                         }
@@ -180,7 +177,6 @@ export class SpeechService {
         var msg = new SpeechSynthesisUtterance();
         // Set the text.
         msg.text = input;
-        console.log(input);
 
         // Set the attributes.
         msg.lang = this.lang;
@@ -220,15 +216,11 @@ export class SpeechService {
 
     this.db.object('firstUser/settings/voiceSettings/volume').valueChanges().subscribe(x => {
         this.volume = <string>x;
-        console.log("xxx"  + this.volume)
-
         }
     );
 
     this.db.object('firstUser/settings/voiceSettings/rate').valueChanges().subscribe(x => {
         this.rate = <string>x;
-        console.log("xxx"  + this.rate)
-
         }
     );
 

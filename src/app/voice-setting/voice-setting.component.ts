@@ -24,15 +24,19 @@ export class VoiceSettingComponent implements OnInit {
   languages = [
     {key: "Google US English", value: "US English"},
     {key: "Google UK English Female", value: "UK English Female"},
-    {key: "Google UK English Male", value: "UK English Male"}
+    {key: "Google UK English Male", value: "UK English Male"},
+    {key: "Google français", value: "français"},
+    {key: "Google italiano", value: "italiano"},
+    {key: "Google русский", value: "русский"},
+    {key: "Google Deutsch", value: "Deutsch"},
+    {key: "Google 普通话（中国大陆", value: "普通话（中国大陆"}
   ];
 
   constructor(db:AngularFireDatabase, speechService: SpeechService) {
     this.db = db;
     //this.speechService = speechService;
     this.speechSettings = speechService.getSettingFromDB();
-    console.log(this.speechSettings.voice + "testtttttt  " + this.speechSettings.volume);
-     this.voiceSelectedValue = this.speechSettings.voice;
+    this.voiceSelectedValue = this.speechSettings.voice;
     this.volumeSelectedValue = +this.speechSettings.volume;
     this.rateSelectedValue = +this.speechSettings.rate;
     this.pitchSelectedValue = +this.speechSettings.pitch;
