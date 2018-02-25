@@ -207,7 +207,7 @@ public userToShare: string;
     });
 
     // get recipe "test" instructions
-    this.instructionsRef = this.afs.collection(`users/${this.user}/instructons`, ref => {
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`, ref => {
       return ref.where('recipeId', '==', 'test');
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();
@@ -818,7 +818,7 @@ return this.recipeTemp;
     });
 
     // get all instructions
-    this.instructionsRef = this.afs.collection(`users/${this.user}/instructons`);
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`);
     this.instructionsObservable = this.instructionsRef.valueChanges();
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;

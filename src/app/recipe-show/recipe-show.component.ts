@@ -1,7 +1,12 @@
 import { Component, OnInit , Input} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DataBaseService, Recipe } from '../services/data-base.service';
+import { DataBaseService, Ingerdient, Instruction, Recipe } from '../services/data-base.service';
 import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Rx';
+import { SpeechService } from '../services/speech.service';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import * as _ from "lodash";
+import { trigger, style, animate, transition } from '@angular/animations';
 
 
 @Component({
@@ -21,20 +26,32 @@ export class RecipeShowComponent implements OnInit {
   category2 = '';
   category3 = '';
   otherUser;
-  ingredients;
-  instructions;
+  ingredients2;
+  instructions2;
+
+
+  id:number;
+  recordId:string;
+  operation:string = "";
+  operationType:string = "";
+  recordString:Observable<string>;
+
+  public ingredientsRef: AngularFirestoreCollection<Ingerdient>;
+  instructionsRef: AngularFirestoreCollection<Instruction>;
+  ingredientsObservable: Observable<Ingerdient[]>;
+  instructionsObservable: Observable<Instruction[]>;
 
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private dbs: DataBaseService) {
+    private dbs: DataBaseService, private afs: AngularFirestore) {
     this.code = this.route.snapshot.params['id'];
     if (this.code != this.dbs.counterRecipe) {// make sure it is an old recipe
       this.getRecipeByID(this.code);
       this.statusDetails = 1;
     }
-    dbs.getIngredientsByRecipeID(this.code);
-    dbs.getInstructionsByRecipeID(this.code);
+    this.getIngredientsByRecipeID(this.code);
+    this.getInstructionsByRecipeID(this.code);
   
 
      }
@@ -42,6 +59,38 @@ export class RecipeShowComponent implements OnInit {
   ngOnInit() {
 
   }
+  
+  getIngredientsByRecipeID(id) {
+    console.log("test idddddddd: " + id);
+    this.ingredientsRef = this.afs.collection(`users/${this.dbs.user}/ingredients`, ref => {
+      return ref.where('recipeId', '==', +id);
+    });
+    this.ingredientsObservable = this.ingredientsRef.valueChanges();
+    this.ingredientsObservable.subscribe(ingredients => {
+      this.ingredients2 = ingredients;
+      this.ingredients2.forEach(ingredient => {
+        console.log('product: ' + ingredient.product + ', amount: ' +
+          ingredient.amount + ', unit: amount: ' + ingredient.unit);
+       });
+    });
+  }
+
+
+  getInstructionsByRecipeID(id) {
+    console.log("getInstructionsByRecipeID: " + id);
+    this.instructionsRef = this.afs.collection(`users/${this.dbs.user}/instructions`, ref => {
+      return ref.where('recipeId', '==', +id);
+    });
+    this.instructionsObservable = this.instructionsRef.valueChanges();
+    this.instructionsObservable.subscribe(instructions => {
+      this.instructions2 = instructions;
+      this.instructions2.forEach(instruction => {
+        console.log('description: ' + instruction.description);
+      });
+    });
+  }
+
+
 
 
   getRecipeByID(recID) {
