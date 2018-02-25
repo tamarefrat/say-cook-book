@@ -16,9 +16,22 @@ export class SearchByKeywordsComponent implements OnInit {
 choProduct = '';
 inShoeRecipes = false;
 inSearch = false;
+  ingredientsList: Ingerdient [];
 
   constructor(private dbs: DataBaseService) {
     this.dbs.getAllIngredients();
+    // this.ingredientsList = this.dbs.ingredientsList;
+    // this.ingredientsList.sort();
+    // console.log(this.ingredientsList);
+  }
+
+  checkuniqe(product, index) {
+for (let i = 0; i < index; i++ ) {
+  if (product === this.dbs.ingredientsList[i].product)  {
+return false;
+  }
+}
+return true;
   }
 
 getRecipes() {

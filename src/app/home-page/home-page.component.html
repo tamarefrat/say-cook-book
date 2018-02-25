@@ -2,7 +2,7 @@
     <div class="container" [style.width.px]="width">
 
         <mat-grid-list class="white" [cols]="cols" [rows]="rows">
-            <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above">
+            <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above" data-wow-delay="1s">
 
                 <mat-icon class="white-icon">
                     {{tile.icon}}
@@ -28,7 +28,7 @@
 
 
                 <mat-grid-list cols="3 " rowHeight="100px ">
-                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]">
+                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]" data-wow-delay="1s">
                         <h4>{{fab}}</h4>
                         <br>
                         <mat-icon>category</mat-icon>
@@ -51,7 +51,7 @@
             <h1 *ngIf="dbs.user=='demoUser'" class="orange-text font-bold animated flash">Attention!</h1>
             <h5 *ngIf="dbs.user=='demoUser'" class="orange-text font-bold">You are not Log In</h5>
             <h2 *ngIf="dbs.user!='demoUser'" class="orange-text font-bold mb-2">Hi {{dbs.user}}!</h2>
-            <p *ngIf="dbs.mailsForUser" class="orange-text bold-text ">
+            <p *ngIf="(dbs.sharedRecipeList.length > 0)" class="orange-text bold-text ">
                 There are recipes was shared with you that are waiting! Click on share option to get them.
             </p>
 
@@ -59,7 +59,14 @@
             <i class="fa fa-phone ml-2"></i>
         </botton-->
             <div class="options text-center text-md-right mt-5">
-                <p>Any problem? <strong><a class="blue-text" (click)="form.show()">Contact Us</a>  <i class="fa fa-phone blue-text"></i></strong></p>
+                <p>Any problem?
+                    <strong>
+    <!--a class="blue-text" (click)="form.show()">Contact Us</a-->
+<a class="blue-text" href="mailto:sm5800810@gmail.com?subject=The%20subject%20of%20the%20mail">Mail Us:</a>
+<i class="fa fa-phone blue-text"></i>
+  </strong>
+                </p>
+
             </div>
         </div>
 
@@ -68,7 +75,7 @@
             <!--Carousel Wrapper-->
             <mdb-carousel [isControls]="true" class="carousel slide carousel-fade mb-2" [animation]="'fade'">
                 <!--First slide-->
-                <mdb-slide *ngFor="let im of images" routerLink="/{{im.route}}" class="link-cosmo">
+                <mdb-slide *ngFor="let im of images" routerLink="/{{im.route}}" class="link-cosmo" data-wow-delay="1s">
 
                     <div class="view zoom" style="width:100%">
 
@@ -93,7 +100,7 @@
 
     <div class="row mb-4 mt-3">
 
-        <div *ngFor="let feat of features1" routerLink="/{{feat.route}}" class="link-cosmo col-lg-3 col-md-3 col-sm-6 mb-4 pr-3 pt-1">
+        <div *ngFor="let feat of features1" routerLink="/{{feat.route}}" class=" wow fadeInUp link-cosmo col-lg-3 col-md-3 col-sm-6 mb-4 pr-3 pt-1" data-wow-delay="1s">
             <div class="view overlay hm-blue-light pt-3" style="border-radius:5%">
                 <i [class]="feat.class"></i>
                 <h4 class="my-4 font-weight-bold">{{feat.text}}</h4>
@@ -106,7 +113,7 @@
 
     <div class="row mb-4 mt-3 d-flex justify-content-around ">
 
-        <div *ngFor="let feat of features2" routerLink="/{{feat.route}}" [class]="feat.class2">
+        <div *ngFor="let feat of features2" routerLink="/{{feat.route}}" [class]="feat.class2" data-wow-delay="1s">
             <div class="view overlay hm-blue-light pt-3 blue-border" style="border-radius:5%">
                 <i [class]="feat.class"></i>
                 <h6 class="my-4 font-weight-bold">{{feat.text}}</h6>
@@ -117,7 +124,7 @@
 
 
     <!--                  favorites                        -->
-    <div #fav class="row d-flex flex-row justify-content-center mb-3">
+    <div #fav class=" wow fadeInUp row d-flex flex-row justify-content-center mb-3" data-wow-delay="0.8s">
         <div class="col-12">
             <h2 class="orange-text font-weight-bold">
                 <i class="fa fa-star fa-2x orange-text"></i> Favorites
@@ -125,7 +132,7 @@
         </div>
     </div>
     <div class="row d-flex flex-row justify-content-center">
-        <div *ngFor="let recipe of dbs.favoriteRecipeList" class="col-md-3 col-lg-3 col-sm-6 mb-2">
+        <div *ngFor="let recipe of dbs.favoriteRecipeList" class="col-md-3 col-lg-3 col-sm-6 mb-2" data-wow-delay="1s">
 
             <!--Card-->
             <div class="card view hm-zoom overlay" [routerLink]="['/recipe', recipe.id]">
@@ -167,7 +174,7 @@
 
 
                 <mat-grid-list cols="3 " rowHeight="100px ">
-                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]">
+                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]" data-wow-delay="1s">
                         <h4>{{fab}}</h4>
                         <br>
                         <mat-icon>category</mat-icon>
@@ -219,7 +226,11 @@
                     </div>
 
                     <div class="text-center mt-1-half">
-                        <a href="mailto:name@rapidtables.com">Send mail</a>
+                        <a href="mailto:sm58000810@gmail.com?cc=name2@rapidtables.com&bcc=name3@rapidtables.com
+&amp;subject=The%20subject%20of%20the%20email
+&amp;body=The%20body%20of%20the%20email">
+  mail us</a>
+
 
                         <button class="btn btn-info mb-2 waves-light" mdbRippleRadius>Send <i class="fa fa-send ml-1"></i></button>
                     </div>

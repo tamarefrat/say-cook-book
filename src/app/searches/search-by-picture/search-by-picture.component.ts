@@ -43,6 +43,7 @@ this.classImage = 'col-' + this.sizeImage + ' mb-2';
       }).catch((error) => {
         console.log(error);
       });
+  //  recipe.urlImg = this.dbs.getPath(recipe.urlImg);
 
  }
 

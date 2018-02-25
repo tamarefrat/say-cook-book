@@ -40,8 +40,8 @@
                 <li class="nav-item waves-light" mdbRippleRadius routerLink="/voice-setting" mdbTooltip="Setting" placement="bottom">
                     <a class="nav-link"><i class="fa fa-gears 2x"></i></a>
                 </li>
-                <li *ngIf="dbs.mailsForUser||dbs.user=='demoUser'" class="nav-item waves-light" mdbRippleRadius mdbTooltip="Read More" placement="bottom">
-                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated pulse infinite"></i></a>
+                <li *ngIf="dbs.mailsForUser||dbs.user=='demoUser'" class="nav-item waves-light" mdbRippleRadius mdbTooltip="mails" placement="bottom">
+                    <a class="nav-link" (click)="mails.show()"><i class="fa fa-envelope fa-x animated swing infinite"></i></a>
                 </li>
                 <li class="nav-item waves-light" mdbRippleRadius [matMenuTriggerFor]="search" mdbTooltip="Search" placement="bottom">
 
@@ -226,7 +226,7 @@
                     <p>You are not Login, Click "login" to get your Say Cook Book</p>
                 </div>
             </div>
-            <div class="modal-body" *ngIf="dbs.mailsToUser">
+            <div class="modal-body" *ngIf="(dbs.sharedRecipeList.length > 0)">
                 <div class="text-center">
                     <i class="fa fa-info fa-4x mb-3 animated rotateIn"></i>
                     <p>There are recipes are waiting share with you!</p>

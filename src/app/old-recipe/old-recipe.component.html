@@ -6,7 +6,13 @@
     </mat-card>
 </div>
 
-<div *ngIf="nameRecipe!=null|| statusDetails==0">
+<div *ngIf="!enable" class="center black white-text mt-4 pt-5 pb-5">
+    <i class="fa fa-warning fa-4x white-text mb-4"></i>
+    <p>this recipe was shared with you.</p>
+    <h4 class="center mt-3 ">You have first add this recipe to your list.</h4>
+</div>
+
+<div *ngIf="enable|| statusDetails==0">
 
     <!--recipe is not deleted-->
     <div *ngIf="statusDetails!=4">
@@ -35,7 +41,7 @@
                     <div class="container  lighten-2 pt-2 pb-2" id="recipeInEdit" *ngIf="statusDetails!=1">
 
                         <mat-card-content>
-                            <div class="row d-flex pl-1 mt-4 align-content-center  grey lighten-2 ">
+                            <div class="row d-flex pl-1 mt-4 align-content-center   lighten-2 ">
                                 <h5 class="font-weight-bold mb-3">
                                     <i *ngIf="isFavorit" class="fa fa-star fa-2x orange-text link-cosmo" (click)="isFavorit=false;"></i>
                                     <i *ngIf="!isFavorit" class="fa fa-star-o fa-2x orange-text link-cosmo" (click)="isFavorit=true;"></i> Favorite Recipe

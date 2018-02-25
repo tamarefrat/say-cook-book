@@ -1,6 +1,7 @@
 {
   "projects": {
     "say cook book": "say-cook-book1",
-    "default": "say-cook-book"
+    "default": "say-cook-book",
+    "?": "say-cookbook"
   }
 }

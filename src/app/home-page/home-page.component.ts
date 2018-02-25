@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { DataBaseService } from '../services/data-base.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { IconModule } from 'angular-icon';
@@ -14,7 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, AfterViewInit {
   features1 = [
     { route: 'recipeList', class: 'fa fa-list-ul fa-4x orange-text', text: 'Recipe List', sub: 'get list of all your recipes'},
     { route: 'recipe', class: 'fa fa-plus-circle fa-4x orange-text', text: 'New Recipe', sub: 'add new recipes to your Say Cook Book'},
@@ -42,31 +42,17 @@ export class HomePageComponent implements OnInit {
     { route: 'recipe', src: '29.jpg', head: 'New Recipe', sub: 'add new recipes to your app' },
     { route: '/#fav', src: '16.jpg', head: 'Favorites', sub: 'goto your favorite recipes' }
   ];
-  filterargs = {isFavorit: true};
-
-
-
-  cols: any;
+ /*wow = new WOW({
+    boxClass: 'wow', // default
+    animateClass: 'animated', // default
+    offset: 0, // default
+    mobile: true, // default
+    live: true // default
+});*/
+cols: any;
   rows: any;
   width: any;
-
-
-
-  ngAfterViewInit() {
-    // ObservableMedia does not fire on init so you have to manually update the grid first.
-    this.updateGrid();
-    this.media.subscribe(change => { this.updateGrid(); });
-  }
-
-  updateGrid(): void {
-    if (this.media.isActive('xl')) { this.cols = 6; this.width = 600; this.rows = 2; }
-    else if (this.media.isActive('lg')) { this.cols = 4; this.width = 500; this.rows = 3; }
-    else if (this.media.isActive('md')) { this.cols = 4; this.width = 400; this.rows = 3; }
-    else if (this.media.isActive('sm')) { this.cols = 3; this.width = 350; this.rows = 4; }
-    else if (this.media.isActive('xs')) { this.cols = 3; this.width = 250; this.rows = 4; }
-  }
-
-  color: string;
+color: string;
 
   tiles = [
     {
@@ -112,6 +98,7 @@ export class HomePageComponent implements OnInit {
   constructor(private dbs: DataBaseService, private router: Router, private media: ObservableMedia) {
     this.color = 'red';
     this.cols = 3;
+   // new WOW().init();
   }
 
   onSelect(route) {
@@ -120,9 +107,23 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([route]);
 
   }
+  ngAfterViewInit() {
+    // ObservableMedia does not fire on init so you have to manually update the grid first.
+    this.updateGrid();
+    this.media.subscribe(change => { this.updateGrid(); });
+  }
+
+  updateGrid(): void {
+    if (this.media.isActive('xl')) { this.cols = 6; this.width = 600; this.rows = 2; }
+    else if (this.media.isActive('lg')) { this.cols = 4; this.width = 500; this.rows = 3; }
+    else if (this.media.isActive('md')) { this.cols = 4; this.width = 400; this.rows = 3; }
+    else if (this.media.isActive('sm')) { this.cols = 3; this.width = 350; this.rows = 4; }
+    else if (this.media.isActive('xs')) { this.cols = 3; this.width = 250; this.rows = 4; }
+  }
+
 
   changeStyle($event) {
-    this.color = $event.type == 'mouseover' ? 'yellow' : 'red';// '#dd5303' : '#1c1e3ac0';
+    this.color = $event.type === 'mouseover' ? 'yellow' : 'red';// '#dd5303' : '#1c1e3ac0';
   }
 
   ngOnInit() {

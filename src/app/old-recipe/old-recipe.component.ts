@@ -24,6 +24,7 @@ export class OldRecipeComponent implements OnInit {
   category1 = '';
   category2 = '';
   category3 = '';
+  enable = true;
   otherUser;
 
 
@@ -121,7 +122,7 @@ export class OldRecipeComponent implements OnInit {
       this.category1 = recipe.category1;
       this.category2 = recipe.category2;
       this.category3 = recipe.category3;
-
+this.enable = recipe.enable;
       const spaceRef = firebase.storage().ref().child(this.urlImg).getDownloadURL().then((url) => {
         // set image url
         this.urlImg = url;
@@ -130,6 +131,7 @@ export class OldRecipeComponent implements OnInit {
         this.urlImg = 'assets\\homeImg\\logo1.png';
         console.log(error);
       });
+    //  this.urlImg = this.dbs.getPath(this.urlImg);
     });
 
   }

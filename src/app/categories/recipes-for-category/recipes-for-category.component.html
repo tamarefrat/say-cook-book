@@ -59,6 +59,7 @@
                     <h4 class="card-title ">{{recipe.nameRecipe}}</h4>
                     <!--Text-->
                     <p *ngIf="recipe.getFrom" class="card-text ">Recipe received from: {{recipe.getFrom}}</p>
+                    <p *ngIf="!recipe.getFrom" class="card-text ">Recipe received from: Unknown</p>
                     <!--a class="btn btn-primary " ">Go To Recipe</a-->
                 </div>
 
