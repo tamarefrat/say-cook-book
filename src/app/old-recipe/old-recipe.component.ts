@@ -70,8 +70,8 @@ export class OldRecipeComponent implements OnInit {
   }
 
   shareRecipe(otherUser) {
-    this.dbs.shareWithOtherUserMyRecipe(this.code, otherUser);
-    this.dbs.createAlert('success', 'Shared successfully with ' + this.otherUser, '');
+    this.dbs.shareWithOtherUserMyRecipe(this.code, otherUser, false);
+    this.dbs.createAlert('success', 'Shared successfully with ' + otherUser, '');
     this.otherUser = '';
   }
   saveRecipe() {
@@ -123,9 +123,11 @@ export class OldRecipeComponent implements OnInit {
       this.category2 = recipe.category2;
       this.category3 = recipe.category3;
 this.enable = recipe.enable;
+console.log(this.urlImg);
       const spaceRef = firebase.storage().ref().child(this.urlImg).getDownloadURL().then((url) => {
         // set image url
         this.urlImg = url;
+        console.log(this.urlImg);
 
       }).catch((error) => {
         this.urlImg = 'assets\\homeImg\\logo1.png';

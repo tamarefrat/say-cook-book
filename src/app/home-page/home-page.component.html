@@ -2,7 +2,7 @@
     <div class="container" [style.width.px]="width">
 
         <mat-grid-list class="white" [cols]="cols" [rows]="rows">
-            <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above" data-wow-delay="1s">
+            <mat-grid-tile (click)="onSelect(tile.route)" *ngFor="let tile of tiles" class='gray example-tooltip-host' [matTooltip]="tile.tooltip" matTooltipPosition="above" data-wow-delay="0.7s">
 
                 <mat-icon class="white-icon">
                     {{tile.icon}}
@@ -28,7 +28,7 @@
 
 
                 <mat-grid-list cols="3 " rowHeight="100px ">
-                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]" data-wow-delay="1s">
+                    <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption(); let i= index " [routerLink]="['/recipesForCategory', fab.name]">
                         <h4>{{fab}}</h4>
                         <br>
                         <mat-icon>category</mat-icon>
@@ -47,9 +47,10 @@
 <div *ngIf="cols==4 || cols==5">
     <div class="container-fluid d-flex row align-items-center justify-items-start ml-2 mt-2">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 justify-items-center align-items-center mb-3 mt-5 ml-3">
-            <img [src]='dbs.userImg' class=" mb-4 rounded-circle img-responsive w-50">
+            <img src="assets\\homeImg\\logo1.png" class=" mb-4 rounded-circle img-responsive w-50">
             <h1 *ngIf="dbs.user=='demoUser'" class="orange-text font-bold animated flash">Attention!</h1>
             <h5 *ngIf="dbs.user=='demoUser'" class="orange-text font-bold">You are not Log In</h5>
+
             <h2 *ngIf="dbs.user!='demoUser'" class="orange-text font-bold mb-2">Hi {{dbs.user}}!</h2>
             <p *ngIf="(dbs.sharedRecipeList.length > 0)" class="orange-text bold-text ">
                 There are recipes was shared with you that are waiting! Click on share option to get them.
@@ -75,7 +76,7 @@
             <!--Carousel Wrapper-->
             <mdb-carousel [isControls]="true" class="carousel slide carousel-fade mb-2" [animation]="'fade'">
                 <!--First slide-->
-                <mdb-slide *ngFor="let im of images" routerLink="/{{im.route}}" class="link-cosmo" data-wow-delay="1s">
+                <mdb-slide *ngFor="let im of images" routerLink="/{{im.route}}" class="link-cosmo" data-wow-delay="0.7s">
 
                     <div class="view zoom" style="width:100%">
 
@@ -100,8 +101,8 @@
 
     <div class="row mb-4 mt-3">
 
-        <div *ngFor="let feat of features1" routerLink="/{{feat.route}}" class=" wow fadeInUp link-cosmo col-lg-3 col-md-3 col-sm-6 mb-4 pr-3 pt-1" data-wow-delay="1s">
-            <div class="view overlay hm-blue-light pt-3" style="border-radius:5%">
+        <div *ngFor="let feat of features1" routerLink="/{{feat.route}}" class="link-cosmo col-lg-3 col-md-3 col-sm-6 mb-4 pr-3 pt-1">
+            <div class="view overlay hm-blue-light pt-3 wow fadeInUp" style="border-radius:5%" data-wow-delay="0.7s">
                 <i [class]="feat.class"></i>
                 <h4 class="my-4 font-weight-bold">{{feat.text}}</h4>
                 <p>{{feat.sub}}</p>
@@ -113,7 +114,7 @@
 
     <div class="row mb-4 mt-3 d-flex justify-content-around ">
 
-        <div *ngFor="let feat of features2" routerLink="/{{feat.route}}" [class]="feat.class2" data-wow-delay="1s">
+        <div *ngFor="let feat of features2" routerLink="/{{feat.route}}" [class]="feat.class2" data-wow-delay="0.7s">
             <div class="view overlay hm-blue-light pt-3 blue-border" style="border-radius:5%">
                 <i [class]="feat.class"></i>
                 <h6 class="my-4 font-weight-bold">{{feat.text}}</h6>
@@ -124,7 +125,7 @@
 
 
     <!--                  favorites                        -->
-    <div #fav class=" wow fadeInUp row d-flex flex-row justify-content-center mb-3" data-wow-delay="0.8s">
+    <div #fav class=" wow fadeInUp row d-flex flex-row justify-content-center mb-3" data-wow-delay="0.7s">
         <div class="col-12">
             <h2 class="orange-text font-weight-bold">
                 <i class="fa fa-star fa-2x orange-text"></i> Favorites
@@ -132,7 +133,7 @@
         </div>
     </div>
     <div class="row d-flex flex-row justify-content-center">
-        <div *ngFor="let recipe of dbs.favoriteRecipeList" class="col-md-3 col-lg-3 col-sm-6 mb-2" data-wow-delay="1s">
+        <div *ngFor="let recipe of dbs.favoriteRecipeList; let i = index" class="wow fadeInUp col-md-3 col-lg-3 col-sm-6 mb-2" data-wow-delay="0.7s">
 
             <!--Card-->
             <div class="card view hm-zoom overlay" [routerLink]="['/recipe', recipe.id]">
@@ -173,17 +174,58 @@
                 </mat-expansion-panel-header>
 
 
-                <mat-grid-list cols="3 " rowHeight="100px ">
+                <!--mat-grid-list cols="3 " rowHeight="100px ">
                     <mat-grid-tile class="blue-border my-2 orange" *ngFor="let fab of this.dbs.getFavoritesFromOption() " [routerLink]="['/recipesForCategory', fab.name]" data-wow-delay="1s">
                         <h4>{{fab}}</h4>
                         <br>
                         <mat-icon>category</mat-icon>
                     </mat-grid-tile>
-                </mat-grid-list>
+                </mat-grid-list-->
 
+
+
+                <mat-grid-list cols="4" rowHeight="260px" class="pt-2 pb-2">
+                    <div *ngFor="let cat of this.dbs.categoryList ">
+                        <mat-grid-tile *ngIf="cat.isFavorite " class="mb-2">
+
+                            <div class="card " [routerLink]="[ '/recipesForCategory', cat.name] ">
+                                <div class="view overlay hm-blue-light">
+                                    <!--Card image-->
+                                    <img class="img-fluid" mdbRippleRadius style="width:110%" src='assets\\category.png' alt="Card image cap ">
+                                    <p class="card-title "> {{cat.name}}</p>
+                                    <div class="mask flex-center">
+
+                                    </div>
+                                </div>
+
+
+                                <!--Card content-->
+                                <!-- <div class="card-body z-depth-1">-->
+                                <!--Title-->
+                                <!--<h4 class="card-title "> {{cat.name}}</h4>-->
+                                <!--Text-->
+
+                                <!-- </div>-->
+
+                            </div>
+                            <!--/.Card-->
+
+                        </mat-grid-tile>
+                    </div>
+                </mat-grid-list>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
+
+
+
+
+
+
+
+
+
+
 
 
     <!--Modal: Contact form-->

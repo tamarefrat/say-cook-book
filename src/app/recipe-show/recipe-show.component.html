@@ -1,6 +1,18 @@
+<div *ngIf="nameRecipe==null&& statusDetails==1" class="center">
+    <mat-card class="center">
+        <h4 class="center">loading...</h4>
+        <mat-spinner class="center"></mat-spinner>
 
+    </mat-card>
+</div>
 
-  <div class="container">
+<div *ngIf="!enable && nameRecipe!=null" class="center black white-text mt-4 pt-5 pb-5">
+    <i class="fa fa-warning fa-4x white-text mb-4"></i>
+    <p>this recipe was shared with you.</p>
+    <h4 class="center mt-3 ">You have first add this recipe to your list.</h4>
+</div>
+
+  <div *ngIf="enable|| statusDetails==0" class="container">
     
        
           <div class="app_button">

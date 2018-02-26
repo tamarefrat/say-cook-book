@@ -23,6 +23,7 @@ export class RecipeShowComponent implements OnInit {
   otherUser;
   ingredients;
   instructions;
+  enable = false;
 
 
   constructor(private router: Router,
@@ -60,6 +61,7 @@ export class RecipeShowComponent implements OnInit {
       this.category1 = recipe.category1;
       this.category2 = recipe.category2;
       this.category3 = recipe.category3;
+      this.enable = recipe.enable;
 
 
       const spaceRef = firebase.storage().ref().child(this.urlImg).getDownloadURL().then((url) => {

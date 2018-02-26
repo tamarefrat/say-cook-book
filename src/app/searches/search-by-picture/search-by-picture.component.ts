@@ -7,18 +7,12 @@ import * as firebase from 'firebase';
   styleUrls: ['./search-by-picture.component.scss']
 })
 export class SearchByPictureComponent implements OnInit {
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
    sizeImage = 4;
    classImage = 'col-md-6 col-lg-4 col-sm-12 mb-2';
-
+delay = '3s';
   constructor(private dbs: DataBaseService) {
-   /* this.dbs.recipeList.forEach(recipe => {
-      this.getImagesForRecipe(recipe);
-      console.log(recipe);
-    });*/
-
-
-   }
+  }
 
   bigger() {
     if (this.sizeImage < 12) {
@@ -46,7 +40,10 @@ this.classImage = 'col-' + this.sizeImage + ' mb-2';
   //  recipe.urlImg = this.dbs.getPath(recipe.urlImg);
 
  }
-
+getDelay(i) {
+    i = i*0.5;
+    return '' + i + 's';
+  }
   ngOnInit() {
   }
 

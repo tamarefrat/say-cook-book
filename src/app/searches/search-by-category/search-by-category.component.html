@@ -1,4 +1,4 @@
-<mat-card class="mb-2 pb-2">
+<div class="mb-4 pb-4 mb-2">
     <h2>Find Recipe by Category</h2>
     <div>
         <input type="text" id="myInput" ng-model="test" placeholder="Search for category.." name="category" [(ngModel)]="category">
@@ -6,7 +6,7 @@
             <img id="searchImg" src='/assets/search.png'>
         </div>
     </div>
-</mat-card>
+</div>
 
 <!--mat-card>
 
@@ -25,9 +25,9 @@
 
 </mat-card-->
 
-<mat-grid-list [cols]="cols">
+<mat-grid-list [cols]="cols" rowHeight="260px">
     <div *ngFor="let cat of this.optionCategories ">
-        <mat-grid-tile *ngIf="isPrefix(cat.name) " rowHeight="200px" class="mb-2">
+        <mat-grid-tile *ngIf="isPrefix(cat.name) "  class="mb-2">
 
             <div class="card " [routerLink]="[ '/recipesForCategory', cat.name] ">
                 <div class="view overlay hm-blue-light">

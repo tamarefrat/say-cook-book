@@ -25,7 +25,7 @@ export interface Recipe {
 }
 
 export interface Ingerdient {
-  id: string;
+  id: any;
   recipeId: string;
   product: string;
   amount: number;
@@ -35,7 +35,7 @@ export interface Ingerdient {
 }
 
 export interface Instruction {
-  id: string;
+  id: any;
   recipeId: string;
   description: string;
   //  index: string;
@@ -288,7 +288,7 @@ export class DataBaseService {
       });
 
     } else {
-      path = '/assets/blank.png';
+      path = '/images/logo1.png';
     }
     const recipe = {
       id: this.counterRecipe,
@@ -468,9 +468,10 @@ export class DataBaseService {
 
   // add recipe to shared list- disable untill coosed by user
   // it addes the recipe to another user- to his shared list
-  shareWithOtherUserMyRecipe(id, userToShare) {
+  shareWithOtherUserMyRecipe(recipes, userToShare, isArray) {
     let counterOtherRef: AngularFirestoreCollection<Counter>;
     let counterOtherObser: Observable<Counter[]>;
+    const mySelected = this.recipeList;
     const myPromise = new Promise((resolve, reject) => {
       // get countsers of other user
       counterOtherRef = this.afs.collection(`users/${userToShare}/counter`);
@@ -481,16 +482,33 @@ export class DataBaseService {
     });
 
     myPromise.then(set => {
-      this.copyRecipe(id, userToShare, set);
-    });
+     // get counter of recipes
+    this.countRec2 = set[2].counter;
+    // get counter of Ingredients
+    this.countIngre2 = set[0].counter;
+    // get counter of Instructions
+    this.countInstr2 = set[1].counter;
+
+if(isArray) {
+  for (let i = 0; i < recipes.length; i++) {
+      if (recipes[i].selected) {
+        // have to share this recipe
+        this.copyRecipe(mySelected[i].id, userToShare, this.countRec2++);
+        console.log(mySelected[i].nameRecipe);
+      }
+    }
+} else { // only 1 recipe
+  this.copyRecipe(recipes, userToShare, this.countRec2++);
+}
+});
   }
 
-  copyRecipe(id, userToShare, set) {
+  copyRecipe(id, userToShare, countRec2) {
 
     // have copy recipe from me to other user with disable mode
     // have update id by other user to new id and update counters
     // have also copy ingredients and instructions
-    let countRec2;
+
     let countIngre2;
     let countInstr2;
     let counterOtherRef: AngularFirestoreCollection<Counter>;
@@ -510,11 +528,11 @@ export class DataBaseService {
         counterOtherObser = counterOtherRef.valueChanges();
         counterOtherObser.subscribe(set => {*/
     // get counter of recipes
-    countRec2 = set[0].counter;
+   /* countRec2 = this.countRec2++;*/
     // get counter of Ingredients
-    countIngre2 = set[1].counter;
+    /*countIngre2 = this.countIngre2++;*/
     // get counter of Instructions
-    countInstr2 = set[2].counter;
+  /*  countInstr2 = this.countInstr2++;*/
     counterOtherRef = this.afs.collection(`users/${userToShare}/counter`);
 
 
@@ -551,7 +569,7 @@ export class DataBaseService {
         console.log('shared ing');
         console.log(ing);
         // change id of ingredient for other user
-        ing.id = countIngre2;
+        ing.id = this.countIngre2++; // ?????????
         ing.recipeId = countRec2;
         console.log('rec id');
         console.log(countRec2);
@@ -562,10 +580,10 @@ export class DataBaseService {
           console.log(ing);
         });
         // update counter for next ing
-        countIngre2++;
+        /*countIngre2++;*/
       }); // end for
       // update counter in DB
-      counterOtherRef.doc('counterIngredients').set({ counter: countIngre2 });
+      counterOtherRef.doc('counterIngredients').set({ counter: this.countIngre2 });
     }); // end copy ingredients
 
 
@@ -580,22 +598,22 @@ export class DataBaseService {
 
       instr.forEach(ins => {
         // change id of instruction for other user
-        ins.id = countInstr2;
+        ins.id = this.countInstr2++; //?????????????/
         ins.recipeId = countRec2;
         this.afs.collection((`users/${userToShare}/instructions`)).doc('num' + ins.id).set(ins).then(res => {
 
         });
         // update counter for next ing
-        countInstr2++;
+       /* countInstr2++;*/
       }); // end for
       // update instruction counter in DB
-      counterOtherRef.doc('counterInstructions').set({ counter: countInstr2 });
+      counterOtherRef.doc('counterInstructions').set({ counter: this.countInstr2 });
 
     }); // end copy instructions
 
     // update recipe counter for other user
-    countRec2++;
-    counterOtherRef.doc('counterRecipe').set({ counter: countRec2 });
+    /*countRec2++;*/
+    counterOtherRef.doc('counterRecipe').set({ counter: this.countRec2 });
   } // end share recipe with all details- end function
 
 

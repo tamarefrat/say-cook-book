@@ -23,15 +23,15 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ];
   features2 = [
     { route: 'about', class: 'fa fa-home fa-4x orange-text', text: 'About Us',
-    class2: 'link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1' },
+    class2: 'wow fadeInUp link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1' },
     { route: 'voice-setting', class: 'fa fa-gears fa-4x orange-text', text: 'Setting',
-    class2: 'link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1'},
+    class2: 'wow fadeInUp link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1'},
     { route: 'share', class: 'fa fa-share fa-4x orange-text', text: 'Share',
-    class2: 'link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1' },
+    class2: 'wow fadeInUp link-cosmo col-lg-2 col-md-2 col-sm-4 col-xs-6 mb-4 pt-1' },
     { route: 'search-by-keywords', class: 'fa fa-search fa-4x orange-text', text: 'By Product',
-    class2: 'link-cosmo col-lg-2 col-md-2 col-sm-6 col-xs-6 mb-4 pt-1' },
+    class2: 'wow fadeInUp link-cosmo col-lg-2 col-md-2 col-sm-6 col-xs-6 mb-4 pt-1' },
     { route: 'search-by-categories', class: 'fa fa-search fa-4x orange-text', text: 'By Category',
-    class2: 'link-cosmo col-lg-2 col-md-2 col-sm-6 col-xs-6 mb-4 pt-1' }
+    class2: 'wow fadeInUp link-cosmo col-lg-2 col-md-2 col-sm-6 col-xs-6 mb-4 pt-1' }
    ];
 
  images = [
@@ -131,5 +131,10 @@ color: string;
 
   contact(mail, subject, data) {
 
+  }
+  getDelay(i) {
+    i = i*0.5;
+   // return '' + i + 's';
+   return '3s';
   }
 }

@@ -22,11 +22,11 @@
     <div class="row d-flex flex-row justify-content-center">
 
 
-        <div *ngFor="let recipe of dbs.recipeList" [class]="classImage" data-wow-delay="0.2s">
+        <div *ngFor="let recipe of dbs.recipeList; let i = index" [class]="classImage">
 
 
             <!--Card-->
-            <div class="card view hm-zoom overlay animated rollIn" [routerLink]="['/recipe-show', recipe.id]">
+            <div class="card view hm-zoom overlay" [routerLink]="['/recipe-show', recipe.id]">
 
                 <!--Card image-->
                 <img class="img-fluid blue-border" [src]='recipe.urlImg' alt="image">

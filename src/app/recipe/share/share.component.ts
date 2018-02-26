@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ShareComponent implements OnInit {
 
-  mySelected: Recipe[]; // ?????????????????????????????????????????
-  gotSharedRecipes: Recipe[];  // ?????????????????????????????????
+  mySelected: Recipe[]; 
+  gotSharedRecipes: Recipe[];  
 
   constructor(private _recipeService: RecipeService,
    private dbs: DataBaseService,
@@ -30,13 +30,14 @@ export class ShareComponent implements OnInit {
     this.mySelected = this.dbs.recipeList;
 
     this.dbs.userToShare = friendId;
-    for (let i = 0; i < recipes.length; i++) {
+    this.dbs.shareWithOtherUserMyRecipe(recipes, friendId, true);
+   /* for (let i = 0; i < recipes.length; i++) {
       if (recipes[i].selected) {
         // have to share this recipe
         this.dbs.shareWithOtherUserMyRecipe(this.mySelected[i].id, friendId);
         console.log(this.mySelected[i].nameRecipe);
       }
-    }
+    }*/
      this.router.navigate(['/']);
     this.dbs.createAlert('success', 'Shared successfully with ' + friendId, '');
   }
