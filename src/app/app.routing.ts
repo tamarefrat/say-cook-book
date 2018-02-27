@@ -23,7 +23,6 @@ import { NewUserComponent } from './home-page/new-user/new-user.component';
 // import { NewRecipeComponent } from './recipe/new-recipe/new-recipe.component';
 import { ReaderRecipeComponent } from './reader-recipe/reader-recipe.component';
 import { RecipesForCategoryComponent } from './categories/recipes-for-category/recipes-for-category.component';
-import { ExampleComponent } from './about/example/example.component';
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
 import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 
@@ -43,8 +42,7 @@ const appRoutes: Routes = [
   { path: 'categories/add-category', component: AddCategoryComponent },
   { path: 'share', component: ShareComponent },
   { path: 'reader/:id', component: ReaderRecipeComponent },
-  { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent },
-  { path: 'example', component: ExampleComponent }
+  { path: 'recipesForCategory/:id', component: RecipesForCategoryComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RecipeService } from './services/recipe.service';
 import { DataBaseService } from './services/data-base.service';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { AlertType } from '@jaspero/ng-alerts';
 import { document } from 'angular-bootstrap-md/utils/facade/browser';
 import { Router } from '@angular/router';
 // import { ToastService } from '../../typescripts/pro/alerts'
@@ -22,14 +23,15 @@ export class AppComponent {
   urlProfilImg = 'assets\\homeImg\\logo1.png';
   modeClass;
   modeDisplay;
+  dbs;
   constructor(private _recipeService: RecipeService,
-    private dbs: DataBaseService,
+   dbs: DataBaseService,
     private _alert: AlertsService,
     private router: Router) {
 setInterval(() => {this.chackImails(); }
                        , 400000);
 
-
+this.dbs = dbs;
 
 
   }

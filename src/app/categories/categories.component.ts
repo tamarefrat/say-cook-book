@@ -15,8 +15,10 @@ export class CategoriesComponent implements OnInit {
   category: string;
   isFavorite = false;
   selectedOptions: string[];
+  dbs;
   /********************************************** */
-  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+  constructor(private _recipeService: RecipeService,  dbs: DataBaseService) {
+    this.dbs = dbs;
     this.optionCategories = this.dbs.categoryList;
     this.favorites = this.dbs.getFavoritesFromOption();
     /*********************************************************************************** */
@@ -67,7 +69,6 @@ this.dbs.updateCategory(category);
       name: this.category,
       isFavorite: false
     };
-    console.log(this.dbs.categoryList.indexOf({isFavorite: false, name: "diat"}));
 
     if (this.dbs.categoryList.indexOf(cat1) > -1) {
       this.dbs.createAlert('attention', 'category appeares', '');

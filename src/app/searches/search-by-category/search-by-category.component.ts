@@ -11,7 +11,9 @@ export class SearchByCategoryComponent implements OnInit, AfterViewInit {
   category = '';
 cols = 4;
   optionCategories: Category[] = [];
-  constructor(private dbs: DataBaseService, private media: ObservableMedia) {
+  dbs;
+  constructor( dbs: DataBaseService, private media: ObservableMedia) {
+    this.dbs = dbs;
     this.optionCategories = this.dbs.categoryList;
   }
 

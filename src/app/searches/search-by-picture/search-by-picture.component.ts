@@ -11,7 +11,9 @@ export class SearchByPictureComponent implements OnInit {
    sizeImage = 4;
    classImage = 'col-md-6 col-lg-4 col-sm-12 mb-2';
 delay = '3s';
-  constructor(private dbs: DataBaseService) {
+dbs;
+  constructor( dbs: DataBaseService) {
+    this.dbs = dbs;
   }
 
   bigger() {
@@ -40,10 +42,10 @@ this.classImage = 'col-' + this.sizeImage + ' mb-2';
   //  recipe.urlImg = this.dbs.getPath(recipe.urlImg);
 
  }
-getDelay(i) {
+/*getDelay(i) {
     i = i*0.5;
     return '' + i + 's';
-  }
+  }*/
   ngOnInit() {
   }
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase';
 import { AlertsService } from '@jaspero/ng2-alerts';
+import { AlertType } from '@jaspero/ng-alerts';
 export interface Category {
   name: string;
   // id: string;
@@ -209,7 +210,7 @@ export class DataBaseService {
     });
 
     // get recipe "test" instructions
-    this.instructionsRef = this.afs.collection(`users/${this.user}/instructons`, ref => {
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`, ref => {
       return ref.where('recipeId', '==', 'test');
     });
     this.instructionsObservable = this.instructionsRef.valueChanges();
@@ -434,7 +435,7 @@ export class DataBaseService {
       //  rec.urlImg = this.getPath(rec.urlImg);
       });
     } else {
-      path = 'images/logo.png';
+      path = rec.urlImg;
     }
     const recipe = {
       id: rec.code,
@@ -641,7 +642,7 @@ if(isArray) {
   /************************************************************* */
   /**************       search and other functions        ***************** */
 
-  getFavoritesFromOption() {
+  public getFavoritesFromOption() {
     const favorites = [];
     this.categoryList.forEach(element => {
       if (element.isFavorite) {
@@ -809,9 +810,10 @@ if(isArray) {
 
   changeUser() {
 // change profile image
+let img;
     this.allUsersRef.doc<User>(this.user).valueChanges().subscribe(user => {
-      this.userImg = user.urlProfilImg;
-      const spaceRef = firebase.storage().ref().child(this.userImg).getDownloadURL().then((url) => {
+       img = user.urlProfilImg;
+      const spaceRef = firebase.storage().ref().child(img).getDownloadURL().then((url) => {
         // set image url
         this.userImg = url;
 
@@ -903,13 +905,13 @@ if(isArray) {
     });
 
     // get all instructions
-    this.instructionsRef = this.afs.collection(`users/${this.user}/instructons`);
+    this.instructionsRef = this.afs.collection(`users/${this.user}/instructions`);
     this.instructionsObservable = this.instructionsRef.valueChanges();
     this.instructionsObservable.subscribe(instructions => {
       this.instructionsList = instructions;
 
     });
-    this.updateProfileImg();
+
   }
 
   /****************************************************************** */
@@ -940,8 +942,8 @@ if(isArray) {
       path = `/users/${this.user}`;
       const iRef = storegRef.child(path);
       iRef.put(selectedFile).then((snapshot) => {
-        this.userImg = path;
-         const spaceRef = firebase.storage().ref().child(this.userImg).getDownloadURL().then((url) => {
+       // this.userImg = path;
+         const spaceRef = firebase.storage().ref().child(path).getDownloadURL().then((url) => {
            // set image url
            this.userImg = url;
 
@@ -953,7 +955,7 @@ if(isArray) {
       });
 
     } else {
-      path = 'images/logo.png';
+      path = 'images/logo1.png';
     }
 
     const user = {

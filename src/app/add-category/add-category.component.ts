@@ -11,13 +11,14 @@ export class AddCategoryComponent implements OnInit {
 
   category: string;
   isFavorite: boolean;
-
+dbs;
   selectedOptions: string[];
 
-  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+  constructor(private _recipeService: RecipeService,  dbs: DataBaseService) {
+    this.dbs = dbs;
     this.selectedOptions = this.dbs.getFavoritesFromOption();
 
-    
+
   }
 
   addCategory() {

@@ -82,7 +82,7 @@ import { DataBaseService } from './services/data-base.service';
 import { RecipeService } from './services/recipe.service';
 import { AuthServiceService } from './auth-service.service';
 import { SpeechService } from './services/speech.service';
-import { ExampleComponent } from './about/example/example.component';
+
 
 import { MenuComponent } from './menu/menu.component';
 import { OldRecipeComponent } from './old-recipe/old-recipe.component';
@@ -93,7 +93,14 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RecipeShowComponent } from './recipe-show/recipe-show.component';
 
 // import { ToastService } from 'ng-mdb-pro/pro/';
-
+ const firebase =  {
+  apiKey: "AIzaSyBNLJU-7v1B4xSk5pMSUoLvuVlwU7zmBJM",
+  authDomain: "say-cookbook.firebaseapp.com",
+  databaseURL: "https://say-cookbook.firebaseio.com",
+  projectId: "say-cookbook",
+  storageBucket: "say-cookbook.appspot.com",
+  messagingSenderId: "931744878133"
+};
 
 
 @NgModule({
@@ -121,7 +128,6 @@ import { RecipeShowComponent } from './recipe-show/recipe-show.component';
     NewUserComponent,
     ReaderRecipeComponent,
     RecipesForCategoryComponent,
-    ExampleComponent,
     MenuComponent,
     OldRecipeComponent,
     RecipeShowComponent
@@ -158,7 +164,7 @@ import { RecipeShowComponent } from './recipe-show/recipe-show.component';
     MatToolbarModule,
     MatTooltipModule,
     MatExpansionModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
     // ToastModule.forRoot(),
