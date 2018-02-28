@@ -490,7 +490,7 @@ export class DataBaseService {
     // get counter of Instructions
     this.countInstr2 = set[1].counter;
 
-if(isArray) {
+if (isArray) {
   for (let i = 0; i < recipes.length; i++) {
       if (recipes[i].selected) {
         // have to share this recipe
@@ -510,8 +510,8 @@ if(isArray) {
     // have update id by other user to new id and update counters
     // have also copy ingredients and instructions
 
-    let countIngre2;
-    let countInstr2;
+    // let countIngre2;
+    // let countInstr2;
     let counterOtherRef: AngularFirestoreCollection<Counter>;
     let recShareDoc: AngularFirestoreDocument<Recipe>;
     let recipeShareObservable: Observable<Recipe>;
@@ -519,7 +519,7 @@ if(isArray) {
     let ingreShareRef: AngularFirestoreCollection<Ingerdient>;
     let instruShareObser: Observable<Instruction[]>;
     let instrShareRef: AngularFirestoreCollection<Instruction>;
-    let counterOtherObser: Observable<Counter[]>;
+    // let counterOtherObser: Observable<Counter[]>;
     //  let recipe: Recipe;
     let ingredients: Ingerdient[];
     /*counterOtherRef = this.afs.collection(`users/${userToShare}/counter`);
@@ -599,7 +599,7 @@ if(isArray) {
 
       instr.forEach(ins => {
         // change id of instruction for other user
-        ins.id = this.countInstr2++; //?????????????/
+        ins.id = this.countInstr2++; // ?????????????/
         ins.recipeId = countRec2;
         this.afs.collection((`users/${userToShare}/instructions`)).doc('num' + ins.id).set(ins).then(res => {
 
@@ -615,6 +615,7 @@ if(isArray) {
     // update recipe counter for other user
     /*countRec2++;*/
     counterOtherRef.doc('counterRecipe').set({ counter: this.countRec2 });
+    console.log(this.sharedRecipeList);
   } // end share recipe with all details- end function
 
 
@@ -637,6 +638,7 @@ if(isArray) {
   enableRecipeFromShare(recipe: Recipe) {
     recipe.enable = true;
     this.recipesRef.doc('num' + recipe.id).update(recipe);
+    this.mailsForUser = (this.sharedRecipeList.length > 0);
   }
 
   /************************************************************* */

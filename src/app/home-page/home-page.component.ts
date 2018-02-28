@@ -95,7 +95,7 @@ color: string;
   ];
 
 
-  constructor(private dbs: DataBaseService, private router: Router, private media: ObservableMedia) {
+  constructor(public dbs: DataBaseService, private router: Router, private media: ObservableMedia) {
     this.color = 'red';
     this.cols = 3;
    // new WOW().init();

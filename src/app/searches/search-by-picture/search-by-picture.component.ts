@@ -11,9 +11,9 @@ export class SearchByPictureComponent implements OnInit {
    sizeImage = 4;
    classImage = 'col-md-6 col-lg-4 col-sm-12 mb-2';
 delay = '3s';
-dbs;
-  constructor( dbs: DataBaseService) {
-    this.dbs = dbs;
+// dbs;
+  constructor(public dbs: DataBaseService) {
+  //  this.dbs = dbs;
   }
 
   bigger() {
@@ -38,6 +38,7 @@ this.classImage = 'col-' + this.sizeImage + ' mb-2';
 
       }).catch((error) => {
         console.log(error);
+        recipe.urlImg = 'assets\\homeImg\\logo1.png';
       });
   //  recipe.urlImg = this.dbs.getPath(recipe.urlImg);
 

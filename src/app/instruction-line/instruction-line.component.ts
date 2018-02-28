@@ -20,9 +20,9 @@ export class InstructionLineComponent implements OnInit {
    itemToDelete: Instruction;
   instructionsRef: AngularFirestoreCollection<Instruction>;
   instructionsObservable: Observable<Instruction[]>;
-dbs;
-  constructor(private afs: AngularFirestore,  dbs: DataBaseService) {
-    this.dbs = dbs;
+// dbs;
+  constructor(private afs: AngularFirestore, public  dbs: DataBaseService) {
+    // this.dbs = dbs;
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }

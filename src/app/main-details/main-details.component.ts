@@ -22,7 +22,7 @@ export class MainDetailsComponent implements OnInit {
   @Input() index: number;
   path: any;
 
-  constructor(private _recipeService: RecipeService, private dbs: DataBaseService) {
+  constructor(private _recipeService: RecipeService, public dbs: DataBaseService) {
     this.code = this.dbs.recipeInWork.code;
     this.dbs.recipeInWork.mainDetails = this;
 

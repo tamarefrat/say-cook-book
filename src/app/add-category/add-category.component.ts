@@ -17,7 +17,7 @@ dbs;
   constructor(private _recipeService: RecipeService,  dbs: DataBaseService) {
     this.dbs = dbs;
     this.selectedOptions = this.dbs.getFavoritesFromOption();
-
+// this.selectedOptions = DataBaseService.getFavoritesFromOption();
 
   }
 

@@ -26,10 +26,10 @@ export class ItemLineComponent implements OnInit {
   ingredientsRef: AngularFirestoreCollection<Ingerdient>;
 
   ingredientsObservable: Observable<Ingerdient[]>;
-dbs;
+// dbs;
 
-  constructor(private afs: AngularFirestore,  dbs: DataBaseService) {
-    this.dbs = dbs;
+  constructor(private afs: AngularFirestore, public dbs: DataBaseService) {
+   //  this.dbs = dbs;
     if (!this.code) {
       this.code = this.dbs.recipeInWork.code;
     }

@@ -15,9 +15,9 @@ export class CategoriesComponent implements OnInit {
   category: string;
   isFavorite = false;
   selectedOptions: string[];
-  dbs;
+ // dbs;
   /********************************************** */
-  constructor(private _recipeService: RecipeService,  dbs: DataBaseService) {
+  constructor(private _recipeService: RecipeService, public dbs: DataBaseService) {
     this.dbs = dbs;
     this.optionCategories = this.dbs.categoryList;
     this.favorites = this.dbs.getFavoritesFromOption();

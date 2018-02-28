@@ -17,9 +17,9 @@ choProduct = '';
 inShoeRecipes = false;
 inSearch = false;
   ingredientsList: Ingerdient [];
-dbs;
-  constructor( dbs: DataBaseService) {
-    this.dbs = dbs;
+// dbs;
+  constructor(public dbs: DataBaseService) {
+  //   this.dbs = dbs;
     this.dbs.getAllIngredients();
     // this.ingredientsList = this.dbs.ingredientsList;
     // this.ingredientsList.sort();

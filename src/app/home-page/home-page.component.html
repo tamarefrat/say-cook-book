@@ -52,9 +52,10 @@
             <h5 *ngIf="dbs.user=='demoUser'" class="orange-text font-bold">You are not Log In</h5>
 
             <h2 *ngIf="dbs.user!='demoUser'" class="orange-text font-bold mb-2">Hi {{dbs.user}}!</h2>
-            <p *ngIf="(dbs.sharedRecipeList.length > 0)" class="orange-text bold-text ">
+            <p *ngIf="dbs.sharedRecipeList.length > 0" class="orange-text bold-text ">
                 There are recipes was shared with you that are waiting! Click on share option to get them.
             </p>
+            <p class="white-text">{{dbs.sharedRecipeList.length > 0}}</p>
 
             <!--botton class="btn btn-outline-orange mt-5 mb-3" (click)="form.show()">contact us
             <i class="fa fa-phone ml-2"></i>

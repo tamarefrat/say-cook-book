@@ -23,15 +23,15 @@ export class AppComponent {
   urlProfilImg = 'assets\\homeImg\\logo1.png';
   modeClass;
   modeDisplay;
-  dbs;
+ // dbs;
   constructor(private _recipeService: RecipeService,
-   dbs: DataBaseService,
+  public dbs: DataBaseService,
     private _alert: AlertsService,
     private router: Router) {
 setInterval(() => {this.chackImails(); }
                        , 400000);
 
-this.dbs = dbs;
+// this.dbs = dbs;
 
 
   }

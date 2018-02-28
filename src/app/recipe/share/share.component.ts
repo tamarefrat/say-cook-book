@@ -11,12 +11,12 @@ export class ShareComponent implements OnInit {
 
   mySelected: Recipe[];
   gotSharedRecipes: Recipe[];
-dbs;
+// dbs;
 
   constructor(private _recipeService: RecipeService,
-    dbs: DataBaseService,
+    public dbs: DataBaseService,
     private router: Router) {
-this.dbs = dbs;
+// this.dbs = dbs;
     this.mySelected = [];
     this.gotSharedRecipes = [];
 
